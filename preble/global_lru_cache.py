@@ -18,7 +18,7 @@ from collections import deque
 
 logging = logging.getLogger(__name__)
 
-
+# TreeNode represents each node in the prefix tree for caching
 class TreeNode:
     def __init__(self, num_nodes):
         self.id = uuid4()
@@ -37,9 +37,11 @@ class TreeNode:
         self.context_length = 0
         self.depth = 0
 
+    # Check if data is cached on the specified GPU and not evicted
     def has_cached_gpu(self, gpu):
         return gpu in self.cached_gpus and gpu not in self.evicted_gpus
 
+    # Calculate context processed so far
     @property
     def context_so_far(self):
         return self.context_length - self.num_tokens
@@ -66,7 +68,7 @@ class TreeNode:
     def __repr__(self) -> str:
         return f"TreeNode(id={self.id}, ref_counter={self.ref_counter}, cached_gpus={self.cached_gpus}, evicted_gpus:{self.evicted_gpus})"
 
-
+# Match function to find common prefix length between two sequences
 def match(key, seq):
     i = 0
     for k, w in zip(key, seq):

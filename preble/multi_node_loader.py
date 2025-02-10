@@ -30,7 +30,7 @@ class MultiNodeLoader:
 
     def runtime_cleanup_handler(self, sig, frame):
         print("You pressed Ctrl+C! Shutting down all remote servers...")
-        for instance in self.models_allocated:
+        for instance in self    .models_allocated:
             for runtime_instance in instance.runtimes:
                 runtime_instance.shutdown()
         sys.exit(0)
@@ -66,4 +66,33 @@ class MultiNodeLoader:
         #     self.update_gpu_memory_usage(gpu)
         model_details.runtimes = []
         # model_details.gpus = []
+        return model_details
+
+
+    # Load a new instance on a specific GPU
+    def load_instance(self, model_path, gpu_id) -> ModelDetails:
+        gpu_config = GPUConfig(gpu_id=gpu_id)
+        model_details = ModelDetails(model_path, [gpu_config], self.simulate)
+        model_details.load_runtimes(model_path=model_path, gpu_configs=[gpu_config])
+
+        self.models_allocated.append(model_details)
+        self.gpus_to_model_allocated[gpu_id].append(model_details)
+
+        print(f"Loaded new instance on GPU {gpu_id}")
+        return model_details
+
+    # Unload a specific instance from a GPU
+    def unload_instance(self, gpu_id):
+        if gpu_id not in self.gpus_to_model_allocated or not self.gpus_to_model_allocated[gpu_id]:
+            print(f"No model instances found on GPU {gpu_id} to unload.")
+            return None
+
+        model_details = self.gpus_to_model_allocated[gpu_id].pop()
+        for runtime in model_details.runtimes:
+            runtime.shutdown()
+
+        if model_details in self.models_allocated and model_details.runtimes == []:
+            self.models_allocated.remove(model_details)
+
+        print(f"Unloaded instance from GPU {gpu_id}")
         return model_details

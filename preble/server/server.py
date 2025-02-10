@@ -18,6 +18,7 @@ from transformers import AutoTokenizer
 from typing import List, Optional
 import uvicorn
 from sglang.srt.managers.router.model_runner import GPUConfig
+from pynvml import nvmlInit, nvmlDeviceGetHandleByIndex, nvmlDeviceGetUtilizationRates, nvmlDeviceGetMemoryInfo, nvmlShutdown
 
 random.seed(10)
 np.random.seed(10)
@@ -35,6 +36,8 @@ from multi_node_loader import MultiNodeLoader
 
 logger = logging.getLogger(__name__)
 
+# Defines parameters for sampling during text generation, 
+# including token limits, temperature, penalties
 class SamplingParams(BaseModel):
     max_new_tokens: int = 16
     stop: Optional[Union[str, List[str]]] = None
@@ -66,15 +69,18 @@ async def async_send_request(
 ):
     start_time = time.time()
     st = time.perf_counter()
-    scheduling_overhead = time.time() - start_time
+    scheduling_overhead = time.time() - start_time # Why is this here?
     api_url = runtime_url
 
+    # Initialize the output object to store metrics and response data
     output = RequestFuncOutput()
     output.rid = rid
     output.prompt_text = text[:20]
     output.prompt_len = len(input_ids)
     output.runtime_selected = runtime_id
     timeout = aiohttp.ClientTimeout(total=3 * 3600)
+
+    # Send the request to the runtime
     async with aiohttp.ClientSession(timeout=timeout) as session:
         ttft = 0
         most_recent_timestamp = st
@@ -86,7 +92,8 @@ async def async_send_request(
                         chunk = chunk.strip()
                         if not chunk:
                             continue
-
+                        
+                        # process for streaming results
                         chunk = remove_prefix(chunk.decode("utf-8"), "data:").strip()
                         if chunk == "[DONE]":
                             output.success = True
@@ -120,6 +127,10 @@ async def async_send_request(
         output.tpot = (output.request_latency - output.ttft) / max(1, output.output_len)
     yield output
 
+# Coordinates request processing:
+# Sends the request to a runtime selected by the router.
+# Uses async_send_request() to handle communication with the runtime.
+# Returns the response as a streaming output.
 async def generate_request_helper(obj: GenerateReqInput):
     request_id = str(uuid.uuid4())
     runtime_events[request_id] = (asyncio.Event(), None)
@@ -152,7 +163,10 @@ async def generate_request_helper(obj: GenerateReqInput):
         await finished_requests_queue.put((output, text, input_ids))
 
     return StreamingResponse(get_requests(), media_type="text/event-stream")
-
+# The main API endpoint handler for incoming /generate requests
+# Parses the request JSON.
+# Tokenizes the input if needed.
+# Delegates the request to generate_request_helper().
 async def process_req(request: Request):
     try:
         obj = await request.json()
@@ -165,6 +179,7 @@ async def process_req(request: Request):
         logger.error(f"Error processing request: {e}")
         return JSONResponse({"error": str(e)}, status_code=400)
 
+#Picks a suitable runtime for each queued request using the request_router.
 async def process_runtime_selection():
     while True:
         obj: GenerateReqInput
@@ -188,10 +203,77 @@ async def process_runtime_selection():
             runtime_events[request_id][0].set()
             runtime_request_queue.task_done()
 
+#Informs the request router when a request has finished.
 async def process_cleanup_selection():
     while True:
         output_obj, text, input_ids = await finished_requests_queue.get()
         request_router.finish_request(text=text, input_ids=input_ids, func_output=output_obj, experiment_id="exp_id", request_id="rid")
+
+
+async def add_gpu_instance(global_scheduler):
+    global runtimes, loader, model_details
+    available_gpus = [gpu_id for gpu_id in all_possible_gpus if gpu_id not in global_scheduler.per_gpu_load]
+    if available_gpus:
+        gpu_id = available_gpus[0]
+        print(f"Adding GPU instance: GPU {gpu_id}")
+        loader.load_instance(
+            model_path=model_details.model_path,
+            gpu_id=gpu_id
+        )
+        global_scheduler.per_gpu_load[gpu_id] = 0
+    else:
+        print("No available GPUs to scale up.")
+
+    print(f"Added GPU {gpu_id}, current GPU num:{global_scheduler.num_gpus}")
+
+async def remove_gpu_instance(gpu_id):
+    loader.unload_instance(gpu_id)
+    print(f"Removed GPU {gpu_id}")
+
+SCALE_OUT_THRESHOLD = 80
+SCALE_IN_THRESHOLD = 20
+MIN_GPU_INSTANCES = 2
+overloaded_instances = set()
+underloaded_instances = set()
+
+async def monitor_and_autoscale(global_scheduler):
+    try:
+        while True:
+            current_devices = list(global_scheduler.per_gpu_load.keys())
+            for gpu_id in current_devices:
+                handle = nvmlDeviceGetHandleByIndex(gpu_id)
+                utilization = nvmlDeviceGetUtilizationRates(handle)
+                memory_info = nvmlDeviceGetMemoryInfo(handle)
+                memory_used_percent = (memory_info.used / memory_info.total) * 100
+                print(f"GPU {gpu_id}: Utilization: {utilization.gpu}% | Memory Used: {memory_info.used / (1024 ** 2):.2f} MB / {memory_info.total / (1024 ** 2):.2f} MB")
+
+                if utilization.gpu > 80 or memory_used_percent > 85:
+                    if gpu_id in overloaded_instances:
+                        print(f"GPU {gpu_id} is consistently overloaded. Triggering scale-up.")
+                        await add_gpu_instance(global_scheduler)
+                        overloaded_instances.discard(gpu_id)
+                    else:
+                        overloaded_instances.add(gpu_id)
+                        underloaded_instances.discard(gpu_id)
+
+                # Check for underload condition
+                elif utilization.gpu < 20 or memory_used_percent < 30:
+                    if gpu_id in underloaded_instances:
+                        print(f"GPU {gpu_id} is consistently underloaded. Triggering scale-down.")
+                        await remove_gpu_instance(global_scheduler)
+                        underloaded_instances.discard(gpu_id)
+                    else:
+                        underloaded_instances.add(gpu_id)
+                        overloaded_instances.discard(gpu_id)
+
+                # If neither overloaded nor underloaded, remove from both sets
+                else:
+                    overloaded_instances.discard(gpu_id)
+                    underloaded_instances.discard(gpu_id)
+
+            await asyncio.sleep(60)
+    finally:
+        nvmlShutdown()
 
 app = FastAPI()
 
@@ -223,9 +305,11 @@ def start_server(runtime_selection_policy="custom", runtime_urls="http://127.0.0
 
     tokenizer = AutoTokenizer.from_pretrained(model)
 
+    # Split runtime URLs into a list for multi-node support
     runtimes = runtime_urls.split(',')
     num_nodes = len(runtimes)
     
+    # Select runtime policy based on provided input
     if runtime_selection_policy == "round_robin":
         runtime_selection_policy = DataParallelRuntimeSelectionPolicy.ROUND_ROBIN
     elif runtime_selection_policy == "lor":
@@ -235,14 +319,19 @@ def start_server(runtime_selection_policy="custom", runtime_urls="http://127.0.0
     else:
         raise ValueError("Invalid runtime selection policy")
 
+    # init scheduler and routers
     global_scheduler = GlobalSchedulerWithTime(num_nodes=num_nodes, enable_eviction=True)
     request_router = DataParallelRequestRouter(
         runtime_selection_policy, total_nodes=num_nodes
     )
     request_router.custom_selector = global_scheduler
+    nvmlInit()
+
+    # Define the main async loop to start background tasks and the server
     async def main():
         loop.create_task(process_runtime_selection())
         loop.create_task(process_cleanup_selection())
+        loop.create_task(monitor_and_autoscale(global_scheduler))
         config = uvicorn.Config(app=app, loop="asyncio", host=host, port=port)
         server = uvicorn.Server(config)
         await server.serve()
@@ -250,7 +339,7 @@ def start_server(runtime_selection_policy="custom", runtime_urls="http://127.0.0
     loop = asyncio.get_event_loop()
     loop.run_until_complete(main())
 
-def start_server_and_load_models(model_name="mistralai/Mistral-7B-v0.1", devices=[0, 1], host="127.0.0.1", port=8000):
+def start_server_and_load_models(model_name="mistralai/Mistral-7B-v0.1", devices=[0, 1], all_gpus=[0, 1, 2, 3],host="127.0.0.1", port=8000):
     """
     Loads the specified model onto the given devices and starts the server.
 
@@ -276,6 +365,8 @@ def start_server_and_load_models(model_name="mistralai/Mistral-7B-v0.1", devices
         'enable_iterative_eviction': True,
     }
     # GPU Configuration
+    global all_possible_gpus
+    all_possible_gpus = all_gpus
     gpu_configs = [
         GPUConfig(gpu_id=device, url=None, use_ssh=False, runtime_args=server_args)
         for device in devices
