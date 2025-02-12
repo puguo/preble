@@ -30,7 +30,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".
 from data_parallel_request_cache import DataParallelRequestRouter, CustomPolicyType, DataParallelRuntimeSelectionPolicy
 
 from model_runtime_manager import remove_prefix
-from benchmarks.benchmark_utils import RequestFuncOutput
+from preble.benchmarks.benchmark_utils import RequestFuncOutput
 from global_scheduler_with_time import GlobalSchedulerWithTime
 from multi_node_loader import MultiNodeLoader
 
@@ -211,7 +211,7 @@ async def process_cleanup_selection():
 
 
 async def add_gpu_instance(global_scheduler):
-    global runtimes, loader, model_details
+    global model_details
     available_gpus = [gpu_id for gpu_id in all_possible_gpus if gpu_id not in global_scheduler.per_gpu_load]
     if available_gpus:
         gpu_id = available_gpus[0]
@@ -365,7 +365,7 @@ def start_server_and_load_models(model_name="mistralai/Mistral-7B-v0.1", devices
         'enable_iterative_eviction': True,
     }
     # GPU Configuration
-    global all_possible_gpus
+    global all_possible_gpus, loader
     all_possible_gpus = all_gpus
     gpu_configs = [
         GPUConfig(gpu_id=device, url=None, use_ssh=False, runtime_args=server_args)

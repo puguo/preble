@@ -10,9 +10,9 @@ from sglang.srt.server import Runtime as SGLangServer
 import requests
 import concurrent.futures
 import unittest
-from benchmarks.benchmark_workload_gen import get_react_workload
+from preble.benchmarks.benchmark_workload_gen import get_react_workload
 from simulator import ServerRuntimeSimulator
-from benchmarks.exp_configs.react_mixed_config import add_simulation_to_gpu_config
+from preble.benchmarks.exp_configs.react_mixed_config import add_simulation_to_gpu_config
 from sglang.srt.managers.router.model_runner import GPUConfig
 from sglang.srt.sampling_params import SamplingParams
 from sglang.srt.managers.io_struct import (

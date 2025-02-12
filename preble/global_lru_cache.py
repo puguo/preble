@@ -8,7 +8,7 @@ import copy
 import threading
 import numpy as np
 import logging
-from benchmarks.benchmark_utils import RequestFuncOutput
+from preble.benchmarks.benchmark_utils import RequestFuncOutput
 from datetime import datetime, timedelta
 from typing import List, Tuple
 import zmq

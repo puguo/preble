@@ -9,9 +9,9 @@ import random
 import asyncio
 import torch
 import gc
-from benchmarks.benchmark_utils import BenchmarkMetrics
+from preble.benchmarks.benchmark_utils import BenchmarkMetrics
 from transformers import AutoTokenizer
-from benchmarks.benchmark_workload_gen import RandomDataLoader, ToolBenchDataLoader, LoadDistribution, LooGLEDataset, LooGLEDatasetType
+from preble.benchmarks.benchmark_workload_gen import RandomDataLoader, ToolBenchDataLoader, LoadDistribution, LooGLEDataset, LooGLEDatasetType
 import unittest
 from parameterized import parameterized
 import logging

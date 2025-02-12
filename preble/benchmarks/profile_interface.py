@@ -13,7 +13,7 @@ import logging
 import concurrent.futures
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-from benchmarks.benchmark_workload_gen import get_react_workload
+from preble.benchmarks.benchmark_workload_gen import get_react_workload
 from multi_node_loader import MultiNodeLoader, ModelDetails
 
 log = logging.getLogger(__name__)

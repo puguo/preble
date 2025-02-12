@@ -9,7 +9,7 @@ from sglang.srt.server import Runtime as SGLangServer
 import requests
 import concurrent.futures
 import unittest
-from benchmarks.benchmark_workload_gen import get_react_workload
+from preble.benchmarks.benchmark_workload_gen import get_react_workload
 
 class TestSGLangServerMetrics(unittest.TestCase):
     def test_sglang_server_metrics_basic(self):

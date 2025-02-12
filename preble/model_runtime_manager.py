@@ -24,13 +24,13 @@ from vllm_runtime import VLLMRuntimeManager
 from dataclasses import field
 from sglang.srt.managers.router.model_runner import GPUConfig # FIXME wrong import
 from simulator import ServerRuntimeSimulator, Simulation
-from benchmarks.benchmark_utils import RequestFuncOutput
+from preble.benchmarks.benchmark_utils import RequestFuncOutput
 from sglang.srt.managers.router.infer_batch import Batch
 from sglang.srt.managers.io_struct import BatchStrOut
 import torch
 import logging
-from benchmarks.benchmark_utils import BenchmarkMetrics, MajorExperimentArgs, WorkloadConfig, ExperimentType
-from benchmarks.multi_experiment_benchmark_utils import RequestRateManager, Workload
+from preble.benchmarks.benchmark_utils import BenchmarkMetrics, MajorExperimentArgs, WorkloadConfig, ExperimentType
+from preble.benchmarks.multi_experiment_benchmark_utils import RequestRateManager, Workload
 
 logger = logging.getLogger(__name__)
 

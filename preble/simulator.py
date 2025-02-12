@@ -41,8 +41,8 @@ from sglang.srt.managers.io_struct import (
 from sglang.srt.sampling_params import SamplingParams
 from sglang.global_config import global_config
 from sglang.srt.managers.router.infer_batch import Batch
-from benchmarks.benchmark_workload_gen import WorkloadPrefixDataLoader
-from benchmarks.benchmark_utils import RequestFuncOutput, BenchmarkMetrics
+from preble.benchmarks.benchmark_workload_gen import WorkloadPrefixDataLoader
+from preble.benchmarks.benchmark_utils import RequestFuncOutput, BenchmarkMetrics
 
 logging.getLogger("requests").setLevel(logging.WARNING)
 logging.getLogger("urllib3").setLevel(logging.WARNING)
@@ -533,7 +533,7 @@ if __name__ == "__main__":
     for config in gpu_configs:
         config.regist_simulator_config(forward_simulation, 1 << 30)
 
-    model_name = "mistralai/Mistral-7B-v0.1"
+    model_name = "meta-llama/Llama-3.2-1B"
     runtimes = [ServerRuntimeSimulator(gpu_config=config, model_path=model_name) for config in gpu_configs]
     vocab_size = runtimes[0].model_rpc.model_config.vocab_size
     

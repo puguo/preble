@@ -9,7 +9,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")
 
 from sglang.srt.managers.router.model_runner import GPUConfig
 from enum import Enum, auto
-from benchmarks.benchmark_utils import WorkloadConfig, ExperimentType, RequestGroup
+from preble.benchmarks.benchmark_utils import WorkloadConfig, ExperimentType, RequestGroup
 from collections import deque
 import numpy as np
 import asyncio

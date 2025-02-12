@@ -19,7 +19,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from sglang.srt.managers.router.model_runner import GPUConfig
 
-from benchmarks.benchmark_workload_gen import DataLoader
+from preble.benchmarks.benchmark_workload_gen import DataLoader
 
 
 class ExperimentType(Enum):

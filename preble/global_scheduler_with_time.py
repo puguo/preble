@@ -1,6 +1,6 @@
 from collections import defaultdict
 from datetime import datetime, timedelta
-from benchmarks.benchmark_utils import RequestFuncOutput
+from preble.benchmarks.benchmark_utils import RequestFuncOutput
 from global_lru_cache import LPRadixCache, TreeNode
 import time
 import numpy as np
@@ -12,11 +12,11 @@ from transformers import AutoTokenizer
 import logging
 import copy
 import math
-from benchmarks.exp_configs.model_equations import LP_mistral_7b_A6000_sglang_extend_flashinfer as prefill_time
+from preble.benchmarks.exp_configs.model_equations import LP_mistral_7b_A6000_sglang_extend_flashinfer as prefill_time
 # from benchmarks.exp_configs.model_equations import LP_Llama3_70B_H100_sglang_extend_flashinfer as prefill_time
 from ttft_overload_detector import TTFTWindowedOverloadedDetector
 
-tokenizer = AutoTokenizer.from_pretrained("mistralai/Mistral-7B-v0.1")
+tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-3.2-1B")
 
 logger = logging.getLogger(__name__)
 

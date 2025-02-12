@@ -9,9 +9,9 @@ from collections import deque
 from typing import List, Tuple
 from transformers import AutoTokenizer
 import logging
-from benchmarks.exp_configs.model_equations_numpy import LP_mistral_7b_A6000_sglang_extend_flashinfer as prefill_time
+from preble.benchmarks.exp_configs.model_equations_numpy import LP_mistral_7b_A6000_sglang_extend_flashinfer as prefill_time
 
-tokenizer = AutoTokenizer.from_pretrained("mistralai/Mistral-7B-v0.1")
+tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-3.2-1B")
 
 logger = logging.getLogger(__name__)
 
@@ -556,7 +556,7 @@ class GlobalSchedulerWithTimePerf:
 
 if __name__ == "__main__":
     perf = GlobalSchedulerWithTimePerf()
-    from benchmarks.benchmark_workload_gen import ToolBenchDataLoader, LoadDistribution
+    from preble.benchmarks.benchmark_workload_gen import ToolBenchDataLoader, LoadDistribution
 
     # num_requests = 50000
     # num_workloads = 1500

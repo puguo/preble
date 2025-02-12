@@ -14,7 +14,7 @@ from sglang.srt.managers.router.model_runner import GPUConfig
 from data_parallel_request_cache import DataParallelRuntimeSelectionPolicy, CustomPolicyType
 import random
 from multi_exp_configs.multi_exp_utils import *
-from benchmarks.benchmark_workload_gen import load_realistic_send_out_times
+from preble.benchmarks.benchmark_workload_gen import load_realistic_send_out_times
 
 model_name = "mistralai/Mistral-7B-v0.1"
 

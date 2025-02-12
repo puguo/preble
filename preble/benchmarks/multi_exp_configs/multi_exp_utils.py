@@ -20,7 +20,7 @@ from typing import Iterator
 from benchmark_workload_gen import LoadDistribution
 import numpy as np
 import uuid
-from benchmarks.exp_configs.model_equations import mistral_7b_A6000_sglang_extend_flashinfer, mistrial_7b_A6000_sglang_decode_flashinfer
+from preble.benchmarks.exp_configs.model_equations import mistral_7b_A6000_sglang_extend_flashinfer, mistrial_7b_A6000_sglang_decode_flashinfer
 
 ssh_config_08 = {
     "hostname": "192.168.1.18",

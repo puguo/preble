@@ -11,7 +11,7 @@ import os
 
 import numpy as np
 import torch
-from vllm.distributed import initialize_model_parallel
+from vllm.distributed import initialize_model_parallel, init_distributed_environment
 from vllm.model_executor.layers.quantization.awq import AWQConfig
 from vllm.model_executor.layers.quantization.gptq import GPTQConfig
 from vllm.model_executor.layers.quantization.marlin import MarlinConfig
@@ -324,6 +324,7 @@ class ModelRunner:
                 rank=self.tp_rank,
                 init_method=f"tcp://127.0.0.1:{self.nccl_port}",
             )
+            init_distributed_environment()
             initialize_model_parallel(tensor_model_parallel_size=self.tp_size)
 
             total_gpu_memory = get_available_gpu_memory(

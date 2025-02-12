@@ -28,8 +28,8 @@ from dataclasses import dataclass
 import logging
 from datasets import load_dataset
 import re
-from benchmarks import chameleon
-from benchmarks import toolqa
+from preble.benchmarks import chameleon
+from preble.benchmarks import toolqa
 import os
 import pandas as pd
 
