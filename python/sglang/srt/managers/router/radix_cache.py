@@ -54,6 +54,8 @@ class RadixCache:
         evicted_ids = []
         while node != self.root_node:
             for k, v in node.parent.children.items():
+                if isinstance(k, int):
+                    k = [k]
                 if v == node:
                     input_ids = list(k) + input_ids
                     if not evicted_ids:

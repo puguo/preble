@@ -5,6 +5,7 @@ import os
 
 from fastapi import HTTPException, Request
 from fastapi.responses import StreamingResponse
+import glog
 
 from sglang.srt.conversation import (
     Conversation,
@@ -72,9 +73,22 @@ def load_chat_template_for_openai_api(chat_template_arg):
 
 async def v1_completions(tokenizer_manager, raw_request: Request):
     request_json = await raw_request.json()
-    request = CompletionRequest(**request_json)
+    
 
     # TODO: Validate the request and return HTTPStatus.BAD_REQUEST if invalid.
+    
+    try:
+        
+        # Add model field if not present
+        if 'model' not in request_json:
+            request_json['model'] = "meta-llama/Llama-3.2-1B"  # Default model
+            
+        request = CompletionRequest(**request_json)
+        # ...existing code...
+    except Exception as e:
+        glog.error(f"Error processing completion request: {e}")
+        raise
+
     assert request.n == 1
 
     adapted_request = GenerateReqInput(

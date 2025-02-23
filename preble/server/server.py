@@ -185,6 +185,11 @@ async def process_runtime_selection():
         obj: GenerateReqInput
         obj, request_id = await runtime_request_queue.get()
         text, input_ids, sampling_params = obj.text, obj.input_ids, obj.sampling_params
+        import glog 
+        glog.info(f"Processing request {request_id}")
+        glog.info(f"Text: {text}")
+        glog.info(f"Input IDs: {input_ids}")
+        glog.info(f"Sampling Params: {sampling_params}")
         sampling_params = sampling_params.dict()
         # hit_rates = [r.hit_ratio for r in runtimes] # 
         # hit_rates = [0 for _ in runtimes] # TODO handle hitrates
@@ -193,6 +198,8 @@ async def process_runtime_selection():
         #     highest_idx = None
         highest_idx = None
         hit_rates = [0 for _ in runtimes] # TODO add hot/cold support
+        
+
         try:
             runtime_id = request_router.select_runtime(text=text, experiment_id="1", input_ids=input_ids, request_id=request_id, sampling_params=sampling_params, runtime_id_with_highest_hit_rate=highest_idx, hit_rates=hit_rates)
             runtime_events[request_id] = (runtime_events[request_id][0], runtime_id)
@@ -247,7 +254,7 @@ async def monitor_and_autoscale(global_scheduler):
                 memory_used_percent = (memory_info.used / memory_info.total) * 100
                 print(f"GPU {gpu_id}: Utilization: {utilization.gpu}% | Memory Used: {memory_info.used / (1024 ** 2):.2f} MB / {memory_info.total / (1024 ** 2):.2f} MB")
 
-                if utilization.gpu > 70 or memory_used_percent > 70:
+                if utilization.gpu > 80 or memory_used_percent > 85:
                     if gpu_id in overloaded_instances:
                         print(f"GPU {gpu_id} is consistently overloaded. Triggering scale-up.")
                         await add_gpu_instance(global_scheduler)

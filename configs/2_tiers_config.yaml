@@ -1,0 +1,24 @@
+priorities:
+  - request_ratio: 59
+    slo_ms:
+      ttft: 7200000
+      tpot: 500000
+    dataset:
+      name: random
+      input_len: 1024
+      output_len: 1024
+      range_ratio: 0.0
+    arrival_pattern:
+      name: azure
+      tag: code
+    tier_name: "batch"
+  - request_ratio: 41
+    slo_ms:
+      ttft: 700
+      tpot: 100
+    dataset:
+      name: sharegpt
+      fixed_output_len: null
+    arrival_pattern:
+      name: poisson
+    tier_name: "realtime"

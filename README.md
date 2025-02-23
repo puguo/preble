@@ -21,6 +21,11 @@ Regular Pip Installation:
 pip3 install preble
 pip install git+https://github.com/wuklab/preble.git#egg=preble[all]
 pip install flashinfer -i https://flashinfer.ai/whl/cu121/torch2.3/
+pip install -e "python[all]"
+pip install fastapi
+pip install transformers
+pip install uvicorn
+
 ```
 
 
