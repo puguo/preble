@@ -10,6 +10,7 @@ from typing import List, Tuple
 from transformers import AutoTokenizer
 import logging
 from preble.benchmarks.exp_configs.model_equations_numpy import LP_mistral_7b_A6000_sglang_extend_flashinfer as prefill_time
+import glog
 
 tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-3.2-1B")
 
@@ -345,6 +346,7 @@ class GlobalSchedulerWithTimePerf:
         hit_rates=None,
         *args, **kwargs
     ):
+        glog.info(f"runtime selector is running. Request ID: {request_id}, Text: {text}")
         decoding_length = sampling_params.get("max_new_tokens", sampling_params.get("max_tokens", 45))
         # Tokenize the text
         start_time = time.time()
@@ -380,6 +382,7 @@ class GlobalSchedulerWithTimePerf:
                         histogram_mem_cost[gpu_id]
                         for gpu_id in range(self.num_gpus)
                     ]
+                glog.info(f"Costs: {costs}")
                 gpu_selected = int(np.argmin(costs))
                 gpu_selected = set([gpu_selected])
             else:

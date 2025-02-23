@@ -15,6 +15,8 @@ import math
 from preble.benchmarks.exp_configs.model_equations import LP_mistral_7b_A6000_sglang_extend_flashinfer as prefill_time
 # from benchmarks.exp_configs.model_equations import LP_Llama3_70B_H100_sglang_extend_flashinfer as prefill_time
 from ttft_overload_detector import TTFTWindowedOverloadedDetector
+import glog
+
 
 tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-3.2-1B")
 
@@ -311,6 +313,7 @@ class GlobalSchedulerWithTime:
         *args, **kwargs,
     ):
         decoding_length = sampling_params.get("max_new_tokens", sampling_params.get("max_tokens", 45))
+        glog.info(f"Decoding length: {decoding_length}")
         # Tokenize the text
         start_time = time.time()
         with self.lock:
@@ -331,6 +334,8 @@ class GlobalSchedulerWithTime:
             else:
                 runtime_idx = self.calculate_min_load_cost(leaf_node, selected_gpus=range(self.num_gpus))
             self.counter += 1
+            glog.info('self.counter: ', self.counter)
+            glog.info('runtime_idx: ', runtime_idx)
             self.update_gpu_allocation_for_parent(leaf_node, {runtime_idx}) # Updated gpu allocations up till parent
             self.cache.update_allocated_size(leaf_node, runtime_idx) # Update ref counters
 

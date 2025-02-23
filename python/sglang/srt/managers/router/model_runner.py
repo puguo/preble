@@ -145,6 +145,8 @@ class InputMetadata:
                 self.model_runner.model_config.num_attention_heads // tp_size,
                 self.model_runner.model_config.num_key_value_heads // tp_size,
                 self.model_runner.model_config.head_dim,
+                4096,
+                
             ]
 
             self.prefill_wrapper.begin_forward(*args)

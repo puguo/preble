@@ -247,7 +247,7 @@ async def monitor_and_autoscale(global_scheduler):
                 memory_used_percent = (memory_info.used / memory_info.total) * 100
                 print(f"GPU {gpu_id}: Utilization: {utilization.gpu}% | Memory Used: {memory_info.used / (1024 ** 2):.2f} MB / {memory_info.total / (1024 ** 2):.2f} MB")
 
-                if utilization.gpu > 80 or memory_used_percent > 85:
+                if utilization.gpu > 70 or memory_used_percent > 70:
                     if gpu_id in overloaded_instances:
                         print(f"GPU {gpu_id} is consistently overloaded. Triggering scale-up.")
                         await add_gpu_instance(global_scheduler)
@@ -257,6 +257,7 @@ async def monitor_and_autoscale(global_scheduler):
                         underloaded_instances.discard(gpu_id)
 
                 # Check for underload condition
+                # For 
                 elif utilization.gpu < 20 or memory_used_percent < 30:
                     if gpu_id in underloaded_instances:
                         print(f"GPU {gpu_id} is consistently underloaded. Triggering scale-down.")
@@ -371,7 +372,7 @@ def start_server_and_load_models(model_name="mistralai/Mistral-7B-v0.1", devices
         GPUConfig(gpu_id=device, url=None, use_ssh=False, runtime_args=server_args)
         for device in devices
     ]
-
+    global model_details
     loader = MultiNodeLoader()
     model_details = loader.load_model(
         model_path=model_name,
