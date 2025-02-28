@@ -29,11 +29,7 @@ from sglang.srt.managers.detokenizer_manager import start_detokenizer_process
 from sglang.srt.managers.io_struct import GenerateReqInput
 from sglang.srt.managers.router.manager import start_router_process
 from sglang.srt.managers.tokenizer_manager import TokenizerManager
-from sglang.srt.openai_api_adapter import (
-    load_chat_template_for_openai_api,
-    v1_chat_completions,
-    v1_completions,
-)
+from sglang.srt.openai_api_adapter import load_chat_template_for_openai_api, v1_chat_completions, v1_completions
 from sglang.srt.server_args import PortArgs, ServerArgs
 import logging
 from starlette.middleware.base import BaseHTTPMiddleware
@@ -47,7 +43,8 @@ from sglang.srt.utils import (
     enable_show_time_cost,
     get_exception_traceback,
 )
-
+from . import openai_api_adapter
+#from preble.server.server import generate as preble_generate
 asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
 logger = logging.getLogger('server')
 
@@ -87,8 +84,13 @@ async def flush_cache():
 
 @app.post("/generate")
 async def generate_request(obj: GenerateReqInput):
+    print(f"sglang server Request: {obj.text[:20]} ...", flush=True)
     obj.post_init()
     logger.debug(f"{obj.text[:20]} ...")
+    # Import generate from preble server
+
+    # Call preble generate function
+
     if obj.stream:
 
         async def stream_results():
@@ -169,8 +171,117 @@ async def dump_prefix_hit_trace(fpath: str):
 async def windowed_prefix_hit_ratio():
     return await tokenizer_manager.handle_windowed_prefix_hit_ratio()
 
+async def call_generate_endpoint(url: str, request_data: dict):
+    """
+    Calls the /generate endpoint asynchronously and handles streaming.
+
+    Args:
+        url: The URL of the /generate endpoint.
+        request_data: The data to send in the request body (as a dictionary).
+
+    Returns:
+        A list of data chunks from the stream, or None if there was an error.
+    """
+    try:
+        async with aiohttp.ClientSession() as session:
+            async with session.post(url, json=request_data) as response:
+                if response.status == 200:
+                    # Check if the response is streaming
+                    if response.content_type == 'text/event-stream':
+                        data_chunks = []
+                        async for chunk in response.content.iter_any():
+                            chunk = chunk.decode('utf-8').strip()
+                            if chunk.startswith('data:'):
+                                data = chunk[5:].strip()  # Remove "data:" prefix
+                                if data == '[DONE]':
+                                    break  # End of stream
+                                try:
+                                    json_data = json.loads(data)
+                                    data_chunks.append(json_data)
+                                except json.JSONDecodeError:
+                                    print(f"Warning: Could not decode JSON: {data}")
+                        return data_chunks
+                    else:
+                        # Handle non-streaming JSON response
+                        return await response.json()
+                else:
+                    print(f"Error: Received status code {response.status}")
+                    return None
+    except aiohttp.ClientError as e:
+        print(f"Error: An aiohttp client error occurred: {e}")
+        return None
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+        return None
+
 @app.post("/v1/completions")
 async def openai_v1_completions(raw_request: Request):
+
+    import glog
+    glog.info("python sglang server.py: openai v1 completions")
+    request_json = await raw_request.json()
+    
+
+    # TODO: Validate the request and return HTTPStatus.BAD_REQUEST if invalid.
+    
+    try:
+        
+        # Add model field if not present
+        if 'model' not in request_json:
+            request_json['model'] = "meta-llama/Llama-3.2-1B"  # Default model
+        
+        
+        
+
+
+
+        request = openai_api_adapter.CompletionRequest(**request_json)
+        # ...existing code...
+    except Exception as e:
+        glog.error(f"Error processing completion request: {e}")
+        raise
+
+    assert request.n == 1
+
+    adapted_request = GenerateReqInput(
+        text=request.prompt,
+        sampling_params={
+            "temperature": request.temperature,
+            "max_new_tokens": request.max_tokens,
+            "stop": request.stop,
+            "top_p": request.top_p,
+            "presence_penalty": request.presence_penalty,
+            "frequency_penalty": request.frequency_penalty,
+            "regex": request.regex,
+        },
+        return_logprob=request.logprobs is not None and request.logprobs > 0,
+        top_logprobs_num=request.logprobs if request.logprobs is not None else 0,
+        return_text_in_logprobs=True,
+        stream=request.stream,
+    )
+
+    try:
+        url = 'http://127.0.0.1:8010/generate'
+        request_data = {
+            "text": adapted_request.text,
+            "input_ids": adapted_request.input_ids,
+            "sampling_params": adapted_request.sampling_params,
+            "stream": adapted_request.stream,
+        }
+        print(f"Calling /generate endpoint with data: {request_data}", flush=True)
+        result = await call_generate_endpoint(url, request_data)
+
+        if result:
+            print("Response from /generate:", result)
+        else:
+            print("Failed to get a response from /generate")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
+    foo = await generate_request(adapted_request)
+    glog.info(foo)
+
+
     return await v1_completions(tokenizer_manager, raw_request)
 
 

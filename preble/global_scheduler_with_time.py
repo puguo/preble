@@ -334,8 +334,8 @@ class GlobalSchedulerWithTime:
             else:
                 runtime_idx = self.calculate_min_load_cost(leaf_node, selected_gpus=range(self.num_gpus))
             self.counter += 1
-            glog.info('self.counter: ', self.counter)
-            glog.info('runtime_idx: ', runtime_idx)
+            glog.info(f'self.counter: {self.counter}')
+            glog.info(f'runtime_idx:  {runtime_idx}')
             self.update_gpu_allocation_for_parent(leaf_node, {runtime_idx}) # Updated gpu allocations up till parent
             self.cache.update_allocated_size(leaf_node, runtime_idx) # Update ref counters
 
@@ -343,6 +343,7 @@ class GlobalSchedulerWithTime:
 
             self.histogram.update(datetime.now(), important_node, leaf_node, runtime_idx, decoding_length=decoding_length)
             self.per_gpu_load[runtime_idx] += 1
+            glog.info(f"per_gpu_load: {self.per_gpu_load[runtime_idx]}")
 
             # NOTE: eviction handled by iterative feedback
             if self.enable_eviction:

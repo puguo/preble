@@ -72,6 +72,7 @@ def load_chat_template_for_openai_api(chat_template_arg):
 
 
 async def v1_completions(tokenizer_manager, raw_request: Request):
+    glog.info('v1_completions')
     request_json = await raw_request.json()
     
 
@@ -84,6 +85,7 @@ async def v1_completions(tokenizer_manager, raw_request: Request):
             request_json['model'] = "meta-llama/Llama-3.2-1B"  # Default model
             
         request = CompletionRequest(**request_json)
+        glog.info(f"Successful completion request: {request}")
         # ...existing code...
     except Exception as e:
         glog.error(f"Error processing completion request: {e}")
@@ -108,7 +110,12 @@ async def v1_completions(tokenizer_manager, raw_request: Request):
         stream=request.stream,
     )
     adapted_request.post_init()
+#manually set it to false
+    adapted_request.stream = False
 
+    
+    
+    print(f"adapted_request_stream: {adapted_request.stream}")
     if adapted_request.stream:
 
         async def generate_stream_resp():

@@ -5,8 +5,8 @@
 Benchmark online serving with dynamic requests.
 
 Usage:
-python3 bench_request.py --backend vllm --num-prompts 3000 -c configs/2_tiers_config.yaml --request-rate 10 \
-    --model meta-llama/Llama-3.2-1B --port 8088 --window 60
+python3 bench_request.py --backend vllm --num-prompts 3000 -c configs/2_tiers_config.yaml --request-rate 2 \
+    --model meta-llama/Llama-3.2-1B --port 30000 --window 60
 
 python3 -m sglang.bench_request --backend sglang --dataset-name random --num-prompts 3000 --random-input 1024 --random-output 1024 --random-range-ratio 0.5
 python3 -m sglang.bench_request --backend sglang --dataset-name random --request-rate-range 1,2,4,8,16,32 --random-input 4096 --random-output 1024 --random-range-ratio 0.125 --multi
@@ -150,8 +150,6 @@ class NullContext:
 
 
 def remove_prefix(text: str, prefix: str) -> str:
-    print(f"remove_prefix: {text[:len(prefix)]}, {prefix}")
-    print(text.startswith(prefix))
     return text[len(prefix) :] if text.startswith(prefix) else text
 
 
@@ -531,6 +529,7 @@ def sample_random_requests(
 
         # Filter out sequences that are too long or too short
         input_requests: List[Tuple[str, int, int]] = []
+
         for i in range(num_prompts):
             # Tokenize the prompts and completions.
             prompt = dataset[i][0]
@@ -544,6 +543,8 @@ def sample_random_requests(
                 input_ids = (prompt_token_ids * ratio)[: input_lens[i]]
             prompt = tokenizer.decode(input_ids)
             input_requests.append((prompt, int(input_lens[i]), int(output_lens[i])))
+        
+        print(input_ids)
     else:
         # Sample token ids from random integers. This can cause some NaN issues.
         offsets = np.random.randint(0, tokenizer.vocab_size, size=num_prompts)
@@ -749,6 +750,19 @@ async def benchmark(
                     request_func(request_func_input=request_func_input, pbar=pbar)
                 )
             )
+
+            another_request_func_input = RequestFuncInput(
+                prompt=prompt,
+                api_url=api_url,
+                prompt_len=prompt_len,
+                output_len=output_len,
+                extra_request_body={
+                    **extra_request_body,
+                    "priority": i,
+                    "batch": True
+                },
+            )
+
         # wait for the window
         while time.perf_counter() - benchmark_start_time < window:
             await asyncio.sleep(0.01)

@@ -67,6 +67,7 @@ def process_stream_output(chunk: dict, output: RequestFuncOutput, **kwargs):
 async def async_send_request(
     text=None, input_ids=None, payload=None, runtime_id=None, runtime_url=None, rid=None
 ):
+    print("async_send_request", flush=True)
     start_time = time.time()
     st = time.perf_counter()
     scheduling_overhead = time.time() - start_time # Why is this here?
@@ -132,6 +133,7 @@ async def async_send_request(
 # Uses async_send_request() to handle communication with the runtime.
 # Returns the response as a streaming output.
 async def generate_request_helper(obj: GenerateReqInput):
+    print("generate_request_helper", flush=True)
     request_id = str(uuid.uuid4())
     runtime_events[request_id] = (asyncio.Event(), None)
     await runtime_request_queue.put((obj, request_id))
@@ -168,6 +170,7 @@ async def generate_request_helper(obj: GenerateReqInput):
 # Tokenizes the input if needed.
 # Delegates the request to generate_request_helper().
 async def process_req(request: Request):
+    print("Processing req", flush=True)
     try:
         obj = await request.json()
         generate_req_input = GenerateReqInput(**obj)
@@ -182,14 +185,17 @@ async def process_req(request: Request):
 #Picks a suitable runtime for each queued request using the request_router.
 async def process_runtime_selection():
     while True:
+        
+        print("processruntimeselection", flush=True)
         obj: GenerateReqInput
         obj, request_id = await runtime_request_queue.get()
+        print('get')
         text, input_ids, sampling_params = obj.text, obj.input_ids, obj.sampling_params
-        import glog 
-        glog.info(f"Processing request {request_id}")
-        glog.info(f"Text: {text}")
-        glog.info(f"Input IDs: {input_ids}")
-        glog.info(f"Sampling Params: {sampling_params}")
+        
+        print(f"Processing request {request_id}", flush=True)
+        print(f"Text: {text}", flush=True)
+        print(f"Input IDs: {input_ids}", flush=True)
+        print(f"Sampling Params: {sampling_params}", flush=True)
         sampling_params = sampling_params.dict()
         # hit_rates = [r.hit_ratio for r in runtimes] # 
         # hit_rates = [0 for _ in runtimes] # TODO handle hitrates
@@ -222,20 +228,20 @@ async def add_gpu_instance(global_scheduler):
     available_gpus = [gpu_id for gpu_id in all_possible_gpus if gpu_id not in global_scheduler.per_gpu_load]
     if available_gpus:
         gpu_id = available_gpus[0]
-        print(f"Adding GPU instance: GPU {gpu_id}")
+        print(f"Adding GPU instance: GPU {gpu_id}", flush=True)
         loader.load_instance(
             model_path=model_details.model_path,
             gpu_id=gpu_id
         )
         global_scheduler.per_gpu_load[gpu_id] = 0
     else:
-        print("No available GPUs to scale up.")
+        print("No available GPUs to scale up.", flush=True)
 
-    print(f"Added GPU {gpu_id}, current GPU num:{global_scheduler.num_gpus}")
+    print(f"Added GPU {gpu_id}, current GPU num:{global_scheduler.num_gpus}", flush=True)
 
 async def remove_gpu_instance(gpu_id):
     loader.unload_instance(gpu_id)
-    print(f"Removed GPU {gpu_id}")
+    print(f"Removed GPU {gpu_id}", flush=True)
 
 SCALE_OUT_THRESHOLD = 80
 SCALE_IN_THRESHOLD = 20
@@ -252,11 +258,11 @@ async def monitor_and_autoscale(global_scheduler):
                 utilization = nvmlDeviceGetUtilizationRates(handle)
                 memory_info = nvmlDeviceGetMemoryInfo(handle)
                 memory_used_percent = (memory_info.used / memory_info.total) * 100
-                print(f"GPU {gpu_id}: Utilization: {utilization.gpu}% | Memory Used: {memory_info.used / (1024 ** 2):.2f} MB / {memory_info.total / (1024 ** 2):.2f} MB")
+                print(f"GPU {gpu_id}: Utilization: {utilization.gpu}% | Memory Used: {memory_info.used / (1024 ** 2):.2f} MB / {memory_info.total / (1024 ** 2):.2f} MB", flush=True)
 
                 if utilization.gpu > 80 or memory_used_percent > 85:
                     if gpu_id in overloaded_instances:
-                        print(f"GPU {gpu_id} is consistently overloaded. Triggering scale-up.")
+                        print(f"GPU {gpu_id} is consistently overloaded. Triggering scale-up.", flush=True)
                         await add_gpu_instance(global_scheduler)
                         overloaded_instances.discard(gpu_id)
                     else:
@@ -267,7 +273,7 @@ async def monitor_and_autoscale(global_scheduler):
                 # For 
                 elif utilization.gpu < 20 or memory_used_percent < 30:
                     if gpu_id in underloaded_instances:
-                        print(f"GPU {gpu_id} is consistently underloaded. Triggering scale-down.")
+                        print(f"GPU {gpu_id} is consistently underloaded. Triggering scale-down.", flush=True)
                         await remove_gpu_instance(global_scheduler)
                         underloaded_instances.discard(gpu_id)
                     else:
@@ -287,6 +293,7 @@ app = FastAPI()
 
 @app.post("/generate")
 async def generate(request: Request):
+    print('preble server generate', flush=True)
     return await process_req(request)
 
 
@@ -312,6 +319,7 @@ def start_server(runtime_selection_policy="custom", runtime_urls="http://127.0.0
     # TODO check that these urls are valid
 
     tokenizer = AutoTokenizer.from_pretrained(model)
+    print(f"Tokenizer loaded for model {model}", flush=True)
 
     # Split runtime URLs into a list for multi-node support
     runtimes = runtime_urls.split(',')
@@ -336,6 +344,7 @@ def start_server(runtime_selection_policy="custom", runtime_urls="http://127.0.0
     nvmlInit()
 
     # Define the main async loop to start background tasks and the server
+    logger.info(f"Starting server... port {port}, host {host}")
     async def main():
         loop.create_task(process_runtime_selection())
         loop.create_task(process_cleanup_selection())
@@ -348,6 +357,7 @@ def start_server(runtime_selection_policy="custom", runtime_urls="http://127.0.0
     loop.run_until_complete(main())
 
 def start_server_and_load_models(model_name="mistralai/Mistral-7B-v0.1", devices=[0, 1], all_gpus=[0, 1, 2, 3],host="127.0.0.1", port=8000):
+    print('Starting server and loading models', flush=True)
     """
     Loads the specified model onto the given devices and starts the server.
 
@@ -388,11 +398,11 @@ def start_server_and_load_models(model_name="mistralai/Mistral-7B-v0.1", devices
     runtimes = []
     for runtime in model_details.runtimes:
         runtimes.append(runtime.generate_url)
-    print(f"Loading runtimes at {runtimes}")
+    print(f"Loading runtimes at {runtimes}", flush=True)
     try:
         start_server(runtime_selection_policy="custom", runtime_urls=",".join(runtimes), model=model_name, host=host, port=port)
     except KeyboardInterrupt:
-        print("Unloading model")
+        print("Unloading model", flush=True)
         loader.unload_model(model_details)
 
 runtime_events = {}
