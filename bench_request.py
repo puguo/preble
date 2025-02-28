@@ -234,9 +234,7 @@ async def async_request_openai_completions(
         start_time = time.perf_counter()
         # print('sending request for batch =', request_func_input.extra_request_body.get('batch', False))
         api_url = request_func_input.api_url
-        assert api_url.endswith(
-            "completions"
-        ), "OpenAI Completions API URL must end with 'completions'."
+    
 
         async with aiohttp.ClientSession(timeout=AIOHTTP_TIMEOUT, read_bufsize=4 * 1024 * 1024) as session:
             payload = {
@@ -266,10 +264,7 @@ async def async_request_openai_completions(
                             chunk_bytes = chunk_bytes.rstrip(b"\r\n")
                             if not chunk_bytes:
                                 continue
-                            glog.info(f"chunk_bytes: {chunk_bytes.decode('utf-8')}")
                             chunk = remove_prefix(chunk_bytes.decode("utf-8"), "data:")
-                            
-                            glog.warning(f"chunk: {chunk}")
                             latency = time.perf_counter() - st
                             if "[DONE]" in chunk:
                                 pass
@@ -278,9 +273,9 @@ async def async_request_openai_completions(
                                 # NOTE: Some completion API might have a last
                                 # usage summary response without a token so we
                                 # want to check a token was generated
-                                if data["choices"][0]["text"]:
-                                    text = data["choices"][0]["text"]
-                                    generated_text = data["choices"][0]["text"]
+                                if data["text"]:
+                                    text = data["text"]
+                                    generated_text += data["text"]
 
                         output.generated_text = generated_text
                         output.success = True
@@ -1031,9 +1026,9 @@ def run_benchmark(args_: argparse.Namespace):
         }.get(args.backend, 30000)
 
     api_url = (
-        f"{args.base_url}/v1/completions"
+        f"{args.base_url}/generate"
         if args.base_url
-        else f"http://{args.host}:{args.port}/v1/completions"
+        else f"http://{args.host}:{args.port}/generate"
     )
     model_url = (
         f"{args.base_url}/v1/models"

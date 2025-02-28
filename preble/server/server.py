@@ -67,7 +67,6 @@ def process_stream_output(chunk: dict, output: RequestFuncOutput, **kwargs):
 async def async_send_request(
     text=None, input_ids=None, payload=None, runtime_id=None, runtime_url=None, rid=None
 ):
-    print("async_send_request", flush=True)
     start_time = time.time()
     st = time.perf_counter()
     scheduling_overhead = time.time() - start_time # Why is this here?
@@ -133,7 +132,6 @@ async def async_send_request(
 # Uses async_send_request() to handle communication with the runtime.
 # Returns the response as a streaming output.
 async def generate_request_helper(obj: GenerateReqInput):
-    print("generate_request_helper", flush=True)
     request_id = str(uuid.uuid4())
     runtime_events[request_id] = (asyncio.Event(), None)
     await runtime_request_queue.put((obj, request_id))
@@ -170,12 +168,15 @@ async def generate_request_helper(obj: GenerateReqInput):
 # Tokenizes the input if needed.
 # Delegates the request to generate_request_helper().
 async def process_req(request: Request):
-    print("Processing req", flush=True)
+    
     try:
         obj = await request.json()
-        generate_req_input = GenerateReqInput(**obj)
+        text = obj.pop("prompt", "")
+        sp = SamplingParams(**obj)
+        stream = obj.pop("stream",True)
+        generate_req_input = GenerateReqInput(text=text,input_ids=[],sampling_params=sp,stream=stream)
         # if text doesn't have tokenization/tokenize the input here
-        if not generate_req_input.input_ids:
+        if not generate_req_input.input_ids or len(generate_req_input.input_ids) == 0:
             generate_req_input.input_ids = tokenizer.encode(generate_req_input.text)
         return await generate_request_helper(generate_req_input)
     except Exception as e:
@@ -185,17 +186,10 @@ async def process_req(request: Request):
 #Picks a suitable runtime for each queued request using the request_router.
 async def process_runtime_selection():
     while True:
-        
-        print("processruntimeselection", flush=True)
         obj: GenerateReqInput
         obj, request_id = await runtime_request_queue.get()
-        print('get')
         text, input_ids, sampling_params = obj.text, obj.input_ids, obj.sampling_params
         
-        print(f"Processing request {request_id}", flush=True)
-        print(f"Text: {text}", flush=True)
-        print(f"Input IDs: {input_ids}", flush=True)
-        print(f"Sampling Params: {sampling_params}", flush=True)
         sampling_params = sampling_params.dict()
         # hit_rates = [r.hit_ratio for r in runtimes] # 
         # hit_rates = [0 for _ in runtimes] # TODO handle hitrates
@@ -293,7 +287,6 @@ app = FastAPI()
 
 @app.post("/generate")
 async def generate(request: Request):
-    print('preble server generate', flush=True)
     return await process_req(request)
 
 
