@@ -219,6 +219,8 @@ async def process_cleanup_selection():
 
 async def add_gpu_instance(global_scheduler):
     global model_details
+    print(f"Current per_gpu_load: {global_scheduler.per_gpu_load}", flush=True)
+    print(f"Current all_possible_gpus: {all_possible_gpus}", flush=True)
     available_gpus = [gpu_id for gpu_id in all_possible_gpus if gpu_id not in global_scheduler.per_gpu_load]
     if available_gpus:
         gpu_id = available_gpus[0]
@@ -233,9 +235,10 @@ async def add_gpu_instance(global_scheduler):
 
     print(f"Added GPU {gpu_id}, current GPU num:{global_scheduler.num_gpus}", flush=True)
 
-async def remove_gpu_instance(gpu_id):
+async def remove_gpu_instance(global_scheduler, gpu_id):
     loader.unload_instance(gpu_id)
     print(f"Removed GPU {gpu_id}", flush=True)
+    global_scheduler.per_gpu_load.pop(gpu_id)
 
 SCALE_OUT_THRESHOLD = 80
 SCALE_IN_THRESHOLD = 20
@@ -254,7 +257,7 @@ async def monitor_and_autoscale(global_scheduler):
                 memory_used_percent = (memory_info.used / memory_info.total) * 100
                 print(f"GPU {gpu_id}: Utilization: {utilization.gpu}% | Memory Used: {memory_info.used / (1024 ** 2):.2f} MB / {memory_info.total / (1024 ** 2):.2f} MB", flush=True)
 
-                if utilization.gpu > 80 or memory_used_percent > 85:
+                if len(global_scheduler.per_gpu_load) < 1 or utilization.gpu > 80 or memory_used_percent > 85:
                     if gpu_id in overloaded_instances:
                         print(f"GPU {gpu_id} is consistently overloaded. Triggering scale-up.", flush=True)
                         await add_gpu_instance(global_scheduler)
@@ -268,18 +271,42 @@ async def monitor_and_autoscale(global_scheduler):
                 elif utilization.gpu < 20 or memory_used_percent < 30:
                     if gpu_id in underloaded_instances:
                         print(f"GPU {gpu_id} is consistently underloaded. Triggering scale-down.", flush=True)
-                        await remove_gpu_instance(global_scheduler)
+                        await remove_gpu_instance(global_scheduler, gpu_id)
                         underloaded_instances.discard(gpu_id)
+                        await asyncio.sleep(50)
+                        
+                        while True:
+                            handle = nvmlDeviceGetHandleByIndex(gpu_id)
+                            utilization = nvmlDeviceGetUtilizationRates(handle)
+                            memory_info = nvmlDeviceGetMemoryInfo(handle)
+                            memory_used_percent = (memory_info.used / memory_info.total) * 100
+                            print(f"GPU {gpu_id}: Utilization: {utilization.gpu}% | Memory Used: {memory_info.used / (1024 ** 2):.2f} MB / {memory_info.total / (1024 ** 2):.2f} MB", flush=True)
+                            if memory_info.used / (1024 ** 2) < 2000:
+                                break
+                            await asyncio.sleep(10)
+                        if len(global_scheduler.per_gpu_load) <= 1:
+                            if gpu_id not in overloaded_instances:
+                                overloaded_instances.add(gpu_id)
+                                print(f"GPU {gpu_id} is consistently underloaded but at minimum instances. Attempting scale up.", flush=True)
+
+                                await add_gpu_instance(global_scheduler)
+                                overloaded_instances.discard(gpu_id)
+                            else:
+                                print(f"Current gpu len: {len(global_scheduler.per_gpu_load)}", flush=True)
+                        
                     else:
                         underloaded_instances.add(gpu_id)
                         overloaded_instances.discard(gpu_id)
+
+                    
+                        
 
                 # If neither overloaded nor underloaded, remove from both sets
                 else:
                     overloaded_instances.discard(gpu_id)
                     underloaded_instances.discard(gpu_id)
 
-            await asyncio.sleep(60)
+            await asyncio.sleep(10)
     finally:
         nvmlShutdown()
 
@@ -383,7 +410,7 @@ def start_server_and_load_models(model_name="mistralai/Mistral-7B-v0.1", devices
         for device in devices
     ]
     global model_details
-    loader = MultiNodeLoader()
+    loader = MultiNodeLoader(server_args=server_args)
     model_details = loader.load_model(
         model_path=model_name,
         gpu_configs=gpu_configs,
