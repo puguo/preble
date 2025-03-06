@@ -56,6 +56,7 @@ def random_uuid_string():
     return str(uuid.uuid4().hex)
 
 # Use simulated ModelRpcServer to maintain node state
+# a simulated LLM server running on a GPU
 class ServerRuntimeSimulator:
     def __init__(
         self,
@@ -139,7 +140,7 @@ class ServerRuntimeSimulator:
         )
         # NOTE: some metadata is maintained in GPU memory, be careful when #replicas is too high
         self.model_rpc = ModelRpcServer(0, server_args, port_args, 
-                                        simulate=not profile_mode, gpu_config=gpu_config)
+                                        simulate=not profile_mode, gpu_config=gpu_config) # set simulate mode=true
         self.manager_recv_reqs = []
         self.gpu_config = gpu_config
         # # Event in each queue will start from these time stamps
@@ -171,7 +172,8 @@ class ServerRuntimeSimulator:
         TOKENIZER = 0
         MANAGER = 1
         DETOKENIZER = 2
-        
+
+# schedule and track actions such as sending a request, executing a model step, requesting routing        
 class SimulationEvent(ABC):
     """
     runtime_id is from external world, e.g. request generator
@@ -217,8 +219,8 @@ class SimulationEvent(ABC):
     
 class Simulation:
     def __init__(self, runtimes: List[ServerRuntimeSimulator], router: DataParallelRequestRouter):
-        self.global_clock = 0.0
-        self.runtimes: List[ServerRuntimeSimulator] = runtimes
+        self.global_clock = 0.0 # track simulation time
+        self.runtimes: List[ServerRuntimeSimulator] = runtimes # List of LLM servers handling inference requests
         self.router = router
         self.events = []
         # rid -> RequestFuncOutput
@@ -227,16 +229,18 @@ class Simulation:
         self.rid_to_input = {} # rid -> input request
  
     def add_event(self, event: SimulationEvent):
-        heapq.heappush(self.events, event)
+        heapq.heappush(self.events, event) # min heap to operate events
     
-    def reset_state(self):
+    def reset_state(self): # reset simulation
         self.global_clock = 0.0
         self.events = []
         self.request_output = {}
         for runtime in self.runtimes:
             runtime.reset_clock()
     
-    def warm_up(self):
+    # Sends a simple warm-up request to all runtimes to initialize GPU caches and prevent cold starts.
+    # waits until all warm-up requests succeed, then resets the simulation state.
+    def warm_up(self): 
         logging.info('--- Warm up started ---')
         prompt = "Say this is a warmup request."
         warm_up_request = {
@@ -270,7 +274,7 @@ class Simulation:
         
     def run(self) -> List[RequestFuncOutput]:
         previous_stamp = self.global_clock
-        while self.events:
+        while self.events: # 1.process eventes until self.events is empty / global clock exceeds limits / all requests are completed
             if self.global_clock > self.time_litmit:
                 break
             if not self.unfinished_requests:
@@ -284,6 +288,7 @@ class Simulation:
             event.advance_to_schedule_time(self)
             event.wrapper_process_event(self)
         all_req_outputs = [{rid: asdict(rq)} for rid, rq in self.request_output.items()]
+        # 2. logs scheduling overhead / number of recomputed tokens / cache hit rates
         logging.info(f"Scheduling waiting overhead(s): {[r.model_rpc.schedule_waiting_overhead for r in self.runtimes]}"
                      f"total schedule overhead(s): {[r.model_rpc.total_scheduling_overhead for r in self.runtimes]}")
         logging.info(f'total recomputed tokens: {[r.model_rpc.recomputed_tokens for r in self.runtimes]}, '
@@ -298,7 +303,7 @@ class Simulation:
     def initialize_all_request_with_rps(
         self, 
         requests, 
-        rps,
+        rps, # requests per second (rate control)
         time,
         send_out_times=None, 
     ):
@@ -524,6 +529,7 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.DEBUG)
     random.seed(2333)
     np.random.seed(2333)
+    # 1. GPU Configuration Setup
     gpu_configs = [
         GPUConfig(gpu_id=0, url=None, use_ssh=False),
         GPUConfig(gpu_id=1, url=None, use_ssh=False)
@@ -531,16 +537,19 @@ if __name__ == "__main__":
     def forward_simulation(batch: Batch):
         return 1
     for config in gpu_configs:
-        config.regist_simulator_config(forward_simulation, 1 << 30)
+        config.regist_simulator_config(forward_simulation, 1 << 30, None)
 
+    # 2. Initializing the Model and Simulation Environment
     model_name = "meta-llama/Llama-3.2-1B"
     runtimes = [ServerRuntimeSimulator(gpu_config=config, model_path=model_name) for config in gpu_configs]
     vocab_size = runtimes[0].model_rpc.model_config.vocab_size
     
-    router = DataParallelRequestRouter(DataParallelRuntimeSelectionPolicy.RANDOM, total_nodes=2)
+    router = DataParallelRequestRouter(DataParallelRuntimeSelectionPolicy.RANDOM, total_nodes=2) # use a random selection policy across two nodes
     simulator = Simulation(runtimes, router)
+    
+    # 3. Generating Workload (Requests)
     tokenizer = AutoTokenizer.from_pretrained(model_name)
-    rps, exp_time = 8, 30
+    rps, exp_time = 8, 30 # 8 requests per second, 30-second runtime
     num_requests = int(rps * exp_time)
     num_workloads = 10
     dataloader = WorkloadPrefixDataLoader(
@@ -550,11 +559,13 @@ if __name__ == "__main__":
         num_in_context_examples=4,
         output_len=10,
     )
+    # 4. Running the simulation
     requests = dataloader.generate_workload(k=1)
     simulator.initialize_all_request_with_rps(requests, 8, 30)
     simulator.start_model_forwarding_loop()
 
     results = simulator.run()
+    # 5. benchmark the performance
     bench_metrics = BenchmarkMetrics.gen_benchmark_metrics(
         tokenizer=tokenizer,
         req_func_outputs=results,

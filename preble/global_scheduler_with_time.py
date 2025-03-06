@@ -16,6 +16,7 @@ from preble.benchmarks.exp_configs.model_equations import LP_mistral_7b_A6000_sg
 # from benchmarks.exp_configs.model_equations import LP_Llama3_70B_H100_sglang_extend_flashinfer as prefill_time
 from ttft_overload_detector import TTFTWindowedOverloadedDetector
 import glog
+from pynvml import nvmlInit, nvmlDeviceGetHandleByIndex, nvmlDeviceGetUtilizationRates, nvmlDeviceGetMemoryInfo, nvmlShutdown
 
 
 tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-3.2-1B")
@@ -123,6 +124,7 @@ class SlidingWindowHistogram:
     def query(self):
         return dict(self.histogram)
 
+    # Calculate Computation Load L_i
     def current_allocation_per_gpu(self):
         allocation = [0 for _ in range(self.num_gpus)]
         topts = []
@@ -151,6 +153,7 @@ class SlidingWindowHistogram:
     def get_prefill_cost(self, node: TreeNode):
         return self.prev_mis_rates[node] * self.node_to_count[node] * prefill_time(node.num_tokens, node.context_length) / len(self.gpu_allocations.get(node)) # potentionally divide by length of node.cached_gpus here
     
+    # Calculate the Prefill+Decode cost
     def get_node_cost(self, node: TreeNode, gpu, tpot):
         prefill_cost = self.get_prefill_cost(node)
         output_len = self.decoding_size[node]
@@ -215,6 +218,12 @@ class GlobalSchedulerWithTime:
         self.last_rebalancing_time = datetime.now()
         self.min_rebalancing_interval = timedelta(seconds=10)
         
+        self.gpu_utilization = {i: 0 for i in range(num_nodes)}  # Store GPU utilization
+        self.gpu_memory = {i: 0 for i in range(num_nodes)}
+        self.utilization_weight_1 = 0.5
+        self.utilization_weight_2 = 0.5
+
+        
     # Consider Split nodes
     def handle_split_nodes_gpu_allocations(self, split_nodes, gpu_allocations):
         for child_node, new_node in split_nodes.items():
@@ -240,7 +249,7 @@ class GlobalSchedulerWithTime:
             return self.all_gpus
         if self.gpu_allocations.get(node):
             return self.gpu_allocations.get(node)
-        return self.get_parent_gpu_allocation(node.parent)
+        return self.get_parent_gpu_allocation(node.parent) # Recursive call to find the nearest ancestor with GPU allocation.
 
     def update_gpu_cache_for_parent(self,node: TreeNode, gpu_id):
         if not node:
@@ -290,16 +299,37 @@ class GlobalSchedulerWithTime:
             eviction_cost += self.histogram.get_eviction_prefill_cost(victim, runtime_selected, self.is_large_node(victim))
         return eviction_cost
     
+    
+    def update_gpu_utilization(self):
+        """Fetches and updates real-time GPU utilization."""
+        nvmlInit()
+        for i in range(self.num_gpus):
+            handle = nvmlDeviceGetHandleByIndex(i)
+            utilization = nvmlDeviceGetUtilizationRates(handle).gpu
+            memory_info = nvmlDeviceGetMemoryInfo(handle)
+            memory_used = (memory_info.used / memory_info.total) * 100
+            self.gpu_memory[i] = memory_used
+            self.gpu_utilization[i] = utilization
+        nvmlShutdown()
+    
     def calculate_min_load_cost(self, leaf_node, selected_gpus):
         # histogram_mem_cost = self.histogram.current_allocation_cost_per_gpu
-        histogram_mem_cost = self.histogram.current_allocation_per_gpu()
+        histogram_mem_cost = self.histogram.current_allocation_per_gpu() # Li: computation load
         costs = []
         for gpu_id in selected_gpus:
             cost = histogram_mem_cost[gpu_id]
             if self.enable_eviction:
-                cost += self.virtual_evict_for_routing(leaf_node, gpu_id)
+                eviction_cost = self.virtual_evict_for_routing(leaf_node, gpu_id)
+                cost += eviction_cost # Mi: eviction cost
+
+            # add GPU utilization as another cost factor
+            gpu_utilization_factor = self.gpu_utilization[gpu_id]
+            gpu_memory_factor = self.gpu_memory[gpu_id]
+            utilization_cost = self.utilization_weight_1 * gpu_utilization_factor + self.utilization_weight_2 * gpu_memory_factor
+            cost += utilization_cost
+            
             costs.append(cost)
-        gpu_selected = int(np.argmin(costs))
+        gpu_selected = int(np.argmin(costs)) # choose the gpu with the min cost
         return gpu_selected
 
 
@@ -314,6 +344,9 @@ class GlobalSchedulerWithTime:
     ):
         decoding_length = sampling_params.get("max_new_tokens", sampling_params.get("max_tokens", 45))
         glog.info(f"Decoding length: {decoding_length}")
+        
+        # update GPU utilization
+        self.update_gpu_utilization()
         # Tokenize the text
         start_time = time.time()
         with self.lock:
@@ -323,26 +356,27 @@ class GlobalSchedulerWithTime:
             self.handle_split_node_histogram(split_nodes)
 
             important_node = self.get_important_node(leaf_node)
-            if leaf_node.num_tokens < leaf_node.context_so_far: # check that gpu allocation exists for important node
-                gpu_selected = self.get_parent_gpu_allocation(leaf_node)
+            if leaf_node.num_tokens < leaf_node.context_so_far: # Exploitation
+                gpu_selected = self.get_parent_gpu_allocation(leaf_node) # Finds GPUs that have already cached this request’s prefix.
                 if len(gpu_selected) > 1:
-                    runtime_idx = self.calculate_min_load_cost(leaf_node, gpu_selected)
+                    runtime_idx = self.calculate_min_load_cost(leaf_node, gpu_selected) # Chooses the GPU with the least computational load.
                 else:
                     runtime_idx = list(gpu_selected)[0]
-            elif runtime_id_with_highest_hit_rate is not None:
+            elif runtime_id_with_highest_hit_rate is not None: # Selects the GPU with the highest cache hit rate 
                 runtime_idx = runtime_id_with_highest_hit_rate
-            else:
+            else: # Exploration
                 runtime_idx = self.calculate_min_load_cost(leaf_node, selected_gpus=range(self.num_gpus))
             self.counter += 1
             glog.info('self.counter: ', self.counter)
             glog.info('runtime_idx: ', runtime_idx)
             self.update_gpu_allocation_for_parent(leaf_node, {runtime_idx}) # Updated gpu allocations up till parent
             self.cache.update_allocated_size(leaf_node, runtime_idx) # Update ref counters
+            self.update_gpu_utilization() # update gpu utilization
 
             assert self.is_large_node(important_node)
 
             self.histogram.update(datetime.now(), important_node, leaf_node, runtime_idx, decoding_length=decoding_length)
-            self.per_gpu_load[runtime_idx] += 1
+            self.per_gpu_load[runtime_idx] += 1 # how many requests are currently active on runtime_idx.
 
             # NOTE: eviction handled by iterative feedback
             if self.enable_eviction:

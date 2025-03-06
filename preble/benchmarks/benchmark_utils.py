@@ -189,12 +189,13 @@ class BenchmarkMetrics:
                 json.dump([asdict(result) for result in 
                         sorted(req_func_outputs, key=lambda x: x.send_out_time)], 
                         f, indent=4)
-
+        # timing metrics
         ttfts = [result.ttft for result in req_func_outputs if result.ttft]
         tpots = [result.tpot for result in req_func_outputs if result.tpot]
         overall_latency = overall_latency
         request_latencies = [result.request_latency for result in req_func_outputs if result.request_latency]
         norm_request_latencies = [result.normalized_latency for result in req_func_outputs if result.normalized_latency]
+        # tokens per second
         throughput_tok_sec = (
             sum([result.total_tokens for result in req_func_outputs]) / overall_latency
         )
@@ -215,7 +216,7 @@ class BenchmarkMetrics:
             and result.success
         ]
         average_finished_tpot = np.average(finished_tpot)
-        p50_tpot, p90_tpot, p99_tpot = np.percentile(tpots, [50, 90, 99])
+        p50_tpot, p90_tpot, p99_tpot = np.percentile(tpots, [50, 90, 99]) # percentile based timing metrics
         
         prefill_decode_ratio = [result.prefill_decode_ratio for result in req_func_outputs if result.prefill_decode_ratio]
 
@@ -230,7 +231,7 @@ class BenchmarkMetrics:
         average_ttft = np.mean(ttfts)
         average_topt = np.mean(tpots)
         requests_per_sec = len([req for req in req_func_outputs if req.success]) / overall_latency
-
+        # sheduling overhead
         avg_scheduling_overhead = np.mean([result.scheduling_overhead for result in req_func_outputs])
         max_scheduling_overhead = np.max([result.scheduling_overhead for result in req_func_outputs])
         p50_ttft, pt90_ttft, p99_ttft = np.percentile(ttfts, 50), np.percentile(ttfts, 90), np.percentile(ttfts, 99)

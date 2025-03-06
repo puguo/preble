@@ -51,10 +51,13 @@ logging.getLogger("vllm.utils").setLevel(logging.WARN)
 
 detail_batch_logger = logger.debug
 
+# handling inference requests in a distributed model-serving system
+# interface between tokenized text requests and GPU-based model execution
+# managing scheduling, caching, and parallel execution
 class ModelRpcServer:
     def __init__(
         self,
-        tp_rank: int,
+        tp_rank: int,  # Tensor parallel rank
         server_args: ServerArgs,
         port_args: PortArgs,
         simulate: bool = False,
@@ -147,7 +150,7 @@ class ModelRpcServer:
         )
         self.tree_cache_metrics = {"total": 0, "hit": 0}
         self.scheduler = Scheduler(
-            self.schedule_heuristic,
+            self.schedule_heuristic, # define scheduler policy
             self.max_num_running_seq,
             self.max_prefill_num_token,
             self.max_total_num_token,
