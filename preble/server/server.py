@@ -19,6 +19,7 @@ from typing import List, Optional
 import uvicorn
 from sglang.srt.managers.router.model_runner import GPUConfig
 from pynvml import nvmlInit, nvmlDeviceGetHandleByIndex, nvmlDeviceGetUtilizationRates, nvmlDeviceGetMemoryInfo, nvmlShutdown
+import random
 
 random.seed(10)
 np.random.seed(10)
@@ -246,6 +247,73 @@ MIN_GPU_INSTANCES = 2
 overloaded_instances = set()
 underloaded_instances = set()
 
+
+
+async def test_monitor_and_autoscale(global_scheduler, initial_gpu_num=2, random_seed=12345):
+    
+    nvmlInit()
+    random.seed(random_seed)
+
+    sum = 0
+    random_values = []
+    list_length = 20  # Arbitrary length for the list
+    for _ in range(list_length - 1):
+        if sum == 0:
+            random_values.append(1)
+        elif sum == initial_gpu_num:
+            random_values.append(-1)
+        else:
+            random_values.append(random.choice([1, -1]))
+        sum += random_values[-1]
+    print(f"Generated random list: {random_values}", flush=True)
+    try:
+        for step in len(random_values):
+            print(f"Testing Step {step}:{'scaleup' if random_values[step]==1 else 'scaledown'}", flush=True)
+            current_devices = list(global_scheduler.per_gpu_load.keys())
+            for gpu_id in current_devices:
+                handle = nvmlDeviceGetHandleByIndex(gpu_id)
+                utilization = nvmlDeviceGetUtilizationRates(handle)
+                memory_info = nvmlDeviceGetMemoryInfo(handle)
+                memory_used_percent = (memory_info.used / memory_info.total) * 100
+                print(f"Testing: GPU {gpu_id}: Utilization: {utilization.gpu}% | Memory Used: {memory_info.used / (1024 ** 2):.2f} MB / {memory_info.total / (1024 ** 2):.2f} MB", flush=True)
+
+                if random_values[step] == 1:
+                    if gpu_id in overloaded_instances:
+                        print(f"GPU {gpu_id} is consistently overloaded. Triggering scale-up.", flush=True)
+                        await add_gpu_instance(global_scheduler)
+                        overloaded_instances.discard(gpu_id)
+                        break
+                    else:
+                        overloaded_instances.add(gpu_id)
+                        underloaded_instances.discard(gpu_id)
+
+                    
+                elif random_values[step] == -1:
+                    if gpu_id in underloaded_instances:
+                        print(f"GPU {gpu_id} is consistently underloaded. Triggering scale-down.", flush=True)
+                        await remove_gpu_instance(global_scheduler, gpu_id)
+                        underloaded_instances.discard(gpu_id)
+                        await asyncio.sleep(50)
+                            
+                        break
+                            
+                    else:
+                        underloaded_instances.add(gpu_id)
+                        overloaded_instances.discard(gpu_id)
+
+                    
+                        
+            
+
+        pass
+
+    except Exception as e:
+        print(f"Autoscaling test failed: {e}", flush=True)
+        raise
+    finally:
+        print("Test complete.", flush=True)
+        nvmlShutdown()
+
 async def monitor_and_autoscale(global_scheduler):
     try:
         while True:
@@ -257,7 +325,7 @@ async def monitor_and_autoscale(global_scheduler):
                 memory_used_percent = (memory_info.used / memory_info.total) * 100
                 print(f"GPU {gpu_id}: Utilization: {utilization.gpu}% | Memory Used: {memory_info.used / (1024 ** 2):.2f} MB / {memory_info.total / (1024 ** 2):.2f} MB", flush=True)
 
-                if len(global_scheduler.per_gpu_load) < 1 or utilization.gpu > 80 or memory_used_percent > 85:
+                if len(global_scheduler.per_gpu_load) < 1 or utilization.gpu > 70 or memory_used_percent > 75:
                     if gpu_id in overloaded_instances:
                         print(f"GPU {gpu_id} is consistently overloaded. Triggering scale-up.", flush=True)
                         await add_gpu_instance(global_scheduler)
@@ -317,7 +385,7 @@ async def generate(request: Request):
     return await process_req(request)
 
 
-def start_server(runtime_selection_policy="custom", runtime_urls="http://127.0.0.1:30000/generate", host='127.0.0.1', port=8000, model="mistralai/Mistral-7B-v0.1"):
+def start_server(runtime_selection_policy="custom", runtime_urls="http://127.0.0.1:30000/generate", host='127.0.0.1', port=8000, model="mistralai/Mistral-7B-v0.1", mode='regular'):
     """
     Starts the server with the specified runtime selection policy, runtime URLs, and model.
 
@@ -368,7 +436,10 @@ def start_server(runtime_selection_policy="custom", runtime_urls="http://127.0.0
     async def main():
         loop.create_task(process_runtime_selection())
         loop.create_task(process_cleanup_selection())
-        loop.create_task(monitor_and_autoscale(global_scheduler))
+        if mode == 'test':
+            loop.create_task(test_monitor_and_autoscale(global_scheduler))
+        else:
+            loop.create_task(monitor_and_autoscale(global_scheduler))
         config = uvicorn.Config(app=app, loop="asyncio", host=host, port=port)
         server = uvicorn.Server(config)
         await server.serve()
@@ -376,7 +447,7 @@ def start_server(runtime_selection_policy="custom", runtime_urls="http://127.0.0
     loop = asyncio.get_event_loop()
     loop.run_until_complete(main())
 
-def start_server_and_load_models(model_name="mistralai/Mistral-7B-v0.1", devices=[0, 1], all_gpus=[0, 1, 2, 3],host="127.0.0.1", port=8000):
+def start_server_and_load_models(model_name="mistralai/Mistral-7B-v0.1", devices=[0], all_gpus=[0],host="127.0.0.1", port=8000, mode='regular'):
     print('Starting server and loading models', flush=True)
     """
     Loads the specified model onto the given devices and starts the server.
@@ -420,7 +491,7 @@ def start_server_and_load_models(model_name="mistralai/Mistral-7B-v0.1", devices
         runtimes.append(runtime.generate_url)
     print(f"Loading runtimes at {runtimes}", flush=True)
     try:
-        start_server(runtime_selection_policy="custom", runtime_urls=",".join(runtimes), model=model_name, host=host, port=port)
+        start_server(runtime_selection_policy="custom", runtime_urls=",".join(runtimes), model=model_name, host=host, port=port, mode=mode)
     except KeyboardInterrupt:
         print("Unloading model", flush=True)
         loader.unload_model(model_details)
