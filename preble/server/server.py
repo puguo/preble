@@ -185,7 +185,7 @@ async def process_req(request: Request):
         return JSONResponse({"error": str(e)}, status_code=400)
 
 #Picks a suitable runtime for each queued request using the request_router.
-async def process_runtime_selection():
+async def process_runtime_selection(global_scheduler=None):
     while True:
         obj: GenerateReqInput
         obj, request_id = await runtime_request_queue.get()
@@ -200,9 +200,9 @@ async def process_runtime_selection():
         highest_idx = None
         hit_rates = [0 for _ in runtimes] # TODO add hot/cold support
         
-
+        loaded_gpu_list = global_scheduler.per_gpu_load.keyes()
         try:
-            runtime_id = request_router.select_runtime(text=text, experiment_id="1", input_ids=input_ids, request_id=request_id, sampling_params=sampling_params, runtime_id_with_highest_hit_rate=highest_idx, hit_rates=hit_rates)
+            runtime_id = request_router.select_runtime(text=text, experiment_id="1", input_ids=input_ids, request_id=request_id, sampling_params=sampling_params, runtime_id_with_highest_hit_rate=highest_idx, hit_rates=hit_rates, loaded_gpu_list=loaded_gpu_list)
             runtime_events[request_id] = (runtime_events[request_id][0], runtime_id)
         except Exception as e:
             logger.error(f"Error selecting runtime: {e}")
@@ -231,10 +231,11 @@ async def add_gpu_instance(global_scheduler):
             gpu_id=gpu_id
         )
         global_scheduler.per_gpu_load[gpu_id] = 0
+        print(f"Added GPU {gpu_id}, current GPU num:{global_scheduler.num_gpus}", flush=True)
     else:
         print("No available GPUs to scale up.", flush=True)
 
-    print(f"Added GPU {gpu_id}, current GPU num:{global_scheduler.num_gpus}", flush=True)
+    
 
 async def remove_gpu_instance(global_scheduler, gpu_id):
     loader.unload_instance(gpu_id)
@@ -250,7 +251,16 @@ underloaded_instances = set()
 
 
 async def test_monitor_and_autoscale(global_scheduler, initial_gpu_num=2, random_seed=12345):
-    
+    """
+    Tests the autoscaling functionality by simulating GPU load and observing
+    scale-up and scale-down behavior.
+
+    Args:
+        global_scheduler: The GlobalSchedulerWithTime instance to test.
+        initial_gpu_num (int): The initial number of GPUs to simulate.
+        target_utilization (int): The target GPU utilization percentage.
+        duration (int): The duration of the test in seconds.
+    """
     nvmlInit()
     random.seed(random_seed)
 
@@ -259,7 +269,7 @@ async def test_monitor_and_autoscale(global_scheduler, initial_gpu_num=2, random
     list_length = 20  # Arbitrary length for the list
     for _ in range(list_length - 1):
         if sum == 0:
-            random_values.append(1)
+            random_values.append(random)
         elif sum == initial_gpu_num:
             random_values.append(-1)
         else:
@@ -268,14 +278,14 @@ async def test_monitor_and_autoscale(global_scheduler, initial_gpu_num=2, random
     print(f"Generated random list: {random_values}", flush=True)
     try:
         for step in len(random_values):
-            print(f"Testing Step {step}:{'scaleup' if random_values[step]==1 else 'scaledown'}", flush=True)
+
             current_devices = list(global_scheduler.per_gpu_load.keys())
             for gpu_id in current_devices:
                 handle = nvmlDeviceGetHandleByIndex(gpu_id)
                 utilization = nvmlDeviceGetUtilizationRates(handle)
                 memory_info = nvmlDeviceGetMemoryInfo(handle)
                 memory_used_percent = (memory_info.used / memory_info.total) * 100
-                print(f"Testing: GPU {gpu_id}: Utilization: {utilization.gpu}% | Memory Used: {memory_info.used / (1024 ** 2):.2f} MB / {memory_info.total / (1024 ** 2):.2f} MB", flush=True)
+                print(f"GPU {gpu_id}: Utilization: {utilization.gpu}% | Memory Used: {memory_info.used / (1024 ** 2):.2f} MB / {memory_info.total / (1024 ** 2):.2f} MB", flush=True)
 
                 if random_values[step] == 1:
                     if gpu_id in overloaded_instances:
@@ -325,7 +335,7 @@ async def monitor_and_autoscale(global_scheduler):
                 memory_used_percent = (memory_info.used / memory_info.total) * 100
                 print(f"GPU {gpu_id}: Utilization: {utilization.gpu}% | Memory Used: {memory_info.used / (1024 ** 2):.2f} MB / {memory_info.total / (1024 ** 2):.2f} MB", flush=True)
 
-                if len(global_scheduler.per_gpu_load) < 1 or utilization.gpu > 70 or memory_used_percent > 75:
+                if len(global_scheduler.per_gpu_load) < 1 or utilization.gpu > 80 or memory_used_percent > 85:
                     if gpu_id in overloaded_instances:
                         print(f"GPU {gpu_id} is consistently overloaded. Triggering scale-up.", flush=True)
                         await add_gpu_instance(global_scheduler)
@@ -434,7 +444,7 @@ def start_server(runtime_selection_policy="custom", runtime_urls="http://127.0.0
     # Define the main async loop to start background tasks and the server
     logger.info(f"Starting server... port {port}, host {host}")
     async def main():
-        loop.create_task(process_runtime_selection())
+        loop.create_task(process_runtime_selection(global_scheduler))
         loop.create_task(process_cleanup_selection())
         if mode == 'test':
             loop.create_task(test_monitor_and_autoscale(global_scheduler))

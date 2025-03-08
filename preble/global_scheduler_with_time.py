@@ -310,6 +310,7 @@ class GlobalSchedulerWithTime:
         input_ids=None,
         sampling_params=None,
         runtime_id_with_highest_hit_rate=None,
+        loaded_gpu_list=None,
         *args, **kwargs,
     ):
         decoding_length = sampling_params.get("max_new_tokens", sampling_params.get("max_tokens", 1024))
@@ -323,15 +324,20 @@ class GlobalSchedulerWithTime:
 
             important_node = self.get_important_node(leaf_node)
             if leaf_node.num_tokens < leaf_node.context_so_far: # check that gpu allocation exists for important node
+               # print('check that gpu allocation exists for important node', flush=True)
+                glog.info('check that gpu allocation exists for important node')
                 gpu_selected = self.get_parent_gpu_allocation(leaf_node)
                 if len(gpu_selected) > 1:
                     runtime_idx = self.calculate_min_load_cost(leaf_node, gpu_selected)
                 else:
                     runtime_idx = list(gpu_selected)[0]
             elif runtime_id_with_highest_hit_rate is not None:
+                glog.info('runtime_id_with_highest_hit_rate is not None, using runtime_id_with_highest_hit_rate')
                 runtime_idx = runtime_id_with_highest_hit_rate
             else:
-                runtime_idx = self.calculate_min_load_cost(leaf_node, selected_gpus=range(self.num_gpus))
+                glog.info('runtime_id_with_highest_hit_rate is None, using calculate_min_load_cost')
+                #runtime_idx = self.calculate_min_load_cost(leaf_node, selected_gpus=range(self.num_gpus))
+                runtime_idx = self.calculate_min_load_cost(leaf_node, selected_gpus=loaded_gpu_list)
             self.counter += 1
             #glog.info(f'self.counter: {self.counter}')
             #glog.info(f'runtime_idx:  {runtime_idx}')
@@ -378,6 +384,7 @@ class GlobalSchedulerWithTime:
                 breakpoint()
             assert important_node in self.histogram.histogram
             self.histogram.per_node_total_decode_lengths[important_node] -= func_output.max_new_tokens
+            self.per_gpu_load[runtime_id] -= 1
 
     def handle_important_node_stealing(self, scheduled_idx):
         if sum(self.per_gpu_load.values()) < 50 * self.num_gpus:
