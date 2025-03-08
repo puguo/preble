@@ -5,14 +5,15 @@ import logging
 import torch
 
 logger = logging.getLogger(__name__)
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
 class ReqToTokenPool:
     def __init__(self, size, max_context_len):
-        self.mem_state = torch.ones((size,), dtype=torch.bool, device="cuda")
+        self.mem_state = torch.ones((size,), dtype=torch.bool, device=device)
         self.can_use_mem_size = size
         self.req_to_token = torch.empty(
-            (size, max_context_len), dtype=torch.int32, device="cuda"
+            (size, max_context_len), dtype=torch.int32, device=device
         )
 
     def alloc(self, need_size):
@@ -38,14 +39,14 @@ class ReqToTokenPool:
 
 class TokenToKVPool:
     def __init__(self, size, dtype, head_num, head_dim, layer_num, simulate):
-        self.mem_state = torch.zeros((size,), dtype=torch.int16, device="cuda")
+        self.mem_state = torch.zeros((size,), dtype=torch.int16, device=device)
         self.total_ref_ct = 0
         self.simulate = simulate
 
         if not self.simulate:
             # [size, key/value, head_num, head_dim] for each layer
             self.kv_data = [
-                torch.empty((size, 2, head_num, head_dim), dtype=dtype, device="cuda")
+                torch.empty((size, 2, head_num, head_dim), dtype=dtype, device=device)
                 for _ in range(layer_num)
             ]
         else:
@@ -80,7 +81,7 @@ class TokenToKVPool:
             return None
 
         start_loc = can_used_loc[0].item()
-        select_index = torch.arange(start_loc, start_loc + need_size, device="cuda")
+        select_index = torch.arange(start_loc, start_loc + need_size, device=device)
         self.add_refs(select_index)
         return select_index.to(torch.int32), start_loc, start_loc + need_size
 

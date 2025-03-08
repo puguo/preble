@@ -12,6 +12,7 @@ import torch
 import random
 from dataclasses import asdict
 from enum import Enum
+from preble.global_scheduler_with_time import GlobalSchedulerWithTime
 
 from sglang.srt.server_args import PortArgs, ServerArgs
 from sglang.srt.conversation import (
@@ -26,7 +27,7 @@ from sglang.srt.managers.router.manager import RouterManager
 from sglang.srt.managers.router.model_rpc import ModelRpcClient, ModelRpcServer
 from sglang.srt.hf_transformers_utils import get_tokenizer
 from sglang.srt.managers.router.model_runner import GPUConfig
-from data_parallel_request_cache import DataParallelRequestRouter, DataParallelRuntimeSelectionPolicy
+from data_parallel_request_cache import DataParallelRequestRouter, DataParallelRuntimeSelectionPolicy, CustomRuntimeSelector
 from sglang.srt.managers.io_struct import (
     BatchStrOut,
     BatchTokenIDOut,
@@ -218,7 +219,8 @@ class SimulationEvent(ABC):
         return self.time == other.time
     
 class Simulation:
-    def __init__(self, runtimes: List[ServerRuntimeSimulator], router: DataParallelRequestRouter):
+    #def __init__(self, runtimes: List[ServerRuntimeSimulator], router: DataParallelRequestRouter):
+    def __init__(self, runtimes: List[ServerRuntimeSimulator], router: GlobalSchedulerWithTime):
         self.global_clock = 0.0 # track simulation time
         self.runtimes: List[ServerRuntimeSimulator] = runtimes # List of LLM servers handling inference requests
         self.router = router
@@ -358,15 +360,16 @@ class SendRequestEvent(SimulationEvent):
         if hit_rates[highest_idx] < 0.7:
             highest_idx = None
         # highest_idx = None
-        runtime_id = simulator.router.select_runtime(
+        #runtime_id = simulator.router.select_runtime(
+        runtime_id = simulator.router.runtime_selector(
             text, 
-            experiment_id, 
+            #experiment_id, 
             rid, 
             input_ids, 
             sampling_params=sampling_params, 
-            current_time_stamp=self.time, 
-            runtime_id_with_highest_hit_rate=highest_idx, 
-            hit_rates=hit_rates)
+            #current_time_stamp=self.time, 
+            runtime_id_with_highest_hit_rate=highest_idx, )
+            #hit_rates=hit_rates)
         generate_input = GenerateReqInput(
             text=text,
             sampling_params=sampling_params,
@@ -501,7 +504,8 @@ class ModelStepEvent(SimulationEvent):
                             request = simulator.rid_to_input[rid]
                             text = request['text']
                             input_ids = request['input_ids']
-                            simulator.router.finish_request(text=text, request_id=rid, input_ids=input_ids, experiment_id=None, func_output=request_output)
+                            #simulator.router.finish_request(text=text, request_id=rid, input_ids=input_ids, experiment_id=None, func_output=request_output)
+                            simulator.router.finish_request(text=text, request_id=rid, input_ids=input_ids, func_output=request_output)
     
     def process_event(self, simulator: Simulation):
         start = time.time()
@@ -534,8 +538,37 @@ if __name__ == "__main__":
         GPUConfig(gpu_id=0, url=None, use_ssh=False),
         GPUConfig(gpu_id=1, url=None, use_ssh=False)
     ]
-    def forward_simulation(batch: Batch):
+    def forward_simulation_1(batch: Batch):
         return 1
+    def forward_simulation(
+        num_requests: int,
+        num_batched_tokens: int,
+        num_attention_tokens: int,
+        input_id_lengths: List[int],
+        unique_kvs: int,
+        seq_lens: List[int]
+    ) -> float:
+        """
+        模拟前向传播时间的计算：
+        - num_requests: 当前批次中的请求数
+        - num_batched_tokens: 批处理后的 token 数
+        - num_attention_tokens: 参与注意力计算的 token 数
+        - input_id_lengths: 每个请求的输入长度
+        - unique_kvs: 唯一的 KV 数量（缓存相关）
+        - seq_lens: 每个请求的序列长度
+
+        返回：
+        - 计算的前向传播时间
+        """
+        # 计算模拟的前向传播时间
+        base_time = 0.01  # 假设基础计算时间
+        token_time = num_batched_tokens * 0.0005  # 每个 token 的计算时间
+        attention_time = num_attention_tokens * 0.0003  # 注意力计算的时间
+        kv_cache_time = unique_kvs * 0.0002  # KV 缓存的计算时间
+
+        total_time = base_time + token_time + attention_time + kv_cache_time
+        return total_time
+    
     for config in gpu_configs:
         config.regist_simulator_config(forward_simulation, 1 << 30, None)
 
@@ -544,7 +577,9 @@ if __name__ == "__main__":
     runtimes = [ServerRuntimeSimulator(gpu_config=config, model_path=model_name) for config in gpu_configs]
     vocab_size = runtimes[0].model_rpc.model_config.vocab_size
     
-    router = DataParallelRequestRouter(DataParallelRuntimeSelectionPolicy.RANDOM, total_nodes=2) # use a random selection policy across two nodes
+    #custom_runtime_selector = CustomRuntimeSelector(num_nodes=2)
+    #router = DataParallelRequestRouter(DataParallelRuntimeSelectionPolicy.CUSTOM, total_nodes=2, custom_runtime_selector=custom_runtime_selector) 
+    router = GlobalSchedulerWithTime(num_nodes=2)
     simulator = Simulation(runtimes, router)
     
     # 3. Generating Workload (Requests)

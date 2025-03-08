@@ -1084,8 +1084,8 @@ class ModelRpcServer:
                 forward_time = forward_time
             else:
                 vocab_size = self.model_config.vocab_size
-                logits = torch.ones((len(batch.reqs), vocab_size), dtype=torch.float16, device="cuda")
-                next_token_ids = torch.ones((len(batch.reqs)), dtype=torch.int32, device="cuda")
+                logits = torch.ones((len(batch.reqs), vocab_size), dtype=torch.float16, device=torch.device("cuda" if torch.cuda.is_available() else "cpu"))
+                next_token_ids = torch.ones((len(batch.reqs)), dtype=torch.int32, device=torch.device("cuda" if torch.cuda.is_available() else "cpu"))
                 forward_time = forward_simulation[0](
                     len(batch.reqs),
                     num_batched_tokens,

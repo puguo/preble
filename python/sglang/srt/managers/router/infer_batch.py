@@ -291,7 +291,8 @@ class Batch:
         return len(self.reqs) == 0
 
     def prepare_for_extend(self, vocab_size: int, int_token_logit_bias: torch.Tensor, enable_iterative_eviction):
-        device = "cuda"
+        #device = "cuda"
+        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         bs = len(self.reqs)
         reqs = self.reqs
         input_ids = [r.input_ids[len(r.prefix_indices) :] for r in reqs]
@@ -484,7 +485,7 @@ class Batch:
             input_ids = [
                 r.output_ids[-1] if r.output_ids else r.input_ids[-1] for r in self.reqs
             ]
-        self.input_ids = torch.tensor(input_ids, dtype=torch.int32, device="cuda")
+        self.input_ids = torch.tensor(input_ids, dtype=torch.int32, device=torch.device("cuda" if torch.cuda.is_available() else "cpu"))
         self.seq_lens.add_(1)
         self.prefix_lens = None
         self.input_id_lengths = [1] * len(input_ids)
@@ -519,7 +520,7 @@ class Batch:
 
     def filter_batch(self, unfinished_indices: List[int]):
         self.reqs = [self.reqs[i] for i in unfinished_indices]
-        new_indices = torch.tensor(unfinished_indices, dtype=torch.int32, device="cuda")
+        new_indices = torch.tensor(unfinished_indices, dtype=torch.int32, device=torch.device("cuda" if torch.cuda.is_available() else "cpu"))
         self.seq_lens = self.seq_lens[new_indices]
         self.input_ids = None
         self.req_pool_indices = self.req_pool_indices[new_indices]
@@ -541,7 +542,7 @@ class Batch:
     
     def copy_from(self, selected_indices: List[int]):
         reqs = [self.reqs[i] for i in selected_indices]
-        new_indices = torch.tensor(selected_indices, dtype=torch.int32, device="cuda")
+        new_indices = torch.tensor(selected_indices, dtype=torch.int32, device=torch.device("cuda" if torch.cuda.is_available() else "cpu"))
         new_batch = Batch.init_new(reqs, self.req_to_token_pool, self.token_to_kv_pool, self.tree_cache)
         new_batch.seq_lens = self.seq_lens[new_indices]
         new_batch.req_pool_indices = self.req_pool_indices[new_indices]
@@ -642,11 +643,11 @@ class Batch:
             )
             if self.logit_bias is None:
                 self.logit_bias = torch.zeros(
-                    (len(self.reqs), vocab_size), dtype=torch.float32, device="cuda"
+                    (len(self.reqs), vocab_size), dtype=torch.float32, device=torch.device("cuda" if torch.cuda.is_available() else "cpu")
                 )
             if other.logit_bias is None:
                 other.logit_bias = torch.zeros(
-                    (len(other.reqs), vocab_size), dtype=torch.float32, device="cuda"
+                    (len(other.reqs), vocab_size), dtype=torch.float32, device=torch.device("cuda" if torch.cuda.is_available() else "cpu")
                 )
             self.logit_bias = torch.concat([self.logit_bias, other.logit_bias])
 
@@ -688,7 +689,7 @@ class Batch:
     
     # TODO: Add image input support
     def prepare_for_decode_v2(self):
-        device = 'cuda'
+        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         input_ids = [r.get_inflight_token_ids() for r in self.reqs]
         self.input_id_lengths = [len(ids) for ids in input_ids]
         input_ids = sum(input_ids, [])
@@ -698,7 +699,7 @@ class Batch:
         
     
     def prepare_for_extend_v2(self, vocab_size: int, int_token_logit_bias: torch.Tensor, enable_iterative_eviction: bool):
-        device = "cuda"
+        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         bs = len(self.reqs)
         reqs = self.reqs
         input_ids = [r.input_ids[len(r.prefix_indices) : len(r.prefix_indices) + r.num_inflight_tokens] for r in reqs]
@@ -820,7 +821,8 @@ class Batch:
         probs = torch.softmax(logits, dim=-1)
         probs_sort, probs_idx = _top_p_top_k(probs, self.top_ps, self.top_ks)
         # sampled_index = torch.multinomial(probs_sort, num_samples=1)
-        sampled_index = torch.zeros(probs_sort.shape[0], 1, dtype=torch.int64, device=probs_sort.get_device())
+        device = probs_sort.get_device() if probs_sort.is_cuda else "cpu"
+        sampled_index = torch.zeros(probs_sort.shape[0], 1, dtype=torch.int64, device=device)
         batch_next_token_ids = torch.gather(probs_idx, dim=1, index=sampled_index).view(
             -1
         )

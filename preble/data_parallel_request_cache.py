@@ -8,6 +8,9 @@ from sglang.srt.managers.router.model_runner import GPUConfig
 import threading
 import numpy as np
 
+#from preble.global_scheduler_with_time import GlobalSchedulerWithTime
+import glog
+
 
 @dataclass
 class CustomRuntimeSelector:
@@ -19,11 +22,57 @@ class CustomRuntimeSelector:
     NodeID = int
 
     num_nodes: int
+    def __init__(self, num_nodes: int, enable_eviction=True, enable_rebalancing=True, enable_miss_rate=True):
+        """
+        Initialize the runtime selector with the given number of GPU nodes and scheduling configurations.
+        """
+        self.num_nodes = num_nodes
+        self.scheduler = GlobalSchedulerWithTime(
+            num_nodes=num_nodes, 
+            enable_eviction=enable_eviction, 
+            enable_rebalancing=enable_rebalancing, 
+            enable_miss_rate=enable_miss_rate
+        )
     def runtime_selector(self, text: InputText, request_id: str, input_ids: List, sampling_params, *args, **kwargs) -> NodeID:
-        pass
+        #pass
+        """
+        Selects the optimal GPU for processing the given request using the scheduling algorithm.
+        """
+        # Update GPU utilization before scheduling
+        self.scheduler.update_gpu_utilization()
+        
+        decoding_length = sampling_params.get("max_new_tokens", sampling_params.get("max_tokens", 45))
+        glog.info(f"Decoding length: {decoding_length}")
+
+        runtime_idx = self.scheduler.runtime_selector(
+            text=text,
+            request_id=request_id,
+            input_ids=input_ids,
+            sampling_params=sampling_params,
+            *args, **kwargs
+        )
+
+        # Update GPU utilization after scheduling
+        self.scheduler.update_gpu_utilization()
+
+        return runtime_idx
 
     def finish_request(self, text: InputText, request_id: str, input_ids: List, func_output, *args, **kwargs) -> NodeID:
-        pass
+        #pass
+        """
+        Updates the scheduler with request completion information.
+        """
+        self.scheduler.finish_request(
+            text=text,
+            request_id=request_id,
+            input_ids=input_ids,
+            func_output=func_output,
+            *args, **kwargs
+        )
+
+        # Update GPU utilization after request completion
+        self.scheduler.update_gpu_utilization()
+    
 
 class DataParallelRuntimeSelectionPolicy(Enum):
     RANDOM = auto()
