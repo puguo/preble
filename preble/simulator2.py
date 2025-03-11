@@ -32,15 +32,15 @@ class ServerRuntimeSimulator:
         self.memory_usage = 0.0  # Simulated memory utilization (0-1)
         self.queue = []  # Stores inference requests
         self.local_clock = 0.0
-        self.kv_cache_size = 4096  # 假设缓存可存储 4096 tokens
-        self.current_cache_usage = 0  # 目前缓存使用的 token 数
-        self.cache_hit_rate = 0.5  # 设定默认 50% 命中率
+        self.kv_cache_size = 4096  
+        self.current_cache_usage = 0 
+        self.cache_hit_rate = 0.5  
 
     def reset_clock(self):
         self.local_clock = 0.0
         
     def estimate_cache_hits(self, num_tokens: int) -> int:
-        cache_utilization = self.current_cache_usage / self.kv_cache_size  # 计算缓存利用率
+        cache_utilization = self.current_cache_usage / self.kv_cache_size  
 
         if cache_utilization < 0.5:
             hit_rate = 0.8 
@@ -100,6 +100,7 @@ class Simulation:
         """ Runs the simulation until all requests are processed or time runs out. """
         last_update_time = time.time()
         update_interval = 1.0  # 每秒更新一次 GPU 负载
+        start_simulation_time = time.time()  
         while self.events and self.global_clock < time_limit:
             event = heapq.heappop(self.events)
             self.global_clock = max(self.global_clock, event.time)
@@ -110,6 +111,8 @@ class Simulation:
             if current_time - last_update_time >= update_interval:
                 self.scheduler.update_gpu_utilization(self.runtimes)
                 last_update_time = current_time
+        total_time = time.time() - start_simulation_time
+        print(f"Total Simulation Time: {total_time:.2f} seconds")
         return list(self.request_output.values())
 
     def initialize_requests(self, requests, rps):
@@ -159,11 +162,14 @@ class SendRequestEvent:
             route_dest=gpu_selected,
             runtime_selected=gpu_selected,
             max_new_tokens=self.request["sampling_params"]["max_new_tokens"],
-            request_latency=processing_delay,  # **存储处理时间**
+            #request_latency=processing_delay,  # **存储处理时间**
             global_time=self.time + processing_delay,  # **存储全局时间**
-            append_to_queue_time=self.time
+            append_to_queue_time=simulator.global_clock
         )
         simulator.request_output[self.request["rid"]] = request_func_output
+        
+        ttft = random.uniform(0.0001, 0.0005)  # 设定一个随机的首 token 生成时间
+        request_func_output.ttft = ttft  
 
         # **确保事件调度时间是基于 `heapq`**
         next_event_time = self.time + processing_delay  # 计算新事件的时间
@@ -195,14 +201,14 @@ class ModelStepEvent:
             # **更新时间**
             request_output.global_time = simulator.global_clock
             request_output.success = True
+            #if request_output.ttft == 0:  # 只计算第一个 token
+                #request_output.ttft = simulator.global_clock - request_output.append_to_queue_time
             request_output.request_latency = simulator.global_clock - request_output.send_out_time
-            request_output.ttft = simulator.global_clock - request_output.append_to_queue_time
+            #request_output.ttft = simulator.global_clock - request_output.append_to_queue_time
 
-            # **计算 tpot**
+            # **计算 tpot** 
             if request_output.output_len > 1:
-                request_output.tpot = (request_output.request_latency - request_output.ttft) / (request_output.output_len - 1)
-                print("tpot")
-                print(request_output.tpot)
+                request_output.tpot = (request_output.request_latency - request_output.ttft) / max(1,request_output.output_len-1)
 
             # **更新度量**
             request_output.update_metrics(runtime.tokenizer)

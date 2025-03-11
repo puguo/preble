@@ -321,7 +321,6 @@ class GlobalSchedulerWithTime:
         decay_factor = 0.9 
 
         try:
-            # 尝试使用 NVML 读取真实 GPU 负载
             nvmlInit()
             for i in range(self.num_gpus):
                 handle = nvmlDeviceGetHandleByIndex(i)
@@ -348,7 +347,7 @@ class GlobalSchedulerWithTime:
             for i in range(self.num_gpus):
                 self.gpu_utilization[i] = random.uniform(0.2, 0.8)
 
-        print(f"Updated GPU utilization: {self.gpu_utilization}")  # 观察 GPU 负载
+        #print(f"Updated GPU utilization: {self.gpu_utilization}") 
     
     def calculate_min_load_cost(self, leaf_node, selected_gpus):
         # histogram_mem_cost = self.histogram.current_allocation_cost_per_gpu
@@ -362,16 +361,13 @@ class GlobalSchedulerWithTime:
 
             # add GPU utilization as another cost factor
             gpu_utilization_factor = self.gpu_utilization[gpu_id]
-            #print(gpu_utilization_factor)
             gpu_memory_factor = self.gpu_memory[gpu_id]
             utilization_cost = self.utilization_weight_1 * gpu_utilization_factor + self.utilization_weight_2 * gpu_memory_factor
-            #print(utilization_cost)
-            cost += utilization_cost
+            ALPHA = 0.7
+            cost = ALPHA*cost + (1-ALPHA)*utilization_cost
             
             costs.append(cost)
-        #print(costs)
         gpu_selected = int(np.argmin(costs)) # choose the gpu with the min cost
-        #print(gpu_selected)
         #glog.info('costs: ', costs)
         return gpu_selected
 
