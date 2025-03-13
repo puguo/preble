@@ -6,7 +6,7 @@ Benchmark online serving with dynamic requests.
 
 Usage:
 python3 bench_request.py --backend vllm --num-prompts 3000 -c configs/2_tiers_config.yaml --request-rate 2 \
-    --model meta-llama/Llama-3.2-1B --port 30000 --window 60
+    --model meta-llama/Llama-3.2-1B --port 8010 --window 20
 
 python3 -m sglang.bench_request --backend sglang --dataset-name random --num-prompts 3000 --random-input 1024 --random-output 1024 --random-range-ratio 0.5
 python3 -m sglang.bench_request --backend sglang --dataset-name random --request-rate-range 1,2,4,8,16,32 --random-input 4096 --random-output 1024 --random-range-ratio 0.125 --multi
@@ -613,6 +613,7 @@ def calculate_metrics(
             retokenized_output_len = len(
                 tokenizer.encode(outputs[i].generated_text, add_special_tokens=False)
             )
+            print(f"output_len: {output_len}, retokenized_output_len: {retokenized_output_len}")
             retokenized_output_lens.append(retokenized_output_len)
             total_input += input_requests[i][1]
             if output_len > 1:
@@ -722,6 +723,7 @@ async def benchmark(
         print(f"WARNING: The benchmark window is longer than the last request sent time ({last_sent_time}).")
 
     benchmark_start_time = time.perf_counter()
+    
     with NullContext(gpu_ids=[1], output_file=None):
         for request in request_timestamps:
             (prompt, prompt_len, output_len), ts, i = request
@@ -741,22 +743,29 @@ async def benchmark(
                 break
             
             tasks[i].append(
-                asyncio.create_task(
-                    request_func(request_func_input=request_func_input, pbar=pbar)
-                )
-            )
+                  asyncio.create_task(
+                      request_func(request_func_input=request_func_input, pbar=pbar)
+                  )
+             )
+            # metric_url = api_url.replace('8010/generate', '30000/scheduling_metric_local')
+            # glog.info(f"metric_url: {metric_url}")
+            # another_request_func_input = RequestFuncInput(
+            #     prompt=prompt,
+            #     api_url=metric_url,
+            #     prompt_len=prompt_len,
+            #     output_len=output_len,
+            #     extra_request_body={
+            #         **extra_request_body,
+            #         "priority": i,
+            #         "batch": True
+            #     },
+            # )
 
-            another_request_func_input = RequestFuncInput(
-                prompt=prompt,
-                api_url=api_url,
-                prompt_len=prompt_len,
-                output_len=output_len,
-                extra_request_body={
-                    **extra_request_body,
-                    "priority": i,
-                    "batch": True
-                },
-            )
+            # tasks[i].append(
+            #     asyncio.create_task(
+            #         request_func(request_func_input=another_request_func_input, pbar=pbar)
+            #     )
+            # )
 
         # wait for the window
         while time.perf_counter() - benchmark_start_time < window:
@@ -881,6 +890,7 @@ async def benchmark(
     print("{:<40} {:<10}".format("Benchmarking Window:", window))
 
     results = []
+    print(outputs_per_workload)
     for workload, outputs in zip(workloads, outputs_per_workload):
         res = print_metrics(
             workload.requests, 
@@ -1080,6 +1090,9 @@ def run_benchmark(args_: argparse.Namespace):
     tokenizer_id = args.tokenizer if args.tokenizer is not None else args.model
 
     tokenizer = get_tokenizer(tokenizer_id)
+    print(args.tokenizer is None)
+    print(f"Tokenizer: {tokenizer}")
+    print(f"Tokenizer_id: {tokenizer_id}")
 
     with open(args.config_file) as f:
         config = yaml.safe_load(f)

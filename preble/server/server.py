@@ -20,6 +20,7 @@ import uvicorn
 from sglang.srt.managers.router.model_runner import GPUConfig
 from pynvml import nvmlInit, nvmlDeviceGetHandleByIndex, nvmlDeviceGetUtilizationRates, nvmlDeviceGetMemoryInfo, nvmlShutdown
 import random
+from dataclasses import dataclass, field
 
 random.seed(10)
 np.random.seed(10)
@@ -34,7 +35,14 @@ from model_runtime_manager import remove_prefix
 from preble.benchmarks.benchmark_utils import RequestFuncOutput
 from global_scheduler_with_time import GlobalSchedulerWithTime
 from multi_node_loader import MultiNodeLoader
-
+from transformers import (
+    AutoTokenizer,
+    PreTrainedTokenizer,
+    PreTrainedTokenizerBase,
+    PreTrainedTokenizerFast,
+)
+from typing import Any, AsyncGenerator, Dict, List, Optional, Tuple, Union
+import glog
 logger = logging.getLogger(__name__)
 
 # Defines parameters for sampling during text generation, 
@@ -57,6 +65,196 @@ class GenerateReqInput(BaseModel):
     input_ids: Optional[List[int]]
     sampling_params: SamplingParams
     stream: bool = True
+
+@dataclass
+class BenchmarkMetrics:
+    completed: int
+    total_input: int
+    total_output: int
+    total_output_retokenized: int
+    request_throughput: float
+    input_throughput: float
+    output_throughput: float
+    output_throughput_retokenized: float
+    mean_ttft_ms: float
+    median_ttft_ms: float
+    std_ttft_ms: float
+    p99_ttft_ms: float
+    mean_tpot_ms: float
+    median_tpot_ms: float
+    std_tpot_ms: float
+    p99_tpot_ms: float
+    mean_itl_ms: float
+    median_itl_ms: float
+    std_itl_ms: float
+    p99_itl_ms: float
+    mean_e2e_latency_ms: float
+    median_e2e_latency_ms: float
+
+class MetricForSchedule:
+    def __init__(self, tokenizer=None, backend=None, ttft_slo=None, tpot_slo=None):
+        self.input_request_list = []
+        self.output_list = []
+        self.start_time = time.time()
+        self.end_time = None
+        self.dur_list = []
+        self.dur_s = 0
+        self.tokenizer = tokenizer
+        self.backend = backend
+
+    def calculate_metrics(self, window=20)->Tuple[BenchmarkMetrics, List[int]]:
+
+        if len(self.output_list) < window:
+            window = len(self.output_list)
+        
+        if len(self.output_list) == 0:
+            glog.warning("No requests have been processed yet.", stacklevel=2)
+            return None, None
+
+        output_list = self.output_list[-window:]
+        input_request_list = self.input_request_list[-window:]
+        dur_s = np.sum(self.dur_list[-window:]) 
+
+        if (dur_s < 1e-6):
+            glog.info(f"len of dur_list: {len(self.dur_list)}")
+            glog.warning("Duration is less than 1e-6. ", stacklevel=2)
+            return None, None
+
+        output_lens: List[int] = []
+        retokenized_output_lens: List[int] = []
+        total_input = 0
+        completed = 0
+        itls: List[float] = []
+        tpots: List[float] = []
+        ttfts: List[float] = []
+        e2e_latencies: List[float] = []
+        for i in range(len(output_list)):
+            if output_list[i].success:
+                output_len = output_list[i].output_len
+                output_lens.append(output_len)
+                retokenized_output_len = len(
+                    self.tokenizer.encode(output_list[i].generated_text, add_special_tokens=False)
+                )
+                retokenized_output_lens.append(retokenized_output_len)
+                total_input += input_request_list[i][1]
+                if output_len > 1:
+                    tpots.append((output_list[i].request_latency - output_list[i].ttft) / (output_len - 1))
+                itls += output_list[i].itl
+                ttfts.append(output_list[i].ttft)
+
+                e2e_latencies.append(output_list[i].request_latency)
+                completed += 1
+            else:
+                output_lens.append(0)
+                retokenized_output_lens.append(0)
+        if completed == 0:
+            glog.warning(
+                "All requests failed. This is likely due to a misconfiguration "
+                "on the benchmark arguments.",
+                stacklevel=2,
+            )
+        metrics = BenchmarkMetrics(
+            completed=completed,
+            total_input=total_input,
+            total_output=sum(output_lens),
+            total_output_retokenized=sum(retokenized_output_lens),
+            request_throughput=completed / dur_s,
+            input_throughput=total_input / dur_s,
+            output_throughput=sum(output_lens) / dur_s,
+            output_throughput_retokenized=sum(retokenized_output_lens) / dur_s,
+            mean_ttft_ms=np.mean(ttfts or 0)
+            * 1000,  # ttfts is empty if streaming is not supported by backend
+            median_ttft_ms=np.median(ttfts or 0) * 1000,
+            std_ttft_ms=np.std(ttfts or 0) * 1000,
+            p99_ttft_ms=np.percentile(ttfts or 0, 99) * 1000,
+            mean_tpot_ms=np.mean(tpots or 0) * 1000,
+            median_tpot_ms=np.median(tpots or 0) * 1000,
+            std_tpot_ms=np.std(tpots or 0) * 1000,
+            p99_tpot_ms=np.percentile(tpots or 0, 99) * 1000,
+            mean_itl_ms=np.mean(itls or 0) * 1000,
+            median_itl_ms=np.median(itls or 0) * 1000,
+            std_itl_ms=np.std(itls or 0) * 1000,
+            p99_itl_ms=np.percentile(itls or 0, 99) * 1000,
+            mean_e2e_latency_ms=np.mean(e2e_latencies) * 1000,
+            median_e2e_latency_ms=np.median(e2e_latencies) * 1000,
+        )
+
+        glog.info(f"Metrics: {metrics}")
+        glog.info(f"Output lens: {output_lens}")
+        return metrics, output_lens
+
+
+
+def calculate_metrics(
+    input_requests: List[Tuple[str, int, int]],
+    outputs: List[RequestFuncOutput],
+    dur_s: float,
+    tokenizer: PreTrainedTokenizerBase,
+) -> Tuple[BenchmarkMetrics, List[int]]:
+    output_lens: List[int] = []
+    retokenized_output_lens: List[int] = []
+    total_input = 0
+    completed = 0
+    itls: List[float] = []
+    tpots: List[float] = []
+    ttfts: List[float] = []
+    e2e_latencies: List[float] = []
+    for i in range(len(outputs)):
+        if outputs[i].success:
+            output_len = outputs[i].output_len
+            output_lens.append(output_len)
+            retokenized_output_len = len(
+                tokenizer.encode(outputs[i].generated_text, add_special_tokens=False)
+            )
+            retokenized_output_lens.append(retokenized_output_len)
+            total_input += input_requests[i][1]
+            if output_len > 1:
+                tpots.append((outputs[i].latency - outputs[i].ttft) / (output_len - 1))
+            itls += outputs[i].itl
+            ttfts.append(outputs[i].ttft)
+
+            e2e_latencies.append(outputs[i].latency)
+
+            completed += 1
+        else:
+            output_lens.append(0)
+            retokenized_output_lens.append(0)
+
+    if completed == 0:
+        glog.warning(
+            "All requests failed. This is likely due to a misconfiguration "
+            "on the benchmark arguments.",
+            stacklevel=2,
+        )
+    metrics = BenchmarkMetrics(
+        completed=completed,
+        total_input=total_input,
+        total_output=sum(output_lens),
+        total_output_retokenized=sum(retokenized_output_lens),
+        request_throughput=completed / dur_s,
+        input_throughput=total_input / dur_s,
+        output_throughput=sum(output_lens) / dur_s,
+        output_throughput_retokenized=sum(retokenized_output_lens) / dur_s,
+        mean_ttft_ms=np.mean(ttfts or 0)
+        * 1000,  # ttfts is empty if streaming is not supported by backend
+        median_ttft_ms=np.median(ttfts or 0) * 1000,
+        std_ttft_ms=np.std(ttfts or 0) * 1000,
+        p99_ttft_ms=np.percentile(ttfts or 0, 99) * 1000,
+        mean_tpot_ms=np.mean(tpots or 0) * 1000,
+        median_tpot_ms=np.median(tpots or 0) * 1000,
+        std_tpot_ms=np.std(tpots or 0) * 1000,
+        p99_tpot_ms=np.percentile(tpots or 0, 99) * 1000,
+        mean_itl_ms=np.mean(itls or 0) * 1000,
+        median_itl_ms=np.median(itls or 0) * 1000,
+        std_itl_ms=np.std(itls or 0) * 1000,
+        p99_itl_ms=np.percentile(itls or 0, 99) * 1000,
+        mean_e2e_latency_ms=np.mean(e2e_latencies) * 1000,
+        median_e2e_latency_ms=np.median(e2e_latencies) * 1000,
+    )
+    glog.info(f"Metrics: {metrics}")
+    glog.info(f"Output lens: {output_lens}")
+
+    return metrics, output_lens
 
 def process_stream_output(chunk: dict, output: RequestFuncOutput, **kwargs):
     current_experiment_state_time = kwargs['current_experiment_state_time']
@@ -135,7 +333,12 @@ async def async_send_request(
 async def generate_request_helper(obj: GenerateReqInput):
     request_id = str(uuid.uuid4())
     runtime_events[request_id] = (asyncio.Event(), None)
+    
     await runtime_request_queue.put((obj, request_id))
+    import glog 
+    queue_items = await peek_queue(runtime_request_queue)
+    glog.info(f"Queue items: {queue_items}")
+    glog.info(f"Current gpu queue length:{runtime_request_queue.qsize()}")
     await runtime_events[request_id][0].wait()
 
     runtime_id = runtime_events[request_id][1]
@@ -155,14 +358,23 @@ async def generate_request_helper(obj: GenerateReqInput):
     }
     text = obj.text
     input_ids = obj.input_ids
+   # glog.info(f"text: {text}")
+   # glog.info(f"input_ids: {input_ids}")
     async def get_requests():
+        start_time = time.time()
         async for chunk in async_send_request(text, input_ids, payload, runtime_id, url, rid):
             if isinstance(chunk, RequestFuncOutput):
                 break
             yield chunk
         output = chunk
+   #     glog.info(f"Output: {output}")
+        metric_collector_list[runtime_id].output_list.append(output)
+        metric_collector_list[runtime_id].input_request_list.append((text, len(input_ids), len(output.generated_text)))
+        metric_collector_list[runtime_id].dur_list.append(time.time() - start_time)
         await finished_requests_queue.put((output, text, input_ids))
+        metric_collector_list[runtime_id].calculate_metrics()
 
+    
     return StreamingResponse(get_requests(), media_type="text/event-stream")
 # The main API endpoint handler for incoming /generate requests
 # Parses the request JSON.
@@ -184,13 +396,24 @@ async def process_req(request: Request):
         logger.error(f"Error processing request: {e}")
         return JSONResponse({"error": str(e)}, status_code=400)
 
+async def peek_queue(runtime_request_queue):
+    import glog
+  #  glog.info(f"Current gpu queue length:{runtime_request_queue.qsize()}")
+    items = list(runtime_request_queue._queue)
+    return items
+
 #Picks a suitable runtime for each queued request using the request_router.
 async def process_runtime_selection(global_scheduler=None):
     while True:
         obj: GenerateReqInput
+        import glog 
+        queue_items = await peek_queue(runtime_request_queue)
+      #  glog.info(f"Queue items: {queue_items}")
         obj, request_id = await runtime_request_queue.get()
         text, input_ids, sampling_params = obj.text, obj.input_ids, obj.sampling_params
         
+        
+
         sampling_params = sampling_params.dict()
         # hit_rates = [r.hit_ratio for r in runtimes] # 
         # hit_rates = [0 for _ in runtimes] # TODO handle hitrates
@@ -200,7 +423,7 @@ async def process_runtime_selection(global_scheduler=None):
         highest_idx = None
         hit_rates = [0 for _ in runtimes] # TODO add hot/cold support
         
-        loaded_gpu_list = global_scheduler.per_gpu_load.keyes()
+        loaded_gpu_list = global_scheduler.per_gpu_load.keys()
         try:
             runtime_id = request_router.select_runtime(text=text, experiment_id="1", input_ids=input_ids, request_id=request_id, sampling_params=sampling_params, runtime_id_with_highest_hit_rate=highest_idx, hit_rates=hit_rates, loaded_gpu_list=loaded_gpu_list)
             runtime_events[request_id] = (runtime_events[request_id][0], runtime_id)
@@ -215,6 +438,9 @@ async def process_runtime_selection(global_scheduler=None):
 async def process_cleanup_selection():
     while True:
         output_obj, text, input_ids = await finished_requests_queue.get()
+    #    glog.info(f"Finished request: {output_obj}")
+     #   glog.info(f"text: {text}")
+     #   glog.info(f"input_ids: {input_ids}")
         request_router.finish_request(text=text, input_ids=input_ids, func_output=output_obj, experiment_id="exp_id", request_id="rid")
 
 
@@ -311,10 +537,6 @@ async def test_monitor_and_autoscale(global_scheduler, initial_gpu_num=2, random
                         underloaded_instances.add(gpu_id)
                         overloaded_instances.discard(gpu_id)
 
-                    
-                        
-            
-
         pass
 
     except Exception as e:
@@ -327,6 +549,11 @@ async def test_monitor_and_autoscale(global_scheduler, initial_gpu_num=2, random
 async def monitor_and_autoscale(global_scheduler):
     try:
         while True:
+            import glog 
+            queue_items = await peek_queue(runtime_request_queue)
+            glog.info(f"Queue items: {queue_items}")
+            glog.info(f"Current per_gpu_load: {global_scheduler.per_gpu_load}")
+            glog.info(f"Current gpu queue length:{runtime_request_queue.qsize()}")
             current_devices = list(global_scheduler.per_gpu_load.keys())
             for gpu_id in current_devices:
                 handle = nvmlDeviceGetHandleByIndex(gpu_id)
@@ -346,7 +573,7 @@ async def monitor_and_autoscale(global_scheduler):
 
                 # Check for underload condition
                 # For 
-                elif utilization.gpu < 20 or memory_used_percent < 30:
+                elif utilization.gpu < 20 and memory_used_percent < 30:
                     if gpu_id in underloaded_instances:
                         print(f"GPU {gpu_id} is consistently underloaded. Triggering scale-down.", flush=True)
                         await remove_gpu_instance(global_scheduler, gpu_id)
@@ -395,6 +622,37 @@ async def generate(request: Request):
     return await process_req(request)
 
 
+def get_model(pretrained_model_name_or_path: str) -> str:
+    if os.getenv("SGLANG_USE_MODELSCOPE", "False").lower() == "true":
+        import huggingface_hub.constants
+        from modelscope import snapshot_download
+
+        model_path = snapshot_download(
+            model_id=pretrained_model_name_or_path,
+            local_files_only=huggingface_hub.constants.HF_HUB_OFFLINE,
+            ignore_file_pattern=[".*.pt", ".*.safetensors", ".*.bin"],
+        )
+
+        return model_path
+    return pretrained_model_name_or_path
+def get_tokenizer(
+    pretrained_model_name_or_path: str,
+) -> Union[PreTrainedTokenizer, PreTrainedTokenizerFast]:
+    if pretrained_model_name_or_path.endswith(
+        ".json"
+    ) or pretrained_model_name_or_path.endswith(".model"):
+        from dyserve.srt.hf_transformers_utils import get_tokenizer
+
+        return get_tokenizer(pretrained_model_name_or_path)
+
+    if pretrained_model_name_or_path is not None and not os.path.exists(
+        pretrained_model_name_or_path
+    ):
+        pretrained_model_name_or_path = get_model(pretrained_model_name_or_path)
+    return AutoTokenizer.from_pretrained(
+        pretrained_model_name_or_path, trust_remote_code=True
+    )
+
 def start_server(runtime_selection_policy="custom", runtime_urls="http://127.0.0.1:30000/generate", host='127.0.0.1', port=8000, model="mistralai/Mistral-7B-v0.1", mode='regular'):
     """
     Starts the server with the specified runtime selection policy, runtime URLs, and model.
@@ -414,10 +672,15 @@ def start_server(runtime_selection_policy="custom", runtime_urls="http://127.0.0
     global request_router
     global tokenizer
     global runtimes
+    global metric_collector_list
+
+    
     # TODO check that these urls are valid
 
     tokenizer = AutoTokenizer.from_pretrained(model)
     print(f"Tokenizer loaded for model {model}", flush=True)
+
+    metric_collector_list = [MetricForSchedule(tokenizer=tokenizer, backend="mistral") for _ in range(len(runtimes))]
 
     # Split runtime URLs into a list for multi-node support
     runtimes = runtime_urls.split(',')
