@@ -533,7 +533,7 @@ if __name__ == "__main__":
     for config in gpu_configs:
         config.regist_simulator_config(forward_simulation, 1 << 30)
 
-    model_name = "meta-llama/Llama-3.2-1B"
+    model_name = "meta-llama/Llama-3.1-8B"
     runtimes = [ServerRuntimeSimulator(gpu_config=config, model_path=model_name) for config in gpu_configs]
     vocab_size = runtimes[0].model_rpc.model_config.vocab_size
     

@@ -87,7 +87,6 @@ async def flush_cache():
 
 @app.post("/generate")
 async def generate_request(obj: GenerateReqInput):
-    print(f"generate_request:{obj}", flush=True)
     if obj.text is None and obj.input_ids is None:
         return JSONResponse(
             {"error": "Either text or input_ids should be provided"}, status_code=400

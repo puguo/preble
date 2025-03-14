@@ -45,6 +45,9 @@ from typing import Any, AsyncGenerator, Dict, List, Optional, Tuple, Union
 import glog
 logger = logging.getLogger(__name__)
 
+
+util_list = []
+
 # Defines parameters for sampling during text generation, 
 # including token limits, temperature, penalties
 class SamplingParams(BaseModel):
@@ -90,6 +93,7 @@ class BenchmarkMetrics:
     p99_itl_ms: float
     mean_e2e_latency_ms: float
     median_e2e_latency_ms: float
+    
 
 class MetricForSchedule:
     def __init__(self, tokenizer=None, backend=None, ttft_slo=None, tpot_slo=None):
@@ -337,8 +341,6 @@ async def generate_request_helper(obj: GenerateReqInput):
     await runtime_request_queue.put((obj, request_id))
     import glog 
     queue_items = await peek_queue(runtime_request_queue)
-    glog.info(f"Queue items: {queue_items}")
-    glog.info(f"Current gpu queue length:{runtime_request_queue.qsize()}")
     await runtime_events[request_id][0].wait()
 
     runtime_id = runtime_events[request_id][1]
@@ -510,8 +512,9 @@ async def test_monitor_and_autoscale(global_scheduler, initial_gpu_num=2, random
                 handle = nvmlDeviceGetHandleByIndex(gpu_id)
                 utilization = nvmlDeviceGetUtilizationRates(handle)
                 memory_info = nvmlDeviceGetMemoryInfo(handle)
-                memory_used_percent = (memory_info.used / memory_info.total) * 100
-                print(f"GPU {gpu_id}: Utilization: {utilization.gpu}% | Memory Used: {memory_info.used / (1024 ** 2):.2f} MB / {memory_info.total / (1024 ** 2):.2f} MB", flush=True)
+                memory_used = self.get_available_gpu_memory(gpu_id)
+                memory_used_percent = (memory_used / memory_info.total) * 100
+                print(f"GPU {gpu_id}: Utilization: {utilization.gpu}% | Memory Used: {memory_used / (1024 ** 2):.2f} MB / {memory_info.total / (1024 ** 2):.2f} MB", flush=True)
 
                 if random_values[step] == 1:
                     if gpu_id in overloaded_instances:
@@ -547,22 +550,32 @@ async def test_monitor_and_autoscale(global_scheduler, initial_gpu_num=2, random
         nvmlShutdown()
 
 async def monitor_and_autoscale(global_scheduler):
+    global util_list
     try:
         while True:
             import glog 
             queue_items = await peek_queue(runtime_request_queue)
-            glog.info(f"Queue items: {queue_items}")
-            glog.info(f"Current per_gpu_load: {global_scheduler.per_gpu_load}")
-            glog.info(f"Current gpu queue length:{runtime_request_queue.qsize()}")
             current_devices = list(global_scheduler.per_gpu_load.keys())
             for gpu_id in current_devices:
                 handle = nvmlDeviceGetHandleByIndex(gpu_id)
-                utilization = nvmlDeviceGetUtilizationRates(handle)
+                recent_window = util_list[-20:] if util_list else []
+                
+                if len(recent_window) == 0:
+                    utilization = nvmlDeviceGetUtilizationRates(handle).gpu
+                else:
+                    utilization = 0
+                    num = 0
+                    for util in recent_window:
+                        if gpu_id in util:
+                            utilization += util[gpu_id]
+                            num += 1
+                    utilization = utilization/num
+                del util_list[:20]
                 memory_info = nvmlDeviceGetMemoryInfo(handle)
                 memory_used_percent = (memory_info.used / memory_info.total) * 100
-                print(f"GPU {gpu_id}: Utilization: {utilization.gpu}% | Memory Used: {memory_info.used / (1024 ** 2):.2f} MB / {memory_info.total / (1024 ** 2):.2f} MB", flush=True)
+                print(f"GPU {gpu_id}: Utilization: {utilization}% | Memory Used: {memory_info.used / (1024 ** 2):.2f} MB / {memory_info.total / (1024 ** 2):.2f} MB", flush=True)
 
-                if len(global_scheduler.per_gpu_load) < 1 or utilization.gpu > 80 or memory_used_percent > 85:
+                if len(global_scheduler.per_gpu_load) < 1 or utilization > 50 or memory_used_percent > 95:
                     if gpu_id in overloaded_instances:
                         print(f"GPU {gpu_id} is consistently overloaded. Triggering scale-up.", flush=True)
                         await add_gpu_instance(global_scheduler)
@@ -573,45 +586,21 @@ async def monitor_and_autoscale(global_scheduler):
 
                 # Check for underload condition
                 # For 
-                elif utilization.gpu < 20 and memory_used_percent < 30:
+                elif utilization < 10 and len(list(global_scheduler.per_gpu_load.keys())) > 1:
                     if gpu_id in underloaded_instances:
                         print(f"GPU {gpu_id} is consistently underloaded. Triggering scale-down.", flush=True)
                         await remove_gpu_instance(global_scheduler, gpu_id)
                         underloaded_instances.discard(gpu_id)
-                        await asyncio.sleep(50)
-                        
-                        while True:
-                            handle = nvmlDeviceGetHandleByIndex(gpu_id)
-                            utilization = nvmlDeviceGetUtilizationRates(handle)
-                            memory_info = nvmlDeviceGetMemoryInfo(handle)
-                            memory_used_percent = (memory_info.used / memory_info.total) * 100
-                            print(f"GPU {gpu_id}: Utilization: {utilization.gpu}% | Memory Used: {memory_info.used / (1024 ** 2):.2f} MB / {memory_info.total / (1024 ** 2):.2f} MB", flush=True)
-                            if memory_info.used / (1024 ** 2) < 2000:
-                                break
-                            await asyncio.sleep(10)
-                        if len(global_scheduler.per_gpu_load) <= 1:
-                            if gpu_id not in overloaded_instances:
-                                overloaded_instances.add(gpu_id)
-                                print(f"GPU {gpu_id} is consistently underloaded but at minimum instances. Attempting scale up.", flush=True)
-
-                                await add_gpu_instance(global_scheduler)
-                                overloaded_instances.discard(gpu_id)
-                            else:
-                                print(f"Current gpu len: {len(global_scheduler.per_gpu_load)}", flush=True)
-                        
                     else:
                         underloaded_instances.add(gpu_id)
                         overloaded_instances.discard(gpu_id)
-
-                    
-                        
 
                 # If neither overloaded nor underloaded, remove from both sets
                 else:
                     overloaded_instances.discard(gpu_id)
                     underloaded_instances.discard(gpu_id)
 
-            await asyncio.sleep(10)
+            await asyncio.sleep(20)
     finally:
         nvmlShutdown()
 
@@ -680,12 +669,10 @@ def start_server(runtime_selection_policy="custom", runtime_urls="http://127.0.0
     tokenizer = AutoTokenizer.from_pretrained(model)
     print(f"Tokenizer loaded for model {model}", flush=True)
 
-    metric_collector_list = [MetricForSchedule(tokenizer=tokenizer, backend="mistral") for _ in range(len(runtimes))]
-
     # Split runtime URLs into a list for multi-node support
     runtimes = runtime_urls.split(',')
     num_nodes = len(runtimes)
-    
+    metric_collector_list = [MetricForSchedule(tokenizer=tokenizer, backend="mistral") for _ in range(len(runtimes))]
     # Select runtime policy based on provided input
     if runtime_selection_policy == "round_robin":
         runtime_selection_policy = DataParallelRuntimeSelectionPolicy.ROUND_ROBIN
@@ -713,12 +700,49 @@ def start_server(runtime_selection_policy="custom", runtime_urls="http://127.0.0
             loop.create_task(test_monitor_and_autoscale(global_scheduler))
         else:
             loop.create_task(monitor_and_autoscale(global_scheduler))
+        loop.create_task(record_gpu_metrics(global_scheduler))
         config = uvicorn.Config(app=app, loop="asyncio", host=host, port=port)
         server = uvicorn.Server(config)
         await server.serve()
 
     loop = asyncio.get_event_loop()
     loop.run_until_complete(main())
+
+
+async def record_gpu_metrics(global_scheduler):
+    global util_list
+    nvmlInit()
+    while True:
+        to_add = {}
+        current_devices = list(global_scheduler.per_gpu_load.keys())
+        for gpu_id in current_devices:
+            handle = nvmlDeviceGetHandleByIndex(gpu_id)
+            utilization = nvmlDeviceGetUtilizationRates(handle).gpu
+            memory_info = nvmlDeviceGetMemoryInfo(handle)
+            memory_used_percent = (memory_info.used / memory_info.total) * 100
+            to_add[gpu_id] = utilization
+        util_list.append(to_add)
+        print(f"Utilization record: active_gpu: {list(to_add.keys())}, utilizations: {list(to_add.values())}", flush=True)
+        await asyncio.sleep(1)
+            
+
+def get_available_gpu_memory(gpu_id, distributed=False):
+    """
+    Get available memory for cuda:gpu_id device.
+    When distributed is True, the available memory is the minimum available memory of all GPUs.
+    """
+    num_gpus = torch.cuda.device_count()
+    assert gpu_id < num_gpus
+
+    if torch.cuda.current_device() != gpu_id:
+        print(
+            f"WARNING: current device is not {gpu_id}, but {torch.cuda.current_device()}, ",
+            "which may cause useless memory allocation for torch CUDA context.",
+        )
+
+    free_gpu_memory, _ = torch.cuda.mem_get_info(gpu_id)
+
+    return free_gpu_memory / (1 << 20)
 
 def start_server_and_load_models(model_name="mistralai/Mistral-7B-v0.1", devices=[0], all_gpus=[0],host="127.0.0.1", port=8000, mode='regular'):
     print('Starting server and loading models', flush=True)

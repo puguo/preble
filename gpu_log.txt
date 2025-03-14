@@ -1,0 +1,250 @@
+Starting server and loading models
+Loaded model meta-llama/Llama-3.1-8B on GPUs [0, 1]
+Loading runtimes at ['http://0.0.0.0:30000/generate', 'http://0.0.0.0:10005/generate']
+Tokenizer loaded for model meta-llama/Llama-3.1-8B
+GPU 0: Utilization: 2% | Memory Used: 39792.62 MB / 49140.00 MB
+GPU 1: Utilization: 2% | Memory Used: 39792.62 MB / 49140.00 MB
+Utilization record: active_gpu: [0, 1], utilizations: [2, 2]
+Utilization record: active_gpu: [0, 1], utilizations: [2, 2]
+Utilization record: active_gpu: [0, 1], utilizations: [2, 2]
+Utilization record: active_gpu: [0, 1], utilizations: [2, 2]
+Utilization record: active_gpu: [0, 1], utilizations: [2, 2]
+Utilization record: active_gpu: [0, 1], utilizations: [2, 2]
+Utilization record: active_gpu: [0, 1], utilizations: [2, 2]
+Utilization record: active_gpu: [0, 1], utilizations: [2, 2]
+Utilization record: active_gpu: [0, 1], utilizations: [2, 2]
+Utilization record: active_gpu: [0, 1], utilizations: [2, 2]
+Utilization record: active_gpu: [0, 1], utilizations: [2, 2]
+Utilization record: active_gpu: [0, 1], utilizations: [2, 2]
+Utilization record: active_gpu: [0, 1], utilizations: [2, 2]
+Utilization record: active_gpu: [0, 1], utilizations: [2, 2]
+Utilization record: active_gpu: [0, 1], utilizations: [2, 2]
+Utilization record: active_gpu: [0, 1], utilizations: [2, 2]
+Utilization record: active_gpu: [0, 1], utilizations: [2, 2]
+Utilization record: active_gpu: [0, 1], utilizations: [2, 2]
+Utilization record: active_gpu: [0, 1], utilizations: [2, 2]
+Utilization record: active_gpu: [0, 1], utilizations: [2, 2]
+Utilization record: active_gpu: [0, 1], utilizations: [2, 2]
+Utilization record: active_gpu: [0, 1], utilizations: [2, 2]
+Utilization record: active_gpu: [0, 1], utilizations: [2, 2]
+Utilization record: active_gpu: [0, 1], utilizations: [2, 2]
+Utilization record: active_gpu: [0, 1], utilizations: [2, 2]
+Utilization record: active_gpu: [0, 1], utilizations: [2, 2]
+Utilization record: active_gpu: [0, 1], utilizations: [2, 2]
+Utilization record: active_gpu: [0, 1], utilizations: [2, 2]
+Utilization record: active_gpu: [0, 1], utilizations: [2, 2]
+Utilization record: active_gpu: [0, 1], utilizations: [2, 2]
+GPU 0: Utilization: 2% | Memory Used: 39792.62 MB / 49140.00 MB
+GPU 0 is consistently underloaded. Triggering scale-down.
+Unloaded instance from GPU 0
+Removed GPU 0
+GPU 1: Utilization: 2% | Memory Used: 39792.62 MB / 49140.00 MB
+Utilization record: active_gpu: [1], utilizations: [2]
+Utilization record: active_gpu: [1], utilizations: [2]
+Utilization record: active_gpu: [1], utilizations: [2]
+Utilization record: active_gpu: [1], utilizations: [2]
+Utilization record: active_gpu: [1], utilizations: [2]
+Utilization record: active_gpu: [1], utilizations: [2]
+Utilization record: active_gpu: [1], utilizations: [2]
+Utilization record: active_gpu: [1], utilizations: [2]
+Utilization record: active_gpu: [1], utilizations: [2]
+Utilization record: active_gpu: [1], utilizations: [2]
+Utilization record: active_gpu: [1], utilizations: [2]
+Utilization record: active_gpu: [1], utilizations: [2]
+Utilization record: active_gpu: [1], utilizations: [2]
+Utilization record: active_gpu: [1], utilizations: [2]
+Utilization record: active_gpu: [1], utilizations: [2]
+Utilization record: active_gpu: [1], utilizations: [2]
+Utilization record: active_gpu: [1], utilizations: [2]
+Utilization record: active_gpu: [1], utilizations: [2]
+Utilization record: active_gpu: [1], utilizations: [2]
+Utilization record: active_gpu: [1], utilizations: [2]
+Utilization record: active_gpu: [1], utilizations: [2]
+Utilization record: active_gpu: [1], utilizations: [2]
+Utilization record: active_gpu: [1], utilizations: [2]
+Utilization record: active_gpu: [1], utilizations: [2]
+Utilization record: active_gpu: [1], utilizations: [2]
+Utilization record: active_gpu: [1], utilizations: [2]
+Utilization record: active_gpu: [1], utilizations: [2]
+Utilization record: active_gpu: [1], utilizations: [2]
+INFO:     127.0.0.1:49448 - "POST /generate HTTP/1.1" 200 OK
+Utilization record: active_gpu: [1], utilizations: [2]
+INFO:     127.0.0.1:49462 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49478 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49484 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49500 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49514 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49516 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49530 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49544 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49558 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49562 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49566 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49578 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49584 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49590 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49602 - "POST /generate HTTP/1.1" 200 OK
+Utilization record: active_gpu: [1], utilizations: [73]
+INFO:     127.0.0.1:49612 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49624 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49638 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35644 - "POST /generate HTTP/1.1" 200 OK
+GPU 1: Utilization: 53% | Memory Used: 40254.62 MB / 49140.00 MB
+Utilization record: active_gpu: [1], utilizations: [53]
+INFO:     127.0.0.1:35650 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35664 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35670 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35686 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35698 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35710 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35720 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35722 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35734 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35748 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35756 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35772 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35788 - "POST /generate HTTP/1.1" 200 OK
+Utilization record: active_gpu: [1], utilizations: [69]
+INFO:     127.0.0.1:35792 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35804 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35816 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35828 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35842 - "POST /generate HTTP/1.1" 200 OK
+Utilization record: active_gpu: [1], utilizations: [67]
+INFO:     127.0.0.1:35858 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35868 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35880 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35886 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35894 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35910 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35920 - "POST /generate HTTP/1.1" 200 OK
+Utilization record: active_gpu: [1], utilizations: [44]
+INFO:     127.0.0.1:35928 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35940 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35942 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35950 - "POST /generate HTTP/1.1" 200 OK
+Utilization record: active_gpu: [1], utilizations: [50]
+INFO:     127.0.0.1:35964 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35970 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35974 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35976 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35984 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35986 - "POST /generate HTTP/1.1" 200 OK
+Utilization record: active_gpu: [1], utilizations: [42]
+INFO:     127.0.0.1:36000 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36010 - "POST /generate HTTP/1.1" 200 OK
+Utilization record: active_gpu: [1], utilizations: [53]
+INFO:     127.0.0.1:36012 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36020 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36028 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36038 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36046 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36056 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36062 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36064 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36080 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36096 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36102 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36104 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36106 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36118 - "POST /generate HTTP/1.1" 200 OK
+Utilization record: active_gpu: [1], utilizations: [70]
+INFO:     127.0.0.1:36130 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36142 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36146 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36156 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36162 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36176 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36178 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36188 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36194 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36196 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36204 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36208 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36224 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36232 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36238 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36250 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36260 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36262 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36264 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36266 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36278 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36282 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36284 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36292 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36296 - "POST /generate HTTP/1.1" 200 OK
+Utilization record: active_gpu: [1], utilizations: [98]
+INFO:     127.0.0.1:36310 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36320 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36326 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36332 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36340 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36344 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36348 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36356 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36360 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36370 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36372 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36376 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36382 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36386 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36398 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36408 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36416 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36426 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36434 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36448 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36458 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36464 - "POST /generate HTTP/1.1" 200 OK
+Utilization record: active_gpu: [1], utilizations: [100]
+INFO:     127.0.0.1:36478 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36480 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36494 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36498 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36502 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36510 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36512 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36522 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36530 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36542 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36548 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36554 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36556 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36560 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36564 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36572 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36576 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36584 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39256 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39262 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39272 - "POST /generate HTTP/1.1" 200 OK
+Utilization record: active_gpu: [1], utilizations: [100]
+INFO:     127.0.0.1:39276 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39280 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39282 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39284 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39298 - "POST /generate HTTP/1.1" 200 OK
+Utilization record: active_gpu: [1], utilizations: [100]
+INFO:     127.0.0.1:39312 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39322 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39336 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39344 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39356 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39364 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39370 - "POST /generate HTTP/1.1" 200 OK
+Utilization record: active_gpu: [1], utilizations: [78]
+INFO:     127.0.0.1:39382 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39388 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39396 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39412 - "POST /generate HTTP/1.1" 200 OK
+> /home/puguo/projects/preble/preble/global_scheduler_with_time.py(385)finish_request()
+-> assert important_node in self.histogram.histogram
+(Pdb) *** SyntaxError: invalid syntax
+(Pdb) You pressed Ctrl+C! Shutting down all remote servers...
+You pressed Ctrl+C! Shutting down all remote servers...
+Server is on port 10005 on host 0.0.0.0 on pid 3201483
+You pressed Ctrl+C! Shutting down all remote servers...
+*** SyntaxError: invalid syntax
+(Pdb) *** SyntaxError: invalid syntax
+(Pdb) 

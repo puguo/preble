@@ -18,7 +18,7 @@ from ttft_overload_detector import TTFTWindowedOverloadedDetector
 import glog
 
 
-tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-3.2-1B")
+tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-3.1-8B")
 
 logger = logging.getLogger(__name__)
 
@@ -293,13 +293,13 @@ class GlobalSchedulerWithTime:
     def calculate_min_load_cost(self, leaf_node, selected_gpus):
         # histogram_mem_cost = self.histogram.current_allocation_cost_per_gpu
         histogram_mem_cost = self.histogram.current_allocation_per_gpu()
-        costs = []
+        costs = {}
         for gpu_id in selected_gpus:
             cost = histogram_mem_cost[gpu_id]
             if self.enable_eviction:
                 cost += self.virtual_evict_for_routing(leaf_node, gpu_id)
-            costs.append(cost)
-        gpu_selected = int(np.argmin(costs))
+            costs[gpu_id]= cost
+        gpu_selected = min(costs, key=costs.get) if costs else None
         return gpu_selected
 
 
@@ -380,10 +380,8 @@ class GlobalSchedulerWithTime:
                 self.avg_topt_per_gpu[runtime_id].append(func_output.tpot)
 
             self.histogram.current_decode_lengths_per_gpu[runtime_id] -= func_output.max_new_tokens
-            if important_node not in self.histogram.histogram:
-                breakpoint()
-            assert important_node in self.histogram.histogram
-            self.histogram.per_node_total_decode_lengths[important_node] -= func_output.max_new_tokens
+            if important_node in self.histogram.histogram:
+                self.histogram.per_node_total_decode_lengths[important_node] -= func_output.max_new_tokens
             self.per_gpu_load[runtime_id] -= 1
 
     def handle_important_node_stealing(self, scheduled_idx):

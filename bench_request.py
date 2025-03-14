@@ -6,7 +6,7 @@ Benchmark online serving with dynamic requests.
 
 Usage:
 python3 bench_request.py --backend vllm --num-prompts 3000 -c configs/2_tiers_config.yaml --request-rate 2 \
-    --model meta-llama/Llama-3.2-1B --port 8010 --window 20
+    --model meta-llama/Llama-3.1-7B --port 8010 --window 20
 
 python3 -m sglang.bench_request --backend sglang --dataset-name random --num-prompts 3000 --random-input 1024 --random-output 1024 --random-range-ratio 0.5
 python3 -m sglang.bench_request --backend sglang --dataset-name random --request-rate-range 1,2,4,8,16,32 --random-input 4096 --random-output 1024 --random-range-ratio 0.125 --multi
@@ -260,12 +260,12 @@ async def async_request_openai_completions(
                     url=api_url, json=payload, headers=headers
                 ) as response:
                     if response.status == 200:
+                        latency = time.perf_counter() - st
                         async for chunk_bytes in response.content:
                             chunk_bytes = chunk_bytes.rstrip(b"\r\n")
                             if not chunk_bytes:
                                 continue
                             chunk = remove_prefix(chunk_bytes.decode("utf-8"), "data:")
-                            latency = time.perf_counter() - st
                             if "[DONE]" in chunk:
                                 pass
                             else:
