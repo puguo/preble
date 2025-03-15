@@ -1,0 +1,3549 @@
+[33mcommit 1b64da6d2d9fde4897f553032d7b6b50d9907ad7[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmulti_modal_main[m[33m, [m[1;31morigin/multi_modal_main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: iaskbd <ewallnut@gmail.com>
+Date:   Sat Mar 1 22:35:42 2025 -0800
+
+    fixed scale up/down
+
+[33mcommit 7a5eb91e09dec31dbb546025799a4e1e64bb3513[m
+Author: puguo <yellowocean23333@gmail.com>
+Date:   Fri Feb 28 15:43:07 2025 -0800
+
+    Fix Request sending problem
+
+[33mcommit 5fea7c283928956281193ecfc0ebec982d5086d4[m[33m ([m[1;31morigin/whn/develop[m[33m, [m[1;32mwhn/develop[m[33m)[m
+Author: iaskbd <ewallnut@gmail.com>
+Date:   Fri Feb 28 13:28:43 2025 -0800
+
+    make script send request to preble/server.py
+
+[33mcommit f8a9323941dbb1b67a553c45e2783573ede98ba4[m
+Author: iaskbd <ewallnut@gmail.com>
+Date:   Sat Feb 22 20:33:39 2025 -0800
+
+    able to perf locally
+    
+    1
+
+[33mcommit 2da558480dd668c3b2bd19cef38c8e2e067a8bfc[m
+Author: iaskbd <ewallnut@gmail.com>
+Date:   Sat Feb 22 19:17:08 2025 -0800
+
+    added a few lines of glog
+
+[33mcommit 8342c18bf4df5e3379ecc6f124dd50f6ff432893[m
+Author: puguo <yellowocean23333@gmail.com>
+Date:   Wed Feb 12 13:08:16 2025 -0800
+
+    Modification for environemnt
+
+[33mcommit 62cf3a270026e5151603cca99162a0b07fe823b5[m
+Author: puguo <yellowocean23333@gmail.com>
+Date:   Sun Feb 9 21:28:15 2025 -0800
+
+    AutoScaling code
+
+[33mcommit 5d0a3db0014fead9d4603b5e0f63691686b59d05[m
+Author: Vikranth Srivatsa <10752522+vikranth22446@users.noreply.github.com>
+Date:   Sun Jul 28 01:53:39 2024 -0700
+
+    Update README.md with arxiv url
+
+[33mcommit 8e7906a3b76693c9003d1c7115b8011296c867e1[m
+Author: Vikranth Srivatsa <10752522+vikranth22446@users.noreply.github.com>
+Date:   Fri May 24 13:28:10 2024 -0700
+
+    Update README.md with preprint url
+
+[33mcommit c361c5f0f00d6b6e3bbd8e3412c2d2124f30c4d0[m
+Author: Vikranth Srivatsa <10752522+vikranth22446@users.noreply.github.com>
+Date:   Fri May 24 13:26:30 2024 -0700
+
+    Update README.md with test pypi instructions
+
+[33mcommit 0a5a767886a9a582ef228d35790457c9d2b16ed8[m
+Merge: dbbf0e2 bdc9135
+Author: Vikranth Srivatsa <10752522+vikranth22446@users.noreply.github.com>
+Date:   Fri May 24 13:24:17 2024 -0700
+
+    Merge pull request #72 from WukLab/feature/basic_server
+    
+    Feature/basic cli release
+
+[33mcommit bdc9135b894eb6fc4de9ae865adb84aa15ef88d8[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Fri May 24 20:05:05 2024 +0000
+
+    Update python packge to be under preble for open source release
+
+[33mcommit add8d466fdb3924ba43539439c0146526c8a74a2[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Fri May 24 19:23:20 2024 +0000
+
+    Update server configuration with better cli arguments
+
+[33mcommit 70d5c98112683cb4984b832b64b96f91c5540fa8[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Fri May 24 04:13:28 2024 +0000
+
+    Add a basic Python Server Impl with url runtime + round robin
+
+[33mcommit dbbf0e2acfeab2528fe5332322ae5d17ca2f26a9[m
+Merge: f5655b4 0b9fd40
+Author: Vikranth Srivatsa <10752522+vikranth22446@users.noreply.github.com>
+Date:   Thu May 23 17:28:58 2024 -0700
+
+    Merge pull request #71 from WukLab/perf/improve_global_scheduler_with_counter_perf
+    
+    Update global scheduler with better perf and better rebalancing handling
+
+[33mcommit 0b9fd4036097a1adb8885e8c218612462a721a88[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Thu May 23 22:59:44 2024 +0000
+
+    Fix Rebalancer for VE  and zipf integration with Infercept
+
+[33mcommit bf1d693bad9d6bbc53806b2ea6c8b0203d15f4de[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Thu May 23 15:23:06 2024 +0000
+
+    Add virtualenv exp utils
+
+[33mcommit a02675943e632fe371f5678c6a18674686f4b258[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Thu May 23 00:37:53 2024 +0000
+
+    Update virtualenv experiment setup
+
+[33mcommit d5277435922064c9089d536f08c86668d96973d8[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Wed May 22 23:37:42 2024 +0000
+
+    Update global scheduler
+
+[33mcommit f5655b4c83ca3c20ccae7ffdc587fd6d6f91ccdd[m
+Merge: 63e5770 64eea75
+Author: Zijian <zih015@ucsd.edu>
+Date:   Fri May 17 18:32:56 2024 -0700
+
+    Merge pull request #70 from WukLab/refactor/rebase
+    
+    Refactor/rebase
+
+[33mcommit 64eea75e364737e804cc2943d6f0587890dad6f9[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Sat May 18 01:30:22 2024 +0000
+
+    tried on video dataset after merge
+
+[33mcommit 046e20e0e23b831fb1f2427dfe73bf931e661d79[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Fri May 17 18:25:45 2024 +0000
+
+    check small example result after merge
+
+[33mcommit 2318a87d0092a2caa4069b60efe434a1f77b87d7[m
+Merge: 63e5770 690d162
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Thu May 16 01:46:35 2024 +0000
+
+    merge from upstream
+
+[33mcommit 63e577034d3764ffcdabe63853f4676c42e74085[m
+Merge: 6806544 622d2b3
+Author: Vikranth Srivatsa <10752522+vikranth22446@users.noreply.github.com>
+Date:   Wed May 15 09:14:47 2024 -0700
+
+    Merge pull request #69 from WukLab/ckpt/videoQA
+    
+    Add NSDI 2024 spring development updates
+
+[33mcommit 622d2b3125b5e2a1b7e277d11d050cac32c9e7f8[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Wed May 15 02:57:42 2024 +0000
+
+    Add perf global scheduling
+
+[33mcommit dc028374d2f0223a7ab3f80fabc6a77890513a84[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Wed May 15 02:56:45 2024 +0000
+
+    Remove unneeded files
+
+[33mcommit 89a18704bb8c6b6d181ae7eb5992a99a3cbf942b[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Wed May 15 02:40:55 2024 +0000
+
+    Fix global scheduler for loogle
+
+[33mcommit 690d162d9746e96d37cc62c5bf00d22f71c32583[m
+Author: Liangsheng Yin <hnyls2002@gmail.com>
+Date:   Tue May 14 22:40:46 2024 +0800
+
+    Format code (#441)
+
+[33mcommit 664287b2a787ff774b6ce9529b2a784e304ee38c[m
+Author: Kaichen Zhang - NTU <zhan0564@e.ntu.edu.sg>
+Date:   Tue May 14 13:17:50 2024 +0800
+
+    [Feat] Add llava qwen, llava mistral (#419)
+    
+    Co-authored-by: Bo Li <drluodian@gmail.com>
+
+[33mcommit e0ae5d42ecdd06a749969f28b67df688e9edec8b[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Mon May 13 17:29:17 2024 -0700
+
+    Update version to 0.1.16 (#438)
+
+[33mcommit 32de16ce2fb6a50534c4878d5ea1430597847829[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Mon May 13 17:26:18 2024 -0700
+
+    Fix streaming (#437)
+
+[33mcommit 0992d85f92688035cd669d12735518faba93b545[m
+Author: Yuanhan Zhang <yuanhan002@ntu.edu.sg>
+Date:   Tue May 14 07:57:00 2024 +0800
+
+    support llava video (#426)
+
+[33mcommit 5dc55a5f02de2aff87a12f5dfcf5a8a781f1220a[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Mon May 13 15:56:00 2024 -0700
+
+    Handle truncation errors (#436)
+
+[33mcommit 4231a42fa8475c039b2b468f6de2a5c294241ae7[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Mon May 13 12:11:55 2024 -0700
+
+    Fix import of global_config
+
+[33mcommit 455c9ccc4a8bbaac141d373f34e0d70716248e7c[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Mon May 13 00:17:02 2024 -0700
+
+    Update readme (#434)
+
+[33mcommit 39191c851532b8899b81c8dfac1bf558ee6be160[m
+Author: Liangsheng Yin <hnyls2002@gmail.com>
+Date:   Mon May 13 12:47:13 2024 +0800
+
+    Cache optimizations (#418)
+
+[33mcommit 562b8857d8060905b64a9698d334c6133c024dd9[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Sun May 12 20:49:04 2024 -0700
+
+    Improve error handling (#433)
+
+[33mcommit 04c0b21488e2edbbc1a191d01abc77bd13e2c2a3[m
+Author: Shannon Shen <22512825+lolipopshock@users.noreply.github.com>
+Date:   Sun May 12 12:29:00 2024 -1000
+
+    Allow `input_ids` in the input of the `/generate` endpoint  (#363)
+
+[33mcommit 6e09cf6a1514067d08cf7c1efb42cf56634c8529[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Sun May 12 15:05:40 2024 -0700
+
+    Misc fixes (#432)
+
+[33mcommit 72bb3443880d5a7e382cb9783a8231021e130ae2[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Sun May 12 14:22:33 2024 -0700
+
+    Update version to 0.1.15 (#431)
+
+[33mcommit 2d580e7a8991b77f4bdc940fcc23b70c9fdc6b1e[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Sun May 12 08:18:53 2024 -0700
+
+    Fix flashinfer (#430)
+
+[33mcommit 3fc97f67095f5c183a9942bfb45679deab08c127[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Sun May 12 06:41:32 2024 -0700
+
+    Move openai api server into a separate file (#429)
+
+[33mcommit abc548c7079638628b8f19c6c742b518f0db0031[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Sun May 12 05:10:35 2024 -0700
+
+    Minor fix for the import path (#428)
+
+[33mcommit aee4f523cfd92f844208118e42dcc6bfeb271d08[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Sun May 12 04:54:07 2024 -0700
+
+    Fix logit processor bugs (#427)
+
+[33mcommit 7023f413c6c57cf29c20a7b28582fa01398de1b6[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Sat May 11 20:55:00 2024 -0700
+
+    Clean up (#422)
+
+[33mcommit 09deb20deef8181a23f66c933ea74b86fee47366[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Sat May 11 16:56:42 2024 -0700
+
+    Optimize the memory usage of logits processor (#420)
+
+[33mcommit 33b242df303e03886835d08a583fefe979a3ee88[m
+Author: Qubitium <417764+Qubitium@users.noreply.github.com>
+Date:   Sun May 12 07:37:49 2024 +0800
+
+    Compat with latest VLLM 0.4.2 main + fork.number rename + Flashinfer 0.0.4 (#380)
+    
+    Co-authored-by: ZX <zx@lbx.dev>
+    Co-authored-by: ZhouXingg <165115237+ZhouXingg@users.noreply.github.com>
+
+[33mcommit a511a2d0895b63505fce68cfff5476b251528b34[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Thu May 9 15:49:29 2024 -0700
+
+    restrict vllm version
+
+[33mcommit 6ec65f4555f24fe832860679bb0eff86798f6987[m
+Author: Liangsheng Yin <hnyls2002@gmail.com>
+Date:   Thu May 9 15:39:22 2024 +0800
+
+    Make public APIs more standard. (#416)
+
+[33mcommit e2c31fca5cbbb8c145b69f6b3cdaabdcf7039add[m
+Author: Enrique Shockwave <33002121+qeternity@users.noreply.github.com>
+Date:   Thu May 9 08:14:01 2024 +0100
+
+    Include finish reason in meta info response (#415)
+
+[33mcommit 785bd249cf32ddaf36ce4246ab0b6d9687429fbb[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Wed May 8 23:57:54 2024 +0000
+
+    loogle retry H100
+
+[33mcommit a9f29174cdd378b91687266677bf33712bb659c5[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Wed May 8 22:13:09 2024 +0000
+
+    fix model exposed rpyc
+
+[33mcommit 5fdb0169bebd090e97d8a29e879f69e850b2c2ee[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Wed May 8 21:31:13 2024 +0000
+
+    add points for programming
+
+[33mcommit d5de20a3ee372339872c287cbc4209df41b834f8[m
+Author: Liangsheng Yin <hnyls2002@gmail.com>
+Date:   Wed May 8 15:15:18 2024 +0800
+
+    Fix `sync()` when `fork(1)` (#412)
+
+[33mcommit 9a38707d9b0fa984ba499075c4547953e5d1542c[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Wed May 8 02:52:44 2024 +0000
+
+    programming oracle
+
+[33mcommit 2705088b24774b580ef5fd50ba3dae880b53c6e4[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Tue May 7 23:48:33 2024 +0000
+
+    checkpoint before VE H100
+
+[33mcommit 4a1c6ae2ced0f85e1a7414cb13ace9f342a13a56[m
+Author: YoungJoong Noah Kim <142862540+noah-kim-theori@users.noreply.github.com>
+Date:   Tue May 7 16:18:15 2024 +0900
+
+    Add Cohere Command R chat template (#411)
+
+[33mcommit 8932f95759bce35a4d31b801642d3d71733160e7[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Sun May 5 22:42:50 2024 +0000
+
+    test toolbench with llama3 70B tp 4
+
+[33mcommit e51a4b0938e0d6ebbd54edbe799de7e2d3d94e7c[m
+Merge: de58bb2 b925275
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Sun May 5 17:13:17 2024 +0000
+
+    merge common ratio micro
+
+[33mcommit de58bb22884bb37bc90baa2f3560e8fd7050247f[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Sun May 5 17:12:38 2024 +0000
+
+    real loogle 4gpu checkpoint
+
+[33mcommit 14522e6a26e7dfb6e27c0b79f211f11d190259fe[m
+Author: Liangsheng Yin <hnyls2002@gmail.com>
+Date:   Sun May 5 16:14:17 2024 +0800
+
+    Organize Benchmark (#381)
+
+[33mcommit b925275d5cc373a4336a7ec23979b390fc05e0f6[m
+Merge: fc76831 d366f2a
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Sun May 5 06:39:21 2024 +0000
+
+    merge video 2r update
+
+[33mcommit fc76831ce9e9aac257849e27fd3d09ea8225bc69[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Sun May 5 06:37:25 2024 +0000
+
+    data point for moving common share ratio
+
+[33mcommit d366f2a6fb06659c39672023b106d150513cf531[m
+Merge: fd5a5b8 c3a7eb7
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Sun May 5 05:41:16 2024 +0000
+
+    merge fixes
+
+[33mcommit fd5a5b8b209ececaf9d54fefb04f4631e6a50a1e[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Sun May 5 05:25:51 2024 +0000
+
+    checkpoint loogle new dataset 2r
+
+[33mcommit c3a7eb7c9eb53485cea50f7caddc21ea70eb6b86[m
+Author: ben <dongmingli_Ben@126.com>
+Date:   Sun May 5 00:22:00 2024 +0000
+
+    fix bugs in virtualenv
+
+[33mcommit fb6b2edcd5a5f0d86b2ec77ccae00ad4062ddc1f[m
+Author: ben <dongmingli_Ben@126.com>
+Date:   Sun May 5 00:12:53 2024 +0000
+
+    remove useless var in virtualenv
+
+[33mcommit b8fd7aacde7bc70114b475d064fa48bc9332c28e[m
+Author: ben <dongmingli_Ben@126.com>
+Date:   Sun May 5 00:09:40 2024 +0000
+
+    fix small bug in virtualenv
+
+[33mcommit 98acf57d63ac1b1e416a16be1fb0a078d2f0ba50[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Sun May 5 00:08:15 2024 +0000
+
+    2gpu video checkpoint
+
+[33mcommit 1ae0a836c4aa85fe8799aa75d1f6146e8283d92b[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Sat May 4 23:44:36 2024 +0000
+
+    Update benchmark virtualenv script
+
+[33mcommit 6806544668ba2a418441f779392c3ed6e7d3bb26[m
+Merge: ffdef6e 718eccb
+Author: Vikranth Srivatsa <10752522+vikranth22446@users.noreply.github.com>
+Date:   Sat May 4 13:14:02 2024 -0700
+
+    Merge pull request #65 from WukLab/new_dataset/programming_dataset
+    
+    Add new dataset programing
+
+[33mcommit 718eccbefe4a5ecd41fac7df0b5849e6d70b5fc6[m
+Merge: 1354366 ffdef6e
+Author: Vikranth Srivatsa <10752522+vikranth22446@users.noreply.github.com>
+Date:   Sat May 4 13:12:39 2024 -0700
+
+    Merge branch 'mulit_modal_main' into new_dataset/programming_dataset
+
+[33mcommit 135436663cf4dbe218d813bb3292a3c48ff4aaf9[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Sat May 4 20:06:53 2024 +0000
+
+    fix programming dataset
+
+[33mcommit ffdef6e785fef184be7bf3295470db8720b81d1d[m
+Merge: bb097c1 b9aae5f
+Author: Zijian <zih015@ucsd.edu>
+Date:   Sat May 4 13:01:00 2024 -0700
+
+    Merge pull request #67 from WukLab/ckpt/videoQA
+    
+    Ckpt/video qa
+
+[33mcommit b9aae5fa534e4047e467e03d48318b29c3ae8410[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Sat May 4 19:51:48 2024 +0000
+
+    uneven video load simulation
+
+[33mcommit 2c76260ebee1c68f05485676ac6773e7f8821c3d[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Sat May 4 17:51:16 2024 +0000
+
+    even load video QA, include avg norom latency
+
+[33mcommit e2461751c3dae3944a387514a7cb908fce83e1fa[m
+Merge: a2a18e2 bb097c1
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Sat May 4 08:43:22 2024 +0000
+
+    Merge branch 'mulit_modal_main' into feat/partial_eviction
+
+[33mcommit a2a18e271494ed3da2fe664f3c326cc30993119f[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Sat May 4 08:43:00 2024 +0000
+
+    real run loogle,toolbench check point
+
+[33mcommit bb097c1e9fc93a69c80f68448a66ba85f7634e7d[m
+Merge: 3af63cf 826e1d7
+Author: Vikranth Srivatsa <10752522+vikranth22446@users.noreply.github.com>
+Date:   Sat May 4 00:25:50 2024 -0700
+
+    Merge pull request #64 from WukLab/feature/initial_worst_case_benchmarks
+    
+    Datasets and worst case benchmarks with virtualenv
+
+[33mcommit 826e1d70768b3c4dc947b9320e80ef3b13feb807[m
+Author: Vikranth Srivatsa <10752522+vikranth22446@users.noreply.github.com>
+Date:   Sat May 4 00:24:56 2024 -0700
+
+    Update model_runtime_manager.py via cleanup
+
+[33mcommit 159972d6a4a024bbf4f4ba4761cd4305fb0fface[m
+Merge: 2ec1f14 3af63cf
+Author: Vikranth Srivatsa <10752522+vikranth22446@users.noreply.github.com>
+Date:   Sat May 4 00:24:16 2024 -0700
+
+    Merge branch 'mulit_modal_main' into feature/initial_worst_case_benchmarks
+
+[33mcommit 3af63cf68c113fa8be01c19785291cef1329b32b[m
+Merge: 23b8956 3e1798a
+Author: Zijian <zih015@ucsd.edu>
+Date:   Sat May 4 00:15:05 2024 -0700
+
+    Merge pull request #66 from WukLab/feat/partial_eviction
+    
+    Feat/partial eviction
+
+[33mcommit 3e1798a7d5e8c1364ddcd14ea916718c42ec1a7c[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Sat May 4 06:29:04 2024 +0000
+
+    profile llama3 70B tp2 prefill time
+
+[33mcommit 3b39fea54cb54b572b850833e7c73ad313f24afd[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Sat May 4 04:19:07 2024 +0000
+
+    disk not enought
+
+[33mcommit 2897731f8c2f6cf33f24b3bf6db60fc49cf86616[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Sat May 4 03:15:34 2024 +0000
+
+    support tensor parallelism
+
+[33mcommit 71805954ea31553a25c9916b39eec2d7571f2cc1[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Fri May 3 21:33:36 2024 +0000
+
+    add command hist
+
+[33mcommit 54f8f04f72fa94a6f91cd82f3626ef9bf97d4381[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Fri May 3 21:29:45 2024 +0000
+
+    A100 mistrial prefill time estimation
+
+[33mcommit ee8d16bdc95c8ef3ef65db79561f8d5bae9b8538[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Fri May 3 18:33:53 2024 +0000
+
+    real run loogle 234 GPUs
+
+[33mcommit 542045b2594d9f92e6adcc73294a4acd8e509841[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Fri May 3 14:05:27 2024 +0000
+
+    Add new dataset
+
+[33mcommit 4fa79f7f06c44c8be8b7ebc43d625550e842e3f4[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Fri May 3 06:41:40 2024 +0000
+
+    add partial eviction
+
+[33mcommit e18f02bf122c75044b556f11c987b61e0b379487[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Thu May 2 20:05:22 2024 +0000
+
+    check point real 2 gpu toolbench
+
+[33mcommit 90f30e137ff3260ac9871c8b24e1cd64882a25a0[m
+Merge: 68a2487 23b8956
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Thu May 2 02:30:45 2024 +0000
+
+    merge main circular import fix
+
+[33mcommit 23b895666342cbea82c90c5dc6c7465533465ea1[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Thu May 2 01:18:25 2024 +0000
+
+    remove unnecessary import
+
+[33mcommit 2ec1f147a78bbe18f71f62561b458bc36a7421e2[m
+Merge: 8010221 88856b3
+Author: Vikranth Srivatsa <10752522+vikranth22446@users.noreply.github.com>
+Date:   Wed May 1 17:50:04 2024 -0700
+
+    Merge branch 'mulit_modal_main' into feature/initial_worst_case_benchmarks
+
+[33mcommit 8010221d7bd0522b1999615b2221d5833fbd73fe[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Thu May 2 00:48:53 2024 +0000
+
+    Update worst case benchmarks
+
+[33mcommit 88856b31fb0c0084b15ea6f1118e9d956b35a540[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Thu May 2 00:43:51 2024 +0000
+
+    Update current gpu in router manager
+
+[33mcommit 68a248730cd767b3c67cf7876109e425c19cac14[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Thu May 2 00:13:24 2024 +0000
+
+    checkpoint waiting queue k=10 for loogle
+
+[33mcommit 4554a2a4a6bb951886ff515215e8f4403da5c178[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Wed May 1 18:41:21 2024 +0000
+
+    Initial work on worst case benchmarks
+
+[33mcommit 2384b53eedc21a0e35844b52a0071f7c246d0746[m
+Merge: 215724c 9ab7570
+Author: Zijian <zih015@ucsd.edu>
+Date:   Wed May 1 11:13:08 2024 -0700
+
+    Merge pull request #63 from WukLab/feat/hc_disagg
+    
+    Feat/hc disagg
+
+[33mcommit 1d70e24cbb7152806b97543ab0953f19fa9ea2b0[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Wed May 1 16:27:23 2024 +0000
+
+    Update workload gen + virtualenv conf
+
+[33mcommit 9ab7570bf7b0572976846f65d33468a3c3a51bd9[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Wed May 1 15:51:30 2024 +0000
+
+    weird drop in latency for RR when rps is high
+
+[33mcommit 215724c9f3df730beaf7015b3a9d14f6eefcb732[m
+Merge: f24ecc8 d31ed83
+Author: Vikranth Srivatsa <10752522+vikranth22446@users.noreply.github.com>
+Date:   Wed May 1 07:34:07 2024 -0700
+
+    Merge pull request #59 from WukLab/feature/add_support_for_loc
+    
+    Add LOC support
+
+[33mcommit 4af3c6f965441dbaeb40a45703642070ba31ec5d[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Wed May 1 09:40:54 2024 +0000
+
+    checkpoint limited prompt loogle 2r4r
+
+[33mcommit e7184fefe9bf14b32e2e142c5e15e8f2a066519d[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Wed May 1 08:39:43 2024 +0000
+
+    checkpoint toolbench 2r4r
+
+[33mcommit f24ecc89bcb70760d6c8ee4576f72681e834c344[m
+Merge: f229d6d fc04453
+Author: Zijian <zih015@ucsd.edu>
+Date:   Wed May 1 00:20:15 2024 -0700
+
+    Merge pull request #62 from WukLab/feat/hc_disagg
+    
+    Feat/hc disagg
+
+[33mcommit fc04453ae90f29325604c00ebb3999c2c9eab8d7[m
+Merge: ce14088 f229d6d
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Wed May 1 07:19:28 2024 +0000
+
+    merge tpot change for global scheduler
+
+[33mcommit f229d6d8182df4029402933f2644cd28f02353ca[m
+Merge: 3a6a04c 80eecd4
+Author: Zijian <zih015@ucsd.edu>
+Date:   Wed May 1 00:16:38 2024 -0700
+
+    Merge pull request #61 from WukLab/feature/add_topt_time_number
+    
+    Add topt to scheduler
+
+[33mcommit bbd3bc2ac7f62509868bf0ed35566fa2ab031ab6[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Wed May 1 06:49:30 2024 +0000
+
+    fix lru cache for virtualenv
+
+[33mcommit ce14088c0cccce14306e32e6f1135057554cd472[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Wed May 1 05:49:51 2024 +0000
+
+    integrate iterative eviction update
+
+[33mcommit 4fe9c174b9e6f8e0ccb8df47749a564c71da3813[m
+Merge: 0287405 e1684ff
+Author: ben <dongmingli_Ben@126.com>
+Date:   Wed May 1 05:08:07 2024 +0000
+
+    Merge branch 'mix_workload' of https://github.com/WukLab/stateful_llm_serving into mix_workload
+
+[33mcommit 028740539aed099a002a4dd8c2a65a0c610c839e[m
+Author: ben <dongmingli_Ben@126.com>
+Date:   Wed May 1 05:06:21 2024 +0000
+
+    add num_patterns to virtualenv
+
+[33mcommit e1684ff820b35f1cb06611ab14e8e8f22893109a[m
+Merge: eb0da33 0565868
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Wed May 1 04:33:08 2024 +0000
+
+    Merge branch 'mix_workload' of github.com:WukLab/stateful_llm_serving into mix_workload
+
+[33mcommit eb0da339d9e09be0a7a31951d1cf0396d39a192d[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Wed May 1 04:33:03 2024 +0000
+
+    Debug mixed workload settings
+
+[33mcommit 0565868bf5fa301bb00df67dcdbb3f75b280f119[m
+Author: ben <dongmingli_Ben@126.com>
+Date:   Wed May 1 03:45:50 2024 +0000
+
+    fix missing break in virtualenv dataset
+
+[33mcommit 7ca3b150ad6907bf7cd902a1373a1ed3bca1b13a[m
+Merge: dfd7611 a6b1655
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Wed May 1 03:00:41 2024 +0000
+
+    merge iterative eviction
+
+[33mcommit dfd7611c9fc75f9cb3b2ff2555d96f70a6083485[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Wed May 1 01:08:31 2024 +0000
+
+    add  eviction lost, fix global tree eviction logic
+
+[33mcommit a6b1655302b08d9adaab08b891747dfb8ece988b[m
+Author: Reyna Abhyankar <forvirenra@gmail.com>
+Date:   Wed May 1 00:47:37 2024 +0000
+
+    Remove aggregate update
+
+[33mcommit 691f41fbe27f54c9bc335987ac2be5d380982837[m
+Author: Reyna Abhyankar <forvirenra@gmail.com>
+Date:   Wed May 1 00:46:06 2024 +0000
+
+    Asynchronous
+
+[33mcommit 80eecd4b7c2f9e836ffa04d803e55578d5418f77[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Wed May 1 00:40:24 2024 +0000
+
+    Add topt to scheduler
+
+[33mcommit 183df4728260a1469612f848f980cc71266591b9[m
+Author: ZhouXingg <165115237+ZhouXingg@users.noreply.github.com>
+Date:   Wed May 1 07:17:12 2024 +0800
+
+    SamplingParams add "spaces_between_special_tokens" argument (#392)
+
+[33mcommit 5c5aba59005d80109e8e290f770fe6501028fa4f[m
+Author: Joschka Braun <47435119+joschkabraun@users.noreply.github.com>
+Date:   Tue Apr 30 19:13:28 2024 -0400
+
+    Adding RAG tracing & eval cookbook using Parea (#390)
+
+[33mcommit ba67101f99ec8a43b738afaff39757795573dc09[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Tue Apr 30 15:53:39 2024 -0700
+
+    Fix chatml template (#406)
+
+[33mcommit 71df8fa01d2a38ab317c6bbada22d831d37adf67[m
+Author: ben <dongmingli_Ben@126.com>
+Date:   Tue Apr 30 22:45:53 2024 +0000
+
+    add mixed workloads
+
+[33mcommit d31ed83351586a5d5a70e4ab50030532f61bfdab[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Tue Apr 30 22:08:02 2024 +0000
+
+    Add LOC support
+
+[33mcommit 11bf50b5eb4e4f1ed5b69fd2246f8069b5148bd1[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Tue Apr 30 20:55:44 2024 +0000
+
+    test globalscheduler with time on toolbench
+
+[33mcommit 78958a0e18641c8a6da7d6935d6fbd245768797e[m
+Merge: a035a95 3a6a04c
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Tue Apr 30 20:24:17 2024 +0000
+
+    merge group request change
+
+[33mcommit a035a95558a5dcabe016f5074923c9b5b74ffdfe[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Tue Apr 30 19:06:58 2024 +0000
+
+    reproduce failed, merge new global scheduler
+
+[33mcommit 5494aa851f9c3bbbfd75605eb67675e879efddb9[m
+Merge: ddcc1ca 3a6a04c
+Author: Reyna Abhyankar <forvirenra@gmail.com>
+Date:   Tue Apr 30 18:09:39 2024 +0000
+
+    Merge branch 'mulit_modal_main' into iterative-sched
+
+[33mcommit ddcc1ca7c0e09e73d99793b4606ae9093d688a58[m
+Author: Reyna Abhyankar <forvirenra@gmail.com>
+Date:   Tue Apr 30 18:07:47 2024 +0000
+
+    Setup loogle
+
+[33mcommit 3a6a04c3307d5b40b657a6ae16d7577e062fafc9[m
+Merge: 594fc94 d737392
+Author: Vikranth Srivatsa <10752522+vikranth22446@users.noreply.github.com>
+Date:   Tue Apr 30 09:16:03 2024 -0700
+
+    Merge pull request #58 from WukLab/request_groups
+    
+    Add support to sequential requests
+
+[33mcommit 594fc9475e5c9eb95df582e5aa377b322844ca04[m
+Merge: 2d4f1ea f41cfc5
+Author: Vikranth Srivatsa <10752522+vikranth22446@users.noreply.github.com>
+Date:   Tue Apr 30 09:15:54 2024 -0700
+
+    Merge pull request #57 from WukLab/feature/update_with_miss_rate_formula
+    
+    Feature/update with miss rate formula to global scheduler
+
+[33mcommit f41cfc5b793fdd27b6dd35b318ab1462d4196475[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Tue Apr 30 16:13:17 2024 +0000
+
+    Update global scheduler with time
+
+[33mcommit d737392bc5a902fd3fd06d35c322536571a4c21c[m
+Author: ben <dongmingli_Ben@126.com>
+Date:   Tue Apr 30 05:28:54 2024 +0000
+
+    test sequential with virtualenv
+
+[33mcommit 678f6e6d3a5ec8a6f32f7c44a8584c13f5821368[m
+Author: ben <dongmingli_Ben@126.com>
+Date:   Tue Apr 30 05:28:21 2024 +0000
+
+    integrate with codebase via request groups
+
+[33mcommit 5fa0d223c5045f1f5b214d21b376d28e59ae10c8[m
+Author: ben <dongmingli_Ben@126.com>
+Date:   Tue Apr 30 03:44:29 2024 +0000
+
+    add sequential requests
+
+[33mcommit 53f42bcf8b42f23a72769a4f3a33d9126a786826[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Tue Apr 30 03:33:48 2024 +0000
+
+    Update with basic miss rate formula
+
+[33mcommit 2130e41823670deadd98a70668fc15e3d69f0658[m
+Merge: da765a0 2d4f1ea
+Author: Reyna Abhyankar <forvirenra@gmail.com>
+Date:   Mon Apr 29 23:43:19 2024 +0000
+
+    Merge branch 'mulit_modal_main' into iterative-sched
+
+[33mcommit da765a02eb976c894d86e31e93cd7af0ba6fa490[m
+Author: Reyna Abhyankar <forvirenra@gmail.com>
+Date:   Mon Apr 29 23:40:18 2024 +0000
+
+    Finish eviction update
+
+[33mcommit 314bfb04043c100e198f842a9fd05192c1e1552a[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Mon Apr 29 23:16:40 2024 +0000
+
+    add video QA
+
+[33mcommit bacb29d5cf04b63fda42a60daab4a6067c66e18c[m
+Merge: 02a3590 2d4f1ea
+Author: Vikranth Srivatsa <10752522+vikranth22446@users.noreply.github.com>
+Date:   Mon Apr 29 14:07:50 2024 -0700
+
+    Merge branch 'mulit_modal_main' into feature/update_global_scheduler_with_better_ref_count
+
+[33mcommit 02a359036c3baa9bc2bfd97fb32310d27bd189a5[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Mon Apr 29 20:59:34 2024 +0000
+
+    Update ref counter and better global scheduler handling of chains
+
+[33mcommit 2d4f1eace861d987f99cd6f16a3216fe0823c9d7[m
+Merge: c973fc5 d9aafad
+Author: Zijian <zih015@ucsd.edu>
+Date:   Mon Apr 29 13:35:26 2024 -0700
+
+    Merge pull request #55 from WukLab/feat/hc_disagg
+    
+    Feat/hc disagg
+
+[33mcommit d9aafad6f03a608d91a18aa9d2befadc8e1112be[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Mon Apr 29 17:56:27 2024 +0000
+
+    multi exp pipeline
+
+[33mcommit c973fc552142f3bf629fa9414408c6ab7ee2f2ff[m
+Merge: 13be8ff 1353663
+Author: Vikranth Srivatsa <10752522+vikranth22446@users.noreply.github.com>
+Date:   Mon Apr 29 10:55:10 2024 -0700
+
+    Merge pull request #54 from WukLab/add_dataloader
+    
+    Add virtualenv data loader
+
+[33mcommit 797450dced6af7e5ef7ae5264b6e6d0b001ae759[m
+Merge: a5cecb4 13be8ff
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Sun Apr 28 21:18:03 2024 +0000
+
+    Merge branch 'mulit_modal_main' into feat/hc_disagg
+
+[33mcommit a5cecb4f1250e740f3eaf0e25415615559dc9924[m
+Merge: dc24464 5fc91bb
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Sun Apr 28 21:10:45 2024 +0000
+
+    merge refactored global scheduler
+
+[33mcommit 381c4b90a513c3ce627556e6cfc0d9eafe66b6db[m
+Author: Reyna Abhyankar <forvirenra@gmail.com>
+Date:   Sun Apr 28 18:56:38 2024 +0000
+
+    Commit current
+
+[33mcommit 1353663e389cb273836acf496036359c4bc84dec[m
+Author: ben <dongmingli_Ben@126.com>
+Date:   Sun Apr 28 17:17:22 2024 +0000
+
+    add virtualenv loader
+
+[33mcommit 13be8ff97b6238f8b528f99768be91601876f301[m
+Merge: 5fc91bb 2765d2e
+Author: Vikranth Srivatsa <10752522+vikranth22446@users.noreply.github.com>
+Date:   Sun Apr 28 08:48:27 2024 -0700
+
+    Merge pull request #53 from WukLab/add_dataloader
+    
+    Add three data loader
+
+[33mcommit 95c4e0dfac5a5f4a2f7f9292402fec26d0838f31[m
+Author: Liangsheng Yin <hnyls2002@gmail.com>
+Date:   Sun Apr 28 21:06:22 2024 +0800
+
+    Format Benchmark Code (#399)
+
+[33mcommit 2765d2e2181738063c61969f0dedc26cd8652d2b[m
+Author: ben <dongmingli_Ben@126.com>
+Date:   Sat Apr 27 23:09:29 2024 +0000
+
+    add 3 data loader
+
+[33mcommit 07cf23dadebbd0a9d7f53c7ef4aa3fea487c81d3[m
+Merge: 7b2f5b4 5fc91bb
+Author: Reyna Abhyankar <forvirenra@gmail.com>
+Date:   Fri Apr 26 18:29:35 2024 +0000
+
+    Merge branch 'mulit_modal_main' into iterative-sched
+
+[33mcommit 7b2f5b43cfdae0b903f12c771a782363014b4cb8[m
+Author: Reyna Abhyankar <forvirenra@gmail.com>
+Date:   Fri Apr 26 18:27:22 2024 +0000
+
+    Fix with iter updates
+
+[33mcommit 5fc91bb9a6adbcf42015ad935a17af582ce3baf8[m
+Merge: c2d9126 bb47226
+Author: Vikranth Srivatsa <10752522+vikranth22446@users.noreply.github.com>
+Date:   Fri Apr 26 10:32:23 2024 -0700
+
+    Merge pull request #52 from WukLab/feature/refactor_to_support_multi_experiment
+    
+    Multi Experiment support
+
+[33mcommit bb47226052446e80487340523039acc407414dbc[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Fri Apr 26 17:30:54 2024 +0000
+
+    Refactor and multi bench experiments samples
+
+[33mcommit dc2446408ac5c142c44e10885d7985a3e66a39d7[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Fri Apr 26 07:46:30 2024 +0000
+
+    add hot/cold to server runtime, refactor chunk prefill metadata
+
+[33mcommit 43f275f7ef150b64099d9e1f8a4f6bfa5191c8d5[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Fri Apr 26 05:19:55 2024 +0000
+
+    Cleanup files and rename to global scheduler
+
+[33mcommit db75e464f60e81fcda2af58e187b366a41f39321[m
+Merge: 61cd7ad c2d9126
+Author: Reyna Abhyankar <forvirenra@gmail.com>
+Date:   Thu Apr 25 21:07:50 2024 +0000
+
+    Merge branch 'mulit_modal_main' into iterative-sched
+
+[33mcommit 61cd7ad84cd250a5a4095cf7927989c89c54f8b7[m
+Author: Reyna Abhyankar <forvirenra@gmail.com>
+Date:   Thu Apr 25 21:05:51 2024 +0000
+
+    Iterative level update comm
+
+[33mcommit ea1627955786c70fcf0c54fb569de5760e768863[m
+Merge: 1aef01a c2d9126
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Thu Apr 25 20:42:48 2024 +0000
+
+    Merge branch 'mulit_modal_main' into feat/hc_disagg
+
+[33mcommit 1aef01ae274fce27f9803368d48e27f07c762d29[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Thu Apr 25 20:42:29 2024 +0000
+
+    align basic mem scheduler interface
+
+[33mcommit c2d9126ddc03332f93a45efee5b51aba96108f63[m
+Merge: d1e8840 45916ec
+Author: Vikranth Srivatsa <10752522+vikranth22446@users.noreply.github.com>
+Date:   Thu Apr 25 13:34:44 2024 -0700
+
+    Merge pull request #51 from WukLab/hotfix/fix_per_gpu_lru_cache_with_ttft_detector
+    
+    Fix issues with lru cache
+
+[33mcommit 45916ec558b7cf9dcaaafa9b0f41369661cdeb1d[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Thu Apr 25 19:14:19 2024 +0000
+
+    Fix issues with lru cache
+
+[33mcommit d1e8840b93c2dfb47b83c4aaf8e8bc50ae208d26[m
+Merge: ffd6005 1e0ddc4
+Author: Zijian <zih015@ucsd.edu>
+Date:   Thu Apr 25 11:43:50 2024 -0700
+
+    Merge pull request #50 from WukLab/feat/hc_disagg
+    
+    Hot/cold integration and revert main back to before hot fix
+
+[33mcommit 1e0ddc4ad7fadd4ea697e9e7d907653abb5f97c2[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Thu Apr 25 18:08:41 2024 +0000
+
+    hot cold integration
+
+[33mcommit 19818b9c2f8df06436412f61d192d065bc2f976e[m
+Author: Liangsheng Yin <hnyls2002@gmail.com>
+Date:   Fri Apr 26 01:01:36 2024 +0800
+
+    Minor: style improvement of radix_cache and memory_pool (#395)
+
+[33mcommit 9216b10678a036a1797e19693b0445c889016687[m
+Author: Liangsheng Yin <hnyls2002@gmail.com>
+Date:   Thu Apr 25 17:29:07 2024 +0800
+
+    Improve performance when running with full parallel (#394)
+
+[33mcommit 8ec13dbadfe20eec51b75c9a098140d0f310fe17[m
+Merge: 4460659 ffd6005
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Wed Apr 24 20:09:02 2024 +0000
+
+    merge eviction in scheduler
+
+[33mcommit 44606597c1da33778afc1776288df91bbfd59d75[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Wed Apr 24 20:03:34 2024 +0000
+
+    hit check should be performed in each iteration
+
+[33mcommit ffd6005881247794c3a351b3c191dbd66f33bfdf[m
+Merge: e6efacf ccfa0ef
+Author: Vikranth Srivatsa <10752522+vikranth22446@users.noreply.github.com>
+Date:   Wed Apr 24 10:54:31 2024 -0700
+
+    Merge pull request #47 from WukLab/hotfix/workstealing_fixed_recomp_scheduler
+    
+    Update the eviction policy + Initial work stealing policy
+
+[33mcommit ccfa0ef72f63037713c89b0ce4e8464c69d0f896[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Wed Apr 24 17:50:05 2024 +0000
+
+    Clean up unnecssary file
+
+[33mcommit 4d26bb0b57922fe90a57a107bec81ea52f923f35[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Wed Apr 24 17:48:30 2024 +0000
+
+    Update the eviction policy
+
+[33mcommit 45887a0923b4f9b81851745b26c59950e2e76a49[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Wed Apr 24 08:58:11 2024 +0000
+
+    refactor the scheduling function for code reuse
+
+[33mcommit 526d467b59a87ce5ba55f272e809a5db71ced362[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Wed Apr 24 05:43:27 2024 +0000
+
+    fix timestamp in histgram scheduler
+
+[33mcommit 0e7b256138768edf8661e2caa004b454b1377bd1[m
+Merge: 8d7ce96 e6efacf
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Tue Apr 23 20:45:02 2024 +0000
+
+    Merge branch 'mulit_modal_main' into feat/hc_disagg
+
+[33mcommit da19434c2f3cbe4f367f84993da0bcbd84efb6ba[m
+Author: Liangsheng Yin <hnyls2002@gmail.com>
+Date:   Wed Apr 24 02:23:01 2024 +0800
+
+    Benchmark Updates (#382)
+
+[33mcommit 8d7ce968b6ed7699538d4e46596c3577cb6af7fc[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Tue Apr 23 17:37:30 2024 +0000
+
+    waiting queue management
+
+[33mcommit 150d7020ed8fcba4f3fdef52b770850aff8ae048[m
+Author: Liangsheng Yin <hnyls2002@gmail.com>
+Date:   Tue Apr 23 22:36:33 2024 +0800
+
+    Revert removing the unused imports (#385)
+
+[33mcommit 806b9939d51325bc74b1f9306d22e260ca21cb9c[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Tue Apr 23 06:28:47 2024 +0000
+
+    add simulation time as request arrival time
+
+[33mcommit e6efacf84e28f9384609a1c9c7147de8eedaf816[m
+Merge: 77d0471 4d83a0d
+Author: Vikranth Srivatsa <10752522+vikranth22446@users.noreply.github.com>
+Date:   Mon Apr 22 14:14:44 2024 -0700
+
+    Merge pull request #46 from WukLab/feature/implement_initial_replication_policy
+    
+    Initial workload replication policy
+
+[33mcommit 4d83a0d2fd9d0931dd712bc84a533a9f440b24bb[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Mon Apr 22 21:01:09 2024 +0000
+
+    Initial workload replication policy
+
+[33mcommit 9acc6e350475a64207a6702a579850c93ab27b43[m
+Author: Liangsheng Yin <hnyls2002@gmail.com>
+Date:   Mon Apr 22 22:38:09 2024 +0800
+
+    add `.isort.cfg` (#378)
+
+[33mcommit 77d04718af3de0666bab207493c4bdd2c8c29f69[m
+Merge: aa427d5 2b2e454
+Author: Vikranth Srivatsa <10752522+vikranth22446@users.noreply.github.com>
+Date:   Sun Apr 21 16:01:34 2024 -0700
+
+    Merge pull request #42 from WukLab/add_vllm_support
+    
+    add support for vllm server via ssh
+
+[33mcommit 2b2e4540c9faf727383aa191dd8984b96dfbe71d[m
+Author: ben <dongmingli_Ben@126.com>
+Date:   Sun Apr 21 22:15:43 2024 +0000
+
+    ignore irrelavant args for sglang and vllm
+
+[33mcommit cf9d8efdd374b65dcdea15f8d5bb89b47f98d8ed[m
+Author: Enrique Shockwave <33002121+qeternity@users.noreply.github.com>
+Date:   Sun Apr 21 17:40:12 2024 +0100
+
+    llama3 instruct template (#372)
+
+[33mcommit 1bf1cf195302fdff14a4321eb8a17831f5c2fc11[m
+Author: Liangsheng Yin <hnyls2002@gmail.com>
+Date:   Sun Apr 21 17:25:14 2024 +0800
+
+    Reduce overhead when `fork(1)` (#375)
+
+[33mcommit 9374b87d5f6741cd1adad5448ce40aabf3bc382c[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Sun Apr 21 01:23:13 2024 +0000
+
+    more accurate equation with only extend kernel
+
+[33mcommit aa427d5f32419ea4995eb2e2a708db0d37997c05[m
+Merge: a1c06c3 ed52344
+Author: Zijian <zih015@ucsd.edu>
+Date:   Sat Apr 20 16:57:48 2024 -0700
+
+    Merge pull request #45 from WukLab/feature/multi_domain_toolbench
+    
+    Add Multi domain tool loader
+
+[33mcommit ed5234425fb7afcfeabc831754d8095376ca7cc0[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Sat Apr 20 23:57:26 2024 +0000
+
+    Add 16 gpu experiment
+
+[33mcommit f238133a54f0e20bdd3e846cdd3fd31125777a62[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Sat Apr 20 23:54:19 2024 +0000
+
+    fix max_new_token = 0, return eos
+
+[33mcommit d7926199783f1a97ef541470e56eb5d7989b6084[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Sat Apr 20 23:12:30 2024 +0000
+
+    Add Multi domain tool loader
+
+[33mcommit a1c06c38a0987db9e01935f122e305d7091a35c0[m
+Merge: 150e400 fe1e64d
+Author: Vikranth Srivatsa <10752522+vikranth22446@users.noreply.github.com>
+Date:   Sat Apr 20 13:38:37 2024 -0700
+
+    Merge pull request #44 from WukLab/feature/add_load_based_eviction_prioritiy_queue_policy
+    
+    Add Load based Memory Eviction with a global tree
+
+[33mcommit fe1e64d65ee96d1fb504b38e9a4be2ad33c12764[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Sat Apr 20 20:37:45 2024 +0000
+
+    cleanup pr
+
+[33mcommit 150e400dcc42260c225fa8353d30bb758b266d17[m
+Merge: e8ec39e b12536c
+Author: Zijian <zih015@ucsd.edu>
+Date:   Sat Apr 20 12:50:14 2024 -0700
+
+    Merge pull request #43 from WukLab/feat/hc_disagg
+    
+    Feat/hc disagg
+
+[33mcommit b12536cb5ff959e4f0c9453833d22393b4caf22a[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Sat Apr 20 19:49:26 2024 +0000
+
+    fix: long prompt handling and workload gen
+
+[33mcommit 3e6b129f8bda2d0a2fbaed4c5fd485b7b89178d6[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Sat Apr 20 19:21:47 2024 +0000
+
+    Add global sliding window to handle eviction
+
+[33mcommit b00948e5e2bdd69342ce736deedb5b7a0fefc09e[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Sat Apr 20 16:26:21 2024 +0000
+
+    Add eviction load + mem recompute based scheduler
+
+[33mcommit f43de68f3a0e678ea1cf1a0b709d099169bf40d4[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Sat Apr 20 08:34:24 2024 +0000
+
+    testify chunk prefill on simulator
+
+[33mcommit 08382fcc4c39654e4acc33fb29d54c499629e0f7[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Sat Apr 20 06:06:02 2024 +0000
+
+    add mixed batch profile script
+
+[33mcommit 26c9a1514756eab42704efe750fe1e0a0d58d76f[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Sat Apr 20 04:46:29 2024 +0000
+
+    add equation fitting script
+
+[33mcommit 8a7ee97997cc4a678e915f2b78f6afeaac04c2b1[m
+Merge: 670c3e2 e8ec39e
+Author: ben <dongmingli_Ben@126.com>
+Date:   Sat Apr 20 04:40:53 2024 +0000
+
+    Merge branch 'mulit_modal_main' into add_vllm_support; add request failure handling in send req
+
+[33mcommit 670c3e2f491b53ef44937afd0c49d4a2cc0e6b81[m
+Author: ben <dongmingli_Ben@126.com>
+Date:   Sat Apr 20 00:31:33 2024 +0000
+
+    add support for vllm server via ssh
+
+[33mcommit e8ec39eb7b33a7eea781f3b382396fb37cfdabf0[m
+Merge: ab2e375 a1a37ef
+Author: Vikranth Srivatsa <10752522+vikranth22446@users.noreply.github.com>
+Date:   Fri Apr 19 15:30:30 2024 -0700
+
+    Merge pull request #40 from WukLab/feat/hc_disagg
+    
+    Feat/hc disagg. Add chunked prefill support to sglang
+
+[33mcommit a1a37ef48429d56dcf220ef6fad9e962367f7b62[m
+Merge: 272f8fa ab2e375
+Author: Vikranth Srivatsa <10752522+vikranth22446@users.noreply.github.com>
+Date:   Fri Apr 19 15:29:34 2024 -0700
+
+    Merge branch 'mulit_modal_main' into feat/hc_disagg
+
+[33mcommit ab2e375a541acda7b43eea9650cb910db8fcdf13[m
+Merge: 9731432 c8fa875
+Author: Vikranth Srivatsa <10752522+vikranth22446@users.noreply.github.com>
+Date:   Fri Apr 19 15:18:12 2024 -0700
+
+    Merge pull request #41 from WukLab/feature/basic_mem_scheduler
+    
+    Feature/basic mem scheduler
+
+[33mcommit c8fa875442fca282ba367c0fc55664a2612e5e85[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Fri Apr 19 22:13:07 2024 +0000
+
+    cleanup mem scheduler notebook
+
+[33mcommit 8be77881a4ff03165da2575d3f14a404372d98c8[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Fri Apr 19 22:11:21 2024 +0000
+
+    cleanup notebooks
+
+[33mcommit 3a96b2bd93adb13a4788d0d1dcf2e600ca7bba2e[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Fri Apr 19 22:10:00 2024 +0000
+
+    reset plot notebook
+
+[33mcommit bcde8d4be69a14cba8f236d78891f4dc6d5a9468[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Fri Apr 19 22:06:53 2024 +0000
+
+    cleanup pr notebooks
+
+[33mcommit 0dc1ebdd97fd4cd1299661f9b98abbf02a933d27[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Fri Apr 19 22:03:42 2024 +0000
+
+    Add histogram based scheduling
+
+[33mcommit 272f8fa59004089c136ce38980f52f2a9aa9982f[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Fri Apr 19 18:30:22 2024 +0000
+
+    fix: delayed batch not returned properly
+
+[33mcommit 28eb7dac99df18253376f486b612c6f7dbd9a903[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Fri Apr 19 17:18:35 2024 +0000
+
+    fix chunk prefill
+
+[33mcommit b19f8872af135f2d1b2ebdf6c5d73b2cef57f3c4[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Fri Apr 19 00:40:09 2024 +0000
+
+    mismtach between chunk prefill and non cp
+
+[33mcommit 2e39dad6fea5827da8cea36ecb4d03a8eda83b12[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Thu Apr 18 21:17:05 2024 +0000
+
+    Implement a histogram based scheduler
+
+[33mcommit e822e5900b98d89d19e0a293d9ad384f4df2945a[m
+Author: Ke Bao <ISPObaoke@163.com>
+Date:   Thu Apr 18 00:47:37 2024 +0800
+
+    Optimize radix tree matching (#364)
+
+[33mcommit ef3414f8cf0d7c51a43e84c909b7b98a4a4524a9[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Wed Apr 17 15:48:12 2024 +0000
+
+    batched ofline inference example
+
+[33mcommit 902f5ae15a20fa00fa69024b097735ddcb6ef456[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Wed Apr 17 15:12:11 2024 +0000
+
+    Create initial mem scheduler
+
+[33mcommit f69119d6c65fcc652b11a1c1eb738fd73d3ef0a7[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Wed Apr 17 07:24:29 2024 +0000
+
+    general batch inference tested on normal decoding
+
+[33mcommit ca4f1ab89c0c9bdd80fdfabcec52968fbde108bb[m
+Author: Ying Sheng <sqy1415@gmail.com>
+Date:   Wed Apr 17 00:16:32 2024 -0700
+
+    Update model support in readme (#370)
+
+[33mcommit 2b6d99919143080b84db5fb1a8cb5ea504e5fabe[m
+Author: Fronx <fronx@wurmus.de>
+Date:   Tue Apr 16 20:18:24 2024 +0200
+
+    Fix issue #367 – System message not supported for Anthropic (anthropic.BadRequestError) (#368)
+    
+    Co-authored-by: Ying Sheng <sqy1415@gmail.com>
+
+[33mcommit 65501a9cf1dc9e73bba24f35b88988f5633866a9[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Tue Apr 16 18:10:12 2024 +0000
+
+    Fix commandr import; format code
+
+[33mcommit db611066ade4314c19973133f13b3dae49f3ee86[m
+Author: ZhouXingg <165115237+ZhouXingg@users.noreply.github.com>
+Date:   Wed Apr 17 01:36:51 2024 +0800
+
+    support `command-r` (#369)
+
+[33mcommit feac69444cd4068935804c85ff45ee6316ff6714[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Tue Apr 16 05:16:25 2024 +0000
+
+    Fix Greedy Tree Node
+
+[33mcommit 4d12ee1d8d9b7f88a9695b887eae6b2d257b9b25[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Mon Apr 15 22:52:46 2024 +0000
+
+    fcfs sorting
+
+[33mcommit e748d193d6c4c8bbfba87ca5bd3bdec2e8bc8e07[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Mon Apr 15 22:52:10 2024 +0000
+
+    Update greedy policy with logs
+
+[33mcommit 9312738995dd2c429ec9e93f10fb1ecac3ceaf55[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Mon Apr 15 05:06:50 2024 +0000
+
+    add run to complete config to simulator
+
+[33mcommit 14b5d1ad2554a149a56f66857ab0ee6e6dec8c00[m
+Merge: 85b3047 9731432
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Sun Apr 14 23:09:47 2024 +0000
+
+    Merge remote-tracking branch 'origin/mulit_modal_main' into feature/add_cache_eviction
+
+[33mcommit 9731432e4c54f0eac0e2265516aac6ab8d392029[m
+Merge: 43af3fa fdc5fe0
+Author: Zijian <zih015@ucsd.edu>
+Date:   Sun Apr 14 15:08:34 2024 -0700
+
+    Merge pull request #38 from WukLab/feat/hc_disagg
+    
+    fix equation for LP
+
+[33mcommit fdc5fe044c00de719eb4cb32a293e8f00d5e7830[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Sun Apr 14 22:07:27 2024 +0000
+
+    fix equation for LP
+
+[33mcommit 85b3047a297c1676ebee2bd2c45aa3150ecb5b06[m
+Merge: 72d32a6 43af3fa
+Author: Vikranth Srivatsa <10752522+vikranth22446@users.noreply.github.com>
+Date:   Sun Apr 14 12:16:12 2024 -0700
+
+    Merge branch 'mulit_modal_main' into feature/add_cache_eviction
+
+[33mcommit 72d32a60ff2f2c589dea858a87b0151784c8a06e[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Sun Apr 14 19:11:14 2024 +0000
+
+    Update greedy lp by only adding start up prefill to leaf node
+
+[33mcommit 43af3faf1deeb0358431ca6b794c94624fa86172[m
+Merge: 08f80f5 0e2daf4
+Author: Zijian <zih015@ucsd.edu>
+Date:   Sun Apr 14 11:57:34 2024 -0700
+
+    Merge pull request #36 from WukLab/feat/hc_disagg
+    
+    Feat/hc disagg
+
+[33mcommit 0e2daf4d9771bbcf16f4847795639186ac4e7d0f[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Sun Apr 14 18:57:16 2024 +0000
+
+    turn off some debug logging
+
+[33mcommit b7bfe47e2959887a5cd200d7d204709d5af4bda2[m
+Merge: e1361a2 08f80f5
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Sun Apr 14 18:56:02 2024 +0000
+
+    merge new greedy
+
+[33mcommit e1361a2e09a49be01dc04aee3e5f887ab13b305f[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Sun Apr 14 18:53:28 2024 +0000
+
+    add equation interface for LP
+
+[33mcommit 14c9bae3ef392728764288518c9a8870b394cb27[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Sun Apr 14 17:51:42 2024 +0000
+
+    Use average tpot as deocidng cost
+
+[33mcommit 97447c4e39c370ee21523ded0ed03f5130fe4aba[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Sun Apr 14 17:07:04 2024 +0000
+
+    Add basic cache eviction
+
+[33mcommit 3d2131ea02d1c84a93fa5d273b7f69bc997eed47[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Sun Apr 14 07:56:07 2024 +0000
+
+    make add to queue separate event
+
+[33mcommit 98055f8faf73b42de8391899264df60034397ec4[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Sun Apr 14 05:56:51 2024 +0000
+
+    sleep simulator similar to ref
+
+[33mcommit 08f80f538db13d1fd74b98a91803413aa19e6bbf[m
+Merge: 01a26d1 8ace407
+Author: Vikranth Srivatsa <10752522+vikranth22446@users.noreply.github.com>
+Date:   Fri Apr 12 10:49:18 2024 -0700
+
+    Merge pull request #35 from WukLab/hotfix/update_plotting_code_with_ttft
+    
+    Update benchmarking utilities with more plotting
+
+[33mcommit 8ace4070e86764afbcbcadeceb56abc282fd86e3[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Fri Apr 12 17:47:25 2024 +0000
+
+    Fix formatting on p50 latency
+
+[33mcommit 0b2503fe54246c9ecac6316376a7761be8fdcc8b[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Fri Apr 12 17:47:06 2024 +0000
+
+    Update workload gen settings
+
+[33mcommit 14633d5baaaa10fc97222b6d04b1e2597e979a7c[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Fri Apr 12 17:41:28 2024 +0000
+
+    Update plotting code and launch server config
+
+[33mcommit 0194dd67e44f8132b58d2056e689e50d7ef1d211[m
+Merge: 0dd061c 01a26d1
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Fri Apr 12 04:50:33 2024 +0000
+
+    merge workload refactor
+
+[33mcommit 0dd061c4ab54fa919e45f9732c4011ac8344fa48[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Fri Apr 12 04:37:43 2024 +0000
+
+    remove some log.debug
+
+[33mcommit 01a26d13cfd0c4b24042922b4846560badcd3460[m
+Merge: 1f20450 c6e2856
+Author: Vikranth Srivatsa <10752522+vikranth22446@users.noreply.github.com>
+Date:   Thu Apr 11 12:04:10 2024 -0700
+
+    Merge pull request #34 from WukLab/hotfix/improve_workload_refactor
+    
+    cleanup workload handling
+
+[33mcommit c6e28567cf61134ed3290139d2c72d3f90a409c2[m
+Merge: f3aecfe 1f20450
+Author: Vikranth Srivatsa <10752522+vikranth22446@users.noreply.github.com>
+Date:   Thu Apr 11 12:03:54 2024 -0700
+
+    Merge branch 'mulit_modal_main' into hotfix/improve_workload_refactor
+
+[33mcommit f3aecfe372ce6e3b55013ee0552e70d2464c65ad[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Thu Apr 11 19:02:58 2024 +0000
+
+    cleanup workload handling
+
+[33mcommit 1f204503bb89497890073b8c776512050802f9e7[m
+Merge: e29f40c 6e864f9
+Author: Zijian <zih015@ucsd.edu>
+Date:   Thu Apr 11 10:54:57 2024 -0700
+
+    Merge pull request #32 from WukLab/feat/hc_disagg
+    
+    use flashinfer
+
+[33mcommit 6e864f926c2c511b9d7d000eaa06392900c12d3f[m
+Merge: 2a1766d e29f40c
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Thu Apr 11 17:54:37 2024 +0000
+
+    merge global policy
+
+[33mcommit 2a1766d5c43528b95eee331588b39c4d834ea990[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Thu Apr 11 17:44:23 2024 +0000
+
+    more accurate flashinfer
+
+[33mcommit e29f40ca813e74c5b0b7a6bad918627d8374b89a[m
+Merge: 724b6aa fe59121
+Author: Vikranth Srivatsa <10752522+vikranth22446@users.noreply.github.com>
+Date:   Thu Apr 11 10:09:28 2024 -0700
+
+    Merge pull request #33 from WukLab/feature/greedy_lp_policy
+    
+    Add support for greedy lp policy
+
+[33mcommit fe591217b78b98ac9d4493f5c90e0a698a42e50c[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Thu Apr 11 17:02:34 2024 +0000
+
+    Add support for greedy lp policy
+
+[33mcommit a3f0de08f90aacd03803e524f59a309cb1302204[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Thu Apr 11 10:23:34 2024 +0000
+
+    equation does not consider cascading in flashinfer
+
+[33mcommit bec2be5c66a9d7d91ff8e82a73ecd13ea0e442b5[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Wed Apr 10 23:31:58 2024 +0000
+
+    use flashinfer
+
+[33mcommit 724b6aa51d0c9a16174ca3bbf720dd973713cc6b[m
+Merge: b304397 80ecf8f
+Author: Zijian <zih015@ucsd.edu>
+Date:   Tue Apr 9 16:59:28 2024 -0700
+
+    Merge pull request #31 from WukLab/feat/hc_disagg
+    
+    simple hot cold disagg
+
+[33mcommit 80ecf8fd506057bab5fad9d2242edfc68ad49d90[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Tue Apr 9 23:57:14 2024 +0000
+
+    simple hot cold disagg
+
+[33mcommit c93293c57e16566c18443bae1bfacc107b714c74[m
+Author: Ikko Eltociear Ashimine <eltociear@gmail.com>
+Date:   Wed Apr 10 00:39:30 2024 +0900
+
+    Update README.md (#358)
+
+[33mcommit 62b3812b696862588e7f88533bde5cc57e8d2acf[m
+Author: Liangsheng Yin <hnyls2002@gmail.com>
+Date:   Tue Apr 9 23:27:31 2024 +0800
+
+    Time cost utils (#355)
+
+[33mcommit 550a4f78f382b5a7f4008d7d21e876e71ab2d2b6[m
+Author: Tom Dörr <tomdoerr96@gmail.com>
+Date:   Tue Apr 9 09:10:05 2024 +0200
+
+    Fix typos in infer_batch.py (#354)
+
+[33mcommit b3043971309798eadba917ca93136ec8be6acd9f[m
+Merge: e99f769 0467ade
+Author: Zijian <zih015@ucsd.edu>
+Date:   Mon Apr 8 10:40:45 2024 -0700
+
+    Merge pull request #29 from WukLab/feat/simulator
+    
+    Feat/simulator
+
+[33mcommit 0467ade3bae517f91320db8898bd7c76e9efd1bc[m
+Merge: c12db2f e99f769
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Mon Apr 8 17:39:04 2024 +0000
+
+    merge from LPScheduler
+
+[33mcommit e99f769123963aa89754c3e72abda14af5c5cac0[m
+Merge: 647e7ac 4584666
+Author: Zijian <zih015@ucsd.edu>
+Date:   Mon Apr 8 10:34:16 2024 -0700
+
+    Merge pull request #28 from WukLab/feature/add_basic_load_support
+    
+    Add basic load support to LP
+
+[33mcommit c12db2f994c236942d0d5d996474be417c99e867[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Mon Apr 8 17:32:34 2024 +0000
+
+    refactor random workload to have same length
+
+[33mcommit 458466675352a8b90624cdddec6fb53e2bb3b247[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Mon Apr 8 17:13:13 2024 +0000
+
+    Update notebooks with tool exp
+
+[33mcommit 263550a7ff9ae155079d8459d90fccc73a0a14ff[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Mon Apr 8 14:50:49 2024 +0000
+
+    update with some load work
+
+[33mcommit 5e3b307faf1165c8829415c1ac6db2369c636c75[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Mon Apr 8 06:51:45 2024 +0000
+
+    find initial working load equation
+
+[33mcommit 9acfc93dc923349c5677b4af116112cacb7f0724[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Mon Apr 8 00:56:35 2024 +0000
+
+    more accurate forward time
+
+[33mcommit 23a020040ca24abede28e79c4ae69600369b516b[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Sun Apr 7 17:28:38 2024 +0000
+
+    Add basic load support
+
+[33mcommit b1659913dc53b0de61910f8ddceedacb8ed304b1[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Sun Apr 7 05:02:09 2024 +0000
+
+    fix mem cache populating stage
+
+[33mcommit 647e7ac6bf0fc83ac48886cf0ac9cbb1cc4ad7b8[m
+Merge: d6f11bf aa92bc0
+Author: Zijian <zih015@ucsd.edu>
+Date:   Sat Apr 6 17:48:24 2024 -0700
+
+    Merge pull request #27 from WukLab/feat/simulator
+    
+    add missing profiling interface for model forwarding
+
+[33mcommit aa92bc0b0c32bd13a824b3a8167cb3ebafc493f2[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Sun Apr 7 00:05:19 2024 +0000
+
+    add missing profiling interface for model forwarding
+
+[33mcommit d6f11bf13244b8d4f6f0e8131d352a52f2cbc469[m
+Merge: 65fe21b c50f17d
+Author: Vikranth Srivatsa <10752522+vikranth22446@users.noreply.github.com>
+Date:   Sat Apr 6 16:15:13 2024 -0700
+
+    Merge pull request #26 from WukLab/bugfix/remove_consistent_hash_router
+    
+    Remove old consistent hash router policy
+
+[33mcommit c50f17d223c0e11e8479bdee5b0b1a4001731a83[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Sat Apr 6 23:14:52 2024 +0000
+
+    Fix imports
+
+[33mcommit 503c0cbef5f4ea75ce32d11e8be0065f7d303fb9[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Sat Apr 6 23:09:57 2024 +0000
+
+    Remove consistent hash router
+
+[33mcommit 65fe21b848858229267cadfaac5010e6db976dde[m
+Merge: 1ae677e 045f90e
+Author: Vikranth Srivatsa <10752522+vikranth22446@users.noreply.github.com>
+Date:   Sat Apr 6 16:06:42 2024 -0700
+
+    Merge pull request #25 from WukLab/hotfix/improve_global_policy_perf
+    
+    Track modified nodes and reduce the creation of new variables over time
+
+[33mcommit 045f90e46db73cfc2ae8f6876e6475b1136484b9[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Sat Apr 6 23:06:05 2024 +0000
+
+    reduce diff for jupyter notebook
+
+[33mcommit 422f628a1e436d304c54e75938404120729911fd[m
+Merge: 67901b6 6a74035
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Sat Apr 6 23:04:22 2024 +0000
+
+    Merge branch 'hotfix/improve_global_policy_perf' of github.com:WukLab/stateful_llm_serving into hotfix/improve_global_policy_perf
+
+[33mcommit 67901b6ec132624b71bb6638c97eb424f2352aed[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Sat Apr 6 23:04:17 2024 +0000
+
+    cleanup benchmarking script and pr
+
+[33mcommit 6a74035748a003824b3fbf473d50ad4a757103a4[m
+Merge: d9cfc17 1ae677e
+Author: Vikranth Srivatsa <10752522+vikranth22446@users.noreply.github.com>
+Date:   Sat Apr 6 16:00:19 2024 -0700
+
+    Merge branch 'mulit_modal_main' into hotfix/improve_global_policy_perf
+
+[33mcommit d9cfc178f60a4b80a32f2c77da27b3ad25c43ba9[m
+Merge: c3dc05a abf2049
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Sat Apr 6 22:59:15 2024 +0000
+
+    Merge branch 'hotfix/improve_global_policy_perf' of github.com:WukLab/stateful_llm_serving into hotfix/improve_global_policy_perf
+
+[33mcommit c3dc05a107ae033a49195f7f4ac2b98a1129c790[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Sat Apr 6 22:59:09 2024 +0000
+
+    Update global policy scheduler with the modified nodes set
+
+[33mcommit 1ae677eb487a920a596095f53616f83841a6cc4a[m
+Merge: fc799e1 dfa6770
+Author: Zijian <zih015@ucsd.edu>
+Date:   Sat Apr 6 13:04:56 2024 -0700
+
+    Merge pull request #22 from WukLab/feat/simulator
+    
+    Add simulation for SGLang backend
+
+[33mcommit dfa67707c5a4e9e496c2577594b76add6b2ce89b[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Sat Apr 6 06:44:31 2024 +0000
+
+    clean config, fix selector initialization
+
+[33mcommit 904dd77f0f58039b3f13ae7b90e7188623e6836a[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Sat Apr 6 04:10:20 2024 +0000
+
+    simulator args are not compulsory
+
+[33mcommit b9e4d7a90592af05612fd96194b169aa78e1c9d0[m
+Merge: 5072178 fc799e1
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Sat Apr 6 04:07:16 2024 +0000
+
+    resolve merge with hotfix
+
+[33mcommit 50721782ab3ea2b3bb67e6d6e9dca9908cc3fc37[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Sat Apr 6 04:04:20 2024 +0000
+
+    separate out experiment configs from the logic
+
+[33mcommit abf2049d2be813cbc8420bddbbd52dad69fa577e[m
+Merge: c78fefc fc799e1
+Author: Vikranth Srivatsa <10752522+vikranth22446@users.noreply.github.com>
+Date:   Fri Apr 5 18:43:20 2024 -0700
+
+    Merge branch 'mulit_modal_main' into hotfix/improve_global_policy_perf
+
+[33mcommit fc799e134638c9ff70505fa02701674d0a66f724[m
+Merge: feba208 1e983d1
+Author: Vikranth Srivatsa <10752522+vikranth22446@users.noreply.github.com>
+Date:   Fri Apr 5 18:42:35 2024 -0700
+
+    Merge pull request #24 from WukLab/hotfix/fix_lp_scheduler_import
+    
+    Fix broken import statement for scheduler
+
+[33mcommit 1e983d1b132d45051f581daea1c2b4c71c59b377[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Sat Apr 6 01:42:19 2024 +0000
+
+    Fix broken import statement for scheduler
+
+[33mcommit c78fefcd7bbe481a3f8fd467d4ab464ad61f5201[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Sat Apr 6 01:39:27 2024 +0000
+
+    Track modified nodes and reduce the creation of new variables over time
+
+[33mcommit d5cab818c61c2377ebb61782af60ed670b56e74a[m
+Merge: 3fd3d0d feba208
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Fri Apr 5 17:55:49 2024 +0000
+
+    resolve main merge conflict
+
+[33mcommit 3fd3d0dc6617e3b6f294b33879c0235b5f4b648c[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Fri Apr 5 05:27:50 2024 +0000
+
+    dont use dummy for bench_data_parallel_routing
+
+[33mcommit feba208ce5b1542d4593661444239f43ce3d483f[m
+Merge: 83dbe42 c82e389
+Author: Vikranth Srivatsa <10752522+vikranth22446@users.noreply.github.com>
+Date:   Thu Apr 4 20:21:45 2024 -0700
+
+    Merge pull request #21 from WukLab/hotfix/initial_integration_tests
+    
+    Add initial tests for scheduler and multinode to improve experiment consistency
+
+[33mcommit c82e3895ea624c6a9e26d515663607acd5cff91d[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Fri Apr 5 03:19:38 2024 +0000
+
+    Add initial tests to improve experiment consistency
+
+[33mcommit 83dbe421af8f74b6d1cc8059237cbfed82cae872[m
+Merge: e240f9d ff1c571
+Author: Vikranth Srivatsa <10752522+vikranth22446@users.noreply.github.com>
+Date:   Thu Apr 4 13:41:45 2024 -0700
+
+    Merge pull request #20 from WukLab/bugfix/cleanup_benchmarks
+    
+    Reformat and cleanup some benchmarks via black python
+
+[33mcommit ff1c5718ecb2893b8fdf0c90dec64ec24b3e6a53[m
+Merge: be137fb e240f9d
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Thu Apr 4 20:40:49 2024 +0000
+
+    Fix merge conflict
+
+[33mcommit be137fb812ba2284b496d479ecdc492d44482e2e[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Thu Apr 4 20:36:45 2024 +0000
+
+    reformat and cleanup some benchmarks
+
+[33mcommit e240f9d5a8b0ab295f7e7d3658f756d88b70313b[m
+Merge: ea22e68 5e85c87
+Author: Vikranth Srivatsa <10752522+vikranth22446@users.noreply.github.com>
+Date:   Thu Apr 4 11:48:19 2024 -0700
+
+    Merge pull request #19 from WukLab/feature/initial_global_policy_impl
+    
+    Initial Global policy implementation using an LP
+
+[33mcommit 5e85c8786c07db682f269f3810ea355ed17fe44f[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Thu Apr 4 18:47:47 2024 +0000
+
+    Jupyter notebook to analyze the overhead and runtime selection
+
+[33mcommit aa46790ce601dd3038df7e741b743ce3063f5a17[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Thu Apr 4 18:42:36 2024 +0000
+
+    Update server.py with better error logging
+
+[33mcommit 4f9d066bd8531f453a3ac44799229bc934465881[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Thu Apr 4 18:40:45 2024 +0000
+
+    Update server.py with better error logging
+
+[33mcommit 387764f9e275f6ba9a882ad1409095ea4c1e3e57[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Thu Apr 4 18:38:43 2024 +0000
+
+    Remove global policy.ipynb for smaller commit
+
+[33mcommit bae58c69fe6917f408d8441852d4133dc71d6a96[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Thu Apr 4 18:30:11 2024 +0000
+
+    simulator prototype
+
+[33mcommit 2f3d58cbb7ac1fcaeefd1325b8d680adb6e91e64[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Thu Apr 4 16:29:16 2024 +0000
+
+    Text on random loader
+
+[33mcommit 0f50b68682fcf34efa74beb9ed3bf41234815e80[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Thu Apr 4 09:43:00 2024 +0000
+
+    Update global policy with proper threading and locsk
+
+[33mcommit cf0cfa4a6844bea80826caa8f45fb12aeec15c51[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Thu Apr 4 06:40:42 2024 +0000
+
+    Update global policy runtime scheduler
+
+[33mcommit 36e80266af27a61247cd530bb25ec09cda531342[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Thu Apr 4 06:24:55 2024 +0000
+
+    Update policy with more experiments
+
+[33mcommit 81ff91116e24ae9107d4090ef196f3977b63256c[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Thu Apr 4 06:03:35 2024 +0000
+
+    Fix lp node splitting issues
+
+[33mcommit 28a423ebaa204c3e751273089da8486fd586fad7[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Thu Apr 4 06:01:46 2024 +0000
+
+    Fix policy to be closer to oracle
+
+[33mcommit 39e40acb557df47a74863c422b7f474c6d0724a9[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Thu Apr 4 02:56:59 2024 +0000
+
+    Update with simple lp policy and initial scheduler
+
+[33mcommit ff99c38a0711ee82926840129db840a70e91f0d9[m
+Author: SimoneRaponi <s.raponi.93@gmail.com>
+Date:   Wed Apr 3 16:22:06 2024 +0200
+
+    Add timeout to get_meta_info (#346)
+    
+    Co-authored-by: simone <simone.raponi@equixely.com>
+
+[33mcommit c9de3e169cca4028875967bfff55182ee10e7890[m
+Author: Qubitium <417764+Qubitium@users.noreply.github.com>
+Date:   Wed Apr 3 13:56:06 2024 +0800
+
+    Eliminate 2 gpu ops during sampling when logit_bias is zero (#338)
+    
+    Co-authored-by: hnyls2002 <hnyls2002@gmail.com>
+
+[33mcommit ed27a6b99258c905502bdc7f37300ea060d9b9b1[m
+Author: Liangsheng Yin <hnyls2002@gmail.com>
+Date:   Wed Apr 3 12:45:01 2024 +0800
+
+    Revert "Eliminate 2 gpu ops during sampling when logit_bias is zero" (#345)
+
+[33mcommit 739b48f44b1fa198fafb116770c35d12542fc382[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Wed Apr 3 00:33:02 2024 +0000
+
+    Initial Global policy implementation
+
+[33mcommit 463c6632a8d1adebd4a18b106311944cba110f55[m
+Author: Liangsheng Yin <hnyls2002@gmail.com>
+Date:   Tue Apr 2 19:14:55 2024 +0800
+
+    Eliminate 2 gpu ops during sampling when logit_bias is zero (#343)
+    
+    Co-authored-by: Qubitium <417764+Qubitium@users.noreply.github.com>
+
+[33mcommit ea22e68d76d2ccd47476754839e422f7929046a3[m
+Merge: fa6b86d d2b0afd
+Author: Vikranth Srivatsa <10752522+vikranth22446@users.noreply.github.com>
+Date:   Mon Apr 1 19:07:28 2024 -0700
+
+    Merge pull request #17 from WukLab/feature/loogle_support
+    
+    Add Loogle dataset support
+
+[33mcommit d2b0afd4e28486e07cbbf74090138bc0dddc4c16[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Tue Apr 2 02:06:37 2024 +0000
+
+    Add loogle support
+
+[33mcommit fa6b86d93365e30e0565dfdd6f570abd37770077[m
+Merge: 339618e f2812e1
+Author: Vikranth Srivatsa <10752522+vikranth22446@users.noreply.github.com>
+Date:   Mon Apr 1 18:06:30 2024 -0700
+
+    Merge pull request #16 from WukLab/bugfix/improve_plotting_ssh_code
+    
+    Rfeactor plotting and ssh runtimes
+
+[33mcommit f2812e143650c4249cd0aad9fd3548e483427195[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Tue Apr 2 01:05:03 2024 +0000
+
+    Fix plotting and ssh runtimes
+
+[33mcommit 339618e1d874d9664b201c1ee80c0f40cf16ac7e[m
+Merge: 134a878 4c929a7
+Author: Vikranth Srivatsa <10752522+vikranth22446@users.noreply.github.com>
+Date:   Mon Apr 1 07:51:18 2024 -0700
+
+    Merge pull request #14 from WukLab/feat/longer_with_timeout
+    
+    Run Longer Context Experiments and reorganize workload generation
+
+[33mcommit b0890631a011be28d5ef5a0b4d5551fdeb94ab25[m
+Author: Ying Sheng <sqy1415@gmail.com>
+Date:   Mon Apr 1 07:35:58 2024 +0000
+
+    fix gemma import error
+
+[33mcommit 4c929a776c22d32c28c545362e6ccec736727246[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Sat Mar 30 05:18:09 2024 +0000
+
+    fix nan time between token
+
+[33mcommit 1ea30d032c7f4cfe397d6798c868da29a8814b43[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Sat Mar 30 04:44:47 2024 +0000
+
+    add timeout when window ends, fix old workload
+
+[33mcommit 134a87818752a4854f29f23602778119ac8223a8[m
+Merge: 63bf395 8ada2c0
+Author: Vikranth Srivatsa <10752522+vikranth22446@users.noreply.github.com>
+Date:   Fri Mar 29 14:32:05 2024 -0700
+
+    Merge pull request #13 from WukLab/bugfix/fix_ttft_stream
+    
+    Add benchmarking utils and streaming responses
+
+[33mcommit cb389c91bcff6ffac4a95a0551a05d67e21ba306[m
+Author: Junlong Li <45759388+lockon-n@users.noreply.github.com>
+Date:   Fri Mar 29 10:24:54 2024 +0800
+
+    Fix llava parallelism/fork bug (#315)
+
+[33mcommit eddaa2b599be266f1a74d83518fb3a7a81b103cd[m
+Author: Qubitium <417764+Qubitium@users.noreply.github.com>
+Date:   Fri Mar 29 10:24:16 2024 +0800
+
+    Add support for new autogptq quant_config.checkpoint_format (#332)
+
+[33mcommit 8ada2c00378e20f5bedcdb8003a3b6a0325d8d11[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Thu Mar 28 20:54:31 2024 +0000
+
+    Add benchmarking utils and streaming responses
+
+[33mcommit 63bf395a84c1028928a2785e2ddd5377e5b5c2bc[m
+Merge: e6beba8 354ddd5
+Author: Vikranth Srivatsa <10752522+vikranth22446@users.noreply.github.com>
+Date:   Thu Mar 28 12:00:14 2024 -0700
+
+    Merge pull request #9 from WukLab/experiment/multi_gpu_scaling_exp
+    
+    Add support for ssh runtimes
+
+[33mcommit 354ddd5f9c0b20e9f51952108ab438df8b3c9f10[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Thu Mar 28 18:58:05 2024 +0000
+
+    Finish up ssh node work
+
+[33mcommit 2af565b3bb22cb8ba06acc17a2bbfa8d0ade0145[m
+Author: Liangsheng Yin <hnyls2002@gmail.com>
+Date:   Fri Mar 29 01:05:19 2024 +0800
+
+    [model] DBRX-instruct support (#337)
+
+[33mcommit 3842eba5fa305edfc2c66f82e8389d72784d5911[m
+Author: Liangsheng Yin <hnyls2002@gmail.com>
+Date:   Thu Mar 28 14:34:49 2024 +0800
+
+    Logprobs Refractor (#331)
+
+[33mcommit 9ca6068bd76e966c1c45dd7b78b4546b823b97d2[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Thu Mar 28 05:42:57 2024 +0000
+
+    Update tree cache info to logging.info for ssh runtime
+
+[33mcommit 83bf6124a7d99651365e280d3aca3e97b6c7537b[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Thu Mar 28 05:19:07 2024 +0000
+
+    Add default cuda visible devices
+
+[33mcommit fe4b8f790cb2e8a860515e2eecb6f2a7452333e5[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Thu Mar 28 05:16:23 2024 +0000
+
+    Add logging of server requests
+
+[33mcommit 39e875c3490895aa3cba0d1e82e7f834e4d8418d[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Thu Mar 28 03:08:40 2024 +0000
+
+    Add support for ssh runtimes
+
+[33mcommit e6beba88e2390466170ef440ae7a53c6332bd292[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Wed Mar 27 21:22:53 2024 +0000
+
+    add zipf, normal distribution for tool sampling
+
+[33mcommit 23a3eef2454557a2a5c00b691ecd3e9e28339f33[m
+Merge: 8133342 24e59f5
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Wed Mar 27 21:17:28 2024 +0000
+
+    Merge from sglang main
+
+[33mcommit 81333426f226aa849cd106e83870abc4b3bfaced[m
+Merge: 7ec0d83 648d18e
+Author: Vikranth Srivatsa <10752522+vikranth22446@users.noreply.github.com>
+Date:   Wed Mar 27 13:38:26 2024 -0700
+
+    Merge pull request #8 from WukLab/perf_inspect
+    
+    Perf inspect
+
+[33mcommit 648d18eaa6face2c933fe95de535837fce0fc33e[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Wed Mar 27 20:34:36 2024 +0000
+
+    Run more visualization experiments with toolbench
+
+[33mcommit fac660edc998f9ed6e4e31d7d1d936fab8d41855[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Tue Mar 26 04:58:59 2024 +0000
+
+    Add visualizations with results across mistral7b toolbench
+
+[33mcommit 1c58ce981018af54990d9041160b8d2ea4b51410[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Mon Mar 25 22:26:54 2024 +0000
+
+    log gpu id
+
+[33mcommit dc234b52af0b897b30df4d414b28643b0b9c76b6[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Mon Mar 25 22:26:31 2024 +0000
+
+    Update routing
+
+[33mcommit ecfa105c4fdebc5a95e8c9e77f946f64f8de45eb[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Mon Mar 25 19:54:07 2024 +0000
+
+    add performance debugging for metric overhead and toolbench benchmark
+
+[33mcommit 24e59f53501bf5a66f71d08238bfc17e15b8114a[m
+Author: Liangsheng Yin <hnyls2002@gmail.com>
+Date:   Sun Mar 24 19:48:37 2024 +0800
+
+    `model_runner` simplify (#329)
+
+[33mcommit 75235419621f38a4b53ae5c2882997a4ce7e698e[m
+Author: Liangsheng Yin <hnyls2002@gmail.com>
+Date:   Sun Mar 24 15:41:24 2024 +0800
+
+    `model_rpc` style improvement (#293)
+
+[33mcommit 64ee9c030e250aedbecbc12ce2528569afea55ea[m
+Author: Jani Monoses <jani.monoses@gmail.com>
+Date:   Sat Mar 23 19:16:24 2024 +0200
+
+    Openrouter usage example (#327)
+
+[33mcommit 30d17840fca0118e9c4f28367e68c3898e36119c[m
+Author: Jani Monoses <jani.monoses@gmail.com>
+Date:   Sat Mar 23 19:15:58 2024 +0200
+
+    Update dependencies (#326)
+
+[33mcommit ce216c80dc413e404b7f6f63a151436253c8b837[m
+Author: Qubitium <417764+Qubitium@users.noreply.github.com>
+Date:   Sun Mar 24 01:15:16 2024 +0800
+
+    Cleanup codebase: removed unnecessary code/logic (#298)
+
+[33mcommit 51104cd405a9573a872e846ba4d85a4298f92c4f[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Fri Mar 22 13:42:22 2024 -0700
+
+    Update version to v0.1.14 (#324)
+
+[33mcommit e2b2f0a21322d6a29106dceaa92bb593b963677e[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Fri Mar 22 13:37:57 2024 -0700
+
+    Support oai in benchmark/mmlu (#323)
+
+[33mcommit b57abe16632605ae9e8b0473dbb45fb0fd25e6f1[m
+Author: Jani Monoses <jani.monoses@gmail.com>
+Date:   Fri Mar 22 22:24:08 2024 +0200
+
+    Add StableLM model. (#301)
+
+[33mcommit e57f079275425872bad6f2d1102cdfad6b523e58[m
+Author: Jani Monoses <jani.monoses@gmail.com>
+Date:   Fri Mar 22 22:23:31 2024 +0200
+
+    Use Anthropic messages API (#304)
+
+[33mcommit 08df63a6f8b9d27ae80cf705ab9496632c8a18c2[m
+Author: Li Bo <drluodian@gmail.com>
+Date:   Sat Mar 23 03:19:58 2024 +0800
+
+    [Fix/Potential Bugs] Can not correctly import models in python/sglang/srt/models (#311)
+
+[33mcommit 77835756a7e9511bb63ac74a5b5c11543f69344c[m
+Author: ZhouGongZaiShi <993566077@qq.com>
+Date:   Sat Mar 23 03:19:11 2024 +0800
+
+    Fix outlines-0.0.35 incompatibility (#291)
+    
+    Co-authored-by: ZX <zx@lbx.dev>
+
+[33mcommit 684508e4bcbca31e0541660fc9cb96f4e8089152[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Mon Mar 18 22:05:29 2024 +0000
+
+    add KV size prompt
+
+[33mcommit 5a97eca01d18d1c9f605ded9756cfb8949dda0c2[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Mon Mar 18 05:24:26 2024 +0000
+
+    add receive side
+
+[33mcommit 971c5a3d434aca57432938b2ede9ea413fad494b[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Mon Mar 18 03:49:06 2024 +0000
+
+    initial implementation
+
+[33mcommit 7ec0d83114e40f409b6540ab2c1222027ff76434[m
+Merge: 786ba64 92a6efc
+Author: Zijian <zih015@ucsd.edu>
+Date:   Sun Mar 17 14:34:26 2024 -0700
+
+    Merge pull request #6 from WukLab/feature/add_simple_heuristic_policy
+    
+    Add simple Heuristic Policy
+
+[33mcommit 92a6efc85a673d52c58ee62e707dff6dfdfdd55b[m
+Merge: 66879b7 786ba64
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Sun Mar 17 21:33:53 2024 +0000
+
+    merge request sending interface change
+
+[33mcommit 786ba642c0cb5a4e8254364d5cd9174a6e0bb07f[m
+Merge: 802a7b5 0295b66
+Author: Zijian <zih015@ucsd.edu>
+Date:   Sun Mar 17 09:26:37 2024 -0700
+
+    Merge pull request #5 from WukLab/feat/profiling_interfaces
+    
+    Feat/profiling interfaces
+
+[33mcommit 66879b7f668de29b18906a04fff23ea0b5c1d3f9[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Sun Mar 17 07:21:06 2024 +0000
+
+    fix: request sender not following rps
+
+[33mcommit a3c938d37e44a082c83ea7035d66731586d3b1e9[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Sun Mar 17 02:48:11 2024 +0000
+
+    Add some logging to debug performance issues
+
+[33mcommit 0295b6632fc29b89ab177045b6d11b87a4a902e7[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Sun Mar 17 01:46:44 2024 +0000
+
+    add matching overhead profiling
+
+[33mcommit ad180f0e5cc3b38017e4c4213a651ed496e5a296[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Sat Mar 16 22:19:36 2024 +0000
+
+    Add profile for tokenizer overhead
+
+[33mcommit defd27f6aabe4c73c79851ebef7389998c029f5d[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Sat Mar 16 01:07:45 2024 +0000
+
+    Add basic metric based scheduling policy
+
+[33mcommit 802a7b5625a8b310c7164a1c7870b5394b95e2e0[m
+Merge: 2d76ad1 6278a09
+Author: Vikranth Srivatsa <10752522+vikranth22446@users.noreply.github.com>
+Date:   Fri Mar 15 17:09:05 2024 -0700
+
+    Merge pull request #4 from WukLab/feature/implement_metrics_server
+    
+    Add Basic Support for Metrics Server
+
+[33mcommit 6278a091c1ecd62b21c23083097402f890b1b0cf[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Fri Mar 15 23:28:45 2024 +0000
+
+    Add a buffer to the waiting queue lengths
+
+[33mcommit 131d906327a9604052679004e8bcdf52208dab9e[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Fri Mar 15 23:14:22 2024 +0000
+
+    Update with tests
+
+[33mcommit 1341c6e0301da9e964edd53adf88f50228505d40[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Fri Mar 15 22:18:43 2024 +0000
+
+    Add simple plumbing to collect the metrics server and return
+
+[33mcommit 397e02f7f36855c0ebdc53f629a6f8530849aa54[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Fri Mar 15 22:18:15 2024 +0000
+
+    Add metrics server endpoint
+
+[33mcommit cfb5a3effddadd62177069c1072b4ae4232bef4e[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Fri Mar 15 22:17:42 2024 +0000
+
+    Update README with server prompt
+
+[33mcommit 2d76ad19a1070517c4b039538153650e7885af67[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Fri Mar 15 19:29:39 2024 +0000
+
+    Update README
+
+[33mcommit 066295db41abe507cb6eca281d635bbed76a611b[m
+Merge: 88fc7e0 40bb54c
+Author: Zijian <zih015@ucsd.edu>
+Date:   Thu Mar 14 13:18:25 2024 -0700
+
+    Merge pull request #2 from vikranth22446/feat/add_rps
+    
+    Add RPS support to Multi model benchmarking
+
+[33mcommit 40bb54c85fb0843f4424b5a247e1fe27782d6e7a[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Wed Mar 13 19:36:00 2024 +0000
+
+    fix rps settings and add plot script
+
+[33mcommit ed3157997153fdbbe142bf4ef995ecaaae62fc34[m
+Author: Liurl <liurl021@gmail.com>
+Date:   Wed Mar 13 13:15:43 2024 +0800
+
+    Fix marlin model loading compat with autogptq (#290)
+    
+    Co-authored-by: LRL <lrl@lbx.dev>
+
+[33mcommit 92e2d74fd0426afb98621465d6574ad2a823e842[m
+Author: Qubitium <417764+Qubitium@users.noreply.github.com>
+Date:   Wed Mar 13 13:02:48 2024 +0800
+
+    Fix env (docker) compat due to __file__ usage (#288)
+
+[33mcommit d9b3b0188338c6a1411c2995db5e8da7f56f6e4d[m
+Author: Enrique Shockwave <33002121+qeternity@users.noreply.github.com>
+Date:   Wed Mar 13 02:10:12 2024 +0000
+
+    enable marlin kernels (#286)
+
+[33mcommit 745ea007acf662b3e439eeb9a1c24ddd06f10b58[m
+Author: Arsalan <41029759+amirarsalan90@users.noreply.github.com>
+Date:   Tue Mar 12 22:09:38 2024 -0400
+
+    Fix Incorrect CURL Request Example in README (#287)
+
+[33mcommit f816393af98b3757c9bf0121709c1bc64cbd9fe8[m
+Author: jiange91 <zih015@ucsd.edu>
+Date:   Tue Mar 12 21:32:39 2024 +0000
+
+    fix rps (somehow)
+
+[33mcommit 88fc7e0002fe6effef4a94af1baf9541c4775f66[m
+Merge: 8608ea0 1ba1bb8
+Author: Vikranth Srivatsa <10752522+vikranth22446@users.noreply.github.com>
+Date:   Tue Mar 12 11:01:50 2024 -0700
+
+    Merge pull request #1 from vikranth22446/bugfix/data_parallel_prefix_cache
+    
+    Better load balance the requests for parallel routing benchmark
+
+[33mcommit 1ba1bb8686fe365535276ce2c1351904cc66361b[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Tue Mar 12 18:01:14 2024 +0000
+
+    Fix bug with oracle
+
+[33mcommit ad1dd74673a2e918a39d869865c1830fb634d150[m
+Author: Qubitium <417764+Qubitium@users.noreply.github.com>
+Date:   Tue Mar 12 21:45:58 2024 +0800
+
+    Fix flashinfer >= 0.0.3 compat (#282)
+
+[33mcommit eb4308c4c9e3efbd58e86ec63e4f88dc36c363a8[m
+Author: Arsalan <41029759+amirarsalan90@users.noreply.github.com>
+Date:   Tue Mar 12 03:16:06 2024 -0400
+
+    adding the triton docker build minimal example (#242)
+
+[33mcommit 39b3e09b3f86832e710da79f03f90a7c9ab71317[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Tue Mar 12 00:10:04 2024 +0000
+
+    Better load balance the requests for parallel routing
+
+[33mcommit 8608ea028f1278e52518fe8c46f120b6c77d751a[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Mon Mar 11 21:33:48 2024 +0000
+
+    Update example workload
+
+[33mcommit 38dab50b1232332b2093fd45a962039f3894ddf0[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Mon Mar 11 20:43:04 2024 +0000
+
+    Add example client workload
+
+[33mcommit 6b743db8c646153008a366161af0dbec5f50290e[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Mon Mar 11 20:42:52 2024 +0000
+
+    Add benchmarking of dynamic routing
+
+[33mcommit f1ec2a3e1d9172afc6d720c918cbd1357b5a9d71[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Mon Mar 11 20:41:30 2024 +0000
+
+    Update logging system of SGLang for better profiling
+
+[33mcommit 63403ba33f39c48a1c80909796298cc0e5788b3b[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Mon Mar 11 20:40:35 2024 +0000
+
+    Add tests on Parallel Routing
+
+[33mcommit b2eb080501b4b4a0d72eb5a0e6be30d43811dcbd[m
+Author: Qubitium <417764+Qubitium@users.noreply.github.com>
+Date:   Mon Mar 11 22:32:15 2024 +0800
+
+    Fix Runtime missing some ServerArgs options (#281)
+
+[33mcommit 4aa5dd2c5f1e386e8bf7d9c6309dc414e2fded7e[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Mon Mar 11 05:49:27 2024 -0700
+
+    Update version to v0.1.13 (#280)
+
+[33mcommit 13662fd5336fc8428e130567fdb1695d664eea24[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Mon Mar 11 05:24:24 2024 -0700
+
+    Fix RuntimeEndpoint (#279)
+
+[33mcommit d5ae2ebaa2a1021b53caa25aa541ca39d590918d[m
+Author: Alessio Dalla Piazza <alessio.dallapiazza@gmail.com>
+Date:   Mon Mar 11 13:16:10 2024 +0100
+
+    Add Support for API Key Authentication (#230)
+
+[33mcommit 1b355479276bf07502c40ffc7bc8b6c494b93b10[m
+Author: Liangsheng Yin <hnyls2002@gmail.com>
+Date:   Mon Mar 11 20:06:52 2024 +0800
+
+    Organize `server_args` (#277)
+
+[33mcommit faba293a0d6c144de0a9687ffc0ed2be6699600d[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Mon Mar 11 04:43:39 2024 -0700
+
+    Improve gemma and documentations (#278)
+
+[33mcommit 89885b31efa6f36faf070b405640763431f3074e[m
+Author: Liangsheng Yin <hnyls2002@gmail.com>
+Date:   Mon Mar 11 12:14:27 2024 +0800
+
+    Gemma Support (#256)
+
+[33mcommit 64fe311593edee917a28506be8723127d4e938c9[m
+Author: Geary.Z <92413813+TideDra@users.noreply.github.com>
+Date:   Mon Mar 11 10:04:52 2024 +0800
+
+    replace skip_embed with input_embeds (#222)
+
+[33mcommit a7ace9c88d48263b863cda5cece386630ac62da6[m
+Author: Liangsheng Yin <hnyls2002@gmail.com>
+Date:   Mon Mar 11 09:54:18 2024 +0800
+
+    Fix qwen config (#261)
+
+[33mcommit a833de05d3ae49c5ba16b097c16df82308fba727[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Sun Mar 10 18:51:47 2024 -0700
+
+    Add logo (#275)
+
+[33mcommit 30d67b2bca647d7a52fddc42a6d48842610cfec3[m
+Author: Lin Tianchuan <47070449+1024th@users.noreply.github.com>
+Date:   Thu Mar 7 23:20:11 2024 +0800
+
+    Add `set_var` to interpreter.py (#263)
+
+[33mcommit a267e4a8336e4f18a9fc78b9b2613e92b0459da9[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Wed Mar 6 23:04:11 2024 +0000
+
+    Refactor code to have more modular model loading and tests
+
+[33mcommit 7e80124321ee938f5a66739744715f2deaa7f12b[m
+Author: vikranth22446 <vsrivatsa@ucsd.edu>
+Date:   Wed Mar 6 16:48:15 2024 +0000
+
+    Update Multi node manager with gpu utlization statistics
+
+[33mcommit 6a13bdeba164702b9bba3bb76ed95f61f88e9e80[m
+Author: Vikranth Srivatsa <vsrivatsa@ucsd.edu>
+Date:   Mon Mar 4 23:21:46 2024 +0000
+
+    Add basic multi model loading wrapper
+
+[33mcommit 74d66603ad819f85a3a333fe6eb7d594a2187774[m
+Author: Vikranth Srivatsa <vsrivatsa@ucsd.edu>
+Date:   Mon Mar 4 23:21:19 2024 +0000
+
+    Update radix cache to support raw prefix strings
+
+[33mcommit e20d197830f6530414cabb875ed4199d8e4cc8d2[m
+Author: Vikranth Srivatsa <vsrivatsa@ucsd.edu>
+Date:   Mon Mar 4 23:20:58 2024 +0000
+
+    Allow specifying cuda device ids as part of creation
+
+[33mcommit 70a8dae9e0462225f458da7692ce12a47d35d291[m
+Author: Vikranth Srivatsa <vsrivatsa@ucsd.edu>
+Date:   Mon Mar 4 23:20:24 2024 +0000
+
+    Add support for AsyncHttpResponse
+
+[33mcommit 2bb569938e0a32835eba4ede4c8181147d8a57d0[m
+Author: Vikranth Srivatsa <vsrivatsa@ucsd.edu>
+Date:   Mon Mar 4 23:19:25 2024 +0000
+
+    Add simple consistent hash
+
+[33mcommit b0b722ee8e90bfa2b379eadb1432e2f6852a6ad0[m
+Author: Xinwei Xiong <3293172751NSS@gmail.com>
+Date:   Sun Mar 3 17:52:36 2024 +0800
+
+    Refactor ChatTemplate for Enhanced Clarity and Efficiency (#201)
+
+[33mcommit 01b07ea3ac0e693dfa9093938dd1ed15a7881240[m
+Author: Srinivas Billa <nivibilla@gmail.com>
+Date:   Sun Mar 3 09:41:41 2024 +0000
+
+    Add SSL Cert Functionality (#224)
+
+[33mcommit dfb13ac45518a1a6c26e3d9223f44612fa2778ac[m
+Author: Liangsheng Yin <hnyls2002@gmail.com>
+Date:   Sun Mar 3 17:09:16 2024 +0800
+
+    Fix addr reuse in check_port (#253)
+
+[33mcommit ec90b9c054461f79cf902f389279853d8e40aabc[m
+Author: Liangsheng Yin <hnyls2002@gmail.com>
+Date:   Sat Feb 24 19:03:46 2024 +0800
+
+    Upload `agent_calls.jsonl` download link (#226)
+
+[33mcommit 9759d927cf6fe741d998015ce35bea546a2cf0a4[m
+Author: Enrique Shockwave <33002121+qeternity@users.noreply.github.com>
+Date:   Sat Feb 24 08:34:22 2024 +0000
+
+    fix chatml template (#195)
+
+[33mcommit 8d0a7fae3b89eecae8cd2a755a673462c23ab31f[m
+Author: Zhang Wenbin <22811973@qq.com>
+Date:   Sat Feb 24 16:27:34 2024 +0800
+
+    Fix interpreter.py `get_var(var_name)` in text iter when `stream` is not enabled (#198)
+
+[33mcommit c4e9ebe3a480128818eeda4a3ce59ee7a8da53bf[m
+Author: Liangsheng Yin <hnyls2002@gmail.com>
+Date:   Sat Feb 24 16:05:21 2024 +0800
+
+    Fix stop str merging (#225)
+    
+    Co-authored-by: Enrique Shockwave <33002121+qeternity@users.noreply.github.com>
+
+[33mcommit 3c2c5869ad719d41d87f6aca8a71e683ebcadc76[m
+Author: Cody Yu <hao.yu.cody@gmail.com>
+Date:   Fri Feb 23 23:06:17 2024 -0800
+
+    Support outlines > 0.0.31 (#219)
+
+[33mcommit 4cb9aaedf3dfe4f876ba447ab2ac1ac9c75da911[m
+Author: Cody Yu <hao.yu.cody@gmail.com>
+Date:   Thu Feb 22 10:33:03 2024 -0800
+
+    Fix logprobs with logprob_start_len (#193)
+
+[33mcommit 9de9a46815bded248b01daba75936b642c2a7c06[m
+Author: psych0v0yager <105936906+psych0v0yager@users.noreply.github.com>
+Date:   Tue Feb 20 18:22:56 2024 -0600
+
+    Added the ability to Modify the Context Length (#210)
+
+[33mcommit ce3b2610535281a2ebde8be2ad072f22207a7a05[m
+Author: Ikko Eltociear Ashimine <eltociear@gmail.com>
+Date:   Tue Feb 20 02:09:03 2024 +0900
+
+    Update README.md (#207)
+
+[33mcommit 91e036334f1e159dba2943cbfab1a0e8185eb60e[m
+Author: Liangsheng Yin <hnyls2002@gmail.com>
+Date:   Sat Feb 17 13:40:39 2024 +0800
+
+    Adjust outlines version. (#200)
+    
+    Co-authored-by: comaniac <hao.yu.cody@gmail.com>
+
+[33mcommit 2a74748b2fb0f061934e056a90db5edfbf2a7dee[m
+Author: Cody Yu <hao.yu.cody@gmail.com>
+Date:   Fri Feb 16 13:01:40 2024 -0800
+
+    Pin outlines version (#196)
+
+[33mcommit 63ba630bbbb2d55787ac54ac0a01cbde993afc20[m
+Author: Cody Yu <hao.yu.cody@gmail.com>
+Date:   Thu Feb 15 10:54:20 2024 -0800
+
+    Refactor decoding logprob and add completion_tokens_wo_jump_forward (#189)
+
+[33mcommit 6493256b7d4b290ede988e5ee5425508249064c7[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Mon Feb 12 12:43:48 2024 +0000
+
+    improve print
+
+[33mcommit 06008bc295e5e83761c2e332642b783f334e8a3c[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Mon Feb 12 04:43:14 2024 -0800
+
+    Fix server launch for jupyter notebook (#186)
+
+[33mcommit bb824da41a24371202f83889d48b06a4b730d1ad[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Mon Feb 12 01:06:38 2024 -0800
+
+    Add Together and AzureOpenAI examples (#184)
+
+[33mcommit 931213245ce69908843c731edbee7bd662f0647b[m
+Author: Yaya Sy <58347382+yaya-sy@users.noreply.github.com>
+Date:   Sun Feb 11 22:26:20 2024 +0100
+
+    correct reference dtype openai.py (#181)
+
+[33mcommit c97fdae4aa0e196f28e7a0d35b24134c5fdc3009[m
+Author: Yaya Sy <58347382+yaya-sy@users.noreply.github.com>
+Date:   Sun Feb 11 22:25:57 2024 +0100
+
+    correct a mistake on the README.md (#182)
+
+[33mcommit 624b21e742f2bfc493b30ca17e7c86ca9255e1e6[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Sun Feb 11 06:43:45 2024 -0800
+
+    Update version to 0.1.12 (#178)
+
+[33mcommit c51020cf0c64498865538362aa34baaed13a3b50[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Sun Feb 11 05:50:13 2024 -0800
+
+    Fix the chat template for llava-v1.6-34b & format code (#177)
+
+[33mcommit 50afed4eaafeec6c87a4f120ec95742846b4130f[m
+Author: Cody Yu <hao.yu.cody@gmail.com>
+Date:   Sat Feb 10 17:21:33 2024 -0800
+
+    Support extra field regex in OpenAI API (#172)
+
+[33mcommit 4d303c4fa365dbe8b4d474be6e613954bb829939[m
+Author: Cody Yu <hao.yu.cody@gmail.com>
+Date:   Fri Feb 9 20:06:15 2024 -0800
+
+    Fix token usage with jump forward (#174)
+
+[33mcommit 37b42297f87645e6ed0517281beb0e5301a63d8e[m
+Author: Liangsheng Yin <hnyls2002@gmail.com>
+Date:   Fri Feb 9 10:13:02 2024 +0800
+
+    import outlines (#168)
+
+[33mcommit cba50273324e9770c587754a4abbea974a4124ba[m
+Author: Cody Yu <hao.yu.cody@gmail.com>
+Date:   Thu Feb 8 17:23:09 2024 -0800
+
+    Fix BaseCache metric (#170)
+
+[33mcommit a6aa46dd3f320a407b364aa53641f1eb99cca520[m
+Author: Ying Sheng <sqy1415@gmail.com>
+Date:   Thu Feb 8 04:35:25 2024 +0000
+
+    minor
+
+[33mcommit 405f26b00b452815852e1a1da2b6937f3a8b9ce9[m
+Author: Srinivas Billa <nivibilla@gmail.com>
+Date:   Thu Feb 8 04:07:31 2024 +0000
+
+    Add Auth Token to RuntimeEndpoint (#162)
+
+[33mcommit b1a3a454ee5b681ff8b193d186530c1d37a6bb3b[m
+Author: Liangsheng Yin <hnyls2002@gmail.com>
+Date:   Thu Feb 8 00:50:12 2024 +0800
+
+    add `--disable-disk-cache` (#160)
+    
+    Co-authored-by: Ja1Zhou <50169346+Ja1Zhou@users.noreply.github.com>
+
+[33mcommit 79e6b84bec463fc1832e89fd70dc4fb55ae09baa[m
+Author: Ying Sheng <sqy1415@gmail.com>
+Date:   Tue Feb 6 23:14:59 2024 -0800
+
+    Update README.md
+
+[33mcommit 26c3494152131a77cd4eb1b4a25e016f3def5313[m
+Author: Cody Yu <hao.yu.cody@gmail.com>
+Date:   Tue Feb 6 19:28:29 2024 -0800
+
+    [Submodule] Change FlashInfer to import (#156)
+
+[33mcommit cb8e1982f83796cdcf5243fbfb44aeb036cc7621[m
+Author: Ying Sheng <sqy1415@gmail.com>
+Date:   Tue Feb 6 18:44:37 2024 -0800
+
+    Update README.md
+
+[33mcommit 23f05005fd33a606af72db68f7320ef411720761[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Tue Feb 6 13:27:46 2024 -0800
+
+    Format code & move functions (#155)
+
+[33mcommit a7334aeea138149906b83e38a593f5ce6e07ea32[m
+Author: Cody Yu <hao.yu.cody@gmail.com>
+Date:   Tue Feb 6 12:24:55 2024 -0800
+
+    Support decode token logprobs (#130)
+
+[33mcommit ee1df26a77971f004444c118eabb7998dbafb14a[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Tue Feb 6 11:35:42 2024 -0800
+
+    Update README.md
+
+[33mcommit 3ae78a09b386364088799c088f8add8ae9e2c584[m
+Author: Arcmoon <50002441+Arcmoon-Hu@users.noreply.github.com>
+Date:   Wed Feb 7 03:35:04 2024 +0800
+
+    Add gptq quantization model support  (#141)
+
+[33mcommit ccbe1e67d8d671d38b248557ef10cd14a10e4acf[m
+Author: Cody Yu <hao.yu.cody@gmail.com>
+Date:   Tue Feb 6 11:34:15 2024 -0800
+
+    Temporary fix OpenAI API for Pydantic v1/v2 (#153)
+
+[33mcommit e2bf732bc3dda44f800caa1aa3d2786ee66d93d1[m
+Author: LiviaSun <33578456+ChuyueSun@users.noreply.github.com>
+Date:   Tue Feb 6 12:38:41 2024 +0800
+
+    add openai error handler with retry and logger (#148)
+
+[33mcommit 322421fae36424cdcef16ecc913e7f6e92d4b7d2[m
+Author: Cody Yu <hao.yu.cody@gmail.com>
+Date:   Mon Feb 5 14:21:16 2024 -0800
+
+    Add warmup to SRT server (#146)
+
+[33mcommit 8ff870bf3e6a87d2b12d4d01820c0e86de194664[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Mon Feb 5 11:22:06 2024 +0000
+
+    improve docs
+
+[33mcommit 26f0bedc8f351ed9b67d9b85ee30aa0c5f2aef45[m
+Author: Liangsheng Yin <hnyls2002@gmail.com>
+Date:   Mon Feb 5 16:50:37 2024 +0800
+
+    jump-forward rename (#144)
+
+[33mcommit 82fa69b3cc0c8b9b3b31148f1d53070649f0d433[m
+Author: Yaya Sy <58347382+yaya-sy@users.noreply.github.com>
+Date:   Sun Feb 4 23:27:52 2024 +0100
+
+    fix undfined variable (#142)
+
+[33mcommit 8fb7459e08ecb94e045a78e2ba8ee08c27ab34c7[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Sat Feb 3 17:42:01 2024 -0800
+
+    update json decoding docs
+
+[33mcommit bb3a3b6675b1844a13ebe368ad693f3dc75b315b[m
+Author: Liangsheng Yin <hnyls2002@gmail.com>
+Date:   Sat Feb 3 23:32:05 2024 +0800
+
+    Support Faster JSON decoding for llava (#137)
+    
+    When sending fast-forwarded reqs to model_rpc, re-calculate `pad_input_ids`
+
+[33mcommit 45d6592d4053fe8b2b8dc9440f64c900de040d09[m
+Author: Ying Sheng <sqy1415@gmail.com>
+Date:   Sat Feb 3 04:59:06 2024 -0800
+
+    Fix no-cache mode (#136)
+
+[33mcommit f6bfe3aaff6fc9c80ed632646c8db06f4a6c0048[m
+Author: Ying Sheng <sqy1415@gmail.com>
+Date:   Sat Feb 3 02:50:13 2024 -0800
+
+    Release 0.1.11 (#134)
+
+[33mcommit e095b16236917d478f537c0bd71f45bcaa408d24[m
+Author: Ying Sheng <sqy1415@gmail.com>
+Date:   Sat Feb 3 02:35:54 2024 -0800
+
+    Add max_prefill_num_token into server arguments (#133)
+
+[33mcommit 67be11c790f600b0003ed36be94e748eb3341be6[m
+Author: Ying Sheng <sqy1415@gmail.com>
+Date:   Sat Feb 3 01:38:00 2024 -0800
+
+    fix bug of race condition in copy()
+
+[33mcommit cd8c3ccd95596db38dfeb610fa19e3b22d9b857f[m
+Author: Liangsheng Yin <hnyls2002@gmail.com>
+Date:   Sat Feb 3 11:48:01 2024 +0800
+
+    Fix `is_multimodal_model` judge (#132)
+
+[33mcommit 9c121f2a45dca269c47812379f851f9ca9478852[m
+Author: hnyls2002 <hnyls2002@gmail.com>
+Date:   Fri Feb 2 09:58:24 2024 +0000
+
+    minor fix: result dump format
+
+[33mcommit 03e04b23312a1c6f5f16cd4dfffd530fb4210a65[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Thu Feb 1 22:44:05 2024 +0000
+
+    update docs for Yi-VL
+
+[33mcommit 864425300fb52782d3f410db248371eb0451cf26[m
+Author: Christopher Chou <49086305+BabyChouSr@users.noreply.github.com>
+Date:   Thu Feb 1 08:33:22 2024 -0800
+
+    Yi-VL Model (#112)
+
+[33mcommit 79cb018e4bcabe9d22db64657649cc1930370a3d[m
+Author: Liangsheng Yin <hnyls2002@gmail.com>
+Date:   Thu Feb 1 13:38:47 2024 +0800
+
+    Add city doc benchmark mode (#129)
+
+[33mcommit c7af9f73938a79b84dab6b6b4b9aa339118b593b[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Wed Jan 31 18:52:15 2024 +0000
+
+    Fix a bug in llava-hd
+
+[33mcommit 876db8dc7a4155041c29fec64fc6d7d4d2772ab3[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Wed Jan 31 10:18:43 2024 -0800
+
+    Update sampling_params.md
+
+[33mcommit ad82bac6f530ce949995c271c6fb4e93c7c26d8c[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Tue Jan 30 23:49:52 2024 -0800
+
+    Fix model loading & format code (#125)
+
+[33mcommit 71b54eea7d21a2bb1d8ef340e7002983a29b1d5f[m
+Author: Cody Yu <hao.yu.cody@gmail.com>
+Date:   Tue Jan 30 22:13:14 2024 -0800
+
+    Add cache metrics (#119)
+
+[33mcommit 74b3bfaaf8238f89df56681af7b601a10486eebb[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Tue Jan 30 16:36:10 2024 +0000
+
+    format code
+
+[33mcommit 4a634cf64613d62986f8c1ba97e24ad6c23fc07b[m
+Author: Jay Zhou <50169346+Ja1Zhou@users.noreply.github.com>
+Date:   Tue Jan 30 08:34:51 2024 -0800
+
+    [Feature] Allow specifying all ports to use in advance (#116)
+
+[33mcommit a49dc52bfa1e04f7713644266b0992e8e977a2bb[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Tue Jan 30 15:37:43 2024 +0000
+
+    release v0.1.10
+
+[33mcommit 873d0e85378792f170cab1eac6c39a2efbb89ab1[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Tue Jan 30 14:52:06 2024 +0000
+
+    Ignore detokenization error
+
+[33mcommit 1d0fbe8e436037257e4b2df83e890b2cf637d7f6[m
+Author: Keith Stevens <keith@surfacedata.org>
+Date:   Tue Jan 30 23:12:33 2024 +0900
+
+    [Feature] Adds basic support for image content in OpenAI chat routes (#113)
+
+[33mcommit 97aa9b3284566a4d84c08f7c1fee3699bf694e3d[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Tue Jan 30 05:45:27 2024 -0800
+
+    Improve docs & Add JSON decode example (#121)
+
+[33mcommit 0617528632fe266427e1ee6cf5037e3fca06e538[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Tue Jan 30 04:29:32 2024 -0800
+
+    Update quick start examples (#120)
+
+[33mcommit 4ea92f83077ce70381528d7d1fcc565db7698d69[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Mon Jan 29 17:08:12 2024 -0800
+
+    Format code (#118)
+
+[33mcommit 6b0af2853c138b945e61e78ec7a0ab4a1a239bb8[m
+Author: Junyang Lin <justinlin930319@hotmail.com>
+Date:   Tue Jan 30 09:06:02 2024 +0800
+
+    Add qwen2 (#114)
+
+[33mcommit 6f560c761b2fc2f577682d0cfda62630f37a3bb0[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Mon Jan 29 17:05:42 2024 -0800
+
+    Improve the control of streaming and improve the first token latency in streaming (#117)
+
+[33mcommit cd6872334e9ead684049b8fccd5f2dac9433b1b4[m
+Author: Cody Yu <hao.yu.cody@gmail.com>
+Date:   Fri Jan 26 09:38:43 2024 -0800
+
+    Fix Mistral model loading (#108)
+    
+    Co-authored-by: johndun <dunavent.jm@gmail.com>
+
+[33mcommit 81561f8e2d55d105aabbe0eab1b3b33f4fc04b0b[m
+Author: Liangsheng Yin <hnyls2002@gmail.com>
+Date:   Fri Jan 26 13:32:59 2024 +0800
+
+    Flush Cache API (#103)
+
+[33mcommit 3a581e9949d14992400c1a9455d0804d6a3fb7e0[m
+Author: Cody Yu <hao.yu.cody@gmail.com>
+Date:   Thu Jan 25 15:29:07 2024 -0800
+
+    Dynamic model class loading (#101)
+
+[33mcommit 0147f940ddc5642e6f88e404123881d69c2b7f0a[m
+Author: shiyi.c_98 <shicao@berkeley.edu>
+Date:   Thu Jan 25 07:56:25 2024 -0800
+
+    fix batch error for llava-hd (#98)
+
+[33mcommit 23950056f0de45cb2c0b12c432c31e8f03047f22[m
+Author: parasol-aser <3848358+parasol-aser@users.noreply.github.com>
+Date:   Thu Jan 25 03:57:06 2024 -0600
+
+    support speculative execution for openai API (#48)
+    
+    Co-authored-by: Ying Sheng <sqy1415@gmail.com>
+
+[33mcommit 93414c8238c0fae97b8c741940f33dff58aec7c6[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Wed Jan 24 22:25:33 2024 -0800
+
+    Add a link to HF paper page
+
+[33mcommit ed7c7eca0ec3485def2a3c5124e516479cea60a4[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Wed Jan 24 16:52:21 2024 -0800
+
+    Update README.md
+
+[33mcommit 0c457bae8f177b2af01a68edea488e8d898102ed[m
+Author: isaac-vidas <80056737+isaac-vidas@users.noreply.github.com>
+Date:   Wed Jan 24 19:23:11 2024 -0500
+
+    Handle grayscale images in expand2square (#97)
+
+[33mcommit d3fc86a43e2287e0446a4b3c9acf1300611f1f85[m
+Author: Haotian Liu <6631389+haotian-liu@users.noreply.github.com>
+Date:   Wed Jan 24 14:23:27 2024 -0600
+
+    Improve Chinese character streaming when the last char is half Chinese word. (#95)
+
+[33mcommit 01ee0fbc051f4e177ad917ef90ab26904c7d6cab[m
+Author: Liangsheng Yin <hnyls2002@gmail.com>
+Date:   Thu Jan 25 01:16:25 2024 +0800
+
+    fast regex decode
+    
+    Auto-detect constant str path in regex FSM, then extend instead.
+
+[33mcommit 711d3435305144d984b3358bbb34fdde40b9a63f[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Wed Jan 24 11:44:07 2024 +0000
+
+    add a batch llava example
+
+[33mcommit 6dceab4d1786a6b94dfcbd2bc4030caa4cb3b0ba[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Wed Jan 24 11:37:25 2024 +0000
+
+    bump version to 0.1.9
+
+[33mcommit c70b3cfa9e3a06b129eef4e2a0b32d67a3c7eb33[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Wed Jan 24 03:33:34 2024 -0800
+
+    Bump the version to v0.1.8 (#93)
+
+[33mcommit 489796c7ea4bc8aa02b94c082400eced5a9a32bc[m
+Author: Ying Sheng <sqy1415@gmail.com>
+Date:   Wed Jan 24 10:45:44 2024 +0000
+
+    minor performance fix
+
+[33mcommit fa7a696d04f65848362332c2edf13d2d5c6d4921[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Wed Jan 24 10:44:32 2024 +0000
+
+    Fix max_new_tokens for limited memory
+
+[33mcommit bef0b359022f62cbc6de7eaef06d074ac635f7ee[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Wed Jan 24 10:35:31 2024 +0000
+
+    Fix llava & Fix multiprocessing
+
+[33mcommit c6576e820c87a801d2c9c94ad81e812159c75804[m
+Author: shiyi.c_98 <shicao@berkeley.edu>
+Date:   Wed Jan 24 01:51:21 2024 -0800
+
+    Llava-hd Support (#92)
+    
+    Co-authored-by: Haotian Liu <liuhaotian.cn@gmail.com>
+
+[33mcommit 99258181c62e98c8a7365a78b74522eefb9d04de[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Wed Jan 24 08:55:38 2024 +0000
+
+    set start method to spawn
+
+[33mcommit 3de54a1b5576efe0a06ce73b856f4aa8f40a8b29[m
+Author: isaac-vidas <80056737+isaac-vidas@users.noreply.github.com>
+Date:   Tue Jan 23 22:00:28 2024 -0500
+
+    Add health endpoint to SGLang runtime server (#90)
+
+[33mcommit 7358fa64f7da3f18ce7512148d330755b0c1f1fe[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Tue Jan 23 22:10:17 2024 +0000
+
+    Fix a bug in runtime backend
+
+[33mcommit 9a16fea0123ca731e74f919e494facfc5c30c30d[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Tue Jan 23 05:07:30 2024 -0800
+
+    Return logprob for choices (#87)
+
+[33mcommit 9e037c822ccabaf593c0145a9d8377f177e22ff9[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Tue Jan 23 03:43:19 2024 -0800
+
+    Update README.md
+
+[33mcommit 9076386d904171c7cc88ace681ca3ebbec2c71ea[m
+Author: 0xWe11es.eth <83463505+CSWellesSun@users.noreply.github.com>
+Date:   Tue Jan 23 16:25:26 2024 +0800
+
+    Fix SRT endpoint api json syntax (#84)
+
+[33mcommit 959c4174b218595dc77bc8853bdc695a670394b0[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Mon Jan 22 21:46:47 2024 -0800
+
+    Fix the chat template for QWen (#83)
+
+[33mcommit 94e05770db538cadce18f5c201572067ab87840e[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Mon Jan 22 21:17:05 2024 -0800
+
+    Fix after QWen support (#82)
+
+[33mcommit 63e97e5e4ccc835a089e140f8ae7079c0e6d823f[m
+Author: Arcmoon <50002441+Arcmoon-Hu@users.noreply.github.com>
+Date:   Tue Jan 23 12:14:51 2024 +0800
+
+    Suppport qwen model and solve some problems (#75)
+
+[33mcommit e08bca2840ca8442c4047e31a659b4329ab943f6[m
+Author: isaac-vidas <80056737+isaac-vidas@users.noreply.github.com>
+Date:   Mon Jan 22 21:15:48 2024 -0500
+
+    Support load fine-tuned LLaVA model (#80)
+
+[33mcommit cd3ccb2ed7aaeaa8f56acd467af9ad8fb482f465[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Sun Jan 21 16:51:45 2024 -0800
+
+    Add a note about triton version for older GPUs (#72)
+
+[33mcommit 3f5c2f4c4aa6b8342497b612a3c35b1294bd2314[m
+Author: Ying Sheng <sqy1415@gmail.com>
+Date:   Sun Jan 21 15:17:30 2024 -0800
+
+    Add an async example (#37)
+
+[33mcommit 007eeb4eb91cb30bd6b0c2bb17a0655ea5841c15[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Sun Jan 21 14:56:25 2024 -0800
+
+    Fix the error message and dependency of openai backend (#71)
+
+[33mcommit e8f2b155fe25a24cffdf085a8045c1e702f9503e[m
+Author: Ying Sheng <sqy1415@gmail.com>
+Date:   Sun Jan 21 02:45:58 2024 -0800
+
+    Update README.md
+
+[33mcommit 723f0421638b8a0ee72ff0a84eed283946753ed6[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Sun Jan 21 10:31:02 2024 +0000
+
+    release v0.1.7 & fix bugs
+
+[33mcommit 585eababa1ffbd68ad364681aff4ca1b7b2b1824[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Sun Jan 21 10:13:45 2024 +0000
+
+    Improve error message of openai
+
+[33mcommit cc3ada983f6445f98a88fa890a8130f40eb0f2af[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Sun Jan 21 01:45:02 2024 -0800
+
+    Bump version to 0.1.6 (#68)
+
+[33mcommit a837166e6f80f6c5148bf1eb24bd88e309bbc86e[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Sun Jan 21 01:39:23 2024 -0800
+
+    Fix select and normalized logprobs (#67)
+
+[33mcommit 11f3cca64fa7bd91a795075876ed2407c4b1ec86[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Sat Jan 20 23:20:35 2024 -0800
+
+    Fix select (#64)
+
+[33mcommit ca13f3b8c58e419c04e706bb5a6711073f466aa0[m
+Author: Liangsheng Yin <hnyls2002@gmail.com>
+Date:   Sun Jan 21 13:26:11 2024 +0800
+
+    Disk FSM cache and adjust code. (#63)
+
+[33mcommit 0b2efc2adc8c5e01c1a4ef3a5ec6c9f5bac684be[m
+Author: Ikko Eltociear Ashimine <eltociear@gmail.com>
+Date:   Sat Jan 20 14:00:29 2024 +0900
+
+    Update README.md (#58)
+
+[33mcommit f30abd090a1d02377a1211a8c8f5b10deac0e763[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Fri Jan 19 17:03:33 2024 -0800
+
+    Improve error message & Add vicuna template (#57)
+
+[33mcommit 40ab1f01294f1c6cebcc0ed8597b76db039028bb[m
+Author: Liangsheng Yin <hnyls2002@gmail.com>
+Date:   Sat Jan 20 03:01:15 2024 +0800
+
+    Fix the possible bug of decode out of memory (#36)
+
+[33mcommit 199e82a15d2d06c9955c71c4e19c68afbe9dc860[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Thu Jan 18 23:51:19 2024 -0800
+
+    Format code & Improve readme (#52)
+
+[33mcommit 23471f9aa3d4fb7bea89d2f9c0b471025292406e[m
+Author: Cody Yu <hao.yu.cody@gmail.com>
+Date:   Thu Jan 18 23:43:09 2024 -0800
+
+    Support v1/chat/completions (#50)
+
+[33mcommit 61d4c93962001da758aee799e8618672c17bec53[m
+Author: Cody Yu <hao.yu.cody@gmail.com>
+Date:   Thu Jan 18 17:00:56 2024 -0800
+
+    Support stream=True in v1/completions (#49)
+
+[33mcommit 98a3e8ef78f673175a6890fd0ed8f39a6bd51b07[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Thu Jan 18 13:46:38 2024 -0800
+
+    Add a llava example (#47)
+
+[33mcommit 2b079f89315553897d9abe49366a24534eee7ec0[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Thu Jan 18 13:30:10 2024 -0800
+
+    Increase interpreter parallelism (#46)
+
+[33mcommit 05b4c398df9f72b5461d9f013f0058da4c44882b[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Thu Jan 18 11:49:27 2024 -0800
+
+    Document sampling parameters (#45)
+
+[33mcommit dafafe5b111d1a74ecade029d342bbea5df4edfa[m
+Author: Cody Yu <hao.yu.cody@gmail.com>
+Date:   Thu Jan 18 11:18:22 2024 -0800
+
+    Use HTTP link in 3rdparty module (#42)
+
+[33mcommit b240f751006bfdb4f4f249348c6915ae962fda62[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Wed Jan 17 22:26:32 2024 -0800
+
+    Add a parallel sampling case (#34)
+
+[33mcommit 501f94444529bad2ea944a42c7c38deae986b827[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Wed Jan 17 21:14:31 2024 -0800
+
+    Bump version to 0.1.5 (#33)
+
+[33mcommit 22ec7bc2a1a0849870323cffa98cf7abf7d416ff[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Wed Jan 17 18:37:02 2024 -0800
+
+    Expose more arguments to control the scheduling policy (#32)
+
+[33mcommit c0454b323c87c78f650074659c2db92b0fd2524d[m
+Author: Christopher Chou <49086305+BabyChouSr@users.noreply.github.com>
+Date:   Wed Jan 17 18:15:02 2024 -0800
+
+    Add option to return metadata in async streaming (#18)
+
+[33mcommit 8024fc5eec67c9ba9bd4df36bade64a939624ab4[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Wed Jan 17 16:38:20 2024 -0800
+
+    Fix streaming (#30)
+
+[33mcommit 70528762bf0800793dab10d1b51d40f21a0608ba[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Wed Jan 17 10:42:55 2024 -0800
+
+    update readme
+
+[33mcommit 71d30d6ddc00f7142b403f858d12f2f1d8385378[m
+Author: Ying Sheng <sqy1415@gmail.com>
+Date:   Wed Jan 17 09:49:53 2024 -0800
+
+    Update README.md
+
+[33mcommit f9d723816ab762c20279463797f3b1a95158f23b[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Wed Jan 17 04:43:17 2024 -0800
+
+    Teak mem fraction (#20)
+
+[33mcommit bf51ddc6e52d872700724ddc181089162811319a[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Wed Jan 17 02:54:41 2024 -0800
+
+    Improve docs & Rename Gemini -> VertexAI (#19)
+
+[33mcommit fd7c4792391127e7cd8d9e3647e118c6a38bf382[m
+Author: shiyi.c_98 <shiyicao314@gmail.com>
+Date:   Tue Jan 16 22:29:37 2024 -0800
+
+    Gemini Backend (#9)
+    
+    Co-authored-by: Ying Sheng <sqy1415@gmail.com>
+
+[33mcommit c4707f1bb52c1743d1f438940d388ae0da36c92b[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Tue Jan 16 19:53:55 2024 -0800
+
+    Improve docs (#17)
+
+[33mcommit ffe4aaee1da5ccfdda1c6228ae911d6f139b68eb[m
+Author: Ying Sheng <sqy1415@gmail.com>
+Date:   Tue Jan 16 15:49:03 2024 -0800
+
+    Fix for T4 GPUs (#16)
+    
+    Co-authored-by: Lianmin Zheng <lianminzheng@gmail.com>
+
+[33mcommit 5b27a1dce413987f07f3a063a938ca27ecc82ea0[m
+Author: Christopher Chou <49086305+BabyChouSr@users.noreply.github.com>
+Date:   Tue Jan 16 15:41:30 2024 -0800
+
+    Rename image_url to image_file (#15)
+
+[33mcommit e71d4ab3f941e8ecec461480b582e50170a6842e[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Tue Jan 16 04:18:54 2024 -0800
+
+    Update docs (#12)
+
+[33mcommit fbf42263f1ba0c6775b92062661a5d2c1fb3bd68[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Tue Jan 16 02:46:27 2024 -0800
+
+    Update Readme (#11)
+
+[33mcommit 2ccd9fd8c5331ee5bd53185772d7ed615a3a8c30[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Tue Jan 16 05:55:25 2024 +0000
+
+    update version to 0.1.3
+
+[33mcommit 46b7ea7c851a98b532e35243957f5438bed9ba89[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Mon Jan 15 21:37:11 2024 -0800
+
+    Improve Readme (#10)
+
+[33mcommit 70359bf31a4b86bb772cd0853cbf833faf159a7c[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Mon Jan 15 16:12:57 2024 -0800
+
+    Update benchmark scripts (#8)
+
+[33mcommit 01ca82d7650c597a9619cec01fd542ca7bcf8620[m
+Author: Liangsheng Yin <hnyls2002@gmail.com>
+Date:   Tue Jan 16 01:42:46 2024 +0800
+
+    fix radix cache match (#7)
+
+[33mcommit 4bd8233f2cf88da571ff7edcf9518e273e65475c[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Mon Jan 15 01:15:53 2024 -0800
+
+    Fix test cases (#6)
+
+[33mcommit 08ab2a1655224a671fd8d356387aa83f3179129a[m
+Author: Liangsheng Yin <hnyls2002@gmail.com>
+Date:   Mon Jan 15 16:49:29 2024 +0800
+
+    Json Decode && Mutl-Turns (#4)
+
+[33mcommit f652494df16ef9fa0fac998ddf63961aee0849d4[m
+Author: hnyls2002 <hnyls2002@gmail.com>
+Date:   Wed Jan 10 04:21:17 2024 +0000
+
+    fix typo
+
+[33mcommit 30720e732c599abf62516ebc6562abc9ad93157f[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Tue Jan 9 12:43:40 2024 -0800
+
+    Add install with pip (#3)
+
+[33mcommit 331848de9d639952ef30cec35e7a58f2760154f8[m
+Author: Liangsheng Yin <hnyls2002@gmail.com>
+Date:   Wed Jan 10 04:35:44 2024 +0800
+
+    Add SRT json decode example (#2)
+
+[33mcommit 93eeb543bacf2d7f5f56dd7e7dd4767884026b38[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Mon Jan 8 21:20:23 2024 +0000
+
+    Update readme.md
+
+[33mcommit ead5b39f82f0664f6b8ffd571c9b41b8a2dd1e22[m
+Author: Liangsheng Yin <hnyls2002@gmail.com>
+Date:   Tue Jan 9 00:26:18 2024 +0800
+
+    Add flashinfer && Oultines (#1)
+
+[33mcommit 22085081bb247cc57fe971c3d72eb66f053d77b6[m
+Author: Lianmin Zheng <lianminzheng@gmail.com>
+Date:   Mon Jan 8 04:37:50 2024 +0000
+
+    release initial code
+    
+    Co-authored-by: Ying Sheng <sqy1415@gmail.com>
+    Co-authored-by: Liangsheng Yin <hnyls2002@gmail.com>
+    Co-authored-by: Zhiqiang Xie <xiezhq@stanford.edu>
+    Co-authored-by: parasol-aser <3848358+parasol-aser@users.noreply.github.com>
+    Co-authored-by: LiviaSun <33578456+ChuyueSun@users.noreply.github.com>
+    Co-authored-by: Cody Yu <hao.yu.cody@gmail.com>
+
+[33mcommit f6d40df0ee1e1fc53db3edc04bf90575f221cf23[m
+Author: Ying Sheng <sqy1415@gmail.com>
+Date:   Mon Oct 9 15:41:15 2023 -0700
+
+    Initial commit
