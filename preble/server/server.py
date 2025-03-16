@@ -21,6 +21,7 @@ from sglang.srt.managers.router.model_runner import GPUConfig
 from pynvml import nvmlInit, nvmlDeviceGetHandleByIndex, nvmlDeviceGetUtilizationRates, nvmlDeviceGetMemoryInfo, nvmlShutdown
 import random
 from dataclasses import dataclass, field
+import requests
 
 random.seed(10)
 np.random.seed(10)
@@ -335,10 +336,15 @@ async def async_send_request(
 # Uses async_send_request() to handle communication with the runtime.
 # Returns the response as a streaming output.
 async def generate_request_helper(obj: GenerateReqInput):
+    request_start = time.perf_counter()
     request_id = str(uuid.uuid4())
     runtime_events[request_id] = (asyncio.Event(), None)
     
+    
+    queue_start = time.perf_counter()
     await runtime_request_queue.put((obj, request_id))
+    queue_time = time.perf_counter() - queue_start
+    
     import glog 
     queue_items = await peek_queue(runtime_request_queue)
     await runtime_events[request_id][0].wait()
@@ -363,18 +369,19 @@ async def generate_request_helper(obj: GenerateReqInput):
    # glog.info(f"text: {text}")
    # glog.info(f"input_ids: {input_ids}")
     async def get_requests():
-        start_time = time.time()
+        processing_start = time.perf_counter()
         async for chunk in async_send_request(text, input_ids, payload, runtime_id, url, rid):
             if isinstance(chunk, RequestFuncOutput):
                 break
             yield chunk
         output = chunk
+        end_time = time.perf_counter()
    #     glog.info(f"Output: {output}")
         metric_collector_list[runtime_id].output_list.append(output)
         metric_collector_list[runtime_id].input_request_list.append((text, len(input_ids), len(output.generated_text)))
-        metric_collector_list[runtime_id].dur_list.append(time.time() - start_time)
+        metric_collector_list[runtime_id].dur_list.append(end_time - processing_start)
         await finished_requests_queue.put((output, text, input_ids))
-        metric_collector_list[runtime_id].calculate_metrics()
+       # metric_collector_list[runtime_id].calculate_metrics()
 
     
     return StreamingResponse(get_requests(), media_type="text/event-stream")
@@ -708,6 +715,10 @@ def start_server(runtime_selection_policy="custom", runtime_urls="http://127.0.0
     loop = asyncio.get_event_loop()
     loop.run_until_complete(main())
 
+async def get_stats():
+    async with aiohttp.ClientSession() as session:
+        async with session.post("http://0.0.0.0:30000/get_stats") as response:
+            return await response.json()
 
 async def record_gpu_metrics(global_scheduler):
     global util_list
@@ -722,7 +733,9 @@ async def record_gpu_metrics(global_scheduler):
             memory_used_percent = (memory_info.used / memory_info.total) * 100
             to_add[gpu_id] = utilization
         util_list.append(to_add)
-        print(f"Utilization record: active_gpu: {list(to_add.keys())}, utilizations: {list(to_add.values())}", flush=True)
+        #print(f"Utilization record: active_gpu: {list(to_add.keys())}, utilizations: {list(to_add.values())}", flush=True)
+        response_stats = await get_stats()
+        glog.info(f"Stats: {response_stats}")
         await asyncio.sleep(1)
             
 

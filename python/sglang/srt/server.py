@@ -19,6 +19,7 @@ import psutil
 import requests
 import uvicorn
 import uvloop
+import glog
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse, Response, StreamingResponse
 
@@ -47,7 +48,10 @@ from sglang.srt.utils import (
     enable_show_time_cost,
     get_exception_traceback,
 )
-
+import numpy as np 
+from dataclasses import dataclass, field
+from typing import Any, AsyncGenerator, Dict, List, Optional, Tuple, Union
+import glog
 asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
 logger = logging.getLogger('server')
 
@@ -55,6 +59,210 @@ logger = logging.getLogger('server')
 app = FastAPI()
 tokenizer_manager = None
 
+'''
+TODO:
+
+add "getstats" endpoint to get the stats of the server
+
+'''
+
+@dataclass
+class BenchmarkMetrics:
+    completed: int
+    total_input: int
+    total_output: int
+    total_output_retokenized: int
+    request_throughput: float
+    input_throughput: float
+    output_throughput: float
+    output_throughput_retokenized: float
+    mean_ttft_ms: float
+    median_ttft_ms: float
+    std_ttft_ms: float
+    p99_ttft_ms: float
+    mean_tpot_ms: float
+    median_tpot_ms: float
+    std_tpot_ms: float
+    p99_tpot_ms: float
+    mean_itl_ms: float
+    median_itl_ms: float
+    std_itl_ms: float
+    p99_itl_ms: float
+    mean_e2e_latency_ms: float
+    median_e2e_latency_ms: float
+
+@dataclass    
+class MetricForSchedule:
+    output_throughput: float = 0
+    output_throughput_retokenized: float = 0
+    p99_ttft_ms: float = 0
+    p99_tpot_ms: float = 0
+    p99_itl_ms: float = 0
+    p99_e2e_latency_ms: float = 0
+    waiting_queue_len: int = 0
+    gpu_power: list = field(default_factory=list)
+    gpu_mem_used: list = field(default_factory=list)
+    gpu_utils: list = field(default_factory=list)
+    
+    def to_dict(self):
+        return {
+            "output_throughput": self.output_throughput,
+            "output_throughput_retokenized": self.output_throughput_retokenized,
+            "p99_ttft_ms": self.p99_ttft_ms,
+            "p99_tpot_ms": self.p99_tpot_ms,
+            "p99_itl_ms": self.p99_itl_ms,
+            "p99_e2e_latency_ms": self.p99_e2e_latency_ms,
+            "waiting_queue_len": self.waiting_queue_len,
+            "gpu_power": self.gpu_power,
+            "gpu_mem_used": self.gpu_mem_used,
+            "gpu_utils": self.gpu_utils,
+        }
+class MetricCollector:
+    def __init__(self):
+        self.ts_list = []
+        self.status_list = []
+        self.ttft_list = []
+        self.tpot_list = []
+        self.itl_list = []
+        self.latency_list = []
+        self.output_len_list = []
+        
+    def cal_metrics(self, window_sec=10):
+        if not self.ts_list:
+            glog.warning("No requests have been processed yet.", stacklevel=2)
+            return None
+        
+        last_ts = self.ts_list[-1]
+        target_ts = last_ts - window_sec
+        
+        # 使用bisect_left进行二分查找
+        from bisect import bisect_left
+        window_start = bisect_left(self.ts_list, target_ts)
+            
+        if window_start >= len(self.ts_list):
+            glog.info('ts_list: {}'.format(self.ts_list))
+            glog.warning("No requests have been processed yet.", stacklevel=2)
+            return None
+        ts_list = self.ts_list[window_start:]
+        ttft_list = self.ttft_list[window_start:]
+        tpot_list = self.tpot_list[window_start:]
+        itl_list = self.itl_list[window_start:]
+        itl_list = [item for sublist in itl_list for item in sublist]
+        latency_list = self.latency_list[window_start:]
+        status_list = self.status_list[window_start:]
+        output_len_list = self.output_len_list[window_start:]
+        if len(ttft_list) == 0:
+            glog.warning("No requests have been processed yet.", stacklevel=2)
+            return None
+        
+        metric = MetricForSchedule()
+        metric.output_throughput = np.sum(output_len_list) / np.sum(latency_list)
+        metric.output_throughput_retokenized = np.sum(output_len_list) / np.sum(latency_list)
+        metric.p99_ttft_ms = np.percentile(ttft_list, 99) * 1000
+        metric.p99_tpot_ms = np.percentile(tpot_list, 99) * 1000
+        metric.p99_itl_ms = np.percentile(itl_list, 99) * 1000
+        metric.p99_e2e_latency_ms = np.percentile(latency_list, 99) * 1000
+        metric.gpu_power = []
+        metric.gpu_mem_used = []
+        metric.gpu_utils = []
+        return metric
+
+    # def calculate_metrics(self, window_sec=20)->Tuple[BenchmarkMetrics, List[int]]:
+
+    #     if len(self.output_list) < window:
+    #         window = len(self.output_list)
+        
+    #     if len(self.output_list) == 0:
+    #         glog.warning("No requests have been processed yet.", stacklevel=2)
+    #         return None, None
+
+    #     window = len(self.output_list)
+    #     dur_s = 0
+    #     window_start = len(self.dur_list) - 1
+    #     while window_start >= 0 and dur_s < window_sec:
+    #         dur_s += self.dur_list[window_start]
+    #         window_start -= 1
+    #     window = len(self.dur_list) - window_start - 1     
+    #     if window > len(self.output_list):
+    #         window = len(self.output_list)
+        
+    #     if window <= 0:
+    #         glog.warning("No requests have been processed yet.", stacklevel=2)
+    #         return None, None
+
+    #     output_list = self.output_list[window_start:]
+    #     input_request_list = self.input_request_list[window_start:]
+    #     dur_s = np.sum(self.dur_list[window_start:]) 
+
+    #     if (dur_s < 1e-6):
+    #         glog.info(f"len of dur_list: {len(self.dur_list)}")
+    #         glog.warning("Duration is less than 1e-6. ", stacklevel=2)
+    #         return None, None
+
+    #     output_lens: List[int] = []
+    #     retokenized_output_lens: List[int] = []
+    #     total_input = 0
+    #     completed = 0
+    #     itls: List[float] = []
+    #     tpots: List[float] = []
+    #     ttfts: List[float] = []
+    #     e2e_latencies: List[float] = []
+    #     for i in range(len(output_list)):
+    #         if output_list[i].success:
+    #             output_len = output_list[i].output_len
+    #             output_lens.append(output_len)
+    #             retokenized_output_len = len(
+    #                 self.tokenizer.encode(output_list[i].generated_text, add_special_tokens=False)
+    #             )
+    #             retokenized_output_lens.append(retokenized_output_len)
+    #             total_input += input_request_list[i][1]
+    #             if output_len > 1:
+    #                 tpots.append((output_list[i].request_latency - output_list[i].ttft) / (output_len - 1))
+    #             itls += output_list[i].itl
+    #             ttfts.append(output_list[i].ttft)
+
+    #             e2e_latencies.append(output_list[i].request_latency)
+    #             completed += 1
+    #         else:
+    #             output_lens.append(0)
+    #             retokenized_output_lens.append(0)
+    #     if completed == 0:
+    #         glog.warning(
+    #             "All requests failed. This is likely due to a misconfiguration "
+    #             "on the benchmark arguments.",
+    #             stacklevel=2,
+    #         )
+    #     metrics = BenchmarkMetrics(
+    #         completed=completed,
+    #         total_input=total_input,
+    #         total_output=sum(output_lens),
+    #         total_output_retokenized=sum(retokenized_output_lens),
+    #         request_throughput=completed / dur_s,
+    #         input_throughput=total_input / dur_s,
+    #         output_throughput=sum(output_lens) / dur_s,
+    #         output_throughput_retokenized=sum(retokenized_output_lens) / dur_s,
+    #         mean_ttft_ms=np.mean(ttfts or 0)
+    #         * 1000,  # ttfts is empty if streaming is not supported by backend
+    #         median_ttft_ms=np.median(ttfts or 0) * 1000,
+    #         std_ttft_ms=np.std(ttfts or 0) * 1000,
+    #         p99_ttft_ms=np.percentile(ttfts or 0, 99) * 1000,
+    #         mean_tpot_ms=np.mean(tpots or 0) * 1000,
+    #         median_tpot_ms=np.median(tpots or 0) * 1000,
+    #         std_tpot_ms=np.std(tpots or 0) * 1000,
+    #         p99_tpot_ms=np.percentile(tpots or 0, 99) * 1000,
+    #         mean_itl_ms=np.mean(itls or 0) * 1000,
+    #         median_itl_ms=np.median(itls or 0) * 1000,
+    #         std_itl_ms=np.std(itls or 0) * 1000,
+    #         p99_itl_ms=np.percentile(itls or 0, 99) * 1000,
+    #         mean_e2e_latency_ms=np.mean(e2e_latencies) * 1000,
+    #         median_e2e_latency_ms=np.median(e2e_latencies) * 1000,
+    #     )
+
+    #     glog.info(f"Metrics: {metrics}")
+    #     glog.info(f"Output lens: {output_lens}")
+    #     return metrics, output_lens
+
+metric_collector = None
 
 @app.get("/health")
 async def health() -> Response:
@@ -84,9 +292,52 @@ async def flush_cache():
         status_code=200,
     )
 
+_last_generate_request_result = []
+
+@app.post("/get_stats")
+async def get_stats():
+    global _last_generate_request_result
+    global metric_collector
+    import pynvml
+    try:
+        pynvml.nvmlInit()
+        deviceCount = pynvml.nvmlDeviceGetCount()
+        gpu_utils = []
+        gpu_mem_used = []
+        gpu_power = []
+        for i in range(deviceCount):
+            handle = pynvml.nvmlDeviceGetHandleByIndex(i)
+            utilization = pynvml.nvmlDeviceGetUtilizationRates(handle)
+            memory_info = pynvml.nvmlDeviceGetMemoryInfo(handle)
+            power_usage = pynvml.nvmlDeviceGetPowerUsage(handle)
+            gpu_utils.append(utilization.gpu)
+            gpu_mem_used.append(memory_info.used)
+            gpu_power.append(power_usage)
+        pynvml.nvmlShutdown()
+        if metric_collector is not None:
+            metric = metric_collector.cal_metrics()
+            if metric is None:
+                return {"error": "No requests have been processed yet."}
+            metric.gpu_utils = gpu_utils
+            metric.gpu_mem_used = gpu_mem_used
+            metric.gpu_power = gpu_power
+        
+        stats = metric.to_dict()
+        glog.info(f"stats: {stats}")
+
+    except ImportError:
+        return {
+            "error": "pynvml is not installed. Please install it with `pip install pynvml`"
+        }
+    
+    return stats
+    pass
 
 @app.post("/generate")
 async def generate_request(obj: GenerateReqInput):
+    global metric_collector
+    if metric_collector is None:
+        metric_collector = MetricCollector()
     if obj.text is None and obj.input_ids is None:
         return JSONResponse(
             {"error": "Either text or input_ids should be provided"}, status_code=400
@@ -94,16 +345,62 @@ async def generate_request(obj: GenerateReqInput):
     obj.post_init()
     logger.debug(f"{obj.text[:20]} ...")
     if obj.stream:
-
+        import glog 
+        glog.warning('streaming\'s get stat is not supported yet')
+        ts = time.perf_counter()
+        
         async def stream_results():
+            ttft = 0
+            tpot = 0 
+            
+            itl = []
+            output_len = 0
+            most_recent_ts = ts
+            success = False
             async for out in tokenizer_manager.generate_request(obj):
+                if ttft == 0:
+                    ttft = time.perf_counter() - ts
+                    glog.info(f"out: {out}")
+                    output_len += out['meta_info']['completion_tokens']
+                else:
+                    itl.append(time.perf_counter() - most_recent_ts)
+                    most_recent_ts = time.perf_counter()
                 yield f"data: {json.dumps(out, ensure_ascii=False)}\n\n"
             yield "data: [DONE]\n\n"
-
-        return StreamingResponse(stream_results(), media_type="text/event-stream")
+            success = True
+            request_latency = time.perf_counter() - ts
+            tpot = (request_latency - ttft) / max(1, output_len)
+            
+            if metric_collector is not None:
+                metric_collector.ttft_list.append(ttft)
+                metric_collector.tpot_list.append(tpot)
+                metric_collector.itl_list.append(itl)
+                metric_collector.latency_list.append(request_latency)
+                metric_collector.status_list.append(success)
+                metric_collector.ts_list.append(ts)
+                metric_collector.output_len_list.append(output_len)
+                
+            
+            await get_stats()
+        
+        stream_result = stream_results()
+        glog.info(StreamingResponse(stream_result, media_type="text/event-stream"))
+        
+        return StreamingResponse(stream_result, media_type="text/event-stream")
 
     try:
+        
+        
+        tokenizer = tokenizer_manager.tokenizer
+        if tokenizer is None:
+            raise ValueError("Tokenizer not initialized")
         ret = await tokenizer_manager.generate_request(obj).__anext__()
+        
+     #  generated_text = ret.generated_text
+     #  metric_collector.input_request_list.append((text, len(input_ids), len(generated_text)))
+     #  metric_collector.dur_list.append(obj.dur)
+     #  metric_collector.output_list.append(ret)
+        
         return ret
     except ValueError as e:
         return JSONResponse({"error": str(e)}, status_code=400)

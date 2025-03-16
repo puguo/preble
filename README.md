@@ -25,7 +25,10 @@ pip install -e "python[all]"
 pip install fastapi
 pip install transformers
 pip install uvicorn
-
+pip install pynvml
+pip install outlines
+pip install glog
+pip install outlines==0.0.46
 ```
 
 

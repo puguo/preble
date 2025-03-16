@@ -298,6 +298,10 @@ class GlobalSchedulerWithTime:
             cost = histogram_mem_cost[gpu_id]
             if self.enable_eviction:
                 cost += self.virtual_evict_for_routing(leaf_node, gpu_id)
+            if not isinstance(cost, float):
+                import glog 
+                glog.warning(f"cost is not a float: {cost}")
+                cost = float(cost) if cost is not None else 1e9
             costs[gpu_id]= cost
         gpu_selected = min(costs, key=costs.get) if costs else None
         return gpu_selected
