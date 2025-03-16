@@ -298,6 +298,14 @@ class GlobalSchedulerWithTime:
             cost = histogram_mem_cost[gpu_id]
             if self.enable_eviction:
                 cost += self.virtual_evict_for_routing(leaf_node, gpu_id)
+                
+            queue_penalty = self.per_gpu_load[gpu_id] * 0.2
+            if leaf_node in self.histogram.hit_tokens and leaf_node in self.histogram.prompt_tokens:
+                matched_ratio = self.histogram.hit_tokens[leaf_node] / max(1, self.histogram.prompt_tokens[leaf_node])
+            else:
+                matched_ratio = 0 
+            cache_bonus = (1 - matched_ratio) * 0.5
+            cost = cost + queue_penalty - cache_bonus
             costs[gpu_id]= cost
         gpu_selected = min(costs, key=costs.get) if costs else None
         return gpu_selected
