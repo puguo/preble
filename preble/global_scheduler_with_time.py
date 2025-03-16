@@ -18,7 +18,7 @@ from ttft_overload_detector import TTFTWindowedOverloadedDetector
 import glog
 
 
-tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-3.1-8B")
+tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-3.2-1B")
 
 logger = logging.getLogger(__name__)
 

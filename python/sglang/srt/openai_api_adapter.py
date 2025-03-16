@@ -82,7 +82,7 @@ async def v1_completions(tokenizer_manager, raw_request: Request):
         
         # Add model field if not present
         if 'model' not in request_json:
-            request_json['model'] = "meta-llama/Llama-3.1-8B"  # Default model
+            request_json['model'] = "meta-llama/Llama-3.2-1B"  # Default model
             
         request = CompletionRequest(**request_json)
         glog.info(f"Successful completion request: {request}")
