@@ -556,14 +556,79 @@ async def test_monitor_and_autoscale(global_scheduler, initial_gpu_num=2, random
         print("Test complete.", flush=True)
         nvmlShutdown()
 
-async def monitor_and_autoscale(global_scheduler):
+async def monitor_and_autoscale(global_scheduler,
+                                keyword_list=['gpu_power'],
+                                scaleup_period=5,
+                                scaledown_period=3,
+                                period_sec=4,
+                                filename='stats.txt'
+                                ):
     global util_list
+    global stats_list
+    global stats_keep_count
     try:
         while True:
             import glog 
             queue_items = await peek_queue(runtime_request_queue)
             current_devices = list(global_scheduler.per_gpu_load.keys())
+            
+            scaleup_flag = False 
+            scaledown_flag = False
+            stats = await get_stats()
+            
+            avg_stat = {}
+            
             for gpu_id in current_devices:
+                if gpu_id in global_scheduler.per_gpu_load:
+                    if avg_stat == {}:
+                        avg_stat = stats[gpu_id]
+                    else:
+                        for key in avg_stat.keys():
+                            if key != 'error' and key in stats[gpu_id] and not isinstance(avg_stat[key], list):
+                                avg_stat[key] += stats[gpu_id][key]
+                                
+            
+            for key in avg_stat.keys():
+                if key != 'error' and isinstance(avg_stat[key], float):
+                    avg_stat[key] = avg_stat[key] / len(list(global_scheduler.per_gpu_load.keys()))
+                elif isinstance(avg_stat[key], list):
+                    val = np.mean([avg_stat[key][gpu_id] for gpu_id in current_devices])
+                    avg_stat[key] = val
+                   
+                
+                    
+
+            if  avg_stat == {} or 'error' in avg_stat:
+                import random 
+             #   if random.randint(0, 10) < 5:
+                    
+                scaledown_flag = True
+            glog.info(avg_stat)
+            for keyword in keyword_list:
+                if keyword in avg_stat:
+                    if len(stats_list[keyword]) >= scaledown_period:
+                        max_latency_ms = np.max(stats_list[keyword])
+                        if max_latency_ms < avg_stat[keyword]:
+                            scaleup_flag = True
+                            stats_keep_count[keyword] = 0
+                        else:
+                            stats_keep_count[keyword] += 1
+                            if stats_keep_count[keyword] > scaleup_period:
+                                scaledown_flag = True
+                                stats_keep_count[keyword] = 0
+                    if len(stats_list[keyword] >= scaleup_period):
+                        stats_list[keyword].pop(0)
+                    stats_list[keyword].append(stats[keyword])
+            
+            print(f"stats: {stats}", file=open(filename, 'a'))
+            if (scaleup_flag == True):
+                print(f"Scale up triggered: {scaleup_flag}", file=open(filename, 'a'))
+            if (scaledown_flag == True):
+                print(f"Scale down triggered: {scaledown_flag}", file=open(filename, 'a'))
+
+            
+            for gpu_id in current_devices:
+                '''
                 handle = nvmlDeviceGetHandleByIndex(gpu_id)
                 recent_window = util_list[-20:] if util_list else []
                 
@@ -581,23 +646,25 @@ async def monitor_and_autoscale(global_scheduler):
                 memory_info = nvmlDeviceGetMemoryInfo(handle)
                 memory_used_percent = (memory_info.used / memory_info.total) * 100
                 print(f"GPU {gpu_id}: Utilization: {utilization}% | Memory Used: {memory_info.used / (1024 ** 2):.2f} MB / {memory_info.total / (1024 ** 2):.2f} MB", flush=True)
-
-                if len(global_scheduler.per_gpu_load) < 1 or utilization > 50 or memory_used_percent > 95:
+                '''
+                if len(list(global_scheduler.per_gpu_load.keys())) < 1 or scaleup_flag:
                     if gpu_id in overloaded_instances:
                         print(f"GPU {gpu_id} is consistently overloaded. Triggering scale-up.", flush=True)
                         await add_gpu_instance(global_scheduler)
                         overloaded_instances.discard(gpu_id)
+                        break
                     else:
                         overloaded_instances.add(gpu_id)
                         underloaded_instances.discard(gpu_id)
 
                 # Check for underload condition
                 # For 
-                elif utilization < 10 and len(list(global_scheduler.per_gpu_load.keys())) > 1:
+                elif len(list(global_scheduler.per_gpu_load.keys())) > 1 and scaledown_flag:
                     if gpu_id in underloaded_instances:
                         print(f"GPU {gpu_id} is consistently underloaded. Triggering scale-down.", flush=True)
                         await remove_gpu_instance(global_scheduler, gpu_id)
                         underloaded_instances.discard(gpu_id)
+                        break
                     else:
                         underloaded_instances.add(gpu_id)
                         overloaded_instances.discard(gpu_id)
@@ -607,10 +674,9 @@ async def monitor_and_autoscale(global_scheduler):
                     overloaded_instances.discard(gpu_id)
                     underloaded_instances.discard(gpu_id)
 
-            await asyncio.sleep(20)
+            await asyncio.sleep(period_sec)
     finally:
         nvmlShutdown()
-
 app = FastAPI()
 
 @app.post("/generate")
@@ -716,9 +782,24 @@ def start_server(runtime_selection_policy="custom", runtime_urls="http://127.0.0
     loop.run_until_complete(main())
 
 async def get_stats():
+    global runtime_url_list
+    result_json_list = []
     async with aiohttp.ClientSession() as session:
-        async with session.post("http://0.0.0.0:30000/get_stats") as response:
-            return await response.json()
+        for runtime_url in runtime_url_list:
+            try:
+                async with session.post(f"{runtime_url}/get_stats") as response:
+                    if response.status == 200:
+                        result_json_list.append(await response.json())
+                    else:
+                        print(f"Error: {response.status} for {runtime_url}", flush=True)
+                        result_json_list.append({"error": f"Error: {response.status} for {runtime_url}"})
+            except aiohttp.ClientConnectionError as e:
+                print(f"Connection error for {runtime_url}: {e}", flush=True)
+                result_json_list.append({"error": f"Connection error for {runtime_url}: {e}"})
+            except Exception as e:
+                print(f"An unexpected error occurred for {runtime_url}: {e}", flush=True)
+                result_json_list.append({"error": f"An unexpected error occurred for {runtime_url}: {e}"})
+    return result_json_list
 
 async def record_gpu_metrics(global_scheduler):
     global util_list
@@ -735,8 +816,8 @@ async def record_gpu_metrics(global_scheduler):
         util_list.append(to_add)
         #print(f"Utilization record: active_gpu: {list(to_add.keys())}, utilizations: {list(to_add.values())}", flush=True)
         response_stats = await get_stats()
-        glog.info(f"Stats: {response_stats}")
-        await asyncio.sleep(1)
+       # glog.info(f"Stats: {response_stats}")
+       # await asyncio.sleep(1)
             
 
 def get_available_gpu_memory(gpu_id, distributed=False):
@@ -773,6 +854,32 @@ def start_server_and_load_models(model_name="mistralai/Mistral-7B-v0.1", devices
     Raises:
         KeyboardInterrupt: If the server is interrupted, it unloads the model.
     """
+    global stats_list
+    global stats_keep_count
+    global runtime_url_list
+    stats_list = {
+        'output_throughput': [],
+        'gpu_power': [],
+        'gpu_mem_used': [],
+        'gpu_utils': [],
+        'p99_ttft_ms': [],
+        'p99_tpot_ms': [],
+        'p99_itl_ms': [],
+        'p99_e2e_latency_ms': [],
+        
+    }
+    stats_keep_count = {
+        'output_throughput': 0,
+        'gpu_power': 0,
+        'gpu_mem_used': 0,
+        'gpu_utils': 0,
+        'p99_ttft_ms': 0,
+        'p99_tpot_ms': 0,
+        'p99_itl_ms': 0,
+        'p99_e2e_latency_ms': 0,
+    }
+    
+    
     server_args = {
         'log_prefix_hit': True,
         'mem_fraction_static': 0.8,
@@ -799,6 +906,8 @@ def start_server_and_load_models(model_name="mistralai/Mistral-7B-v0.1", devices
     runtimes = []
     for runtime in model_details.runtimes:
         runtimes.append(runtime.generate_url)
+        
+    runtime_url_list = [runtime.generate_url[:runtime.generate_url.rfind('/')] for runtime in model_details.runtimes]
     print(f"Loading runtimes at {runtimes}", flush=True)
     try:
         start_server(runtime_selection_policy="custom", runtime_urls=",".join(runtimes), model=model_name, host=host, port=port, mode=mode)

@@ -346,7 +346,7 @@ async def generate_request(obj: GenerateReqInput):
     logger.debug(f"{obj.text[:20]} ...")
     if obj.stream:
         import glog 
-        glog.warning('streaming\'s get stat is not supported yet')
+       # glog.warning('streaming\'s get stat is not supported yet')
         ts = time.perf_counter()
         
         async def stream_results():
@@ -384,7 +384,7 @@ async def generate_request(obj: GenerateReqInput):
             await get_stats()
         
         stream_result = stream_results()
-        glog.info(StreamingResponse(stream_result, media_type="text/event-stream"))
+       # glog.info(StreamingResponse(stream_result, media_type="text/event-stream"))
         
         return StreamingResponse(stream_result, media_type="text/event-stream")
 
