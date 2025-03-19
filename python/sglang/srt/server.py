@@ -56,6 +56,11 @@ app = FastAPI()
 tokenizer_manager = None
 
 
+@app.post("/get_stats")
+async def get_stats():
+    ret = await tokenizer_manager.get_waiting_queue_length()
+    return ret
+
 @app.get("/health")
 async def health() -> Response:
     """Health check."""

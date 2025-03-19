@@ -27,7 +27,9 @@ from sglang.srt.managers.io_struct import (
     FlushCacheReq,
     TokenizedGenerateReqInput,
     SchedulingMetricsReqInput, 
-    SchedulingMetricsOut
+    SchedulingMetricsOut,
+    WaitingQueueLengthReq,
+    WaitingQueueLengthOut,
 )
 from sglang.srt.managers.router.infer_batch import Batch, ForwardMode, Req, SchedulingBudget, FinishReason
 from sglang.srt.managers.router.model_runner import ModelRunner
@@ -223,6 +225,13 @@ class ModelRpcServer:
     
     def num_waiting_reqs(self):
         return len(self.forward_queue) + sum(len(pg) for pg in self.multi_priority_queue)
+
+    def exposed_num_waiting_reqs(self,recv_req:WaitingQueueLengthReq):
+        out = WaitingQueueLengthOut(
+            rid=recv_req.rid,
+            waiting_queue_len = len(self.forward_queue) + sum(len(pg) for pg in self.multi_priority_queue),
+        )
+        return out
     
     def update_hit_trace(self, timestamp, hit_tokens, total_prompt_len):
         self.hit_trace_buffer.append((timestamp, hit_tokens, total_prompt_len))
@@ -407,14 +416,14 @@ class ModelRpcServer:
         num_batched_tokens = batch.input_ids.shape[0]
         num_attention_tokens = batch.seq_lens.cpu().numpy().sum()
         unique_kvs = self.tree_cache.total_unique_kv_tokens(batch.reqs)
-        # detail_batch_logger(
-        #     f"GPU: {self.current_gpu} "
-        #     f"schedule running: "
-        #     f"batch.num_reqs: {len(batch.reqs)}, "
-        #     f"input ids: {num_batched_tokens}, "
-        #     f"attention tokens: {num_attention_tokens}, "
-        #     f"unique kv tokens: {unique_kvs}"
-        # )
+        detail_batch_logger(
+             f"GPU: {self.current_gpu} "
+             f"schedule running: "
+             f"batch.num_reqs: {len(batch.reqs)}, "
+             f"input ids: {num_batched_tokens}, "
+             f"attention tokens: {num_attention_tokens}, "
+             f"unique kv tokens: {unique_kvs}"
+        )
         return preempted, delayed_batch
 
     # TODO: add log prob
@@ -1525,6 +1534,9 @@ class ModelRpcClient:
             self.scheduler_metrics_request = async_wrap(
                 self.model_server.exposed_scheduler_metrics_request
             )
+            self.get_waiting_queue_length = async_wrap(
+                self.model_server.exposed_num_waiting_reqs
+            )
             self.dump_prefix_hit_trace = async_wrap(self.model_server.dump_prefix_hit_trace)
         else:
             with ThreadPoolExecutor(tp_size) as executor:
@@ -1550,7 +1562,8 @@ class ModelRpcClient:
                     await asyncio.gather(*[asyncio.to_thread(t.wait) for t in tasks])
                     return obtain(tasks[0].value)
                 return _func
-
+            
+            self.get_waiting_queue_length = async_wrap("exposed_num_waiting_reqs")
             self.step = async_wrap("step")
             self.get_windowed_hit_ratio = async_wrap("get_windowed_hit_ratio")
             # TODO: test push_req_step in TP mode

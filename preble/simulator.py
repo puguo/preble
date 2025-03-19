@@ -36,6 +36,8 @@ from sglang.srt.managers.io_struct import (
     TokenizedGenerateReqInput,
     SchedulingMetricsReqInput,
     SchedulingMetricsOut,
+    WaitingQueueLengthReq,
+    WaitingQueueLengthOut,
     DumpTrace
 )
 from sglang.srt.sampling_params import SamplingParams

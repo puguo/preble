@@ -25,6 +25,8 @@ from sglang.srt.managers.io_struct import (
     GenerateReqInput,
     TokenizedGenerateReqInput,
     SchedulingMetricsReqInput,
+    WaitingQueueLengthReq,
+    WaitingQueueLengthOut,
     SchedulingMetricsOut,
     DumpTrace,
     PrefixHitInspect,
@@ -164,6 +166,25 @@ class TokenizerManager:
     
     async def schedule_migration_request(self, url: str):
         self.send_to_router.send_pyobj(url)
+    
+
+    async def get_waiting_queue_length(self):
+        """
+        Sends a request to the router to retrieve the waiting queue length.
+        """
+        loop = asyncio.get_running_loop()
+        rid = str(uuid.uuid4())
+        waiting_queue_req = WaitingQueueLengthReq(rid=rid)
+        await self.send_to_router.send_pyobj(waiting_queue_req)
+        lock = asyncio.Lock()
+        event = asyncio.Event()
+        state = ReqState([], False, event)
+        self.rid_to_state[rid] = state
+        await event.wait()
+        result = state.out_list[-1]
+        del self.rid_to_state[rid]
+        event.clear()
+        return result
 
     async def get_scheduling_metrics(self, text: str):
         """
@@ -434,6 +455,23 @@ class TokenizerManager:
                     "matching_overhead": recv_obj.matching_overhead,
                 }
                 state = self.rid_to_state[recv_obj.rid]
+                state.out_list.append(out_dict)
+                state.finished = True
+                state.event.set()
+            elif isinstance(recv_obj, WaitingQueueLengthOut):
+                out_dict = {
+                    'waiting_queue_len': recv_obj.waiting_queue_len,
+                }
+                state = self.rid_to_state[recv_obj.rid]
+                state.out_list.append(out_dict)
+                state.finished = True
+                state.event.set()
+            elif isinstance(recv_obj, PrefixHitInspect):
+                out_dict = {
+                    'windowed': recv_obj.windowed,
+                    'hit_ratio': recv_obj.hit_ratio,
+                }
+                state = self.rid_to_state[recv_obj.random_id]
                 state.out_list.append(out_dict)
                 state.finished = True
                 state.event.set()

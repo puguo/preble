@@ -133,6 +133,15 @@ class SchedulingMetricsOut:
     manager_recv_time: float
 
 @dataclass
+class WaitingQueueLengthReq:
+    rid:str
+
+@dataclass
+class WaitingQueueLengthOut:
+    rid:str
+    waiting_queue_len: int
+
+@dataclass
 class BatchTokenIDOut:
     rids: List[str]
     output_tokens: List[List[int]]

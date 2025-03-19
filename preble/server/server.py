@@ -47,6 +47,8 @@ logger = logging.getLogger(__name__)
 
 
 util_list = []
+waiting_queues = []
+ttfts = {}
 
 # Defines parameters for sampling during text generation, 
 # including token limits, temperature, penalties
@@ -308,6 +310,8 @@ async def async_send_request(
                             if ttft == 0:
                                 ttft = time.perf_counter() - st
                                 output.ttft = ttft
+                                if runtime_id in ttfts:
+                                    ttfts[runtime_id].append(ttft)
 
                             # Decoding phase
                             else:
@@ -459,6 +463,7 @@ async def add_gpu_instance(global_scheduler):
             gpu_id=gpu_id
         )
         global_scheduler.per_gpu_load[gpu_id] = 0
+        ttfts[runtime.gpu] = []
         print(f"Added GPU {gpu_id}, current GPU num:{global_scheduler.num_gpus}", flush=True)
     else:
         print("No available GPUs to scale up.", flush=True)
@@ -469,6 +474,7 @@ async def remove_gpu_instance(global_scheduler, gpu_id):
     loader.unload_instance(gpu_id)
     print(f"Removed GPU {gpu_id}", flush=True)
     global_scheduler.per_gpu_load.pop(gpu_id)
+    del ttfts[gpu_id]
 
 SCALE_OUT_THRESHOLD = 80
 SCALE_IN_THRESHOLD = 20
@@ -477,80 +483,10 @@ overloaded_instances = set()
 underloaded_instances = set()
 
 
-
-async def test_monitor_and_autoscale(global_scheduler, initial_gpu_num=2, random_seed=12345):
-    """
-    Tests the autoscaling functionality by simulating GPU load and observing
-    scale-up and scale-down behavior.
-
-    Args:
-        global_scheduler: The GlobalSchedulerWithTime instance to test.
-        initial_gpu_num (int): The initial number of GPUs to simulate.
-        target_utilization (int): The target GPU utilization percentage.
-        duration (int): The duration of the test in seconds.
-    """
-    nvmlInit()
-    random.seed(random_seed)
-
-    sum = 0
-    random_values = []
-    list_length = 20  # Arbitrary length for the list
-    for _ in range(list_length - 1):
-        if sum == 0:
-            random_values.append(random)
-        elif sum == initial_gpu_num:
-            random_values.append(-1)
-        else:
-            random_values.append(random.choice([1, -1]))
-        sum += random_values[-1]
-    print(f"Generated random list: {random_values}", flush=True)
-    try:
-        for step in len(random_values):
-
-            current_devices = list(global_scheduler.per_gpu_load.keys())
-            for gpu_id in current_devices:
-                handle = nvmlDeviceGetHandleByIndex(gpu_id)
-                utilization = nvmlDeviceGetUtilizationRates(handle)
-                memory_info = nvmlDeviceGetMemoryInfo(handle)
-                memory_used = self.get_available_gpu_memory(gpu_id)
-                memory_used_percent = (memory_used / memory_info.total) * 100
-                print(f"GPU {gpu_id}: Utilization: {utilization.gpu}% | Memory Used: {memory_used / (1024 ** 2):.2f} MB / {memory_info.total / (1024 ** 2):.2f} MB", flush=True)
-
-                if random_values[step] == 1:
-                    if gpu_id in overloaded_instances:
-                        print(f"GPU {gpu_id} is consistently overloaded. Triggering scale-up.", flush=True)
-                        await add_gpu_instance(global_scheduler)
-                        overloaded_instances.discard(gpu_id)
-                        break
-                    else:
-                        overloaded_instances.add(gpu_id)
-                        underloaded_instances.discard(gpu_id)
-
-                    
-                elif random_values[step] == -1:
-                    if gpu_id in underloaded_instances:
-                        print(f"GPU {gpu_id} is consistently underloaded. Triggering scale-down.", flush=True)
-                        await remove_gpu_instance(global_scheduler, gpu_id)
-                        underloaded_instances.discard(gpu_id)
-                        await asyncio.sleep(50)
-                            
-                        break
-                            
-                    else:
-                        underloaded_instances.add(gpu_id)
-                        overloaded_instances.discard(gpu_id)
-
-        pass
-
-    except Exception as e:
-        print(f"Autoscaling test failed: {e}", flush=True)
-        raise
-    finally:
-        print("Test complete.", flush=True)
-        nvmlShutdown()
-
 async def monitor_and_autoscale(global_scheduler):
     global util_list
+    global ttfts
+    global waiting_queues
     try:
         while True:
             import glog 
@@ -558,7 +494,7 @@ async def monitor_and_autoscale(global_scheduler):
             current_devices = list(global_scheduler.per_gpu_load.keys())
             for gpu_id in current_devices:
                 handle = nvmlDeviceGetHandleByIndex(gpu_id)
-                recent_window = util_list[-20:] if util_list else []
+                recent_window = util_list[-15:] if util_list else []
                 
                 if len(recent_window) == 0:
                     utilization = nvmlDeviceGetUtilizationRates(handle).gpu
@@ -570,7 +506,7 @@ async def monitor_and_autoscale(global_scheduler):
                             utilization += util[gpu_id]
                             num += 1
                     utilization = utilization/num
-                del util_list[:20]
+                del util_list[:15]
                 memory_info = nvmlDeviceGetMemoryInfo(handle)
                 memory_used_percent = (memory_info.used / memory_info.total) * 100
                 print(f"GPU {gpu_id}: Utilization: {utilization}% | Memory Used: {memory_info.used / (1024 ** 2):.2f} MB / {memory_info.total / (1024 ** 2):.2f} MB", flush=True)
@@ -599,8 +535,9 @@ async def monitor_and_autoscale(global_scheduler):
                 else:
                     overloaded_instances.discard(gpu_id)
                     underloaded_instances.discard(gpu_id)
-
-            await asyncio.sleep(20)
+                ttfts[gpu_id] = []
+                del waiting_queues[:15]
+            await asyncio.sleep(15)
     finally:
         nvmlShutdown()
 
@@ -714,15 +651,30 @@ async def record_gpu_metrics(global_scheduler):
     nvmlInit()
     while True:
         to_add = {}
+        waiting = {}
         current_devices = list(global_scheduler.per_gpu_load.keys())
         for gpu_id in current_devices:
             handle = nvmlDeviceGetHandleByIndex(gpu_id)
             utilization = nvmlDeviceGetUtilizationRates(handle).gpu
-            memory_info = nvmlDeviceGetMemoryInfo(handle)
-            memory_used_percent = (memory_info.used / memory_info.total) * 100
             to_add[gpu_id] = utilization
+            runtime = None
+            for rt in model_details.runtimes:
+                if str(gpu_id) == str(rt.gpu):
+                    runtime = rt
+                    break
+            if runtime:
+                async with aiohttp.ClientSession() as session:
+                    async with session.post(runtime.get_stats_url) as response:
+                        data = await response.json()
+                        if response.status == 200:
+                            waiting[gpu_id] = data.get("waiting_queue_len", 0)
+                        else:
+                            print(f"[GPU {gpu_id}] Failed to get waiting queue: {data} ,{response.status}", flush=True)
+            else:
+                print(f"[GPU {gpu_id}] No matching runtime found.", flush=True)
         util_list.append(to_add)
-        print(f"Utilization record: active_gpu: {list(to_add.keys())}, utilizations: {list(to_add.values())}", flush=True)
+        waiting_queues.append(waiting)
+        print(f"Utilization record: active_gpu: {list(to_add.keys())}, utilizations: {list(to_add.values())}, waiting_queue_nums: {list(waiting.values())}", flush=True)
         await asyncio.sleep(1)
             
 
@@ -745,7 +697,6 @@ def get_available_gpu_memory(gpu_id, distributed=False):
     return free_gpu_memory / (1 << 20)
 
 def start_server_and_load_models(model_name="mistralai/Mistral-7B-v0.1", devices=[0], all_gpus=[0],host="127.0.0.1", port=8000, mode='regular'):
-    print('Starting server and loading models', flush=True)
     """
     Loads the specified model onto the given devices and starts the server.
 
@@ -785,6 +736,7 @@ def start_server_and_load_models(model_name="mistralai/Mistral-7B-v0.1", devices
     )
     runtimes = []
     for runtime in model_details.runtimes:
+        ttfts[runtime.gpu] = []
         runtimes.append(runtime.generate_url)
     print(f"Loading runtimes at {runtimes}", flush=True)
     try:

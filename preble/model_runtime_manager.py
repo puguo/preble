@@ -60,6 +60,10 @@ class EndpointRuntimeInterface:
     def flush_cache_url(self):
         return f"{self.url}/flush_cache"
 
+    @property
+    def get_stats_url(self):
+        return f"{self.url}/get_stats"
+
     def shutdown(self):
         pass
 

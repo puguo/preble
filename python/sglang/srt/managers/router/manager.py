@@ -12,11 +12,14 @@ from sglang.srt.managers.router.model_rpc import ModelRpcClient
 from sglang.srt.managers.tokenizer_manager import ReqState
 from sglang.srt.server_args import PortArgs, ServerArgs
 from sglang.srt.utils import get_exception_traceback
-from sglang.srt.managers.io_struct import SchedulingMetricsReqInput, MigrationReq, DumpTrace, PrefixHitInspect
+from sglang.srt.managers.io_struct import SchedulingMetricsReqInput, MigrationReq, DumpTrace, PrefixHitInspect, WaitingQueueLengthReq
 from sglang.srt.managers.router.model_runner import GPUConfig
 import time
+from fastapi import FastAPI
+import uvicorn
 
 asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
+
 
 
 class RouterManager:
@@ -131,6 +134,9 @@ class RouterManager:
         """
         while True:
             recv_req = await self.recv_from_tokenizer.recv_pyobj()
+            if isinstance(recv_req, WaitingQueueLengthReq):
+                loop.create_task(self.get_waiting_queue_length(recv_req))
+                continue
             if isinstance(recv_req, SchedulingMetricsReqInput):
                 recv_req.manager_recv_time = time.time() - recv_req.tokenizer_dispatch_time
                 loop.create_task(self.scheduler_metrics_request(recv_req))
@@ -174,6 +180,10 @@ class RouterManager:
         if mreq.requets:
             print(f"recving requests: {mreq.requets}")
             self.model_client.model_server.forward_queue.extend(mreq.requets)
+    
+    async def get_waiting_queue_length(self, recv_req: WaitingQueueLengthReq):
+        out = await self.model_client.get_waiting_queue_length(recv_req)
+        await self.send_to_tokenizer.send_pyobj(out)
 
 def start_router_process(
     server_args: ServerArgs, port_args: PortArgs, pipe_writer, model_overide_args, gpu_config: GPUConfig,
@@ -189,7 +199,7 @@ def start_router_process(
     except Exception:
         pipe_writer.send(get_exception_traceback())
         raise
-
+    
     pipe_writer.send("init ok")
 
     loop = asyncio.new_event_loop()
