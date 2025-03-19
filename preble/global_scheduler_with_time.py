@@ -127,6 +127,7 @@ class SlidingWindowHistogram:
         allocation = [0 for _ in range(self.num_gpus)]
         topts = []
         for i in range(self.num_gpus):
+            # wrong point, could have None in self.avg_topt_per_gpu[i] ex. (0.15, None)
             topts.append(np.median(self.avg_topt_per_gpu[i]))
         node: TreeNode
         for node, cost in self.histogram.items():
@@ -382,7 +383,8 @@ class GlobalSchedulerWithTime:
             self.histogram.current_decode_lengths_per_gpu[runtime_id] -= func_output.max_new_tokens
             if important_node in self.histogram.histogram:
                 self.histogram.per_node_total_decode_lengths[important_node] -= func_output.max_new_tokens
-            self.per_gpu_load[runtime_id] -= 1
+            if runtime_id in self.per_gpu_load:
+                self.per_gpu_load[runtime_id] -= 1
 
     def handle_important_node_stealing(self, scheduled_idx):
         if sum(self.per_gpu_load.values()) < 50 * self.num_gpus:
