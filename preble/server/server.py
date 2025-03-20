@@ -212,7 +212,7 @@ async def peek_queue(runtime_request_queue):
     return items
 
 #Picks a suitable runtime for each queued request using the request_router.
-async def process_runtime_selection(global_scheduler=None):
+async def process_runtime_selection(global_scheduler=None, cache_weight=None, queue_penalty_weight=None):
     while True:
         obj: GenerateReqInput
         import glog 
@@ -234,7 +234,7 @@ async def process_runtime_selection(global_scheduler=None):
         
         loaded_gpu_list = global_scheduler.per_gpu_load.keys()
         try:
-            runtime_id = request_router.select_runtime(text=text, experiment_id="1", input_ids=input_ids, request_id=request_id, sampling_params=sampling_params, runtime_id_with_highest_hit_rate=highest_idx, hit_rates=hit_rates, loaded_gpu_list=loaded_gpu_list)
+            runtime_id = request_router.select_runtime(text=text, experiment_id="1", input_ids=input_ids, request_id=request_id, sampling_params=sampling_params, runtime_id_with_highest_hit_rate=highest_idx, hit_rates=hit_rates, loaded_gpu_list=loaded_gpu_list, waiting_queues=waiting_queues, cache_weight=cache_weight, queue_penalty_weight=queue_penalty_weight)
             runtime_events[request_id] = (runtime_events[request_id][0], runtime_id)
         except Exception as e:
             logger.error(f"Error selecting runtime: {e}")
@@ -400,7 +400,7 @@ def get_tokenizer(
         pretrained_model_name_or_path, trust_remote_code=True
     )
 
-def start_server(runtime_selection_policy="custom", runtime_urls="http://127.0.0.1:30000/generate", host='127.0.0.1', port=8000, model="mistralai/Mistral-7B-v0.1", mode='regular'):
+def start_server(runtime_selection_policy="custom", runtime_urls="http://127.0.0.1:30000/generate", host='127.0.0.1', port=8000, model="mistralai/Mistral-7B-v0.1", mode='regular', cache_weight=0.7, queue_penalty_weight=0.3):
     """
     Starts the server with the specified runtime selection policy, runtime URLs, and model.
 
@@ -450,7 +450,7 @@ def start_server(runtime_selection_policy="custom", runtime_urls="http://127.0.0
     # Define the main async loop to start background tasks and the server
     logger.info(f"Starting server... port {port}, host {host}")
     async def main():
-        loop.create_task(process_runtime_selection(global_scheduler))
+        loop.create_task(process_runtime_selection(global_scheduler, cache_weight, queue_penalty_weight))
         loop.create_task(process_cleanup_selection())
         if mode == 'test':
             loop.create_task(test_monitor_and_autoscale(global_scheduler))

@@ -18,7 +18,7 @@ from ttft_overload_detector import TTFTWindowedOverloadedDetector
 import glog
 
 
-tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-3.1-8B")
+tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-3.2-1B")
 
 logger = logging.getLogger(__name__)
 
@@ -302,6 +302,26 @@ class GlobalSchedulerWithTime:
             costs[gpu_id]= cost
         gpu_selected = min(costs, key=costs.get) if costs else None
         return gpu_selected
+    
+    def calculate_min_load_cost_1(self, leaf_node, selected_gpus):
+        # histogram_mem_cost = self.histogram.current_allocation_cost_per_gpu
+        histogram_mem_cost = self.histogram.current_allocation_per_gpu()
+        costs = {}
+        for gpu_id in selected_gpus:
+            cost = histogram_mem_cost[gpu_id]
+            if self.enable_eviction:
+                cost += self.virtual_evict_for_routing(leaf_node, gpu_id)
+                
+            queue_penalty = self.per_gpu_load[gpu_id] * 0.2
+            if leaf_node in self.histogram.hit_tokens and leaf_node in self.histogram.prompt_tokens:
+                matched_ratio = self.histogram.hit_tokens[leaf_node] / max(1, self.histogram.prompt_tokens[leaf_node])
+            else:
+                matched_ratio = 0 
+            cache_bonus = (1 - matched_ratio) * 0.5
+            cost = cost + queue_penalty - cache_bonus
+            costs[gpu_id]= cost
+        gpu_selected = min(costs, key=costs.get) if costs else None
+        return gpu_selected
 
 
     def runtime_selector(
@@ -312,6 +332,9 @@ class GlobalSchedulerWithTime:
         sampling_params=None,
         runtime_id_with_highest_hit_rate=None,
         loaded_gpu_list=None,
+        waiting_queues=None,
+        cache_weight=0.7,
+        queue_penalty_weight=0.3,
         *args, **kwargs,
     ):
         decoding_length = sampling_params.get("max_new_tokens", sampling_params.get("max_tokens", 1024))
@@ -324,6 +347,39 @@ class GlobalSchedulerWithTime:
             self.handle_split_node_histogram(split_nodes)
 
             important_node = self.get_important_node(leaf_node)
+            
+            candidate_gpus = set()
+            candidate_nodes = []
+            current_node = leaf_node
+            unmatched_tokens = 0
+            
+            while current_node and len(candidate_gpus) < 3:  # Stop after finding up to 3 GPUs
+                matched_tokens = current_node.num_tokens
+                unmatched_tokens = current_node.context_so_far - matched_tokens  # Cache misses
+                
+                parent_gpus = self.get_parent_gpu_allocation(current_node)
+                for gpu in parent_gpus:
+                    if gpu not in candidate_gpus:
+                        candidate_gpus.add(gpu)
+                        candidate_nodes.append((gpu, unmatched_tokens))  # Store GPU with its unmatched token cost
+                
+                current_node = current_node.parent  # Move up in the tree
+            
+            def gpu_score(gpu_id, unmatched_tokens):
+                queue_penalty = waiting_queues.get(gpu_id, 0)  
+                return (cache_weight * unmatched_tokens) + (queue_penalty_weight * queue_penalty)
+            
+            if candidate_gpus:
+                runtime_idx = min(candidate_nodes, key=lambda x: gpu_score(x[0], x[1]))[0]  # Select GPU with lowest cost
+
+            elif runtime_id_with_highest_hit_rate is not None:
+                glog.info('runtime_id_with_highest_hit_rate is not None, using it directly')
+                runtime_idx = runtime_id_with_highest_hit_rate
+
+            else:
+                glog.info('No strong cache match, selecting GPU based on min load cost')
+                runtime_idx = self.calculate_min_load_cost(leaf_node, selected_gpus=loaded_gpu_list)
+            """
             if leaf_node.num_tokens < leaf_node.context_so_far: # check that gpu allocation exists for important node
                # print('check that gpu allocation exists for important node', flush=True)
                 glog.info('check that gpu allocation exists for important node')
@@ -339,6 +395,7 @@ class GlobalSchedulerWithTime:
                 glog.info('runtime_id_with_highest_hit_rate is None, using calculate_min_load_cost')
                 #runtime_idx = self.calculate_min_load_cost(leaf_node, selected_gpus=range(self.num_gpus))
                 runtime_idx = self.calculate_min_load_cost(leaf_node, selected_gpus=loaded_gpu_list)
+            """
             self.counter += 1
             #glog.info(f'self.counter: {self.counter}')
             #glog.info(f'runtime_idx:  {runtime_idx}')
