@@ -5,8 +5,8 @@
 Benchmark online serving with dynamic requests.
 
 Usage:
-python3 bench_request.py --backend vllm --num-prompts 30000 -c configs/2_tiers_config.yaml --request-rate 20 \
-    --model meta-llama/Llama-3.1-8B --port 8089 --window 500
+python3 bench_request.py --backend vllm --num-prompts 30000 -c configs/1_tier_config.yaml --request-rate 50 \
+    --model mistralai/Mistral-7B-v0.1 --port 8010 --window 100
 
 python3 -m sglang.bench_request --backend sglang --dataset-name random --num-prompts 3000 --random-input 1024 --random-output 1024 --random-range-ratio 0.5
 python3 -m sglang.bench_request --backend sglang --dataset-name random --request-rate-range 1,2,4,8,16,32 --random-input 4096 --random-output 1024 --random-range-ratio 0.125 --multi
@@ -180,13 +180,14 @@ async def async_request_trt_llm(
         output = RequestFuncOutput()
         output.prompt_len = request_func_input.prompt_len
 
-        ttft = 0.0
+        ttft = -1
         st = time.perf_counter()
         most_recent_timestamp = st
         try:
             async with session.post(url=api_url, json=payload) as response:
                 if response.status == 200:
                     async for chunk_bytes in response.content:
+                        timestamp = time.perf_counter()
                         chunk_bytes = chunk_bytes.strip()
                         if not chunk_bytes:
                             continue
@@ -195,10 +196,12 @@ async def async_request_trt_llm(
 
                         data = json.loads(chunk)
                         output.generated_text += data["text_output"]
-                        timestamp = time.perf_counter()
+                        
                         # First token
-                        if ttft == 0.0:
-                            ttft = time.perf_counter() - st
+                        if ttft == -1:
+                            import glog
+                            glog.info(f'ttft:{ttft}')
+                            ttft = timestamp - st
                             output.ttft = ttft
 
                         # Decoding phase
@@ -252,32 +255,42 @@ async def async_request_openai_completions(
             output.prompt_len = request_func_input.prompt_len
 
             generated_text = ""
-            ttft = 0.0
-            st = time.perf_counter()
+            ttft = -1
+            
             try:
-                output.sent_time = st
-                async with session.post(
-                    url=api_url, json=payload, headers=headers
-                ) as response:
-                    if response.status == 200:
-                        latency = time.perf_counter() - st
-                        async for chunk_bytes in response.content:
-                            chunk_bytes = chunk_bytes.rstrip(b"\r\n")
-                            if not chunk_bytes:
-                                continue
-                            if ttft ==0.0:
-                                ttft = latency
-                            chunk = remove_prefix(chunk_bytes.decode("utf-8"), "data:")
-                            if "[DONE]" in chunk:
-                                pass
-                            else:
-                                data = json.loads(chunk)
-                                # NOTE: Some completion API might have a last
-                                # usage summary response without a token so we
-                                # want to check a token was generated
-                                if data["text"]:
-                                    text = data["text"]
-                                    generated_text += data["text"]
+                async def posting():
+                    st = time.perf_counter()
+                    
+                    response = session.post(
+                        url=api_url, json=payload, headers=headers
+                    )
+                    latency = time.perf_counter() - st
+                    return response, latency
+                
+                response, latency = await posting()
+                if response.status == 200:
+                        
+                    async for chunk_bytes in response.content:
+                        chunk_bytes = chunk_bytes.rstrip(b"\r\n")
+                        if not chunk_bytes:
+                            continue
+                        if ttft == -1:
+                            import glog
+                                
+                            ttft = latency
+                            output.ttft = ttft
+                            glog.info(f'ttft:{ttft}, ts:{st}, now:{latency}')
+                        chunk = remove_prefix(chunk_bytes.decode("utf-8"), "data:")
+                        if "[DONE]" in chunk:
+                            pass
+                        else:
+                            data = json.loads(chunk)
+                            # NOTE: Some completion API might have a last
+                            # usage summary response without a token so we
+                            # want to check a token was generated
+                            if data["text"]:
+                                text = data["text"]
+                                generated_text += data["text"]
 
                         output.generated_text = generated_text
                         output.success = True
@@ -511,6 +524,7 @@ def sample_random_requests(
             dataset_path = download_and_cache_file(SHAREGPT_URL)
 
         # Load the dataset.
+        print(dataset_path)
         with open(dataset_path) as f:
             dataset = json.load(f)
         # Filter out the conversations with less than 2 turns.
@@ -541,7 +555,6 @@ def sample_random_requests(
             prompt = tokenizer.decode(input_ids)
             input_requests.append((prompt, int(input_lens[i]), int(output_lens[i])))
         
-        print(input_ids)
     else:
         # Sample token ids from random integers. This can cause some NaN issues.
         offsets = np.random.randint(0, tokenizer.vocab_size, size=num_prompts)
@@ -615,7 +628,7 @@ def calculate_metrics(
             retokenized_output_len = len(
                 tokenizer.encode(outputs[i].generated_text, add_special_tokens=False)
             )
-            print(f"output_len: {output_len}, retokenized_output_len: {retokenized_output_len}")
+         #   print(f"output_len: {output_len}, retokenized_output_len: {retokenized_output_len}")
             retokenized_output_lens.append(retokenized_output_len)
             total_input += input_requests[i][1]
             if output_len > 1:
@@ -892,7 +905,6 @@ async def benchmark(
     print("{:<40} {:<10}".format("Benchmarking Window:", window))
 
     results = []
-    print(outputs_per_workload)
     for workload, outputs in zip(workloads, outputs_per_workload):
         res = print_metrics(
             workload.requests, 
