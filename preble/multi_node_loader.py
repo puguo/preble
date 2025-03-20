@@ -76,14 +76,12 @@ class MultiNodeLoader:
 
 
     # Load a new instance on a specific GPU
-    def load_instance(self, model_path, gpu_id) -> ModelDetails:
+    def load_instance(self, model_path, gpu_id, model_details) -> ModelDetails:
         gpu_config = GPUConfig(gpu_id=gpu_id,url=None, use_ssh=False, runtime_args=self.server_args)
-        model_details = ModelDetails(model_path, [gpu_config], self.simulate)
+        print("Loading Runtime...")
         model_details.load_runtimes(model_path=model_path, gpu_configs=[gpu_config])
-
-        self.models_allocated.append(model_details)
-        self.gpus_to_model_allocated[gpu_id].append(model_details)
-
+        if model_details not in self.gpus_to_model_allocated[gpu_id]:
+            self.gpus_to_model_allocated[gpu_id].append(model_details)
         print(f"Loaded new instance on GPU {gpu_id}")
         return model_details
 
@@ -91,6 +89,7 @@ class MultiNodeLoader:
     def unload_instance(self, gpu_id):
         
         popped = False
+
         for model_details in self.models_allocated:
             for gpu_config in model_details.gpu_configs:
                 if gpu_config.gpu_id == gpu_id:
@@ -100,8 +99,7 @@ class MultiNodeLoader:
                 if runtime.gpu == gpu_id:
                     runtime.shutdown()
             model_details.runtimes = [runtime for runtime in model_details.runtimes if runtime.gpu != gpu_id]
-
-       
+            self.gpus_to_model_allocated[gpu_id].remove(model_details)
         if popped:
             print(f"Unloaded instance from GPU {gpu_id}")
         else:
