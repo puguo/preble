@@ -515,7 +515,7 @@ def get_available_gpu_memory(gpu_id, distributed=False):
 
     return free_gpu_memory / (1 << 20)
 
-def start_server_and_load_models(model_name="mistralai/Mistral-7B-v0.1", devices=[0], all_gpus=[0],host="127.0.0.1", port=8000, mode='regular'):
+def start_server_and_load_models(model_name="mistralai/Mistral-7B-v0.1", devices=[0], all_gpus=[0],host="127.0.0.1", port=8000, mode='regular', cache_weight=0.7, queue_penalty_weight=0.3):
     """
     Loads the specified model onto the given devices and starts the server.
 
@@ -560,7 +560,7 @@ def start_server_and_load_models(model_name="mistralai/Mistral-7B-v0.1", devices
         global_tpots[runtime.gpu] = []
     print(f"Loading runtimes at {runtimes}", flush=True)
     try:
-        start_server(runtime_selection_policy="custom", runtime_urls=",".join(runtimes), model=model_name, host=host, port=port, mode=mode)
+        start_server(runtime_selection_policy="custom", runtime_urls=",".join(runtimes), model=model_name, host=host, port=port, mode=mode, cache_weight=cache_weight, queue_penalty_weight=queue_penalty_weight)
     except KeyboardInterrupt:
         print("Unloading model", flush=True)
         loader.unload_model(model_details)

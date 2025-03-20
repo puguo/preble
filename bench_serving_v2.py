@@ -6,7 +6,7 @@ Benchmark online serving with dynamic requests.
 
 Usage:
 python3 bench_serving_v2.py --backend sglang --num-prompt 3000 -c configs/2_tiers_config.yaml --request-rate 10 \
-    --model meta-llama/Meta-Llama-3.2-1B --port 8081 --window 60
+    --model meta-llama/Meta-Llama-3.1-8B --port 8081 --window 60
 
 python3 -m sglang.bench_serving --backend sglang --dataset-name random --num-prompts 3000 --random-input 1024 --random-output 1024 --random-range-ratio 0.5
 python3 -m sglang.bench_serving --backend sglang --dataset-name random --request-rate-range 1,2,4,8,16,32 --random-input 4096 --random-output 1024 --random-range-ratio 0.125 --multi
@@ -1765,7 +1765,7 @@ class BenchmarkingArgs:
         parser.add_argument(
             "--model",
             type=str,
-            default="meta-llama/Meta-Llama-3.2-1B",
+            default="meta-llama/Meta-Llama-3.1-8B",
             help="Name or path of the model. If not set, the default model will request /v1/models for conf.",
         )
         parser.add_argument(

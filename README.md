@@ -26,6 +26,13 @@ pip install fastapi
 pip install transformers
 pip install uvicorn
 
+pip install fire
+pip install pynvml
+pip install pandas
+pip install outlines==0.0.46
+pip install glog
+pip install paramiko
+pip install matplotlib
 ```
 
 

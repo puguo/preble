@@ -1,7 +1,7 @@
 Starting server and loading models
-Loaded model meta-llama/Llama-3.2-1B on GPUs [0, 1]
+Loaded model meta-llama/Llama-3.1-8B on GPUs [0, 1]
 Loading runtimes at ['http://0.0.0.0:30000/generate', 'http://0.0.0.0:10005/generate']
-Tokenizer loaded for model meta-llama/Llama-3.2-1B
+Tokenizer loaded for model meta-llama/Llama-3.1-8B
 GPU 0: Utilization: 2% | Memory Used: 39792.62 MB / 49140.00 MB
 GPU 1: Utilization: 2% | Memory Used: 39792.62 MB / 49140.00 MB
 Utilization record: active_gpu: [0, 1], utilizations: [2, 2]
