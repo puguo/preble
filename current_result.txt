@@ -1,0 +1,69 @@
+
+Baseline:
+
+```
+Average Metrics:
+- TTFT: 1.1114 s
+- TPOT: 0.0736 s
+- Queue Length: 30.4942
+
+P99 Metrics:
+- TTFT: 0.1014 s
+- TPOT: 0.0432 s
+- Queue Length: 0.0000
+```
+
+
+### 1. utils方法 (gpu_metrics_analysis_utils.png)
+```
+Average Metrics:
+- TTFT: 0.2273s
+- TPOT: 0.1047 s
+- Queue Length: 2576.4020
+
+P99 Metrics:
+- TTFT: 0.2953 s
+- TPOT: 0.0475 s
+- Queue Length: 0.0000
+```
+
+### 2. ttft方法 (gpu_metrics_analysis_ttft.png)
+```
+Average Metrics:
+- TTFT: 6.8061 s
+- TPOT: 0.1205 s
+- Queue Length: 115.7777
+
+P99 Metrics:
+- TTFT: 0.1835 s
+- TPOT: 0.0382 s
+- Queue Length: 0.0000
+```
+
+### 3. tpot方法 (gpu_metrics_analysis_tpot.png)
+```
+Average Metrics:
+- TTFT: [Test break down at middle due to too long queue on single card]
+- TPOT: 0.1104 s
+- Queue Length: 2771.3677
+
+P99 Metrics:
+- TTFT: 0.2503 s
+- TPOT: 0.0483 s
+- Queue Length: 0.0000
+```
+
+
+### 4. waiting queue方法 (gpu_metrics_analysis_waitingqueue.png)
+```
+Average Metrics:
+- TTFT: 7.2790 s
+- TPOT: 0.1398 s
+- Queue Length: 562.0081
+
+P99 Metrics:
+- TTFT: 0.1816 s
+- TPOT: 0.0376 s
+- Queue Length: 0.0000
+```
+

@@ -1,0 +1,618 @@
+Threshold 10, 300:2025-03-21 00:59:22 - GPU 0: Utilization: 2% | Avg TTFT: 0.0 s | Avg TPOT: 0.0 s | Avg Waiting Queue Length: 0
+Threshold 10, 300:2025-03-21 00:59:22 - recent_ttft[] - recent_tpot[] 
+Threshold 10, 300:2025-03-21 00:59:22 - GPU 1: Utilization: 2% | Avg TTFT: 0.0 s | Avg TPOT: 0.0 s | Avg Waiting Queue Length: 0
+Threshold 10, 300:2025-03-21 00:59:22 - recent_ttft[] - recent_tpot[] 
+Threshold 10, 300:2025-03-21 00:59:22 - GPU 2: Utilization: 2% | Avg TTFT: 0.0 s | Avg TPOT: 0.0 s | Avg Waiting Queue Length: 0
+Threshold 10, 300:2025-03-21 00:59:22 - recent_ttft[] - recent_tpot[] 
+Threshold 10, 300:2025-03-21 00:59:22 - GPU 3: Utilization: 2% | Avg TTFT: 0.0 s | Avg TPOT: 0.0 s | Avg Waiting Queue Length: 0
+Threshold 10, 300:2025-03-21 00:59:22 - recent_ttft[] - recent_tpot[] 
+Threshold 10, 300:2025-03-21 00:59:22 - Utilization record: active_gpu: [0, 1, 2, 3], utilizations: [2, 2, 2, 2], waiting_keys: [0, 1, 2, 3], waiting_queue_nums: [0, 0, 0, 0]
+Threshold 10, 300:2025-03-21 00:59:23 - Utilization record: active_gpu: [0, 1, 2, 3], utilizations: [2, 3, 2, 2], waiting_keys: [0, 1, 2, 3], waiting_queue_nums: [0, 0, 0, 0]
+Threshold 10, 300:2025-03-21 00:59:24 - Utilization record: active_gpu: [0, 1, 2, 3], utilizations: [2, 2, 2, 2], waiting_keys: [0, 1, 2, 3], waiting_queue_nums: [0, 0, 0, 0]
+Threshold 10, 300:2025-03-21 00:59:25 - Utilization record: active_gpu: [0, 1, 2, 3], utilizations: [2, 2, 2, 2], waiting_keys: [0, 1, 2, 3], waiting_queue_nums: [0, 0, 0, 0]
+Threshold 10, 300:2025-03-21 00:59:26 - Utilization record: active_gpu: [0, 1, 2, 3], utilizations: [2, 2, 2, 2], waiting_keys: [0, 1, 2, 3], waiting_queue_nums: [0, 0, 0, 0]
+Threshold 10, 300:2025-03-21 00:59:27 - Utilization record: active_gpu: [0, 1, 2, 3], utilizations: [2, 2, 2, 2], waiting_keys: [0, 1, 2, 3], waiting_queue_nums: [0, 0, 0, 0]
+Threshold 10, 300:2025-03-21 00:59:28 - Utilization record: active_gpu: [0, 1, 2, 3], utilizations: [2, 2, 2, 2], waiting_keys: [0, 1, 2, 3], waiting_queue_nums: [0, 0, 0, 0]
+Threshold 10, 300:2025-03-21 00:59:29 - Utilization record: active_gpu: [0, 1, 2, 3], utilizations: [2, 2, 2, 2], waiting_keys: [0, 1, 2, 3], waiting_queue_nums: [0, 0, 0, 0]
+Threshold 10, 300:2025-03-21 00:59:30 - Utilization record: active_gpu: [0, 1, 2, 3], utilizations: [2, 2, 2, 2], waiting_keys: [0, 1, 2, 3], waiting_queue_nums: [0, 0, 0, 0]
+Threshold 10, 300:2025-03-21 00:59:31 - Utilization record: active_gpu: [0, 1, 2, 3], utilizations: [2, 2, 2, 2], waiting_keys: [0, 1, 2, 3], waiting_queue_nums: [0, 0, 0, 0]
+Threshold 10, 300:2025-03-21 00:59:32 - GPU 0: Utilization: 2.0% | Avg TTFT: 0.0 s | Avg TPOT: 0.0 s | Avg Waiting Queue Length: 0.0
+Threshold 10, 300:2025-03-21 00:59:32 - recent_ttft[] - recent_tpot[] 
+Threshold 10, 300:2025-03-21 00:59:32 - GPU 0 is consistently underloaded. Triggering scale-down.
+Threshold 10, 300:2025-03-21 00:59:37 - GPU 1: Utilization: 2.1% | Avg TTFT: 0.0 s | Avg TPOT: 0.0 s | Avg Waiting Queue Length: 0.0
+Threshold 10, 300:2025-03-21 00:59:37 - recent_ttft[] - recent_tpot[] 
+Threshold 10, 300:2025-03-21 00:59:37 - GPU 1 is consistently underloaded. Triggering scale-down.
+Threshold 10, 300:2025-03-21 00:59:42 - GPU 2: Utilization: 2.0% | Avg TTFT: 0.0 s | Avg TPOT: 0.0 s | Avg Waiting Queue Length: 0.0
+Threshold 10, 300:2025-03-21 00:59:42 - recent_ttft[] - recent_tpot[] 
+Threshold 10, 300:2025-03-21 00:59:42 - GPU 2 is consistently underloaded. Triggering scale-down.
+Threshold 10, 300:2025-03-21 00:59:47 - GPU 3: Utilization: 2.0% | Avg TTFT: 0.0 s | Avg TPOT: 0.0 s | Avg Waiting Queue Length: 0.0
+Threshold 10, 300:2025-03-21 00:59:47 - recent_ttft[] - recent_tpot[] 
+Threshold 10, 300:2025-03-21 00:59:47 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 00:59:48 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 00:59:49 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 00:59:50 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 00:59:51 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 00:59:52 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 00:59:53 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 00:59:54 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 00:59:55 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 00:59:56 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 00:59:57 - GPU 3: Utilization: 2.0% | Avg TTFT: 0.0 s | Avg TPOT: 0.0 s | Avg Waiting Queue Length: 0.0
+Threshold 10, 300:2025-03-21 00:59:57 - recent_ttft[] - recent_tpot[] 
+Threshold 10, 300:2025-03-21 00:59:57 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 00:59:58 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 00:59:59 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:00:00 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:00:01 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:00:02 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:00:03 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:00:04 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:00:05 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:00:06 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:00:07 - GPU 3: Utilization: 2.0% | Avg TTFT: 0.0 s | Avg TPOT: 0.0 s | Avg Waiting Queue Length: 0.0
+Threshold 10, 300:2025-03-21 01:00:07 - recent_ttft[] - recent_tpot[] 
+Threshold 10, 300:2025-03-21 01:00:07 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:00:08 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:00:09 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:00:10 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:00:11 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:00:12 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:00:13 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:00:14 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:00:15 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:00:16 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:00:17 - GPU 3: Utilization: 2.0% | Avg TTFT: 0.0 s | Avg TPOT: 0.0 s | Avg Waiting Queue Length: 0.0
+Threshold 10, 300:2025-03-21 01:00:17 - recent_ttft[] - recent_tpot[] 
+Threshold 10, 300:2025-03-21 01:00:17 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:00:18 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:00:19 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:00:20 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:00:21 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:00:22 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:00:23 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:00:24 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:00:25 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:00:26 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:00:27 - GPU 3: Utilization: 2.0% | Avg TTFT: 0.0 s | Avg TPOT: 0.0 s | Avg Waiting Queue Length: 0.0
+Threshold 10, 300:2025-03-21 01:00:27 - recent_ttft[] - recent_tpot[] 
+Threshold 10, 300:2025-03-21 01:00:27 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:00:28 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:00:29 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:00:30 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:00:31 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:00:32 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:00:33 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:00:34 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:00:35 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:00:36 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:00:37 - GPU 3: Utilization: 2.0% | Avg TTFT: 0.0 s | Avg TPOT: 0.0 s | Avg Waiting Queue Length: 0.0
+Threshold 10, 300:2025-03-21 01:00:37 - recent_ttft[] - recent_tpot[] 
+Threshold 10, 300:2025-03-21 01:00:37 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:00:38 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:00:39 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:00:40 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:00:41 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:00:42 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:00:43 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:00:44 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:00:45 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:00:47 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:00:47 - GPU 3: Utilization: 2.0% | Avg TTFT: 0.0 s | Avg TPOT: 0.0 s | Avg Waiting Queue Length: 0.0
+Threshold 10, 300:2025-03-21 01:00:47 - recent_ttft[] - recent_tpot[] 
+Threshold 10, 300:2025-03-21 01:00:48 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:00:49 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:00:50 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:00:51 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:00:52 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:00:53 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:00:54 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:00:55 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:00:56 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:00:57 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:00:57 - GPU 3: Utilization: 2.0% | Avg TTFT: 0.0 s | Avg TPOT: 0.0 s | Avg Waiting Queue Length: 0.0
+Threshold 10, 300:2025-03-21 01:00:57 - recent_ttft[] - recent_tpot[] 
+Threshold 10, 300:2025-03-21 01:00:58 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:00:59 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:01:00 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:01:01 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:01:02 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:01:03 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:01:04 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:01:05 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:01:06 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:01:07 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:01:07 - GPU 3: Utilization: 2.0% | Avg TTFT: 0.0 s | Avg TPOT: 0.0 s | Avg Waiting Queue Length: 0.0
+Threshold 10, 300:2025-03-21 01:01:07 - recent_ttft[] - recent_tpot[] 
+Threshold 10, 300:2025-03-21 01:01:08 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:01:09 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:01:10 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:01:11 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:01:12 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:01:13 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:01:14 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:01:15 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:01:16 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:01:17 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:01:17 - GPU 3: Utilization: 2.0% | Avg TTFT: 0.0 s | Avg TPOT: 0.0 s | Avg Waiting Queue Length: 0.0
+Threshold 10, 300:2025-03-21 01:01:17 - recent_ttft[] - recent_tpot[] 
+Threshold 10, 300:2025-03-21 01:01:18 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:01:19 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:01:20 - Utilization record: active_gpu: [3], utilizations: [2], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:01:21 - Utilization record: active_gpu: [3], utilizations: [84], waiting_keys: [3], waiting_queue_nums: [0]
+Threshold 10, 300:2025-03-21 01:01:22 - Utilization record: active_gpu: [3], utilizations: [46], waiting_keys: [3], waiting_queue_nums: [45]
+Threshold 10, 300:2025-03-21 01:01:23 - Utilization record: active_gpu: [3], utilizations: [100], waiting_keys: [3], waiting_queue_nums: [65]
+Threshold 10, 300:2025-03-21 01:01:25 - Utilization record: active_gpu: [3], utilizations: [100], waiting_keys: [3], waiting_queue_nums: [105]
+Threshold 10, 300:2025-03-21 01:01:26 - Utilization record: active_gpu: [3], utilizations: [67], waiting_keys: [3], waiting_queue_nums: [120]
+Threshold 10, 300:2025-03-21 01:01:27 - Utilization record: active_gpu: [3], utilizations: [62], waiting_keys: [3], waiting_queue_nums: [142]
+Threshold 10, 300:2025-03-21 01:01:27 - GPU 3: Utilization: 51.666666666666664% | Avg TTFT: 4.367224142886698 s | Avg TPOT: 0.03731278437044239 s | Avg Waiting Queue Length: 53.0
+Threshold 10, 300:2025-03-21 01:01:27 - recent_ttft[4.412760643986985, 4.460957951028831, 4.290454596979544, 4.428083773003891, 4.310013429960236, 4.311277461936697, 4.444901296985336, 4.372948586940765, 4.378347352030687, 4.26249633601401] - recent_tpot[0.03731278437044239] 
+Threshold 10, 300:2025-03-21 01:01:28 - Utilization record: active_gpu: [3], utilizations: [46], waiting_keys: [3], waiting_queue_nums: [172]
+Threshold 10, 300:2025-03-21 01:01:29 - Utilization record: active_gpu: [3], utilizations: [61], waiting_keys: [3], waiting_queue_nums: [194]
+Threshold 10, 300:2025-03-21 01:01:31 - Utilization record: active_gpu: [3], utilizations: [61], waiting_keys: [3], waiting_queue_nums: [210]
+Threshold 10, 300:2025-03-21 01:01:32 - Utilization record: active_gpu: [3], utilizations: [100], waiting_keys: [3], waiting_queue_nums: [246]
+Threshold 10, 300:2025-03-21 01:01:33 - Utilization record: active_gpu: [3], utilizations: [59], waiting_keys: [3], waiting_queue_nums: [288]
+Threshold 10, 300:2025-03-21 01:01:34 - Utilization record: active_gpu: [3], utilizations: [36], waiting_keys: [3], waiting_queue_nums: [324]
+Threshold 10, 300:2025-03-21 01:01:35 - Utilization record: active_gpu: [3], utilizations: [100], waiting_keys: [3], waiting_queue_nums: [372]
+Threshold 10, 300:2025-03-21 01:01:37 - Utilization record: active_gpu: [3], utilizations: [78], waiting_keys: [3], waiting_queue_nums: [367]
+Threshold 10, 300:2025-03-21 01:01:37 - GPU 3: Utilization: 67.625% | Avg TTFT: 9.066364107397385 s | Avg TPOT: 0.0 s | Avg Waiting Queue Length: 271.625
+Threshold 10, 300:2025-03-21 01:01:37 - recent_ttft[10.066681168973446, 9.950060190982185, 10.083663124940358, 10.037015730980784, 9.957545891054906, 10.041857853997499, 9.944576994981617, 10.004441848956048, 9.969853368005715, 0.6079449011012912] - recent_tpot[] 
+Threshold 10, 300:2025-03-21 01:01:38 - Utilization record: active_gpu: [3], utilizations: [100], waiting_keys: [3], waiting_queue_nums: [426]
+Threshold 10, 300:2025-03-21 01:01:39 - Utilization record: active_gpu: [3], utilizations: [60], waiting_keys: [3], waiting_queue_nums: [439]
+Threshold 10, 300:2025-03-21 01:01:40 - Utilization record: active_gpu: [3], utilizations: [100], waiting_keys: [3], waiting_queue_nums: [457]
+Threshold 10, 300:2025-03-21 01:01:42 - Utilization record: active_gpu: [3], utilizations: [20], waiting_keys: [3], waiting_queue_nums: [512]
+Threshold 10, 300:2025-03-21 01:01:43 - Utilization record: active_gpu: [3], utilizations: [64], waiting_keys: [3], waiting_queue_nums: [545]
+Threshold 10, 300:2025-03-21 01:01:44 - Utilization record: active_gpu: [3], utilizations: [41], waiting_keys: [3], waiting_queue_nums: [629]
+Threshold 10, 300:2025-03-21 01:01:45 - Utilization record: active_gpu: [3], utilizations: [65], waiting_keys: [3], waiting_queue_nums: [648]
+Threshold 10, 300:2025-03-21 01:01:46 - Utilization record: active_gpu: [3], utilizations: [56], waiting_keys: [3], waiting_queue_nums: [683]
+Threshold 10, 300:2025-03-21 01:01:47 - Utilization record: active_gpu: [3], utilizations: [54], waiting_keys: [3], waiting_queue_nums: [710]
+Threshold 10, 300:2025-03-21 01:01:47 - GPU 3: Utilization: 62.22222222222222% | Avg TTFT: 5.6029307939228605 s | Avg TPOT: 0.09573126219911501 s | Avg Waiting Queue Length: 561.0
+Threshold 10, 300:2025-03-21 01:01:47 - recent_ttft[0.1444864940131083, 18.18614540307317, 18.17314016504679, 0.1506408479763195, 18.28523041808512, 0.12593025993555784, 0.23507012508343905, 0.10955079109407961, 0.1760967270238325, 0.4430167078971863] - recent_tpot[0.0957714256219333, 0.095780431998719, 0.09769173355743987, 0.097694072748709, 0.0977035187461297, 0.09771569599979557, 0.09307291400182294, 0.09303467325662496, 0.0930353895018925, 0.09581276655808324] 
+Threshold 10, 300:2025-03-21 01:01:48 - Utilization record: active_gpu: [3], utilizations: [64], waiting_keys: [3], waiting_queue_nums: [741]
+Threshold 10, 300:2025-03-21 01:01:49 - Utilization record: active_gpu: [3], utilizations: [76], waiting_keys: [3], waiting_queue_nums: [777]
+Threshold 10, 300:2025-03-21 01:01:50 - Utilization record: active_gpu: [3], utilizations: [71], waiting_keys: [3], waiting_queue_nums: [800]
+Threshold 10, 300:2025-03-21 01:01:51 - Utilization record: active_gpu: [3], utilizations: [77], waiting_keys: [3], waiting_queue_nums: [837]
+Threshold 10, 300:2025-03-21 01:01:53 - Utilization record: active_gpu: [3], utilizations: [50], waiting_keys: [3], waiting_queue_nums: [864]
+Threshold 10, 300:2025-03-21 01:01:54 - Utilization record: active_gpu: [3], utilizations: [50], waiting_keys: [3], waiting_queue_nums: [901]
+Threshold 10, 300:2025-03-21 01:01:55 - Utilization record: active_gpu: [3], utilizations: [60], waiting_keys: [3], waiting_queue_nums: [940]
+Threshold 10, 300:2025-03-21 01:01:56 - Utilization record: active_gpu: [3], utilizations: [56], waiting_keys: [3], waiting_queue_nums: [973]
+Threshold 10, 300:2025-03-21 01:01:57 - Utilization record: active_gpu: [3], utilizations: [62], waiting_keys: [3], waiting_queue_nums: [987]
+Threshold 10, 300:2025-03-21 01:01:57 - GPU 3: Utilization: 62.888888888888886% | Avg TTFT: 16.2032691457076 s | Avg TPOT: 0.0939777969440911 s | Avg Waiting Queue Length: 868.8888888888889
+Threshold 10, 300:2025-03-21 01:01:57 - recent_ttft[0.08813512104097754, 0.11164143891073763, 26.81013392598834, 26.901422778028063, 0.19502126600127667, 0.11951312504243106, 26.971984083997086, 26.93040769500658, 26.906688952003606, 26.997743071056902] - recent_tpot[0.09286040318693267, 0.09285328356054379, 0.09256395824922947, 0.09258353012410225, 0.09257435824838467, 0.09254920206149109, 0.09391767375200288, 0.09392561306594871, 0.09797817562503042, 0.09797177156724501] 
+Threshold 10, 300:2025-03-21 01:01:57 - GPU 3 is consistently overloaded. Triggering scale-up.
+Threshold 10, 300:2025-03-21 01:01:57 - Current per_gpu_load: {3: 1032}
+Threshold 10, 300:2025-03-21 01:01:57 - Current all_possible_gpus: [0, 1, 2, 3]
+Threshold 10, 300:2025-03-21 01:02:06 - Utilization record: active_gpu: [3, 0], utilizations: [66, 59], waiting_keys: [3, 0], waiting_queue_nums: [876, 0]
+Threshold 10, 300:2025-03-21 01:02:08 - Utilization record: active_gpu: [3, 0], utilizations: [78, 100], waiting_keys: [3, 0], waiting_queue_nums: [865, 69]
+Threshold 10, 300:2025-03-21 01:02:09 - Utilization record: active_gpu: [3, 0], utilizations: [75, 100], waiting_keys: [3, 0], waiting_queue_nums: [890, 82]
+Threshold 10, 300:2025-03-21 01:02:11 - Utilization record: active_gpu: [3, 0], utilizations: [61, 100], waiting_keys: [3, 0], waiting_queue_nums: [949, 58]
+Threshold 10, 300:2025-03-21 01:02:12 - Utilization record: active_gpu: [3, 0], utilizations: [49, 71], waiting_keys: [3, 0], waiting_queue_nums: [978, 75]
+Threshold 10, 300:2025-03-21 01:02:13 - Utilization record: active_gpu: [3, 0], utilizations: [56, 75], waiting_keys: [3, 0], waiting_queue_nums: [1030, 58]
+Threshold 10, 300:2025-03-21 01:02:15 - Utilization record: active_gpu: [3, 0], utilizations: [41, 100], waiting_keys: [3, 0], waiting_queue_nums: [1071, 39]
+Threshold 10, 300:2025-03-21 01:02:16 - Utilization record: active_gpu: [3, 0], utilizations: [35, 100], waiting_keys: [3, 0], waiting_queue_nums: [1128, 36]
+Threshold 10, 300:2025-03-21 01:02:16 - GPU 3: Utilization: 57.625% | Avg TTFT: 8.543780082394369 s | Avg TPOT: 0.09349103282074793 s | Avg Waiting Queue Length: 973.375
+Threshold 10, 300:2025-03-21 01:02:16 - recent_ttft[0.2527342221001163, 0.3496224789414555, 0.19481119397096336, 0.2688505909172818, 41.40757471695542, 0.15827722393441945, 0.39967362198513, 0.4132165811024606, 0.3719521670136601, 41.62108802702278] - recent_tpot[0.09456718144065235, 0.09172030162881128, 0.09022273738082731, 0.09477704325399827, 0.09956497818347998, 0.09910251513065305, 0.09024435181345325, 0.09156933218764607, 0.09157185687945457, 0.09157003030850319] 
+Threshold 10, 300:2025-03-21 01:02:16 - GPU 0: Utilization: 88.125% | Avg TTFT: 3.515276063501369 s | Avg TPOT: 0.0 s | Avg Waiting Queue Length: 52.125
+Threshold 10, 300:2025-03-21 01:02:16 - recent_ttft[4.140262497938238, 4.4908994029974565, 4.411211455008015, 4.35829894291237, 3.908083742018789, 4.503178945975378, 4.063768916064873, 4.476610636105761, 0.5332143920240924, 0.26723170396871865] - recent_tpot[] 
+Threshold 10, 300:2025-03-21 01:02:17 - Utilization record: active_gpu: [3, 0], utilizations: [55, 36], waiting_keys: [3, 0], waiting_queue_nums: [1165, 14]
+Threshold 10, 300:2025-03-21 01:02:19 - Utilization record: active_gpu: [3, 0], utilizations: [42, 100], waiting_keys: [3, 0], waiting_queue_nums: [1221, 0]
+Threshold 10, 300:2025-03-21 01:02:20 - Utilization record: active_gpu: [3, 0], utilizations: [56, 100], waiting_keys: [3, 0], waiting_queue_nums: [1270, 0]
+Threshold 10, 300:2025-03-21 01:02:22 - Utilization record: active_gpu: [3, 0], utilizations: [81, 85], waiting_keys: [3, 0], waiting_queue_nums: [1300, 0]
+Threshold 10, 300:2025-03-21 01:02:23 - Utilization record: active_gpu: [3, 0], utilizations: [56, 90], waiting_keys: [3, 0], waiting_queue_nums: [1350, 0]
+Threshold 10, 300:2025-03-21 01:02:25 - Utilization record: active_gpu: [3, 0], utilizations: [62, 41], waiting_keys: [3, 0], waiting_queue_nums: [1397, 5]
+Threshold 10, 300:2025-03-21 01:02:26 - Utilization record: active_gpu: [3, 0], utilizations: [49, 74], waiting_keys: [3, 0], waiting_queue_nums: [1439, 1]
+Threshold 10, 300:2025-03-21 01:02:26 - GPU 3: Utilization: 57.285714285714285% | Avg TTFT: 10.210968000313732 s | Avg TPOT: 0.09237460170625127 s | Avg Waiting Queue Length: 1306.0
+Threshold 10, 300:2025-03-21 01:02:26 - recent_ttft[0.2160360220586881, 0.6413475569570437, 0.184519920963794, 0.48700573400128633, 0.6264931230107322, 49.34940909501165, 0.5648784870281816, 49.41695700108539, 0.2132936370326206, 0.40973942598793656] - recent_tpot[0.08784503612696426, 0.0975248586255475, 0.08784929537796415, 0.09753185912268236, 0.08888450737140374, 0.09313752844172996, 0.09808344256452983, 0.08785624949814519, 0.09188731737231137, 0.09314592256123433] 
+Threshold 10, 300:2025-03-21 01:02:26 - GPU 3 is consistently overloaded. Triggering scale-up.
+Threshold 10, 300:2025-03-21 01:02:26 - Current per_gpu_load: {3: 1800, 0: 391}
+Threshold 10, 300:2025-03-21 01:02:26 - Current all_possible_gpus: [0, 1, 2, 3]
+Threshold 10, 300:2025-03-21 01:02:34 - GPU 0: Utilization: 75.14285714285714% | Avg TTFT: 0.654214567085728 s | Avg TPOT: 0.16766516824864083 s | Avg Waiting Queue Length: 2.857142857142857
+Threshold 10, 300:2025-03-21 01:02:34 - recent_ttft[0.8370793559588492, 0.9453436239855364, 0.23716454801615328, 0.8438960959902033, 0.9842119769891724, 0.6287744559813291, 0.4961071510333568, 0.6790896339807659, 0.39478964696172625, 0.49568918196018785] - recent_tpot[0.18354326025291812, 0.1789528701265226, 0.22630137043597642, 0.14030722687311936, 0.2213469443086069, 0.16895109955657972, 0.1835588225585525, 0.128240992751671, 0.12272402893722756, 0.1227250666852342] 
+Threshold 10, 300:2025-03-21 01:02:35 - Utilization record: active_gpu: [3, 0, 1], utilizations: [45, 1, 22], waiting_keys: [3, 0, 1], waiting_queue_nums: [1362, 0, 0]
+Threshold 10, 300:2025-03-21 01:02:37 - Utilization record: active_gpu: [3, 0, 1], utilizations: [46, 1, 32], waiting_keys: [3, 0, 1], waiting_queue_nums: [1344, 0, 33]
+Threshold 10, 300:2025-03-21 01:02:39 - Utilization record: active_gpu: [3, 0, 1], utilizations: [63, 1, 100], waiting_keys: [3, 0, 1], waiting_queue_nums: [1327, 0, 67]
+Threshold 10, 300:2025-03-21 01:02:40 - Utilization record: active_gpu: [3, 0, 1], utilizations: [60, 1, 36], waiting_keys: [3, 0, 1], waiting_queue_nums: [1308, 0, 120]
+Threshold 10, 300:2025-03-21 01:02:42 - Utilization record: active_gpu: [3, 0, 1], utilizations: [59, 1, 100], waiting_keys: [3, 0, 1], waiting_queue_nums: [1287, 0, 155]
+Threshold 10, 300:2025-03-21 01:02:43 - Utilization record: active_gpu: [3, 0, 1], utilizations: [76, 91, 100], waiting_keys: [3, 0, 1], waiting_queue_nums: [1296, 0, 183]
+Threshold 10, 300:2025-03-21 01:02:44 - GPU 3: Utilization: 58.166666666666664% | Avg TTFT: 25.333083718502895 s | Avg TPOT: 0.10780646975617855 s | Avg Waiting Queue Length: 1320.6666666666667
+Threshold 10, 300:2025-03-21 01:02:44 - recent_ttft[0.44925094093196094, 62.52531512803398, 0.38861250900663435, 62.699920385028236, 62.72457102697808, 62.85560265404638, 0.27615964598953724, 0.4569007579702884, 0.47787966998293996, 0.4766244670609012] - recent_tpot[0.11168753144011134, 0.11168975143664284, 0.11021974199684337, 0.10741151100228308, 0.11527204499725485, 0.12123519543820294, 0.10416030812484678, 0.10017266756040044, 0.10017392600275343, 0.09604201956244651] 
+Threshold 10, 300:2025-03-21 01:02:44 - GPU 0: Utilization: 16.0% | Avg TTFT: 0.27732327980920674 s | Avg TPOT: 0.20687243094289443 s | Avg Waiting Queue Length: 0.0
+Threshold 10, 300:2025-03-21 01:02:44 - recent_ttft[0.3610353949479759, 0.2228873500134796, 0.3686352079967037, 0.2453398060752079, 0.26612269098404795, 0.2440093030454591, 0.21534318395424634, 0.32790577807463706, 0.30034120404161513, 0.22161287895869464] - recent_tpot[0.5548131301256944, 0.5684651843112078, 0.5495850172519567, 0.04727920524601359, 0.04568240668595536, 0.044902762871060986, 0.06262398618855514, 0.06364045587542932, 0.06477390112559078, 0.06695825974748004] 
+Threshold 10, 300:2025-03-21 01:02:44 - GPU 0 is consistently underloaded. Triggering scale-down.
+Threshold 10, 300:2025-03-21 01:02:49 - GPU 1: Utilization: 65.0% | Avg TTFT: 5.695298941317015 s | Avg TPOT: 0.0 s | Avg Waiting Queue Length: 93.0
+Threshold 10, 300:2025-03-21 01:02:49 - recent_ttft[5.663606252055615, 5.722934963996522, 5.702712096041068, 5.744042025995441, 5.765474913059734, 5.645924616022967, 5.682462295982987, 5.610209885053337, 5.628748980932869, 5.7868733840296045] - recent_tpot[] 
+Threshold 10, 300:2025-03-21 01:02:50 - Utilization record: active_gpu: [3, 1], utilizations: [74, 100], waiting_keys: [3, 1], waiting_queue_nums: [1253, 55]
+Threshold 10, 300:2025-03-21 01:02:52 - Utilization record: active_gpu: [3, 1], utilizations: [49, 60], waiting_keys: [3, 1], waiting_queue_nums: [1279, 58]
+Threshold 10, 300:2025-03-21 01:02:53 - Utilization record: active_gpu: [3, 1], utilizations: [63, 28], waiting_keys: [3, 1], waiting_queue_nums: [1305, 63]
+Threshold 10, 300:2025-03-21 01:02:54 - Utilization record: active_gpu: [3, 1], utilizations: [48, 66], waiting_keys: [3, 1], waiting_queue_nums: [1336, 49]
+Threshold 10, 300:2025-03-21 01:02:56 - Utilization record: active_gpu: [3, 1], utilizations: [54, 57], waiting_keys: [3, 1], waiting_queue_nums: [1359, 41]
+Threshold 10, 300:2025-03-21 01:02:57 - Utilization record: active_gpu: [3, 1], utilizations: [88, 41], waiting_keys: [3, 1], waiting_queue_nums: [1385, 26]
+Threshold 10, 300:2025-03-21 01:02:59 - Utilization record: active_gpu: [3, 1], utilizations: [59, 57], waiting_keys: [3, 1], waiting_queue_nums: [1420, 11]
+Threshold 10, 300:2025-03-21 01:02:59 - GPU 3: Utilization: 62.142857142857146% | Avg TTFT: 15.274531152588315 s | Avg TPOT: 0.09073211072536651 s | Avg Waiting Queue Length: 1333.857142857143
+Threshold 10, 300:2025-03-21 01:02:59 - recent_ttft[0.4613916620146483, 74.43392309499905, 0.5612946810433641, 74.5728564610472, 0.27164781594183296, 0.5351186499465257, 0.6089330520480871, 0.5576227270066738, 0.2725544689456001, 0.46996891289018095] - recent_tpot[0.08911557756073307, 0.08656771637470229, 0.08818004794011358, 0.08818175674969098, 0.0880476066886331, 0.09312057137140073, 0.09817757231212454, 0.09817861525516491, 0.08672280800237786, 0.09102883499872405] 
+Threshold 10, 300:2025-03-21 01:02:59 - GPU 3 is consistently overloaded. Triggering scale-up.
+Threshold 10, 300:2025-03-21 01:02:59 - Current per_gpu_load: {3: 2234, 1: 469}
+Threshold 10, 300:2025-03-21 01:02:59 - Current all_possible_gpus: [0, 1, 2, 3]
+Threshold 10, 300:2025-03-21 01:03:08 - GPU 1: Utilization: 58.42857142857143% | Avg TTFT: 2.59643199959537 s | Avg TPOT: 0.10814237115773721 s | Avg Waiting Queue Length: 43.285714285714285
+Threshold 10, 300:2025-03-21 01:03:08 - recent_ttft[3.3139380789361894, 3.3004520050017163, 3.285682898014784, 3.175805183011107, 2.911821482004598, 3.045366953010671, 0.28602116799447685, 2.26741414796561, 2.2770378490677103, 2.100780230946839] - recent_tpot[0.10586155750206672, 0.10586266006430378, 0.10587069806206273, 0.1058710616271128, 0.10607330394122982, 0.1074326244997792, 0.1074248887525755, 0.10742371324886335, 0.12156019531539641, 0.10804300856398186] 
+Threshold 10, 300:2025-03-21 01:03:10 - Utilization record: active_gpu: [3, 1, 0], utilizations: [59, 67, 2], waiting_keys: [3, 1, 0], waiting_queue_nums: [1335, 0, 0]
+Threshold 10, 300:2025-03-21 01:03:11 - Utilization record: active_gpu: [3, 1, 0], utilizations: [34, 1, 2], waiting_keys: [3, 1, 0], waiting_queue_nums: [1315, 0, 0]
+Threshold 10, 300:2025-03-21 01:03:13 - Utilization record: active_gpu: [3, 1, 0], utilizations: [79, 1, 2], waiting_keys: [3, 1, 0], waiting_queue_nums: [1295, 0, 0]
+Threshold 10, 300:2025-03-21 01:03:15 - Utilization record: active_gpu: [3, 1, 0], utilizations: [39, 1, 2], waiting_keys: [3, 1, 0], waiting_queue_nums: [1280, 0, 0]
+Threshold 10, 300:2025-03-21 01:03:16 - Utilization record: active_gpu: [3, 1, 0], utilizations: [79, 1, 2], waiting_keys: [3, 1, 0], waiting_queue_nums: [1265, 0, 0]
+Threshold 10, 300:2025-03-21 01:03:18 - Utilization record: active_gpu: [3, 1, 0], utilizations: [42, 1, 2], waiting_keys: [3, 1, 0], waiting_queue_nums: [1250, 0, 0]
+Threshold 10, 300:2025-03-21 01:03:18 - GPU 3: Utilization: 55.333333333333336% | Avg TTFT: 81.1854074229952 s | Avg TPOT: 0.2985410479886923 s | Avg Waiting Queue Length: 1290.0
+Threshold 10, 300:2025-03-21 01:03:18 - recent_ttft[81.333792994963, 81.30534479604103, 81.2734549259767, 81.24427495198324, 81.20274407102261, 81.14835903502535, 81.13183084898628, 81.09615984198172, 81.03936481301207, 81.07874795095995] - recent_tpot[3.4576296457089484e-06, 0.5960534588157316, 0.5724589731835295, 0.5824871633158182, 2.1717496565543115e-06, 0.6193391658816836, 2.541746653150767e-06, 2.1857485990040004e-06, 2.173313987441361e-06, 0.6150591885016183] 
+Threshold 10, 300:2025-03-21 01:03:18 - GPU 1: Utilization: 12.0% | Avg TTFT: 9.86823911400279 s | Avg TPOT: 0.5275797007627261 s | Avg Waiting Queue Length: 0.0
+Threshold 10, 300:2025-03-21 01:03:18 - recent_ttft[10.56374004704412, 10.427415366983041, 10.28950612200424, 9.647163389949128, 10.152515567955561, 9.90587633405812, 9.76842630293686, 9.452717080013826, 9.317774567054585, 9.15725636202842] - recent_tpot[0.5894497816261719, 0.5611133327547577, 0.5894616834339104, 0.5681643044372322, 2.6869383873417974e-06, 0.6048260190655128, 0.5973289804314845, 0.612190073938109, 0.5766265391866909, 0.5766336058150046] 
+Threshold 10, 300:2025-03-21 01:03:18 - GPU 0: Utilization: 2.0% | Avg TTFT: 0.0 s | Avg TPOT: 0.0 s | Avg Waiting Queue Length: 0.0
+Threshold 10, 300:2025-03-21 01:03:18 - recent_ttft[] - recent_tpot[] 
+Threshold 10, 300:2025-03-21 01:03:19 - Utilization record: active_gpu: [3, 1, 0], utilizations: [41, 1, 2], waiting_keys: [3, 1, 0], waiting_queue_nums: [1229, 0, 0]
+Threshold 10, 300:2025-03-21 01:03:21 - Utilization record: active_gpu: [3, 1, 0], utilizations: [44, 1, 2], waiting_keys: [3, 1, 0], waiting_queue_nums: [1212, 0, 0]
+Threshold 10, 300:2025-03-21 01:03:22 - Utilization record: active_gpu: [3, 1, 0], utilizations: [45, 1, 2], waiting_keys: [3, 1, 0], waiting_queue_nums: [1194, 0, 0]
+Threshold 10, 300:2025-03-21 01:03:24 - Utilization record: active_gpu: [3, 1, 0], utilizations: [42, 1, 2], waiting_keys: [3, 1, 0], waiting_queue_nums: [1178, 0, 0]
+Threshold 10, 300:2025-03-21 01:03:26 - Utilization record: active_gpu: [3, 1, 0], utilizations: [44, 1, 2], waiting_keys: [3, 1, 0], waiting_queue_nums: [1159, 0, 0]
+Threshold 10, 300:2025-03-21 01:03:27 - Utilization record: active_gpu: [3, 1, 0], utilizations: [42, 1, 2], waiting_keys: [3, 1, 0], waiting_queue_nums: [1144, 0, 0]
+Threshold 10, 300:2025-03-21 01:03:28 - GPU 3: Utilization: 43.0% | Avg TTFT: 0.0 s | Avg TPOT: 0.0 s | Avg Waiting Queue Length: 1186.0
+Threshold 10, 300:2025-03-21 01:03:28 - recent_ttft[] - recent_tpot[] 
+Threshold 10, 300:2025-03-21 01:03:28 - GPU 3 is consistently overloaded. Triggering scale-up.
+Threshold 10, 300:2025-03-21 01:03:28 - Current per_gpu_load: {3: 2720, 1: 569, 0: 171}
+Threshold 10, 300:2025-03-21 01:03:28 - Current all_possible_gpus: [0, 1, 2, 3]
+Threshold 10, 300:2025-03-21 01:03:37 - GPU 1: Utilization: 1.0% | Avg TTFT: 0.0 s | Avg TPOT: 0.0 s | Avg Waiting Queue Length: 0.0
+Threshold 10, 300:2025-03-21 01:03:37 - recent_ttft[] - recent_tpot[] 
+Threshold 10, 300:2025-03-21 01:03:37 - GPU 1 is consistently underloaded. Triggering scale-down.
+Threshold 10, 300:2025-03-21 01:03:42 - GPU 0: Utilization: 2.0% | Avg TTFT: 0.0 s | Avg TPOT: 0.0 s | Avg Waiting Queue Length: 0.0
+Threshold 10, 300:2025-03-21 01:03:42 - recent_ttft[] - recent_tpot[] 
+Threshold 10, 300:2025-03-21 01:03:42 - GPU 0 is consistently underloaded. Triggering scale-down.
+Threshold 10, 300:2025-03-21 01:03:48 - Utilization record: active_gpu: [3, 1, 0], utilizations: [74, 0, 0], waiting_keys: [3], waiting_queue_nums: [917]
+Threshold 10, 300:2025-03-21 01:03:49 - Utilization record: active_gpu: [3, 2], utilizations: [82, 2], waiting_keys: [3, 2], waiting_queue_nums: [904, 0]
+Threshold 10, 300:2025-03-21 01:03:50 - Utilization record: active_gpu: [3, 2], utilizations: [79, 76], waiting_keys: [3, 2], waiting_queue_nums: [891, 0]
+Threshold 10, 300:2025-03-21 01:03:51 - Utilization record: active_gpu: [3, 2], utilizations: [70, 80], waiting_keys: [3, 2], waiting_queue_nums: [881, 3]
+Threshold 10, 300:2025-03-21 01:03:53 - Utilization record: active_gpu: [3, 2], utilizations: [82, 34], waiting_keys: [3, 2], waiting_queue_nums: [871, 2]
+Threshold 10, 300:2025-03-21 01:03:54 - Utilization record: active_gpu: [3, 2], utilizations: [78, 100], waiting_keys: [3, 2], waiting_queue_nums: [853, 7]
+Threshold 10, 300:2025-03-21 01:03:56 - Utilization record: active_gpu: [3, 2], utilizations: [61, 100], waiting_keys: [3, 2], waiting_queue_nums: [833, 15]
+Threshold 10, 300:2025-03-21 01:03:57 - GPU 3: Utilization: 75.14285714285714% | Avg TTFT: 0.2942807754734531 s | Avg TPOT: 0.15105784956540447 s | Avg Waiting Queue Length: 878.5714285714286
+Threshold 10, 300:2025-03-21 01:03:57 - recent_ttft[0.18311470292974263, 0.4054468480171636] - recent_tpot[0.15105784956540447] 
+Threshold 10, 300:2025-03-21 01:03:57 - GPU 2: Utilization: 65.33333333333333% | Avg TTFT: 1.0976230024942197 s | Avg TPOT: 0.03807618861901574 s | Avg Waiting Queue Length: 4.5
+Threshold 10, 300:2025-03-21 01:03:57 - recent_ttft[1.4807252760510892, 1.3670446969335899, 1.4361936949426308, 1.5248306939611211, 1.567118385923095, 1.2849981500767171, 0.5219840470235795, 0.5512804560130462, 0.7440568309975788, 0.4979977930197492] - recent_tpot[0.03807618861901574] 
+Threshold 10, 300:2025-03-21 01:03:58 - Utilization record: active_gpu: [3, 2], utilizations: [58, 40], waiting_keys: [3, 2], waiting_queue_nums: [817, 14]
+Threshold 10, 300:2025-03-21 01:03:59 - Utilization record: active_gpu: [3, 2], utilizations: [57, 100], waiting_keys: [3, 2], waiting_queue_nums: [798, 21]
+Threshold 10, 300:2025-03-21 01:04:00 - Utilization record: active_gpu: [3, 2], utilizations: [84, 100], waiting_keys: [3, 2], waiting_queue_nums: [782, 28]
+Threshold 10, 300:2025-03-21 01:04:01 - Utilization record: active_gpu: [3, 2], utilizations: [73, 100], waiting_keys: [3, 2], waiting_queue_nums: [770, 21]
+Threshold 10, 300:2025-03-21 01:04:02 - Utilization record: active_gpu: [3, 2], utilizations: [51, 100], waiting_keys: [3, 2], waiting_queue_nums: [758, 24]
+Threshold 10, 300:2025-03-21 01:04:04 - Utilization record: active_gpu: [3, 2], utilizations: [51, 64], waiting_keys: [3, 2], waiting_queue_nums: [746, 27]
+Threshold 10, 300:2025-03-21 01:04:05 - Utilization record: active_gpu: [3, 2], utilizations: [64, 47], waiting_keys: [3, 2], waiting_queue_nums: [734, 35]
+Threshold 10, 300:2025-03-21 01:04:06 - Utilization record: active_gpu: [3, 2], utilizations: [64, 100], waiting_keys: [3, 2], waiting_queue_nums: [726, 28]
+Threshold 10, 300:2025-03-21 01:04:07 - GPU 3: Utilization: 62.75% | Avg TTFT: 0.0 s | Avg TPOT: 0.13943380625278223 s | Avg Waiting Queue Length: 766.375
+Threshold 10, 300:2025-03-21 01:04:07 - recent_ttft[] - recent_tpot[0.13943380625278223] 
+Threshold 10, 300:2025-03-21 01:04:07 - GPU 3 is consistently overloaded. Triggering scale-up.
+Threshold 10, 300:2025-03-21 01:04:07 - Current per_gpu_load: {3: 2723, 2: 478}
+Threshold 10, 300:2025-03-21 01:04:07 - Current all_possible_gpus: [0, 1, 2, 3]
+Threshold 10, 300:2025-03-21 01:04:16 - GPU 2: Utilization: 81.375% | Avg TTFT: 2.3192469111294485 s | Avg TPOT: 0.0 s | Avg Waiting Queue Length: 24.75
+Threshold 10, 300:2025-03-21 01:04:16 - recent_ttft[3.563877391978167, 3.4656731970608234, 2.809484253055416, 3.3346620919182897, 3.586309898062609, 3.4433797270758078, 0.4223882670048624, 0.9631662670290098, 0.2947636160533875, 1.3087644020561129] - recent_tpot[] 
+Threshold 10, 300:2025-03-21 01:04:16 - Utilization record: active_gpu: [3, 2], utilizations: [53, 79], waiting_keys: [3, 2], waiting_queue_nums: [710, 59]
+Threshold 10, 300:2025-03-21 01:04:18 - Utilization record: active_gpu: [3, 2, 0], utilizations: [53, 93, 2], waiting_keys: [3, 2, 0], waiting_queue_nums: [591, 21, 0]
+Threshold 10, 300:2025-03-21 01:04:20 - Utilization record: active_gpu: [3, 2, 0], utilizations: [78, 75, 88], waiting_keys: [3, 2, 0], waiting_queue_nums: [584, 27, 0]
+Threshold 10, 300:2025-03-21 01:04:21 - Utilization record: active_gpu: [3, 2, 0], utilizations: [51, 67, 62], waiting_keys: [3, 2, 0], waiting_queue_nums: [590, 6, 0]
+Threshold 10, 300:2025-03-21 01:04:23 - Utilization record: active_gpu: [3, 2, 0], utilizations: [66, 35, 65], waiting_keys: [3, 2, 0], waiting_queue_nums: [614, 0, 0]
+Threshold 10, 300:2025-03-21 01:04:25 - Utilization record: active_gpu: [3, 2, 0], utilizations: [87, 64, 63], waiting_keys: [3, 2, 0], waiting_queue_nums: [644, 0, 0]
+Threshold 10, 300:2025-03-21 01:04:26 - GPU 3: Utilization: 64.66666666666667% | Avg TTFT: 0.4398425997933373 s | Avg TPOT: 0.11220736423128982 s | Avg Waiting Queue Length: 622.1666666666666
+Threshold 10, 300:2025-03-21 01:04:26 - recent_ttft[0.4990320820361376, 0.358080624951981, 0.5901554450392723, 0.47207491495646536, 0.2975119019392878, 0.42253608792088926, 0.44004470808431506, 0.30297082592733204, 0.32428701303433627, 0.6917323940433562] - recent_tpot[0.11084109787771013, 0.10886406443751184, 0.10886817025311757, 0.11327733493817504, 0.10778682555974228, 0.1110331170639256, 0.11082725969026797, 0.10965962024783948, 0.12307550843252102, 0.11784064381208736] 
+Threshold 10, 300:2025-03-21 01:04:26 - GPU 2: Utilization: 68.83333333333333% | Avg TTFT: 0.3817668117932044 s | Avg TPOT: 0.07604740564929671 s | Avg Waiting Queue Length: 18.833333333333332
+Threshold 10, 300:2025-03-21 01:04:26 - recent_ttft[0.32673951890319586, 0.2306653039995581, 0.258443815051578, 0.275039633968845, 0.39363235502969474, 0.4390478259883821, 0.5120353869860992, 0.5354454549960792, 0.4167299809632823, 0.4298888420453295] - recent_tpot[0.07847735312680015, 0.07823643249867018, 0.07670336699811742, 0.07392378406075295, 0.07211044168798253, 0.07266877387883142, 0.07428524886927335, 0.07489420262572821, 0.0767865883099148, 0.08238786443689605] 
+Threshold 10, 300:2025-03-21 01:04:26 - GPU 0: Utilization: 56.0% | Avg TTFT: 0.3444477694109082 s | Avg TPOT: 0.09084124658256769 s | Avg Waiting Queue Length: 0.0
+Threshold 10, 300:2025-03-21 01:04:26 - recent_ttft[0.3253690639976412, 0.37825842306483537, 0.29202210903167725, 0.3250604929635301, 0.29649695404805243, 0.46533781301695853, 0.3855091850273311, 0.3622759779682383, 0.329835347016342, 0.2843123279744759] - recent_tpot[0.07508091069030343, 0.08722275619220454, 0.08722431956266519, 0.09248616875265725, 0.09108011012722272, 0.09860613344062585, 0.08164239749748958, 0.09591171606007265, 0.10336169437505305, 0.09579625912738265] 
+Threshold 10, 300:2025-03-21 01:04:26 - Utilization record: active_gpu: [3, 2, 0], utilizations: [68, 38, 64], waiting_keys: [3, 2, 0], waiting_queue_nums: [668, 0, 0]
+Threshold 10, 300:2025-03-21 01:04:28 - Utilization record: active_gpu: [3, 2, 0], utilizations: [60, 93, 45], waiting_keys: [3, 2, 0], waiting_queue_nums: [683, 0, 0]
+Threshold 10, 300:2025-03-21 01:04:30 - Utilization record: active_gpu: [3, 2, 0], utilizations: [68, 64, 63], waiting_keys: [3, 2, 0], waiting_queue_nums: [710, 0, 0]
+Threshold 10, 300:2025-03-21 01:04:31 - Utilization record: active_gpu: [3, 2, 0], utilizations: [71, 64, 62], waiting_keys: [3, 2, 0], waiting_queue_nums: [732, 0, 0]
+Threshold 10, 300:2025-03-21 01:04:33 - Utilization record: active_gpu: [3, 2, 0], utilizations: [51, 89, 58], waiting_keys: [3, 2, 0], waiting_queue_nums: [756, 0, 0]
+Threshold 10, 300:2025-03-21 01:04:34 - Utilization record: active_gpu: [3, 2, 0], utilizations: [75, 85, 69], waiting_keys: [3, 2, 0], waiting_queue_nums: [776, 0, 0]
+Threshold 10, 300:2025-03-21 01:04:35 - Utilization record: active_gpu: [3, 2, 0], utilizations: [80, 82, 58], waiting_keys: [3, 2, 0], waiting_queue_nums: [786, 0, 0]
+Threshold 10, 300:2025-03-21 01:04:36 - GPU 3: Utilization: 67.57142857142857% | Avg TTFT: 0.2868437906028703 s | Avg TPOT: 0.10381900302527355 s | Avg Waiting Queue Length: 730.1428571428571
+Threshold 10, 300:2025-03-21 01:04:36 - recent_ttft[0.4001842869911343, 0.2741900890832767, 0.21755358099471778, 0.29922292300034314, 0.20810221298597753, 0.37836825801059604, 0.3773646759800613, 0.2974455839721486, 0.17026002297643572, 0.24574627203401178] - recent_tpot[0.10295713000232354, 0.10930497387016658, 0.10839706312253838, 0.1083986427547643, 0.08762251675216248, 0.0950127755641006, 0.10216674675029935, 0.108106365056301, 0.10810790962568717, 0.1081159067543922] 
+Threshold 10, 300:2025-03-21 01:04:36 - GPU 3 is consistently overloaded. Triggering scale-up.
+Threshold 10, 300:2025-03-21 01:04:36 - Current per_gpu_load: {3: 3197, 2: 644, 0: 91}
+Threshold 10, 300:2025-03-21 01:04:36 - Current all_possible_gpus: [0, 1, 2, 3]
+Threshold 10, 300:2025-03-21 01:04:44 - GPU 2: Utilization: 73.57142857142857% | Avg TTFT: 0.17940137981204315 s | Avg TPOT: 0.05648587586911162 s | Avg Waiting Queue Length: 0.0
+Threshold 10, 300:2025-03-21 01:04:44 - recent_ttft[0.2505435459315777, 0.3003255049698055, 0.31676090601831675, 0.21336417505517602, 0.11907021107617766, 0.25378046405967325, 0.15384476899635047, 0.059529762947931886, 0.06448932201601565, 0.06230513704940677] - recent_tpot[0.06102144200121984, 0.06548624512652168, 0.06267061262769857, 0.059259327812469564, 0.061608247306139674, 0.058373526684590615, 0.05215366256015841, 0.05071308906190097, 0.050378029693092685, 0.04319457581732422] 
+Threshold 10, 300:2025-03-21 01:04:44 - GPU 0: Utilization: 59.857142857142854% | Avg TTFT: 0.1851106032729149 s | Avg TPOT: 0.06032683578378055 s | Avg Waiting Queue Length: 0.0
+Threshold 10, 300:2025-03-21 01:04:44 - recent_ttft[0.27047386998310685, 0.2970577769447118, 0.24153976002708077, 0.23088574095163494, 0.19121529289986938, 0.10489995696116239, 0.19155699701514095, 0.055127284955233335, 0.19922427495475858, 0.06912507803644985] - recent_tpot[0.08391433131328085, 0.07655200737644918, 0.07389500950375805, 0.0687222136912169, 0.0568011024442967, 0.06371382856741548, 0.055403399441274814, 0.04472249805985484, 0.04326440256409114, 0.03627956487616757] 
+Threshold 10, 300:2025-03-21 01:04:44 - GPU 0 is consistently underloaded. Triggering scale-down.
+Threshold 10, 300:2025-03-21 01:04:50 - Utilization record: active_gpu: [3, 2, 1], utilizations: [81, 1, 2], waiting_keys: [3, 2, 1], waiting_queue_nums: [629, 0, 0]
+Threshold 10, 300:2025-03-21 01:04:52 - Utilization record: active_gpu: [3, 2, 1], utilizations: [84, 1, 79], waiting_keys: [3, 2, 1], waiting_queue_nums: [612, 0, 0]
+Threshold 10, 300:2025-03-21 01:04:54 - Utilization record: active_gpu: [3, 2, 1], utilizations: [73, 1, 68], waiting_keys: [3, 2, 1], waiting_queue_nums: [646, 0, 0]
+Threshold 10, 300:2025-03-21 01:04:55 - Utilization record: active_gpu: [3, 2, 1], utilizations: [47, 1, 79], waiting_keys: [3, 2, 1], waiting_queue_nums: [681, 0, 0]
+Threshold 10, 300:2025-03-21 01:04:57 - Utilization record: active_gpu: [3, 2, 1], utilizations: [44, 1, 100], waiting_keys: [3, 2, 1], waiting_queue_nums: [715, 0, 0]
+Threshold 10, 300:2025-03-21 01:04:58 - Utilization record: active_gpu: [3, 2, 1], utilizations: [46, 1, 57], waiting_keys: [3, 2, 1], waiting_queue_nums: [747, 0, 0]
+Threshold 10, 300:2025-03-21 01:05:00 - GPU 3: Utilization: 62.5% | Avg TTFT: 0.34968048898736015 s | Avg TPOT: 0.1093308700081252 s | Avg Waiting Queue Length: 671.6666666666666
+Threshold 10, 300:2025-03-21 01:05:00 - recent_ttft[0.3687571689952165, 0.5694491899339482, 0.395694920909591, 0.291870686924085, 0.33824587508570403, 0.3118731459835544, 0.287066349061206, 0.38022565096616745, 0.2543059289455414, 0.2993159730685875] - recent_tpot[0.11721022469282616, 0.11722648575232597, 0.10884024631377542, 0.11443194025196135, 0.10743184937746264, 0.11211235787777696, 0.10323030581639614, 0.10560311580775306, 0.10361122225003783, 0.1036109519409365] 
+Threshold 10, 300:2025-03-21 01:05:00 - GPU 2: Utilization: 1.0% | Avg TTFT: 0.22123217105399817 s | Avg TPOT: 0.4725639693097037 s | Avg Waiting Queue Length: 0.0
+Threshold 10, 300:2025-03-21 01:05:00 - recent_ttft[0.22123217105399817] - recent_tpot[0.8815592748724157, 0.06356866374699166] 
+Threshold 10, 300:2025-03-21 01:05:00 - GPU 2 is consistently underloaded. Triggering scale-down.
+Threshold 10, 300:2025-03-21 01:05:05 - GPU 1: Utilization: 64.16666666666667% | Avg TTFT: 0.32163473787950353 s | Avg TPOT: 0.08802993882418378 s | Avg Waiting Queue Length: 0.0
+Threshold 10, 300:2025-03-21 01:05:05 - recent_ttft[0.3413520558970049, 0.24346110899932683, 0.40866923495195806, 0.5509906730148941, 0.33564675401430577, 0.28816013189498335, 0.262730818009004, 0.30473097797948867, 0.2522480390034616, 0.22835758503060788] - recent_tpot[0.07893919655907666, 0.07529220143624116, 0.07228462693456095, 0.06483896818826906, 0.07089542200264987, 0.08205827775236685, 0.08030935374699766, 0.1056448738090694, 0.12415321893786313, 0.125883248874743] 
+Threshold 10, 300:2025-03-21 01:05:05 - Utilization record: active_gpu: [3, 2, 1], utilizations: [53, 1, 2], waiting_keys: [3, 2, 1], waiting_queue_nums: [774, 0, 0]
+Threshold 10, 300:2025-03-21 01:05:06 - Utilization record: active_gpu: [3, 1], utilizations: [46, 82], waiting_keys: [3, 1], waiting_queue_nums: [734, 1]
+Threshold 10, 300:2025-03-21 01:05:08 - Utilization record: active_gpu: [3, 1], utilizations: [81, 54], waiting_keys: [3, 1], waiting_queue_nums: [763, 0]
+Threshold 10, 300:2025-03-21 01:05:09 - Utilization record: active_gpu: [3, 1], utilizations: [38, 51], waiting_keys: [3, 1], waiting_queue_nums: [796, 0]
+Threshold 10, 300:2025-03-21 01:05:11 - Utilization record: active_gpu: [3, 1], utilizations: [69, 74], waiting_keys: [3, 1], waiting_queue_nums: [822, 0]
+Threshold 10, 300:2025-03-21 01:05:12 - Utilization record: active_gpu: [3, 1], utilizations: [61, 56], waiting_keys: [3, 1], waiting_queue_nums: [860, 0]
+Threshold 10, 300:2025-03-21 01:05:13 - Utilization record: active_gpu: [3, 1], utilizations: [47, 61], waiting_keys: [3, 1], waiting_queue_nums: [890, 0]
+Threshold 10, 300:2025-03-21 01:05:15 - GPU 3: Utilization: 56.42857142857143% | Avg TTFT: 0.51257933229208 s | Avg TPOT: 0.10097526883837418 s | Avg Waiting Queue Length: 805.5714285714286
+Threshold 10, 300:2025-03-21 01:05:15 - recent_ttft[0.2856675259536132, 0.47103448503185064, 0.7145960109774023, 0.5411551430588588, 0.262796486960724, 0.5155941080302, 0.6098224759334698, 0.5622241869568825, 0.5687516359612346, 0.5941512640565634] - recent_tpot[0.1021157449358725, 0.10211867568432353, 0.10212143487296999, 0.09269354119169293, 0.09295767131698085, 0.11523154256428825, 0.10132884025370004, 0.10039707693795208, 0.10039332119049504, 0.10039483943546657] 
+Threshold 10, 300:2025-03-21 01:05:15 - GPU 3 is consistently overloaded. Triggering scale-up.
+Threshold 10, 300:2025-03-21 01:05:15 - Current per_gpu_load: {3: 3879, 1: 123}
+Threshold 10, 300:2025-03-21 01:05:15 - Current all_possible_gpus: [0, 1, 2, 3]
+Threshold 10, 300:2025-03-21 01:05:23 - GPU 1: Utilization: 54.285714285714285% | Avg TTFT: 0.30600023129954934 s | Avg TPOT: 0.0507921283126052 s | Avg Waiting Queue Length: 0.14285714285714285
+Threshold 10, 300:2025-03-21 01:05:23 - recent_ttft[0.25681570696178824, 0.3174437989946455, 0.41245148691814393, 0.331826655077748, 0.2874720379477367, 0.3564416840672493, 0.33526558603625745, 0.28109195397701114, 0.2603433160111308, 0.2208500870037824] - recent_tpot[0.05264659406384453, 0.046547308753360994, 0.04399593256675871, 0.044259546062676236, 0.0695299731232808, 0.05920530343428254, 0.04575905855745077, 0.05470711787347682, 0.04119514512422029, 0.05007530356670031] 
+Threshold 10, 300:2025-03-21 01:05:23 - GPU 1 is consistently underloaded. Triggering scale-down.
+Threshold 10, 300:2025-03-21 01:05:28 - Utilization record: active_gpu: [3, 1], utilizations: [57, 84], waiting_keys: [3, 1], waiting_queue_nums: [909, 0]
+Threshold 10, 300:2025-03-21 01:05:29 - Utilization record: active_gpu: [3, 0], utilizations: [72, 37], waiting_keys: [3, 0], waiting_queue_nums: [748, 32]
+Threshold 10, 300:2025-03-21 01:05:31 - Utilization record: active_gpu: [3, 0], utilizations: [78, 100], waiting_keys: [3, 0], waiting_queue_nums: [729, 49]
+Threshold 10, 300:2025-03-21 01:05:33 - Utilization record: active_gpu: [3, 0], utilizations: [61, 100], waiting_keys: [3, 0], waiting_queue_nums: [712, 9]
+Threshold 10, 300:2025-03-21 01:05:34 - Utilization record: active_gpu: [3, 0], utilizations: [65, 47], waiting_keys: [3, 0], waiting_queue_nums: [686, 0]
+Threshold 10, 300:2025-03-21 01:05:35 - Utilization record: active_gpu: [3, 0], utilizations: [0, 2], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:05:37 - Utilization record: active_gpu: [3, 0], utilizations: [0, 2], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:05:38 - GPU 3: Utilization: 47.57142857142857% | Avg TTFT: 65.57912886830745 s | Avg TPOT: 0.09898806658238754 s | Avg Waiting Queue Length: 735.7142857142857
+Threshold 10, 300:2025-03-21 01:05:38 - recent_ttft[65.44972863898147, 65.47012387600262, 65.54200008197222, 65.52203741203994, 65.5773476450704, 65.60180913005024, 65.55556444299873, 65.64735858200584, 65.67457269399893, 65.75074617995415] - recent_tpot[0.06566104468220146, 0.08301132950145984, 0.09107027600111905, 0.09107313294225605, 0.09908287268626736, 0.09908302019175608, 0.09909004093788099, 0.11364374031836633, 0.11947487868746975, 0.12869032987509854] 
+Threshold 10, 300:2025-03-21 01:05:38 - GPU 0: Utilization: 48.0% | Avg TTFT: 0.8328230532933958 s | Avg TPOT: 0.0 s | Avg Waiting Queue Length: 15.0
+Threshold 10, 300:2025-03-21 01:05:38 - recent_ttft[1.2831817660480738, 1.356675540911965, 1.26504838000983, 0.6206299180630594, 0.9675741950049996, 0.5996967029059306, 0.6537326700054109, 0.4464133109431714, 0.5586063220398501, 0.576671727001667] - recent_tpot[] 
+Threshold 10, 300:2025-03-21 01:05:38 - Utilization record: active_gpu: [3, 0], utilizations: [0, 2], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:05:40 - Utilization record: active_gpu: [3, 0], utilizations: [0, 2], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:05:41 - Utilization record: active_gpu: [3, 0], utilizations: [0, 56], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:05:42 - Utilization record: active_gpu: [3, 0], utilizations: [0, 84], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:05:43 - Utilization record: active_gpu: [3, 0], utilizations: [0, 59], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:05:45 - Utilization record: active_gpu: [3, 0], utilizations: [0, 52], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:05:46 - Utilization record: active_gpu: [3, 0], utilizations: [0, 59], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:05:47 - Utilization record: active_gpu: [3, 0], utilizations: [0, 37], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:05:48 - GPU 3: Utilization: 0.0% | Avg TTFT: 0.0 s | Avg TPOT: 0.0 s | Avg Waiting Queue Length: 683.0
+Threshold 10, 300:2025-03-21 01:05:48 - recent_ttft[] - recent_tpot[] 
+Threshold 10, 300:2025-03-21 01:05:48 - GPU 3 is consistently overloaded. Triggering scale-up.
+Threshold 10, 300:2025-03-21 01:05:48 - Current per_gpu_load: {3: 4450, 0: 263}
+Threshold 10, 300:2025-03-21 01:05:48 - Current all_possible_gpus: [0, 1, 2, 3]
+Threshold 10, 300:2025-03-21 01:05:55 - GPU 0: Utilization: 43.875% | Avg TTFT: 0.28994497631210836 s | Avg TPOT: 0.12191681930053164 s | Avg Waiting Queue Length: 0.0
+Threshold 10, 300:2025-03-21 01:05:55 - recent_ttft[0.279377429978922, 0.42607995902653784, 0.3577794519951567, 0.3275445010513067, 0.28548456204589456, 0.21631654095835984, 0.22174388193525374, 0.2967231720685959, 0.2467144860420376, 0.24168577801901847] - recent_tpot[0.12264536124712322, 0.1183590028740582, 0.11414196362602524, 0.1297848135654931, 0.1340935072512366, 0.12725724956544582, 0.11346180250257021, 0.12799209299555514, 0.11796268318721559, 0.11346971619059332] 
+Threshold 10, 300:2025-03-21 01:05:56 - Utilization record: active_gpu: [3, 0, 1], utilizations: [0, 2, 44], waiting_keys: [3, 0, 1], waiting_queue_nums: [683, 0, 0]
+Threshold 10, 300:2025-03-21 01:05:58 - Utilization record: active_gpu: [3, 0, 1], utilizations: [0, 15, 100], waiting_keys: [3, 0, 1], waiting_queue_nums: [683, 0, 41]
+Threshold 10, 300:2025-03-21 01:05:59 - Utilization record: active_gpu: [3, 0, 1], utilizations: [0, 2, 59], waiting_keys: [3, 0, 1], waiting_queue_nums: [683, 0, 64]
+Threshold 10, 300:2025-03-21 01:06:01 - Utilization record: active_gpu: [3, 0, 1], utilizations: [0, 2, 100], waiting_keys: [3, 0, 1], waiting_queue_nums: [683, 0, 80]
+Threshold 10, 300:2025-03-21 01:06:03 - Utilization record: active_gpu: [3, 0, 1], utilizations: [0, 2, 100], waiting_keys: [3, 0, 1], waiting_queue_nums: [683, 0, 70]
+Threshold 10, 300:2025-03-21 01:06:05 - Utilization record: active_gpu: [3, 0, 1], utilizations: [0, 2, 100], waiting_keys: [3, 0, 1], waiting_queue_nums: [683, 0, 42]
+Threshold 10, 300:2025-03-21 01:06:05 - GPU 3: Utilization: 0.0% | Avg TTFT: 0.0 s | Avg TPOT: 0.0 s | Avg Waiting Queue Length: 683.0
+Threshold 10, 300:2025-03-21 01:06:05 - recent_ttft[] - recent_tpot[] 
+Threshold 10, 300:2025-03-21 01:06:05 - GPU 0: Utilization: 4.166666666666667% | Avg TTFT: 5.15676179730023 s | Avg TPOT: 0.4091380657737318 s | Avg Waiting Queue Length: 0.0
+Threshold 10, 300:2025-03-21 01:06:05 - recent_ttft[7.611813896917738, 7.656425665947609, 0.20204582903534174] - recent_tpot[0.46852176386892097, 0.5129559861888993, 0.5202021149962093, 0.48187546587723773, 0.5246706708712736, 0.49582172249938594, 0.5082875606240123, 0.5037870971282246, 0.037960379937430844, 0.03729789574572351] 
+Threshold 10, 300:2025-03-21 01:06:05 - GPU 0 is consistently underloaded. Triggering scale-down.
+Threshold 10, 300:2025-03-21 01:06:11 - GPU 1: Utilization: 83.83333333333333% | Avg TTFT: 4.172440976812505 s | Avg TPOT: 0.0 s | Avg Waiting Queue Length: 49.5
+Threshold 10, 300:2025-03-21 01:06:11 - recent_ttft[5.137090107076801, 5.189913096954115, 4.976559405098669, 5.027682643034495, 5.054355110041797, 5.109220452955924, 5.2187633300200105, 5.00270929990802, 0.53022856998723, 0.47788775304798037] - recent_tpot[] 
+Threshold 10, 300:2025-03-21 01:06:11 - Utilization record: active_gpu: [3, 1], utilizations: [0, 10], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:06:12 - Utilization record: active_gpu: [3, 1], utilizations: [0, 57], waiting_keys: [3, 1], waiting_queue_nums: [683, 1]
+Threshold 10, 300:2025-03-21 01:06:14 - Utilization record: active_gpu: [3, 1], utilizations: [0, 62], waiting_keys: [3, 1], waiting_queue_nums: [683, 1]
+Threshold 10, 300:2025-03-21 01:06:15 - Utilization record: active_gpu: [3, 1], utilizations: [0, 70], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:06:17 - Utilization record: active_gpu: [3, 1], utilizations: [0, 60], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:06:18 - Utilization record: active_gpu: [3, 1], utilizations: [0, 50], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:06:20 - Utilization record: active_gpu: [3, 1], utilizations: [0, 68], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:06:21 - GPU 3: Utilization: 0.0% | Avg TTFT: 0.0 s | Avg TPOT: 0.0 s | Avg Waiting Queue Length: 683.0
+Threshold 10, 300:2025-03-21 01:06:21 - recent_ttft[] - recent_tpot[] 
+Threshold 10, 300:2025-03-21 01:06:21 - GPU 3 is consistently overloaded. Triggering scale-up.
+Threshold 10, 300:2025-03-21 01:06:21 - Current per_gpu_load: {3: 4894, 1: 350}
+Threshold 10, 300:2025-03-21 01:06:21 - Current all_possible_gpus: [0, 1, 2, 3]
+Threshold 10, 300:2025-03-21 01:06:39 - GPU 1: Utilization: 53.857142857142854% | Avg TTFT: 0.35424062550300733 s | Avg TPOT: 0.0857557690309477 s | Avg Waiting Queue Length: 0.2857142857142857
+Threshold 10, 300:2025-03-21 01:06:39 - recent_ttft[0.3028650269843638, 0.29927316796965897, 0.424705793033354, 0.47410313901491463, 0.3247460019774735, 0.2244779660832137, 0.39549849403556436, 0.2430746069876477, 0.3904746730113402, 0.4631873859325424] - recent_tpot[0.11355428030947223, 0.07782430374936666, 0.08131623569352087, 0.08463959718937986, 0.0860998376228963, 0.0848427309319959, 0.0831940977514023, 0.08305318724887911, 0.08010675468540285, 0.08292666512716096] 
+Threshold 10, 300:2025-03-21 01:06:39 - Utilization record: active_gpu: [3, 1], utilizations: [0, 1], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:06:41 - Utilization record: active_gpu: [3, 1, 0], utilizations: [0, 1, 36], waiting_keys: [3, 1, 0], waiting_queue_nums: [683, 0, 1]
+Threshold 10, 300:2025-03-21 01:06:43 - Utilization record: active_gpu: [3, 1, 0], utilizations: [0, 52, 53], waiting_keys: [3, 1, 0], waiting_queue_nums: [683, 0, 9]
+Threshold 10, 300:2025-03-21 01:06:44 - Utilization record: active_gpu: [3, 1, 0], utilizations: [0, 52, 100], waiting_keys: [3, 1, 0], waiting_queue_nums: [683, 0, 6]
+Threshold 10, 300:2025-03-21 01:06:46 - Utilization record: active_gpu: [3, 1, 0], utilizations: [0, 72, 88], waiting_keys: [3, 1, 0], waiting_queue_nums: [683, 0, 0]
+Threshold 10, 300:2025-03-21 01:06:48 - Utilization record: active_gpu: [3, 1, 0], utilizations: [0, 53, 60], waiting_keys: [3, 1, 0], waiting_queue_nums: [683, 0, 0]
+Threshold 10, 300:2025-03-21 01:06:49 - GPU 3: Utilization: 0.0% | Avg TTFT: 0.0 s | Avg TPOT: 0.0 s | Avg Waiting Queue Length: 683.0
+Threshold 10, 300:2025-03-21 01:06:49 - recent_ttft[] - recent_tpot[] 
+Threshold 10, 300:2025-03-21 01:06:49 - GPU 1: Utilization: 38.5% | Avg TTFT: 0.33334170930320395 s | Avg TPOT: 0.06552247438012274 s | Avg Waiting Queue Length: 0.0
+Threshold 10, 300:2025-03-21 01:06:49 - recent_ttft[0.24274152400903404, 0.3864791849628091, 0.34048945701215416, 0.45854229596443474, 0.3181391960242763, 0.27538899099454284, 0.3003385020419955, 0.3768654230516404, 0.302200190955773, 0.3322323280153796] - recent_tpot[0.061028493189951405, 0.06343815418949816, 0.06404234193905722, 0.06448488293972332, 0.06972922712157015, 0.06977241105778376, 0.06981797280604951, 0.06703304018446943, 0.0629334058103268, 0.06294481456279755] 
+Threshold 10, 300:2025-03-21 01:06:49 - GPU 1 is consistently underloaded. Triggering scale-down.
+Threshold 10, 300:2025-03-21 01:06:54 - GPU 0: Utilization: 67.4% | Avg TTFT: 0.4331666009034961 s | Avg TPOT: 0.1892405887127097 s | Avg Waiting Queue Length: 3.2
+Threshold 10, 300:2025-03-21 01:06:54 - recent_ttft[0.27682193100918084, 0.5903072280343622, 0.7481046280590817, 0.5302355160238221, 0.4297362860525027, 0.3825899149524048, 0.40138344396837056, 0.36695598694495857, 0.3004885039990768, 0.30504256999120116] - recent_tpot[0.3997563294979045, 0.3314909107502899, 0.3314969048151397, 0.09817289694183273, 0.12101520880969474, 0.1264342376816785, 0.12487182718905387, 0.11973470488010207, 0.1197156704365625, 0.11971719612483867] 
+Threshold 10, 300:2025-03-21 01:06:55 - Utilization record: active_gpu: [3, 0], utilizations: [0, 2], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:06:56 - Utilization record: active_gpu: [3, 0], utilizations: [0, 82], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:06:58 - Utilization record: active_gpu: [3, 0], utilizations: [0, 90], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:06:59 - Utilization record: active_gpu: [3, 0], utilizations: [0, 63], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:07:01 - Utilization record: active_gpu: [3, 0], utilizations: [0, 39], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:07:02 - Utilization record: active_gpu: [3, 0], utilizations: [0, 75], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:07:04 - Utilization record: active_gpu: [3, 0], utilizations: [0, 63], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:07:04 - GPU 3: Utilization: 0.0% | Avg TTFT: 0.0 s | Avg TPOT: 0.0 s | Avg Waiting Queue Length: 683.0
+Threshold 10, 300:2025-03-21 01:07:04 - recent_ttft[] - recent_tpot[] 
+Threshold 10, 300:2025-03-21 01:07:04 - GPU 3 is consistently overloaded. Triggering scale-up.
+Threshold 10, 300:2025-03-21 01:07:04 - Current per_gpu_load: {3: 5278, 0: 221}
+Threshold 10, 300:2025-03-21 01:07:04 - Current all_possible_gpus: [0, 1, 2, 3]
+Threshold 10, 300:2025-03-21 01:07:13 - GPU 0: Utilization: 59.142857142857146% | Avg TTFT: 0.34456154130166394 s | Avg TPOT: 0.0711782811617013 s | Avg Waiting Queue Length: 0.0
+Threshold 10, 300:2025-03-21 01:07:13 - recent_ttft[0.38276102708186954, 0.2720664580119774, 0.30405603104736656, 0.3297858339501545, 0.391397638944909, 0.3577900229720399, 0.30403458792716265, 0.33673822705168277, 0.32848197501152754, 0.4385036110179499] - recent_tpot[0.09297491681354586, 0.0744416242450825, 0.07073455087083858, 0.06862948993511964, 0.08137676943442784, 0.06094559006305644, 0.06399129149940563, 0.05774605681654066, 0.06218362531217281, 0.07875889662682312] 
+Threshold 10, 300:2025-03-21 01:07:13 - GPU 0 is consistently underloaded. Triggering scale-down.
+Threshold 10, 300:2025-03-21 01:07:19 - Utilization record: active_gpu: [3, 1], utilizations: [0, 2], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:07:20 - Utilization record: active_gpu: [3, 1], utilizations: [0, 34], waiting_keys: [3, 1], waiting_queue_nums: [683, 2]
+Threshold 10, 300:2025-03-21 01:07:22 - Utilization record: active_gpu: [3, 1], utilizations: [0, 85], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:07:23 - Utilization record: active_gpu: [3, 1], utilizations: [0, 2], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:07:25 - Utilization record: active_gpu: [3, 1], utilizations: [0, 2], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:07:26 - Utilization record: active_gpu: [3, 1], utilizations: [0, 2], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:07:28 - Utilization record: active_gpu: [3, 1], utilizations: [0, 2], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:07:28 - GPU 3: Utilization: 0.0% | Avg TTFT: 0.0 s | Avg TPOT: 0.0 s | Avg Waiting Queue Length: 683.0
+Threshold 10, 300:2025-03-21 01:07:28 - recent_ttft[] - recent_tpot[] 
+Threshold 10, 300:2025-03-21 01:07:28 - GPU 1: Utilization: 18.428571428571427% | Avg TTFT: 0.7502535327104851 s | Avg TPOT: 0.0 s | Avg Waiting Queue Length: 0.2857142857142857
+Threshold 10, 300:2025-03-21 01:07:28 - recent_ttft[0.7235244299517944, 1.0167813829611987, 0.9480761480517685, 0.9152508509578183, 0.6016969000920653, 0.4314662149408832, 0.7968892650678754, 0.8311194280395284, 0.8633050780044869, 0.3744256290374324] - recent_tpot[] 
+Threshold 10, 300:2025-03-21 01:07:29 - Utilization record: active_gpu: [3, 1], utilizations: [0, 2], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:07:31 - Utilization record: active_gpu: [3, 1], utilizations: [0, 2], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:07:32 - Utilization record: active_gpu: [3, 1], utilizations: [0, 2], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:07:33 - Utilization record: active_gpu: [3, 1], utilizations: [0, 2], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:07:35 - Utilization record: active_gpu: [3, 1], utilizations: [0, 2], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:07:36 - Utilization record: active_gpu: [3, 1], utilizations: [0, 2], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:07:38 - Utilization record: active_gpu: [3, 1], utilizations: [0, 2], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:07:38 - GPU 3: Utilization: 0.0% | Avg TTFT: 0.0 s | Avg TPOT: 0.0 s | Avg Waiting Queue Length: 683.0
+Threshold 10, 300:2025-03-21 01:07:38 - recent_ttft[] - recent_tpot[] 
+Threshold 10, 300:2025-03-21 01:07:38 - GPU 3 is consistently overloaded. Triggering scale-up.
+Threshold 10, 300:2025-03-21 01:07:38 - Current per_gpu_load: {3: 5806, 1: 156}
+Threshold 10, 300:2025-03-21 01:07:38 - Current all_possible_gpus: [0, 1, 2, 3]
+Threshold 10, 300:2025-03-21 01:07:48 - GPU 1: Utilization: 2.0% | Avg TTFT: 0.0 s | Avg TPOT: 0.0 s | Avg Waiting Queue Length: 0.0
+Threshold 10, 300:2025-03-21 01:07:48 - recent_ttft[] - recent_tpot[] 
+Threshold 10, 300:2025-03-21 01:07:48 - GPU 1 is consistently underloaded. Triggering scale-down.
+Threshold 10, 300:2025-03-21 01:07:53 - Utilization record: active_gpu: [3, 0], utilizations: [0, 2], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:07:55 - Utilization record: active_gpu: [3, 0], utilizations: [0, 2], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:07:56 - Utilization record: active_gpu: [3, 0], utilizations: [0, 2], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:07:58 - Utilization record: active_gpu: [3, 0], utilizations: [0, 2], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:07:59 - Utilization record: active_gpu: [3, 0], utilizations: [0, 2], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:08:01 - Utilization record: active_gpu: [3, 0], utilizations: [0, 2], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:08:02 - Utilization record: active_gpu: [3, 0], utilizations: [0, 2], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:08:03 - GPU 3: Utilization: 0.0% | Avg TTFT: 0.0 s | Avg TPOT: 0.0 s | Avg Waiting Queue Length: 683.0
+Threshold 10, 300:2025-03-21 01:08:03 - recent_ttft[] - recent_tpot[] 
+Threshold 10, 300:2025-03-21 01:08:03 - GPU 0: Utilization: 2.0% | Avg TTFT: 0.0 s | Avg TPOT: 0.0 s | Avg Waiting Queue Length: 0.0
+Threshold 10, 300:2025-03-21 01:08:03 - recent_ttft[] - recent_tpot[] 
+Threshold 10, 300:2025-03-21 01:08:03 - Utilization record: active_gpu: [3, 0], utilizations: [0, 2], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:08:05 - Utilization record: active_gpu: [3, 0], utilizations: [0, 2], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:08:06 - Utilization record: active_gpu: [3, 0], utilizations: [0, 2], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:08:08 - Utilization record: active_gpu: [3, 0], utilizations: [0, 2], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:08:09 - Utilization record: active_gpu: [3, 0], utilizations: [0, 2], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:08:11 - Utilization record: active_gpu: [3, 0], utilizations: [0, 2], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:08:12 - Utilization record: active_gpu: [3, 0], utilizations: [0, 2], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:08:13 - GPU 3: Utilization: 0.0% | Avg TTFT: 0.0 s | Avg TPOT: 0.0 s | Avg Waiting Queue Length: 683.0
+Threshold 10, 300:2025-03-21 01:08:13 - recent_ttft[] - recent_tpot[] 
+Threshold 10, 300:2025-03-21 01:08:13 - GPU 3 is consistently overloaded. Triggering scale-up.
+Threshold 10, 300:2025-03-21 01:08:13 - Current per_gpu_load: {3: 6309, 0: 194}
+Threshold 10, 300:2025-03-21 01:08:13 - Current all_possible_gpus: [0, 1, 2, 3]
+Threshold 10, 300:2025-03-21 01:08:21 - GPU 0: Utilization: 2.0% | Avg TTFT: 0.0 s | Avg TPOT: 0.0 s | Avg Waiting Queue Length: 0.0
+Threshold 10, 300:2025-03-21 01:08:21 - recent_ttft[] - recent_tpot[] 
+Threshold 10, 300:2025-03-21 01:08:21 - GPU 0 is consistently underloaded. Triggering scale-down.
+Threshold 10, 300:2025-03-21 01:08:27 - Utilization record: active_gpu: [3, 1], utilizations: [0, 2], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:08:28 - Utilization record: active_gpu: [3, 1], utilizations: [0, 2], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:08:30 - Utilization record: active_gpu: [3, 1], utilizations: [0, 2], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:08:31 - Utilization record: active_gpu: [3, 1], utilizations: [0, 2], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:08:33 - Utilization record: active_gpu: [3, 1], utilizations: [0, 2], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:08:34 - Utilization record: active_gpu: [3, 1], utilizations: [0, 2], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:08:36 - Utilization record: active_gpu: [3, 1], utilizations: [0, 2], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:08:36 - GPU 3: Utilization: 0.0% | Avg TTFT: 0.0 s | Avg TPOT: 0.0 s | Avg Waiting Queue Length: 683.0
+Threshold 10, 300:2025-03-21 01:08:36 - recent_ttft[] - recent_tpot[] 
+Threshold 10, 300:2025-03-21 01:08:36 - GPU 1: Utilization: 2.0% | Avg TTFT: 0.0 s | Avg TPOT: 0.0 s | Avg Waiting Queue Length: 0.0
+Threshold 10, 300:2025-03-21 01:08:36 - recent_ttft[] - recent_tpot[] 
+Threshold 10, 300:2025-03-21 01:08:37 - Utilization record: active_gpu: [3, 1], utilizations: [0, 2], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:08:39 - Utilization record: active_gpu: [3, 1], utilizations: [0, 2], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:08:40 - Utilization record: active_gpu: [3, 1], utilizations: [0, 2], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:08:41 - Utilization record: active_gpu: [3, 1], utilizations: [0, 2], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:08:43 - Utilization record: active_gpu: [3, 1], utilizations: [0, 2], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:08:44 - Utilization record: active_gpu: [3, 1], utilizations: [0, 2], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:08:46 - Utilization record: active_gpu: [3, 1], utilizations: [0, 2], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:08:46 - GPU 3: Utilization: 0.0% | Avg TTFT: 0.0 s | Avg TPOT: 0.0 s | Avg Waiting Queue Length: 683.0
+Threshold 10, 300:2025-03-21 01:08:46 - recent_ttft[] - recent_tpot[] 
+Threshold 10, 300:2025-03-21 01:08:46 - GPU 3 is consistently overloaded. Triggering scale-up.
+Threshold 10, 300:2025-03-21 01:08:46 - Current per_gpu_load: {3: 6820, 1: 184}
+Threshold 10, 300:2025-03-21 01:08:46 - Current all_possible_gpus: [0, 1, 2, 3]
+Threshold 10, 300:2025-03-21 01:08:55 - GPU 1: Utilization: 2.0% | Avg TTFT: 0.0 s | Avg TPOT: 0.0 s | Avg Waiting Queue Length: 0.0
+Threshold 10, 300:2025-03-21 01:08:55 - recent_ttft[] - recent_tpot[] 
+Threshold 10, 300:2025-03-21 01:08:55 - GPU 1 is consistently underloaded. Triggering scale-down.
+Threshold 10, 300:2025-03-21 01:09:00 - Utilization record: active_gpu: [3, 0], utilizations: [0, 2], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:09:02 - Utilization record: active_gpu: [3, 0], utilizations: [0, 2], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:09:03 - Utilization record: active_gpu: [3, 0], utilizations: [0, 2], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:09:05 - Utilization record: active_gpu: [3, 0], utilizations: [0, 2], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:09:06 - Utilization record: active_gpu: [3, 0], utilizations: [0, 2], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:09:07 - Utilization record: active_gpu: [3, 0], utilizations: [0, 2], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:09:08 - Utilization record: active_gpu: [3, 0], utilizations: [0, 2], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:09:09 - Utilization record: active_gpu: [3, 0], utilizations: [0, 2], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:09:10 - GPU 3: Utilization: 0.0% | Avg TTFT: 0.0 s | Avg TPOT: 0.0 s | Avg Waiting Queue Length: 683.0
+Threshold 10, 300:2025-03-21 01:09:10 - recent_ttft[] - recent_tpot[] 
+Threshold 10, 300:2025-03-21 01:09:10 - GPU 0: Utilization: 2.0% | Avg TTFT: 0.0 s | Avg TPOT: 0.0 s | Avg Waiting Queue Length: 0.0
+Threshold 10, 300:2025-03-21 01:09:10 - recent_ttft[] - recent_tpot[] 
+Threshold 10, 300:2025-03-21 01:09:10 - Utilization record: active_gpu: [3, 0], utilizations: [0, 2], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:09:11 - Utilization record: active_gpu: [3, 0], utilizations: [0, 2], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:09:12 - Utilization record: active_gpu: [3, 0], utilizations: [0, 2], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:09:13 - Utilization record: active_gpu: [3, 0], utilizations: [0, 2], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:09:14 - Utilization record: active_gpu: [3, 0], utilizations: [0, 2], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:09:15 - Utilization record: active_gpu: [3, 0], utilizations: [0, 2], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:09:16 - Utilization record: active_gpu: [3, 0], utilizations: [0, 2], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:09:17 - Utilization record: active_gpu: [3, 0], utilizations: [0, 2], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:09:18 - Utilization record: active_gpu: [3, 0], utilizations: [0, 2], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:09:19 - Utilization record: active_gpu: [3, 0], utilizations: [0, 2], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:09:20 - GPU 3: Utilization: 0.0% | Avg TTFT: 0.0 s | Avg TPOT: 0.0 s | Avg Waiting Queue Length: 683.0
+Threshold 10, 300:2025-03-21 01:09:20 - recent_ttft[] - recent_tpot[] 
+Threshold 10, 300:2025-03-21 01:09:20 - GPU 3 is consistently overloaded. Triggering scale-up.
+Threshold 10, 300:2025-03-21 01:09:20 - Current per_gpu_load: {3: 6882, 0: 186}
+Threshold 10, 300:2025-03-21 01:09:20 - Current all_possible_gpus: [0, 1, 2, 3]
+Threshold 10, 300:2025-03-21 01:09:28 - GPU 0: Utilization: 2.0% | Avg TTFT: 0.0 s | Avg TPOT: 0.0 s | Avg Waiting Queue Length: 0.0
+Threshold 10, 300:2025-03-21 01:09:28 - recent_ttft[] - recent_tpot[] 
+Threshold 10, 300:2025-03-21 01:09:28 - GPU 0 is consistently underloaded. Triggering scale-down.
+Threshold 10, 300:2025-03-21 01:09:33 - Utilization record: active_gpu: [3, 1], utilizations: [0, 2], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:09:34 - Utilization record: active_gpu: [3, 1], utilizations: [0, 2], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:09:35 - Utilization record: active_gpu: [3, 1], utilizations: [0, 2], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:09:36 - Utilization record: active_gpu: [3, 1], utilizations: [0, 2], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:09:37 - Utilization record: active_gpu: [3, 1], utilizations: [0, 2], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:09:38 - Utilization record: active_gpu: [3, 1], utilizations: [0, 2], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:09:39 - Utilization record: active_gpu: [3, 1], utilizations: [0, 2], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:09:40 - Utilization record: active_gpu: [3, 1], utilizations: [0, 2], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:09:41 - Utilization record: active_gpu: [3, 1], utilizations: [0, 2], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:09:42 - Utilization record: active_gpu: [3, 1], utilizations: [0, 2], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:09:43 - GPU 3: Utilization: 0.0% | Avg TTFT: 0.0 s | Avg TPOT: 0.0 s | Avg Waiting Queue Length: 683.0
+Threshold 10, 300:2025-03-21 01:09:43 - recent_ttft[] - recent_tpot[] 
+Threshold 10, 300:2025-03-21 01:09:43 - GPU 1: Utilization: 2.0% | Avg TTFT: 0.0 s | Avg TPOT: 0.0 s | Avg Waiting Queue Length: 0.0
+Threshold 10, 300:2025-03-21 01:09:43 - recent_ttft[] - recent_tpot[] 
+Threshold 10, 300:2025-03-21 01:09:43 - Utilization record: active_gpu: [3, 1], utilizations: [0, 2], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:09:44 - Utilization record: active_gpu: [3, 1], utilizations: [0, 2], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:09:45 - Utilization record: active_gpu: [3, 1], utilizations: [0, 2], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:09:46 - Utilization record: active_gpu: [3, 1], utilizations: [0, 2], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:09:47 - Utilization record: active_gpu: [3, 1], utilizations: [0, 2], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:09:48 - Utilization record: active_gpu: [3, 1], utilizations: [0, 2], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:09:49 - Utilization record: active_gpu: [3, 1], utilizations: [0, 2], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:09:50 - Utilization record: active_gpu: [3, 1], utilizations: [0, 2], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:09:52 - Utilization record: active_gpu: [3, 1], utilizations: [0, 2], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:09:53 - Utilization record: active_gpu: [3, 1], utilizations: [0, 2], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:09:53 - GPU 3: Utilization: 0.0% | Avg TTFT: 0.0 s | Avg TPOT: 0.0 s | Avg Waiting Queue Length: 683.0
+Threshold 10, 300:2025-03-21 01:09:53 - recent_ttft[] - recent_tpot[] 
+Threshold 10, 300:2025-03-21 01:09:53 - GPU 3 is consistently overloaded. Triggering scale-up.
+Threshold 10, 300:2025-03-21 01:09:53 - Current per_gpu_load: {3: 6882, 1: 0}
+Threshold 10, 300:2025-03-21 01:09:53 - Current all_possible_gpus: [0, 1, 2, 3]
+Threshold 10, 300:2025-03-21 01:10:02 - GPU 1: Utilization: 2.0% | Avg TTFT: 0.0 s | Avg TPOT: 0.0 s | Avg Waiting Queue Length: 0.0
+Threshold 10, 300:2025-03-21 01:10:02 - recent_ttft[] - recent_tpot[] 
+Threshold 10, 300:2025-03-21 01:10:02 - GPU 1 is consistently underloaded. Triggering scale-down.
+Threshold 10, 300:2025-03-21 01:10:07 - Utilization record: active_gpu: [3, 0], utilizations: [0, 2], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:10:08 - Utilization record: active_gpu: [3, 0], utilizations: [0, 2], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:10:09 - Utilization record: active_gpu: [3, 0], utilizations: [0, 2], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:10:10 - Utilization record: active_gpu: [3, 0], utilizations: [0, 2], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:10:11 - Utilization record: active_gpu: [3, 0], utilizations: [0, 2], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:10:12 - Utilization record: active_gpu: [3, 0], utilizations: [0, 2], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:10:13 - Utilization record: active_gpu: [3, 0], utilizations: [0, 2], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:10:14 - Utilization record: active_gpu: [3, 0], utilizations: [0, 2], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:10:15 - Utilization record: active_gpu: [3, 0], utilizations: [0, 2], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:10:16 - Utilization record: active_gpu: [3, 0], utilizations: [0, 2], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:10:17 - GPU 3: Utilization: 0.0% | Avg TTFT: 0.0 s | Avg TPOT: 0.0 s | Avg Waiting Queue Length: 683.0
+Threshold 10, 300:2025-03-21 01:10:17 - recent_ttft[] - recent_tpot[] 
+Threshold 10, 300:2025-03-21 01:10:17 - GPU 0: Utilization: 2.0% | Avg TTFT: 0.0 s | Avg TPOT: 0.0 s | Avg Waiting Queue Length: 0.0
+Threshold 10, 300:2025-03-21 01:10:17 - recent_ttft[] - recent_tpot[] 
+Threshold 10, 300:2025-03-21 01:10:17 - Utilization record: active_gpu: [3, 0], utilizations: [0, 2], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:10:18 - Utilization record: active_gpu: [3, 0], utilizations: [0, 2], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:10:19 - Utilization record: active_gpu: [3, 0], utilizations: [0, 2], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:10:20 - Utilization record: active_gpu: [3, 0], utilizations: [0, 2], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:10:21 - Utilization record: active_gpu: [3, 0], utilizations: [0, 2], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:10:22 - Utilization record: active_gpu: [3, 0], utilizations: [0, 2], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:10:23 - Utilization record: active_gpu: [3, 0], utilizations: [0, 2], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:10:24 - Utilization record: active_gpu: [3, 0], utilizations: [0, 2], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:10:25 - Utilization record: active_gpu: [3, 0], utilizations: [0, 2], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:10:26 - Utilization record: active_gpu: [3, 0], utilizations: [0, 2], waiting_keys: [3, 0], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:10:27 - GPU 3: Utilization: 0.0% | Avg TTFT: 0.0 s | Avg TPOT: 0.0 s | Avg Waiting Queue Length: 683.0
+Threshold 10, 300:2025-03-21 01:10:27 - recent_ttft[] - recent_tpot[] 
+Threshold 10, 300:2025-03-21 01:10:27 - GPU 3 is consistently overloaded. Triggering scale-up.
+Threshold 10, 300:2025-03-21 01:10:27 - Current per_gpu_load: {3: 6882, 0: 0}
+Threshold 10, 300:2025-03-21 01:10:27 - Current all_possible_gpus: [0, 1, 2, 3]
+Threshold 10, 300:2025-03-21 01:10:35 - GPU 0: Utilization: 2.0% | Avg TTFT: 0.0 s | Avg TPOT: 0.0 s | Avg Waiting Queue Length: 0.0
+Threshold 10, 300:2025-03-21 01:10:35 - recent_ttft[] - recent_tpot[] 
+Threshold 10, 300:2025-03-21 01:10:35 - GPU 0 is consistently underloaded. Triggering scale-down.
+Threshold 10, 300:2025-03-21 01:10:41 - Utilization record: active_gpu: [3, 1], utilizations: [0, 2], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:10:42 - Utilization record: active_gpu: [3, 1], utilizations: [0, 2], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:10:43 - Utilization record: active_gpu: [3, 1], utilizations: [0, 2], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:10:44 - Utilization record: active_gpu: [3, 1], utilizations: [0, 2], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:10:45 - Utilization record: active_gpu: [3, 1], utilizations: [0, 2], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:10:46 - Utilization record: active_gpu: [3, 1], utilizations: [0, 2], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:10:47 - Utilization record: active_gpu: [3, 1], utilizations: [0, 2], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:10:48 - Utilization record: active_gpu: [3, 1], utilizations: [0, 2], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:10:49 - Utilization record: active_gpu: [3, 1], utilizations: [0, 2], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:10:50 - Utilization record: active_gpu: [3, 1], utilizations: [0, 2], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:10:51 - GPU 3: Utilization: 0.0% | Avg TTFT: 0.0 s | Avg TPOT: 0.0 s | Avg Waiting Queue Length: 683.0
+Threshold 10, 300:2025-03-21 01:10:51 - recent_ttft[] - recent_tpot[] 
+Threshold 10, 300:2025-03-21 01:10:51 - GPU 1: Utilization: 2.0% | Avg TTFT: 0.0 s | Avg TPOT: 0.0 s | Avg Waiting Queue Length: 0.0
+Threshold 10, 300:2025-03-21 01:10:51 - recent_ttft[] - recent_tpot[] 
+Threshold 10, 300:2025-03-21 01:10:51 - Utilization record: active_gpu: [3, 1], utilizations: [0, 2], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:10:52 - Utilization record: active_gpu: [3, 1], utilizations: [0, 2], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
+Threshold 10, 300:2025-03-21 01:10:53 - Utilization record: active_gpu: [3, 1], utilizations: [0, 2], waiting_keys: [3, 1], waiting_queue_nums: [683, 0]
