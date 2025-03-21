@@ -33,6 +33,7 @@ pip install outlines==0.0.46
 pip install glog
 pip install paramiko
 pip install matplotlib
+pip install scipy
 ```
 
 

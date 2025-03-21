@@ -12,7 +12,7 @@ import logging
 from preble.benchmarks.exp_configs.model_equations_numpy import LP_mistral_7b_A6000_sglang_extend_flashinfer as prefill_time
 import glog
 
-tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-3.1-8B")
+tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-3.2-1B")
 
 logger = logging.getLogger(__name__)
 

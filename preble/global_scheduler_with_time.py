@@ -18,7 +18,7 @@ from ttft_overload_detector import TTFTWindowedOverloadedDetector
 import glog
 
 
-tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-3.1-8B")
+tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-3.2-1B")
 
 logger = logging.getLogger(__name__)
 
@@ -371,6 +371,7 @@ class GlobalSchedulerWithTime:
             
             if candidate_gpus:
                 runtime_idx = min(candidate_nodes, key=lambda x: gpu_score(x[0], x[1]))[0]  # Select GPU with lowest cost
+                print(candidate_nodes)
 
             elif runtime_id_with_highest_hit_rate is not None:
                 glog.info('runtime_id_with_highest_hit_rate is not None, using it directly')
@@ -406,7 +407,8 @@ class GlobalSchedulerWithTime:
 
             self.histogram.update(datetime.now(), important_node, leaf_node, runtime_idx, decoding_length=decoding_length)
             self.per_gpu_load[runtime_idx] += 1
-            glog.info(f"per_gpu_load: {self.per_gpu_load[runtime_idx]}")
+            #glog.info(f"per_gpu_load: {self.per_gpu_load[runtime_idx]}")
+            glog.info(f"runtime_idx: {runtime_idx}, per_gpu_load: {self.per_gpu_load[runtime_idx]}")
 
             # NOTE: eviction handled by iterative feedback
             if self.enable_eviction:
