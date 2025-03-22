@@ -4,11 +4,16 @@
 """
 Benchmark online serving with dynamic requests.
 
+python3 bench_request.py --backend vllm --num-prompts 30000 -c configs/1_tier_config.yaml --request-rate 40 --request-rates 50,25,50     --model mistralai/Mistral-7B-v0.1 --port 8010 --window 100 | tee br_utils_2134.log
+python3 bench_request.py --backend vllm --num-prompts 30000 -c configs/1_tier_config.yaml --request-rate 40 --request-rates 50,25,50     --model mistralai/Mistral-7B-v0.1 --port 8010 --window 150 | tee br_ttft_2310.log
+
+python3 bench_request.py --backend vllm --num-prompts 30000 -c configs/1_tier_config.yaml --request-rate 40 --request-rates 50,25,50     --model mistralai/Mistral-7B-v0.1 --port 8010 --window 150 | tee br_always_2252.log
+
 Usage:
-python3 bench_request.py --backend vllm --num-prompts 3000 -c configs/2_tiers_config.yaml --request-rate 2 \
-    --model meta-llama/Llama-3.2-1B --port 8010 --window 20
-
-
+python3 bench_request.py --backend vllm --num-prompts 30000 -c configs/1_tier_config.yaml --request-rate 50  \
+    --model mistralai/Mistral-7B-v0.1 --port 8010 --window 100 | tee ttft_log_1636.log
+    python3 bench_request.py --backend vllm --num-prompts 30000 -c configs/1_tier_config.yaml --request-rate 20  \
+    --model mistralai/Mistral-7B-v0.1 --port 8010 --window 100 | tee ttft_log_1636.log
 
 python3 -m sglang.bench_request --backend sglang --dataset-name random --num-prompts 3000 --random-input 1024 --random-output 1024 --random-range-ratio 0.5
 python3 -m sglang.bench_request --backend sglang --dataset-name random --request-rate-range 1,2,4,8,16,32 --random-input 4096 --random-output 1024 --random-range-ratio 0.125 --multi
@@ -267,6 +272,8 @@ async def async_request_openai_completions(
                             chunk_bytes = chunk_bytes.rstrip(b"\r\n")
                             if not chunk_bytes:
                                 continue
+                            if ttft ==0.0:
+                                ttft = latency
                             chunk = remove_prefix(chunk_bytes.decode("utf-8"), "data:")
                             if "[DONE]" in chunk:
                                 pass
@@ -615,7 +622,6 @@ def calculate_metrics(
             retokenized_output_len = len(
                 tokenizer.encode(outputs[i].generated_text, add_special_tokens=False)
             )
-            print(f"output_len: {output_len}, retokenized_output_len: {retokenized_output_len}")
             retokenized_output_lens.append(retokenized_output_len)
             total_input += input_requests[i][1]
             if output_len > 1:
@@ -892,7 +898,6 @@ async def benchmark(
     print("{:<40} {:<10}".format("Benchmarking Window:", window))
 
     results = []
-    print(outputs_per_workload)
     for workload, outputs in zip(workloads, outputs_per_workload):
         res = print_metrics(
             workload.requests, 
@@ -1014,6 +1019,8 @@ def prepare_workloads(config, tokenizer, num_prompts, request_rate) -> List[Work
     return workloads
 
 
+workloads_list = [None for i in range(100)]
+
 def run_benchmark(args_: argparse.Namespace):
     global args
     args = args_
@@ -1098,10 +1105,22 @@ def run_benchmark(args_: argparse.Namespace):
 
     with open(args.config_file) as f:
         config = yaml.safe_load(f)
-    
-    workloads = prepare_workloads(config, tokenizer, args.num_prompts, args.request_rate)
+
+    if workloads_list[25] is None:
+        workloads_list[25] = prepare_workloads(config, tokenizer, args.num_prompts, 25)
+    if workloads_list[40] is None:
+        workloads_list[40] = prepare_workloads(config, tokenizer, args.num_prompts, 40)
+    if workloads_list[50] is None:
+        workloads_list[50] = prepare_workloads(config, tokenizer, args.num_prompts, 50)
+
+    if int(args.request_rate) % 5 == 0 and int(args.request_rate) >= 20:
+        workloads = workloads_list[int(args.request_rate)]
+    else:
+        workloads = prepare_workloads(config, tokenizer, args.num_prompts, args.request_rate)
 
     if not args.multi:
+        import time 
+        print(time.strftime('%Y-%m-%d %H:%M:%S'))
         return asyncio.run(
             benchmark(
                 backend=backend,
@@ -1128,6 +1147,21 @@ def set_ulimit(target_soft_limit=65535):
             resource.setrlimit(resource_type, (target_soft_limit, current_hard))
         except ValueError as e:
             print(f"Fail to set RLIMIT_NOFILE: {e}")
+
+
+def parse_number_list(string_list: str) -> List[float]:
+    """Parse a string of numbers into a list of floats.
+    Accepts formats like "1,2,3" or "[1,2,3]" or "1 2 3"
+    """
+    try:
+        # 首先尝试作为Python列表语法解析
+        return ast.literal_eval(string_list)
+    except:
+        # 然后尝试按逗号或空格分割
+        try:
+            return [float(x.strip()) for x in string_list.replace(',', ' ').split()]
+        except:
+            raise ValueError(f"Cannot parse {string_list} into list of numbers")
 
 
 if __name__ == "__main__":
@@ -1226,5 +1260,25 @@ if __name__ == "__main__":
         type=str,
         help="The config file for the benchmark.",
     )
+
+    parser.add_argument(
+        "--request-rates",
+        type=str,
+        help="List of request rates to test. Can be specified as '1,2,3' or '[1,2,3]' or '1 2 3'. "
+        "If specified, overrides --request-rate.",
+    )
     args = parser.parse_args()
-    run_benchmark(args)
+    if args.request_rates:
+        try:
+            rates = parse_number_list(args.request_rates)
+            for rate in rates:
+                print(f"\nRunning benchmark with request rate: {rate}")
+                args.request_rate = rate
+                run_benchmark(args)
+        except ValueError as e:
+            print(f"Error parsing request rates: {e}")
+            exit(0)
+    else:
+        # 使用单一请求率运行
+        run_benchmark(args)
+
